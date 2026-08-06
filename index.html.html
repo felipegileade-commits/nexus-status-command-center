@@ -28,81 +28,34 @@ main{padding:22px 4vw 40px}.view{display:none}.view.active{display:block}
 .panel-actions{display:flex;gap:10px}.mini{background:#0a1a2a;border:1px solid #284661;color:#fff;border-radius:10px;padding:11px 15px;font-weight:700}.mini.add{color:var(--green);border-color:#14785f}
 .timeline-scroll{overflow-x:auto;overflow-y:hidden;cursor:grab;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--green) #10283d;padding:12px 0 8px}.timeline-scroll.dragging{cursor:grabbing;user-select:none;scroll-behavior:auto}.timeline-scroll::-webkit-scrollbar{height:14px}.timeline-scroll::-webkit-scrollbar-track{background:#10283d;border-radius:999px}.timeline-scroll::-webkit-scrollbar-thumb{background:var(--green);border-radius:999px;border:3px solid #10283d}
 .timeline-track{
-  display:flex;
-  gap:16px;
-  width:max-content;
-  padding:18px 18px 26px;
-  min-height:540px;
-  position:relative;
-  align-items:stretch;
-}
-.timeline-track:before{
-  content:"";
-  position:absolute;
-  left:18px;
-  right:18px;
-  top:55%;
-  height:4px;
-  transform:translateY(-50%);
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--green),#ffe34b,var(--orange),#ff6b59);
-  z-index:1;
+  display:flex;gap:18px;width:max-content;padding:18px 18px 26px;
+  min-height:540px;position:relative;align-items:stretch
 }
 .month-group{
-  display:flex;
-  gap:28px;
-  position:relative;
-  padding:70px 22px 18px;
-  border:1px solid #193a55;
-  border-radius:14px;
-  background:linear-gradient(180deg,rgba(18,44,67,.82),rgba(9,27,43,.42));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+  flex:0 0 auto;border:1px solid #1e405d;border-radius:16px;overflow:hidden;
+  background:linear-gradient(180deg,rgba(18,43,66,.72),rgba(8,26,43,.42));
+  box-shadow:0 14px 34px rgba(0,0,0,.18);scroll-snap-align:start
 }
-.month-group:nth-child(even){
-  background:linear-gradient(180deg,rgba(14,38,59,.92),rgba(8,24,39,.50));
+.month-group:nth-child(even){background:linear-gradient(180deg,rgba(13,37,58,.9),rgba(7,23,38,.55))}
+.month-header{
+  height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:0 18px;border-bottom:1px solid #28506e;
+  background:linear-gradient(90deg,rgba(54,217,189,.16),rgba(43,160,255,.08))
 }
-.month-group:not(:last-child):after{
-  content:"";
-  position:absolute;
-  top:10px;
-  right:-9px;
-  bottom:10px;
-  width:2px;
-  background:linear-gradient(180deg,transparent,#2e5d7d 15%,#2e5d7d 85%,transparent);
+.month-header strong{font-size:15px;letter-spacing:.16em}
+.month-header span{font-size:11px;color:#8fb0c8;text-transform:uppercase;letter-spacing:.09em}
+.month-body{
+  display:flex;gap:28px;padding:24px 18px 22px;min-height:450px;
+  position:relative;align-items:center
 }
-.month-band{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:50px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding:0 18px;
-  border-bottom:1px solid #244762;
-  border-radius:14px 14px 0 0;
-  background:linear-gradient(90deg,rgba(54,217,189,.13),rgba(43,160,255,.05));
+.month-body:before{
+  content:"";position:absolute;left:0;right:0;top:50%;height:4px;
+  transform:translateY(-50%);
+  background:linear-gradient(90deg,var(--green),#ffe34b,var(--orange));z-index:0
 }
-.month-band strong{
-  font-size:15px;
-  letter-spacing:.16em;
-  color:#f3f7fb;
-}
-.month-band span{
-  font-size:11px;
-  color:#7fa3bc;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
+.month-group:last-child .month-body:before{background:linear-gradient(90deg,var(--orange),#ff6b59)}
 .milestone{
-  width:210px;
-  height:420px;
-  flex:0 0 210px;
-  scroll-snap-align:start;
-  position:relative;
-  z-index:2;
+  width:210px;height:400px;flex:0 0 210px;position:relative;z-index:1
 }
 .milestone-card{
   position:absolute;
@@ -126,13 +79,13 @@ main{padding:22px 4vw 40px}.view{display:none}.view.active{display:block}
   background:#35536e;
   transform:translateX(-50%);
 }
-.milestone.top:before{top:176px;height:54px}
-.milestone.bottom:before{bottom:176px;height:54px}
+.milestone.top:before{top:176px;height:24px}
+.milestone.bottom:before{bottom:176px;height:24px}
 .milestone:after{
   content:"";
   position:absolute;
   left:50%;
-  top:55%;
+  top:50%;
   width:16px;
   height:16px;
   transform:translate(-50%,-50%);
@@ -297,7 +250,7 @@ footer{display:flex;justify-content:space-between;color:#7f9db4;padding:24px 4vw
   <article class="front-summary">
     <div class="front-head"><div><div class="eyebrow">FRENTE DE TRABALHO</div><h2>Central de Projetos</h2></div><span class="status-pill">1 risco</span></div>
     <div class="front-progress"><span id="cpFront">62,06%</span> <small>concluído</small></div><div class="progress"><span id="cpFrontBar"></span></div>
-    <div class="metrics-row"><div class="metric-block"><strong style="color:var(--teal)" id="cpUat">62,06%</strong><span>UAT</span></div><div class="metric-block"><strong style="color:var(--orange)" id="cpHom">17,64%</strong><span>homologado</span></div><div class="metric-block"><strong style="color:var(--red)" id="cpDev">-1,24%</strong><span>desvio</span></div></div>
+    <div class="metrics-row"><div class="metric-block"><strong style="color:var(--teal)" id="cpUat">56,76%</strong><span>UAT</span></div><div class="metric-block"><strong style="color:var(--orange)" id="cpHom">17,64%</strong><span>homologado</span></div><div class="metric-block"><strong style="color:var(--red)" id="cpDev">-0,84%</strong><span>desvio</span></div></div>
     <div class="front-foot"><span id="cpSprint">Sprint 14/20</span><span>● Em acompanhamento</span></div>
   </article>
   <section class="section"><div class="section-title"><div><div class="eyebrow">RESUMO DA SEMANA</div><h2>O que avançou e o que precisa de atenção</h2></div><p>As informações operacionais continuam disponíveis sem competir com a leitura executiva.</p></div><article class="week-card" id="cpWeek"></article></section>
@@ -363,22 +316,24 @@ footer{display:flex;justify-content:space-between;color:#7f9db4;padding:24px 4vw
 <script>
 const defaults={
  date:"06/08/2026",week:32,overall:68.47,revenue:83.43,central:62.06,
- message:"Sprint 13 concluída; Revenue em fase final e Central avança para homologação.",
- context:"Revenue permanece concentrado na finalização do ambiente. Em Central de Projetos, o time prepara documentação, ambiente e massa de dados para testes e homologação.",
- highlights:["Sprint 13 concluída e entregue","Revenue em fase final","Preparação do ambiente de CP","Atenção à transição de equipe em setembro"],
- risks:[["Dependências para homologação","Alto"],["Consolidação de massa de dados em CP","Médio"],["Esforço adicional em Revenue","Baixo"]],
+ message:"Sprint 13 concluída; Revenue avança para a finalização e Central prepara o início da homologação.",
+ context:"Revenue segue na Sprint 14, com conclusão prevista na Sprint 15 e atenção à integração com o Benner. Em Central de Projetos, os testes em UAT estão em fase de finalização e o início da homologação está previsto para 17/08.",
+ highlights:["Review da Sprint 13 e início da Sprint 14","Revenue com 83,43% concluído","Central com testes em UAT em fase de finalização","Início da homologação de Central previsto para 17/08"],
+ risks:[["Integração com o Benner","Alto"],["Revenue com desvio de -1,81%","Médio"],["Central com desvio de -0,84%","Médio"]],
  stages:[
-  {date:"06 08",month:"HOJE",title:"Hoje",value:"Sprint 14",desc:"Sprint 13 concluída e entregue.",status:"Em andamento"},
-  {date:"20 08",month:"AGOSTO",title:"Sprint 15",value:"75,68%",desc:"Marco estimado de conclusão.",status:"Planejado"},
-  {date:"31 08",month:"AGOSTO",title:"Revenue",value:"Finalização",desc:"Conclusão prevista do ambiente de Revenue.",status:"Planejado"},
-  {date:"04 09",month:"SETEMBRO",title:"Sprint 16",value:"80,80%",desc:"Continuidade da Central de Projetos.",status:"Planejado"},
-  {date:"22 09",month:"SETEMBRO",title:"Sprint 17",value:"84,95%",desc:"Avanço de homologação e transição.",status:"Planejado"},
-  {date:"06 10",month:"OUTUBRO",title:"Sprint 18",value:"90,10%",desc:"Continuidade das entregas de CP.",status:"Planejado"},
-  {date:"22 10",month:"OUTUBRO",title:"Sprint 19",value:"95,99%",desc:"Marco estimado de conclusão.",status:"Planejado"},
-  {date:"06 11",month:"NOVEMBRO",title:"Sprint 20",value:"Encerramento",desc:"Sprint exclusiva para ajustes, sem novas melhorias.",status:"Planejado"}
+  {date:"06 08",month:"AGOSTO",title:"Status atual",value:"Sprint 14",desc:"Review da Sprint 13 concluída e início da Sprint 14.",status:"Em andamento"},
+  {date:"17 08",month:"AGOSTO",title:"Central de Projetos",value:"Início da homologação",desc:"Marco previsto para o início da homologação.",status:"Planejado"},
+  {date:"19 08",month:"AGOSTO",title:"Sprint 15 · CP",value:"75,68%",desc:"Marco estimado da Central de Projetos.",status:"Planejado"},
+  {date:"20 08",month:"AGOSTO",title:"Sprint 15 · Revenue",value:"100%",desc:"Conclusão estimada da frente de Revenue.",status:"Planejado"},
+  {date:"03 09",month:"SETEMBRO",title:"Sprint 16 · CP",value:"80,80%",desc:"Continuidade da evolução da Central de Projetos.",status:"Planejado"},
+  {date:"21 09",month:"SETEMBRO",title:"Sprint 17 · CP",value:"84,95%",desc:"Evolução prevista do cronograma.",status:"Planejado"},
+  {date:"06 10",month:"OUTUBRO",title:"Sprint 18 · CP",value:"91,16%",desc:"Marco estimado da Central de Projetos.",status:"Planejado"},
+  {date:"22 10",month:"OUTUBRO",title:"Sprint 19 · CP",value:"95,99%",desc:"Marco estimado de conclusão parcial.",status:"Planejado"},
+  {date:"05 11",month:"NOVEMBRO",title:"Encerramento · CP",value:"100%",desc:"Marco final informado no Status Report.",status:"Planejado"}
  ]
-};
-let data=JSON.parse(localStorage.getItem("nexusData")||"null")||defaults;
+}
+const STORAGE_KEY="nexusData_v20260806";
+let data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null")||defaults;
 
 let revEpics=data.revEpics||[
 ["Fundação Comercial de Produtos e Catálogos",3,3],["Fundação do Objeto Conta",4,4],["Esforço Adicional Conta",0,2],["Fundação do Objeto Produtos",3,3],["Processo de Vendas",1,1],["Gestão do Processo de Cotações",1,1],["Gestão do Processo de Arquitetura",2,2],["Dados adicionais da Cotação",2,2],["Plataforma de Planilhas de Cálculos",3,3],["Cálculo de Esforço de Projetos",5,5],["Cálculo de Preços Avançados",3,3],["Cálculo de Margem dos Projetos",2,2],["Precificação de Despesas de Projetos",2,2],["Personalizações de Cálculos de Projetos",1,1],["Documentos Anexos Comerciais",1,4],["Processo de Infraestrutura",1,2],["Geração de Contratos",2,3],["Geração de Ativos",1,3],["Execução de Contrato",2,3],["Parametrização do Faturamento",3,3],["Processo de Faturamento (Billing)",4,6],["Integração Benner Faturamento",0,2],["Integração Benner Recebimento",0,2],["Gestão de Renovações e Reajustes",0,3],["Prontuário do Cliente",3,3],["Prontuário do Cliente Esforço Adicional",2,3],["Cadastro de Produtos Arquitetura",4,4]];
@@ -398,28 +353,17 @@ function render(){
  document.getElementById("highlights").innerHTML=data.highlights.map(x=>`<div>✓ ${x}</div>`).join("");
  document.getElementById("risks").innerHTML=data.risks.map(([t,l])=>`<div class="risk"><span>${t}</span><strong class="${l==="Alto"?"high":l==="Médio"?"med":"low"}">${l}</strong></div>`).join("");
  const track=document.getElementById("timelineTrack");
- const monthNames={"08":"AGOSTO","09":"SETEMBRO","10":"OUTUBRO","11":"NOVEMBRO","12":"DEZEMBRO"};
- const monthOrder=[];
- const grouped={};
- data.stages.forEach((s,i)=>{
-   const parts=String(s.date).trim().split(/\s+/);
-   const inferred=monthNames[parts[1]]||s.month||"OUTROS";
-   const key=s.month==="HOJE"?inferred:s.month;
-   if(!grouped[key]){grouped[key]=[];monthOrder.push(key)}
-   grouped[key].push({...s,_index:i});
- });
+ const monthOrder=[...new Set(data.stages.map(s=>s.month))];
+ let globalIndex=0;
  track.innerHTML=monthOrder.map(month=>{
-   const items=grouped[month];
-   const first=items[0]?.date||"";
-   const last=items[items.length-1]?.date||"";
-   const range=first===last?first:`${first} — ${last}`;
-   return `<section class="month-group" aria-label="${month}">
-     <div class="month-band"><strong>${month}</strong><span>${range}</span></div>
-     ${items.map(s=>`<div class="milestone ${s._index%2===0?"top":"bottom"} ${s._index===0?"current":""}">
-       <div class="date-row"><strong>${s.date}</strong><span>${s.month==="HOJE"?"HOJE":s.status}</span></div>
-       <div class="milestone-card"><span class="tag">${s.status}</span><h3>${s.title}</h3><b>${s.value}</b><p>${s.desc}</p></div>
-     </div>`).join("")}
-   </section>`;
+   const stages=data.stages.filter(s=>s.month===month);
+   const first=stages[0]?.date.replace(" ","/")||"";
+   const last=stages[stages.length-1]?.date.replace(" ","/")||"";
+   const cards=stages.map(s=>{
+     const i=globalIndex++;
+     return `<div class="milestone ${i===0?"current ":""}${i%2===0?"top":"bottom"}"><div class="date-row"><strong>${s.date.replace(" ","/")}</strong><span>${s.status}</span></div><div class="milestone-card"><span class="tag">${s.status}</span><h3>${s.title}</h3><b>${s.value}</b><p>${s.desc}</p></div></div>`;
+   }).join("");
+   return `<section class="month-group"><header class="month-header"><strong>${month}</strong><span>${first}${first!==last?" — "+last:""}</span></header><div class="month-body">${cards}</div></section>`;
  }).join("");
  
  renderEpics("revEpics",revEpics);renderEpics("cpEpics",cpEpics);
@@ -427,14 +371,14 @@ function render(){
 }
 function renderEpics(id,arr){document.getElementById(id).innerHTML=arr.map((e,i)=>`<div class="epic"><span class="num">${i+1}</span><span>${e[0]}</span><strong>${e[1]}/${e[2]}</strong><span class="bar"><span style="width:${e[2]?e[1]/e[2]*100:0}%"></span></span></div>`).join("")}
 function renderWeek(){
- document.getElementById("revWeek").innerHTML=`<h3>Revenue</h3><div class="week-grid"><div class="week-block"><div class="box-title">Atividades executadas</div><div class="bullet">Checkpoint e evolução das USs da Sprint 13.</div><div class="bullet">Refinamento do reconhecimento de receita.</div><div class="bullet">Alinhamento da integração com o Idocuments.</div></div><div class="week-block"><div class="subgrid"><div><div class="box-title">Pontos de atenção</div><div class="bullet">Devolutiva dos resultados da homologação.</div><div class="bullet">Esforço adicional fora do escopo inicial.</div></div><div><div class="box-title">Pendências</div><div class="bullet">Modelo inicial de cutover.</div><div class="bullet">Endpoint de integração com Idocuments.</div><div class="bullet">Dicionário de dados Salesforce para Benner.</div></div></div></div></div><div class="box-title" style="margin-top:18px">Impedimentos</div><div class="bullet">No momento, não há impedimentos identificados.</div>`;
- document.getElementById("cpWeek").innerHTML=`<h3>Central de Projetos</h3><div class="week-grid"><div class="week-block"><div class="box-title">Atividades executadas</div><div class="bullet">Refinamento de apontamento de horas e Ordens de Serviço.</div><div class="bullet">Aprovação de USs de prazos, suspensão e recursos.</div><div class="bullet">Alinhamento entre Central e Revenue.</div><div class="bullet">Preparação de UAT e documentação de homologação.</div></div><div class="week-block"><div class="subgrid"><div><div class="box-title">Pontos de atenção</div><div class="bullet">Testes diretamente em UAT conforme orientação da MV.</div></div><div><div class="box-title">Pendências</div><div class="bullet">Início do ciclo de homologação.</div></div></div></div></div><div class="box-title" style="margin-top:18px">Impedimentos</div><div class="bullet">No momento, não há impedimentos identificados.</div>`;
- document.getElementById("revRiskBox").innerHTML=`<h3>Revenue <span style="float:right;color:var(--orange);font-size:11px">RISCO ATIVO</span></h3><div class="subgrid"><div><div class="box-title">Risco</div><p>Integração com o Benner.</p></div><div><div class="box-title" style="color:var(--teal)">Plano de ação</div><p>Realizar reunião de alinhamento do Benner e manter as agendas de Idocuments e Legado.</p></div></div>`;
- document.getElementById("cpRiskBox").innerHTML=`<h3>Central de Projetos <span style="float:right;color:var(--orange);font-size:11px">RISCO ATIVO</span></h3><div class="subgrid"><div><div class="box-title">Risco</div><p>Alteração do percentual geral em razão de itens adicionados ao cronograma.</p></div><div><div class="box-title" style="color:var(--teal)">Plano de ação</div><p>Reforço da equipe, maior atuação do arquiteto e manutenção do plano de recuperação até a normalização.</p></div></div>`;
+ document.getElementById("revWeek").innerHTML=`<h3>Revenue</h3><div class="week-grid"><div class="week-block"><div class="box-title">Principais atividades realizadas</div><div class="bullet">Review da Sprint 13 e início da Sprint 14.</div><div class="bullet">Refinamento do novo modelo de contas.</div><div class="bullet">Reunião de integração com o Idocument.</div></div><div class="week-block"><div class="subgrid"><div><div class="box-title">Pontos de atenção</div><div class="bullet">Devolutiva da homologação prevista para 07/08.</div><div class="bullet">Esforço adicional de 11% direcionado ao backlog, aguardando definição sobre sprints adicionais.</div></div><div><div class="box-title">Pendências</div><div class="bullet">Dicionário de dados Salesforce para a integração Benner.</div><div class="bullet">Planejamento consolidado da quantidade de US até a conclusão.</div></div></div></div></div><div class="box-title" style="margin-top:18px">Impedimentos</div><div class="bullet">Integração com o Benner.</div>`;
+ document.getElementById("cpWeek").innerHTML=`<h3>Central de Projetos</h3><div class="week-grid"><div class="week-block"><div class="box-title">Principais atividades realizadas</div><div class="bullet">Review da Sprint 13 e Planning da Sprint 14.</div><div class="bullet">Criação das documentações para homologação em UAT e painel de acompanhamento das US.</div><div class="bullet">Refinamento de negócio de Gestão de Fluxo Financeiro.</div><div class="bullet">Testes em UAT em fase de finalização.</div></div><div class="week-block"><div class="subgrid"><div><div class="box-title">Pontos de atenção</div><div class="bullet">Início da homologação previsto para 17/08.</div></div><div><div class="box-title">Pendências</div><div class="bullet">Envio das documentações para HML em UAT em 07/08.</div><div class="bullet">Entrega dos artefatos visuais para os portais.</div><div class="bullet">Planejamento consolidado da quantidade de US até a conclusão.</div></div></div></div></div><div class="box-title" style="margin-top:18px">Impedimentos</div><div class="bullet">No momento, não há impedimentos identificados.</div>`;
+ document.getElementById("revRiskBox").innerHTML=`<h3>Revenue <span style="float:right;color:var(--orange);font-size:11px">RISCO ATIVO</span></h3><div class="subgrid"><div><div class="box-title">Risco</div><p>Entrega do modelo inicial de cutover pela MV, cujo prazo original era 31/07.</p></div><div><div class="box-title" style="color:var(--teal)">Plano de ação</div><p>Reunião sobre o Benner em 07/08, além das agendas de Idocuments e Legado.</p></div></div>`;
+ document.getElementById("cpRiskBox").innerHTML=`<h3>Central de Projetos <span style="float:right;color:var(--orange);font-size:11px">RISCO ATIVO</span></h3><div class="subgrid"><div><div class="box-title">Risco</div><p>A inclusão de itens no cronograma alterou o percentual geral e resultou em atraso de -0,84%.</p></div><div><div class="box-title" style="color:var(--teal)">Plano de ação</div><p>Reforço da equipe com novo desenvolvedor e ampliação da atuação do arquiteto até a normalização do cronograma.</p></div></div>`;
 }
 function renderNext(){
- const rev=["Concluir o modelo inicial de cutover.","Realizar alinhamento do Benner.","Acompanhar resultados da homologação.","Disponibilizar endpoint do Idocuments.","Concluir dicionário de dados Salesforce."];
- const cp=["Iniciar o ciclo de homologação.","Manter o plano de recuperação do cronograma."];
+ const rev=["Realizar reunião sobre o Benner em 07/08.","Acompanhar a devolutiva da homologação em 07/08.","Manter as agendas de Idocuments e Legado.","Concluir o dicionário de dados Salesforce para o Benner.","Consolidar a quantidade de US até a conclusão."];
+ const cp=["Enviar documentações para HML em UAT em 07/08.","Entregar os artefatos visuais dos portais.","Iniciar a homologação em 17/08.","Consolidar a quantidade de US até a conclusão.","Manter o plano de recuperação do cronograma."];
  document.getElementById("revNext").innerHTML=rev.map((x,i)=>`<article class="next-card"><span class="n">0${i+1}</span><span class="tag2">Revenue</span><p>${x}</p><small>Em acompanhamento</small></article>`).join("");
  document.getElementById("cpNext").innerHTML=cp.map((x,i)=>`<article class="next-card"><span class="n">0${i+1}</span><span class="tag2">Central de Projetos</span><p>${x}</p><small>Em acompanhamento</small></article>`).join("");
 }
@@ -448,8 +392,8 @@ function reportPage(front,title,done,uat,hom,dev,sprint,arr,risk,plan,steps){
 function renderReport(){
  const months=["AGOSTO","SETEMBRO","OUTUBRO","NOVEMBRO"];
  document.getElementById("report").innerHTML=
- reportPage("revenue","Revenue",data.revenue,"56,13%","6,06%","-1,81%","14/15",revEpics,"Integração com o Benner.","Alinhamento do Benner, Idocuments e Legado.",["Checkpoint da Sprint 13","Refinamento de receita","Alinhamento do Idocuments"])+
- reportPage("central","Central de Projetos",data.central,"62,06%","17,64%","-1,24%","14/20",cpEpics,"Itens adicionados ao cronograma.","Reforço da equipe e manutenção do plano de recuperação.",["Preparação de UAT","Documentação de homologação","Massa de dados para testes"])+
+ reportPage("revenue","Revenue",data.revenue,"56,13%","6,06%","-1,81%","14/15",revEpics,"Entrega do modelo inicial de cutover pela MV.","Reunião sobre o Benner em 07/08 e agendas de Idocuments e Legado.",["Review da Sprint 13","Início da Sprint 14","Refinamento do novo modelo de contas","Reunião de integração com o Idocument"])+
+ reportPage("central","Central de Projetos",data.central,"56,76%","17,64%","-0,84%","14/20",cpEpics,"Inclusão de itens no cronograma, com atraso de -0,84%.","Novo desenvolvedor, maior atuação do arquiteto e manutenção do plano de recuperação.",["Review da Sprint 13","Planning da Sprint 14","Documentação para homologação em UAT","Testes em UAT em fase de finalização"])+
  `<div class="report-page"><div class="r-top"></div><div class="r-head"><h1><span style="color:#19a99c;font-size:11px;letter-spacing:.12em">PROJETO NEXUS</span> &nbsp; Cronograma executivo</h1><small>Agosto a novembro de 2026<br>Base: status de ${data.date}</small></div><div style="margin-top:8mm"><small style="color:#17a89b;font-weight:700">LINHA DO TEMPO</small><h1 style="font-size:28px;font-weight:500">Próximos marcos do projeto</h1><p style="color:#6c7b86">Visão consolidada dos ciclos, homologação, testes integrados e encerramento previsto.</p></div><div class="r-timeline">${months.map(m=>{let ss=data.stages.filter(s=>s.month===m);return `<div class="r-month"><span class="count">${String(ss.length).padStart(2,"0")}</span><small style="color:#17a89b;font-weight:700">${m==="AGOSTO"?"MÊS ATUAL":m==="SETEMBRO"?"EVOLUÇÃO":m==="OUTUBRO"?"CONSOLIDAÇÃO":"ENCERRAMENTO"}</small><h2>${m.charAt(0)+m.slice(1).toLowerCase()} 2026</h2>${ss.map(s=>`<div class="r-event"><b>${s.date.replace(" ","/")} · ${s.title}</b>${s.value}<br><span style="color:#75838d">${s.desc}</span></div>`).join("")}</div>`}).join("")}</div></div>`;
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.view).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})});
@@ -489,7 +433,7 @@ document.getElementById("addStageEditor").onclick=()=>{data.stages.push({date:""
 document.querySelectorAll(".editor-tabs button").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".editor-tabs button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".epic-editor").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById(btn.dataset.editor).classList.add("active")});
 document.getElementById("addRevEpic").onclick=()=>{syncEpicEditors();revEpics.push(["Novo épico Revenue",0,1]);renderEpicEditors()};
 document.getElementById("addCpEpic").onclick=()=>{syncEpicEditors();cpEpics.push(["Novo épico Central",0,1]);renderEpicEditors()};
-document.getElementById("saveDrawer").onclick=()=>{syncEpicEditors();data.date=fDate.value;data.week=+fWeek.value;data.overall=+fOverall.value;data.revenue=+fRevenue.value;data.central=+fCentral.value;data.message=fMessage.value;data.context=fContext.value;data.highlights=fHighlights.value.split("\n").map(x=>x.trim()).filter(Boolean);data.risks=fRisks.value.split("\n").map(x=>x.split("|").map(y=>y.trim())).filter(x=>x[0]);document.querySelectorAll("#stageEditor [data-i]").forEach(el=>{data.stages[+el.dataset.i][el.dataset.k]=el.value});data.revEpics=revEpics;data.cpEpics=cpEpics;localStorage.setItem("nexusData",JSON.stringify(data));render();closeDrawer()};
+document.getElementById("saveDrawer").onclick=()=>{syncEpicEditors();data.date=fDate.value;data.week=+fWeek.value;data.overall=+fOverall.value;data.revenue=+fRevenue.value;data.central=+fCentral.value;data.message=fMessage.value;data.context=fContext.value;data.highlights=fHighlights.value.split("\n").map(x=>x.trim()).filter(Boolean);data.risks=fRisks.value.split("\n").map(x=>x.split("|").map(y=>y.trim())).filter(x=>x[0]);document.querySelectorAll("#stageEditor [data-i]").forEach(el=>{data.stages[+el.dataset.i][el.dataset.k]=el.value});data.revEpics=revEpics;data.cpEpics=cpEpics;localStorage.setItem(STORAGE_KEY,JSON.stringify(data));render();closeDrawer()};
 document.getElementById("printBtn").onclick=()=>{
   renderReport();
   const preview=document.getElementById("reportPreviewContent");
