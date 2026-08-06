@@ -29,24 +29,72 @@ main{padding:22px 4vw 40px}.view{display:none}.view.active{display:block}
 .timeline-scroll{overflow-x:auto;overflow-y:hidden;cursor:grab;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--green) #10283d;padding:12px 0 8px}.timeline-scroll.dragging{cursor:grabbing;user-select:none;scroll-behavior:auto}.timeline-scroll::-webkit-scrollbar{height:14px}.timeline-scroll::-webkit-scrollbar-track{background:#10283d;border-radius:999px}.timeline-scroll::-webkit-scrollbar-thumb{background:var(--green);border-radius:999px;border:3px solid #10283d}
 .timeline-track{
   display:flex;
-  gap:28px;
+  gap:16px;
   width:max-content;
   padding:18px 18px 26px;
-  min-height:500px;
+  min-height:540px;
   position:relative;
-  align-items:center;
+  align-items:stretch;
 }
 .timeline-track:before{
   content:"";
   position:absolute;
   left:18px;
   right:18px;
-  top:50%;
+  top:55%;
   height:4px;
   transform:translateY(-50%);
   border-radius:999px;
   background:linear-gradient(90deg,var(--green),#ffe34b,var(--orange),#ff6b59);
-  z-index:0;
+  z-index:1;
+}
+.month-group{
+  display:flex;
+  gap:28px;
+  position:relative;
+  padding:70px 22px 18px;
+  border:1px solid #193a55;
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(18,44,67,.82),rgba(9,27,43,.42));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.month-group:nth-child(even){
+  background:linear-gradient(180deg,rgba(14,38,59,.92),rgba(8,24,39,.50));
+}
+.month-group:not(:last-child):after{
+  content:"";
+  position:absolute;
+  top:10px;
+  right:-9px;
+  bottom:10px;
+  width:2px;
+  background:linear-gradient(180deg,transparent,#2e5d7d 15%,#2e5d7d 85%,transparent);
+}
+.month-band{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:0 18px;
+  border-bottom:1px solid #244762;
+  border-radius:14px 14px 0 0;
+  background:linear-gradient(90deg,rgba(54,217,189,.13),rgba(43,160,255,.05));
+}
+.month-band strong{
+  font-size:15px;
+  letter-spacing:.16em;
+  color:#f3f7fb;
+}
+.month-band span{
+  font-size:11px;
+  color:#7fa3bc;
+  text-transform:uppercase;
+  letter-spacing:.08em;
 }
 .milestone{
   width:210px;
@@ -54,7 +102,7 @@ main{padding:22px 4vw 40px}.view{display:none}.view.active{display:block}
   flex:0 0 210px;
   scroll-snap-align:start;
   position:relative;
-  z-index:1;
+  z-index:2;
 }
 .milestone-card{
   position:absolute;
@@ -67,8 +115,8 @@ main{padding:22px 4vw 40px}.view{display:none}.view.active{display:block}
   border-radius:10px;
   padding:16px;
 }
-.milestone:nth-child(odd) .milestone-card{top:0}
-.milestone:nth-child(even) .milestone-card{bottom:0}
+.milestone.top .milestone-card{top:0}
+.milestone.bottom .milestone-card{bottom:0}
 .milestone.current .milestone-card{border-left-color:var(--green)}
 .milestone:before{
   content:"";
@@ -78,13 +126,13 @@ main{padding:22px 4vw 40px}.view{display:none}.view.active{display:block}
   background:#35536e;
   transform:translateX(-50%);
 }
-.milestone:nth-child(odd):before{top:176px;height:34px}
-.milestone:nth-child(even):before{bottom:176px;height:34px}
+.milestone.top:before{top:176px;height:54px}
+.milestone.bottom:before{bottom:176px;height:54px}
 .milestone:after{
   content:"";
   position:absolute;
   left:50%;
-  top:50%;
+  top:55%;
   width:16px;
   height:16px;
   transform:translate(-50%,-50%);
@@ -349,7 +397,30 @@ function render(){
  const next=data.stages.find(s=>s.status!=="Concluído")||data.stages[0];document.getElementById("nextDate").textContent=next.date.replace(" "," ");document.getElementById("nextTitle").textContent=next.title;document.getElementById("nextDesc").textContent=next.desc;
  document.getElementById("highlights").innerHTML=data.highlights.map(x=>`<div>✓ ${x}</div>`).join("");
  document.getElementById("risks").innerHTML=data.risks.map(([t,l])=>`<div class="risk"><span>${t}</span><strong class="${l==="Alto"?"high":l==="Médio"?"med":"low"}">${l}</strong></div>`).join("");
- const track=document.getElementById("timelineTrack");track.innerHTML=data.stages.map((s,i)=>`<div class="milestone ${i===0?"current":""}"><div class="date-row"><strong>${s.date}</strong><span>${s.month}</span></div><div class="milestone-card"><span class="tag">${s.status}</span><h3>${s.title}</h3><b>${s.value}</b><p>${s.desc}</p></div></div>`).join("");
+ const track=document.getElementById("timelineTrack");
+ const monthNames={"08":"AGOSTO","09":"SETEMBRO","10":"OUTUBRO","11":"NOVEMBRO","12":"DEZEMBRO"};
+ const monthOrder=[];
+ const grouped={};
+ data.stages.forEach((s,i)=>{
+   const parts=String(s.date).trim().split(/\s+/);
+   const inferred=monthNames[parts[1]]||s.month||"OUTROS";
+   const key=s.month==="HOJE"?inferred:s.month;
+   if(!grouped[key]){grouped[key]=[];monthOrder.push(key)}
+   grouped[key].push({...s,_index:i});
+ });
+ track.innerHTML=monthOrder.map(month=>{
+   const items=grouped[month];
+   const first=items[0]?.date||"";
+   const last=items[items.length-1]?.date||"";
+   const range=first===last?first:`${first} — ${last}`;
+   return `<section class="month-group" aria-label="${month}">
+     <div class="month-band"><strong>${month}</strong><span>${range}</span></div>
+     ${items.map(s=>`<div class="milestone ${s._index%2===0?"top":"bottom"} ${s._index===0?"current":""}">
+       <div class="date-row"><strong>${s.date}</strong><span>${s.month==="HOJE"?"HOJE":s.status}</span></div>
+       <div class="milestone-card"><span class="tag">${s.status}</span><h3>${s.title}</h3><b>${s.value}</b><p>${s.desc}</p></div>
+     </div>`).join("")}
+   </section>`;
+ }).join("");
  
  renderEpics("revEpics",revEpics);renderEpics("cpEpics",cpEpics);
  renderWeek();renderNext();renderReport();
