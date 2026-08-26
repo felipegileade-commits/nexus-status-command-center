@@ -94,7 +94,7 @@ main{padding:0 4vw 36px}.view{display:none}.view.active{display:block}
   .exec-board{min-width:1240px}.exec-axis,.exec-lane{grid-template-columns:140px repeat(12,minmax(80px,1fr))}.exec-track{grid-template-columns:repeat(12,minmax(80px,1fr))}
 }
 
-.exec-period .period-label.inside{position:static;display:block;padding:4px 10px;color:#fff;white-space:nowrap}.exec-period .period-label.inside b{display:inline;font-size:10px;margin:0}
+.exec-lane{min-height:168px}.exec-track{grid-template-rows:42px 72px 42px}.exec-lane.sprints-lane{min-height:96px}.sprints-lane .exec-track{grid-template-rows:42px}.exec-period .period-label{min-width:0;width:calc(100% - 20px);white-space:normal;overflow-wrap:anywhere}.exec-period .period-label.inside{position:static;display:block;width:auto;padding:4px 10px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.exec-period .period-label.inside b{display:inline;font-size:10px;margin:0}.exec-pin-label{min-width:0;width:100%;padding:0 6px;overflow-wrap:anywhere}.exec-period.sottelli{border-color:#2fd4bf;background:#123f43}.exec-period.mv{border-color:#2a9cff;background:#153d63}.exec-pin.sottelli{background:#2fd4bf;box-shadow:0 0 0 1px #7ff0df}.exec-pin.mv{background:#2a9cff;box-shadow:0 0 0 1px #8bc8ff}.exec-legend{display:flex;justify-content:flex-end;gap:16px;flex-wrap:wrap;padding:0 4px 12px;color:#b9d1e1;font-size:10px}.exec-legend span{display:flex;align-items:center;gap:6px}.exec-swatch{width:10px;height:10px;border-radius:3px;background:#2fd4bf}.exec-swatch.mv{background:#2a9cff}.exec-swatch.joint{background:#ff8d2d}.exec-swatch.final{background:#46dda8}
 
 /* ===== MODO DE EDIÇÃO COMPLETO ===== */
 .editor-help{margin:18px 0;padding:15px;border:1px solid #1d405d;border-radius:10px;background:#0d2438;color:#bcd0de;font-size:12px;line-height:1.55}
@@ -182,8 +182,9 @@ body.edit-mode .edit-mode-banner{display:block}
     </div>
     <div class="timeline-scroll" id="timeline">
       <div class="exec-board">
+        <div class="exec-legend"><span><i class="exec-swatch"></i>Sottelli</span><span><i class="exec-swatch mv"></i>MV</span><span><i class="exec-swatch joint"></i>Marco conjunto</span><span><i class="exec-swatch final"></i>Conclusão</span></div>
         <div class="exec-axis"><span class="axis-month aug">AGOSTO</span><span class="axis-month sep">SETEMBRO</span><span class="axis-month oct">OUTUBRO</span><span class="axis-month nov">NOVEMBRO</span></div>
-        <div class="exec-lane">
+        <div class="exec-lane sprints-lane">
           <div class="exec-lane-label"><strong>Sprints</strong><span>Central de Projetos</span></div>
           <div class="exec-track">
             <div class="exec-period green" style="grid-column:1/3;grid-row:1"><span class="period-label inside"><b>Sprint 15 · 21/08</b></span></div>
@@ -198,22 +199,22 @@ body.edit-mode .edit-mode-banner{display:block}
           <div class="exec-lane-label"><strong>Revenue</strong><span>Conclusão e homologação</span></div>
           <div class="exec-track">
             <div class="exec-pin" style="grid-column:3;grid-row:1"></div><div class="exec-pin-label" style="grid-column:3;grid-row:3"><b>04/09</b>Desenvolvimento concluído</div>
-            <div class="exec-period" style="grid-column:3/6;grid-row:1"><span class="period-label"><b>07/09 a 25/09</b>Testes Sottelli em UAT · documentação para homologação · ajustes e melhorias identificados pela Sottelli</span></div>
-            <div class="exec-period orange" style="grid-column:6/8;grid-row:1"><span class="period-label"><b>28/09 a 09/10</b>Homologação de Revenue</span></div>
-            <div class="exec-pin blue" style="grid-column:8;grid-row:1"></div><div class="exec-pin-label" style="grid-column:8;grid-row:2"><b>12/10</b>Sottelli · ajustes e bugs<br>sem novas melhorias</div>
+            <div class="exec-period sottelli" style="grid-column:3/6;grid-row:1"><span class="period-label"><b>07/09 a 25/09</b>Testes em UAT · documentação para homologação · ajustes e melhorias da Sottelli</span></div>
+            <div class="exec-period mv" style="grid-column:6/8;grid-row:1"><span class="period-label"><b>28/09 a 09/10</b>Homologação de Revenue pela MV</span></div>
+            <div class="exec-pin sottelli" style="grid-column:8;grid-row:1"></div><div class="exec-pin-label" style="grid-column:8;grid-row:2"><b>12/10</b>Sottelli · ajustes e bugs<br>sem novas melhorias</div>
           </div>
         </div>
         <div class="exec-lane">
           <div class="exec-lane-label"><strong>Atuação presencial</strong><span>Recife</span></div>
           <div class="exec-track">
-            <div class="exec-period green" style="grid-column:6/8;grid-row:1"><span class="period-label inside"><b>Felipe · 28/09 a 09/10</b></span></div>
-            <div class="exec-period plan" style="grid-column:7/8;grid-row:2"><span class="period-label inside"><b>Lucas · 05/10 a 09/10</b></span></div>
+            <div class="exec-period sottelli" style="grid-column:6/8;grid-row:1"><span class="period-label inside"><b>Felipe · 28/09 a 09/10</b></span></div>
+            <div class="exec-period sottelli" style="grid-column:7/8;grid-row:2"><span class="period-label inside"><b>Lucas · 05/10 a 09/10</b></span></div>
           </div>
         </div>
         <div class="exec-lane">
           <div class="exec-lane-label"><strong>Central de Projetos</strong><span>Homologação e entrega</span></div>
           <div class="exec-track">
-            <div class="exec-pin blue" style="grid-column:9;grid-row:1"></div><div class="exec-pin-label" style="grid-column:9;grid-row:2"><b>19/10</b>Início da homologação<br>Revenue concluída e maior massa de dados</div>
+            <div class="exec-pin mv" style="grid-column:9;grid-row:1"></div><div class="exec-pin-label" style="grid-column:9/11;grid-row:2"><b>19/10</b>Início da homologação pela MV<br>Revenue concluída e maior massa de dados</div>
             <div class="exec-pin green" style="grid-column:12;grid-row:1"></div><div class="exec-pin-label" style="grid-column:12;grid-row:2"><b>13/11</b>Entrega final do desenvolvimento</div>
           </div>
         </div>
