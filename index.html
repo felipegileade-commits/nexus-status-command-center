@@ -1,1 +1,1034 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projeto Nexus · Status Executivo</title><style>:root{--bg:#07111d;--bg2:#081827;--panel:#0d2236;--panel2:#10283e;--line:#1d405d;--text:#f5f8fb;--muted:#8da8bd;--teal:#2fd4bf;--teal2:#20b7c4;--blue:#2a9cff;--orange:#ff8d2d;--yellow:#ffc148;--red:#ff6b61;--green:#46dda8;--white:#fff}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 96% 4%,rgba(38,208,195,.08),transparent 27%),linear-gradient(180deg,var(--bg),#06111e 55%,#07111d);color:var(--text)}button,input,textarea,select{font:inherit}button{cursor:pointer}.topbar{position:sticky;top:0;z-index:40;display:grid;grid-template-columns:180px 1fr 170px 88px 170px 140px;gap:18px;align-items:center;padding:16px 4vw;background:#06111d;border-bottom:1px solid #183149}.logo{font-size:30px;letter-spacing:.13em;font-weight:300}.logo b{color:var(--teal);font-weight:300}.logo small{display:block;font-size:8px;letter-spacing:.20em;color:#6988a0;margin-top:6px}.nav{display:flex;gap:34px;align-items:center}.nav button{border:0;background:none;color:#8fa7b9;font-size:14px;padding:18px 0;border-bottom:2px solid transparent}.nav button.active{color:#fff;border-color:var(--teal)}.meta{font-size:13px;line-height:1.5}.meta small{display:block;color:#819bad}.week{padding-left:20px;border-left:1px dashed #27425c}.action{border:1px solid #24435d;background:#091a2a;color:#fff;border-radius:8px;padding:12px 15px;font-weight:800;font-size:13px}.action.primary{background:linear-gradient(135deg,#28cec3,#149aae);border:0}main{padding:0 4vw 36px}.view{display:none}.view.active{display:block}.hero-title{margin:34px 0 26px}.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--teal);font-weight:900;text-transform:uppercase}.hero-title h1{font-size:42px;margin:10px 0 7px;font-weight:400}.hero-title p{color:#8ca8bd;margin:0;font-size:13px}.panel{background:linear-gradient(180deg,rgba(12,33,52,.98),rgba(8,25,40,.98));border:1px solid #17344d;border-radius:12px;padding:22px 24px}.front-summary{padding:26px;border-radius:11px;background:#0b2034;border:1px solid #173954}.front-head{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #1d3a55;padding-bottom:18px}.front-head h2{margin:0;font-weight:500;font-size:22px}.status-pill{color:#ff9f3a;background:#34291f;padding:6px 10px;border-radius:999px;font-size:10px}.front-progress{font-size:52px;font-weight:850;margin:22px 0 8px}.front-progress small{font-size:12px;color:#8ba8bd;font-weight:400}.progress{height:7px;background:#29445d;border-radius:999px;overflow:hidden}.progress span{display:block;height:100%;border-radius:inherit;background:var(--teal)}.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;padding-top:12px;border-top:1px solid #18364f}.metric-block{text-align:center;border-right:1px solid #1c3a54}.metric-block:last-child{border:0}.metric-block strong{display:block;font-size:20px}.metric-block span{font-size:10px;color:#819cb1}.front-foot{display:flex;justify-content:space-between;color:#90aabd;font-size:10px;margin-top:18px}.section{padding:38px 0;border-bottom:1px solid #153049}.section-title{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:18px}.section-title h2{font-size:34px;font-weight:400;margin:7px 0}.section-title p{max-width:250px;color:#829db1;font-size:11px}.week-card{background:#0b2035;border:1px solid #193a55;border-top:1px solid var(--teal);padding:20px 24px}.week-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.week-block h3{font-weight:500}.subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.box-title{font-size:9px;color:#7895ab;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}.bullet{margin:8px 0;color:#b7cad8;font-size:11px;line-height:1.45}.bullet:before{content:"•";color:var(--teal);margin-right:8px}.epic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px;background:#0b2035;border:1px solid #193a55;border-radius:10px;padding:14px}.epic{display:grid;grid-template-columns:25px 1fr 34px 72px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #17334c;font-size:10px}.num{width:18px;height:18px;border-radius:50%;background:#14334d;display:grid;place-items:center;color:#d9e5ee;font-size:9px}.epic strong{color:#ff9b35}.bar{height:5px;background:#284159;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:var(--teal)}.risk-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.risk-card{background:#0b2035;border:1px solid #193a55;padding:16px;max-width:680px}.risk-card-head{display:flex;justify-content:space-between;margin-bottom:12px}.risk-card-head span{font-size:9px;color:var(--orange);font-weight:900}.risk-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}.risk-col h4{font-size:9px;letter-spacing:.08em;color:var(--orange);margin:0 0 8px}.risk-col.action h4{color:var(--teal)}.risk-col p{color:#b5c8d7;font-size:11px;line-height:1.55;margin:0}.next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.next-card{min-height:150px;background:#0b2035;border:1px solid #193a55;padding:16px}.next-card .n{color:var(--teal);font-size:12px;font-weight:900}.next-card .tag2{float:right;background:#103c39;color:#9cf0df;border-radius:999px;padding:5px 8px;font-size:8px}.next-card p{margin-top:28px;color:#dbe6ee;font-size:11px;line-height:1.5}.next-card small{color:#80b9ae;font-size:9px}.footer{display:flex;justify-content:space-between;padding:20px 0;color:#6f899d;font-size:9px}.timeline-panel{margin-top:22px}.panel-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid #18344d;padding-bottom:14px}.panel-head h1{font-size:24px;margin:0 0 7px;font-weight:500}.panel-head p{margin:0;color:var(--muted);font-size:13px}.panel-actions{display:flex;gap:8px}.mini{background:#0a1a2a;border:1px solid #284661;color:#fff;border-radius:8px;padding:9px 12px;font-weight:700;font-size:11px}.mini.add{color:var(--green);border-color:#14785f}.timeline-scroll{overflow-x:auto;overflow-y:hidden;cursor:grab;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--green) #10283d;padding:10px 0 8px}.timeline-scroll.dragging{cursor:grabbing;user-select:none;scroll-behavior:auto}.timeline-track{display:flex;gap:16px;width:max-content;padding:14px 8px 22px;min-height:420px;position:relative;align-items:stretch}.month-group{flex:0 0 auto;border:1px solid #1e405d;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(18,43,66,.72),rgba(8,26,43,.42));scroll-snap-align:start}.month-header{height:54px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 16px;border-bottom:1px solid #28506e;background:linear-gradient(90deg,rgba(54,217,189,.16),rgba(43,160,255,.08))}.month-header strong{font-size:13px;letter-spacing:.14em}.month-header span{font-size:9px;color:#8fb0c8;text-transform:uppercase}.month-body{display:flex;gap:24px;padding:20px 16px;min-height:340px;position:relative;align-items:center}.month-body:before{content:"";position:absolute;left:0;right:0;top:50%;height:4px;transform:translateY(-50%);background:linear-gradient(90deg,var(--green),#ffe34b,var(--orange));z-index:0}.milestone{width:180px;height:300px;flex:0 0 180px;position:relative;z-index:1}.milestone-card{position:absolute;left:0;width:180px;min-height:132px;border:1px solid #274661;border-left:2px solid var(--orange);background:#10253a;border-radius:9px;padding:13px}.milestone.top .milestone-card{top:0}.milestone.bottom .milestone-card{bottom:0}.milestone.current .milestone-card{border-left-color:var(--green)}.milestone:after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;transform:translate(-50%,-50%);border-radius:50%;background:#091522;border:3px solid var(--orange);box-shadow:0 0 0 3px #091522}.milestone.current:after{border-color:var(--green)}.date-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.date-row strong{font-size:14px}.date-row span{font-size:9px;color:#6f94b1;text-transform:uppercase}.tag{display:inline-block;padding:5px 8px;border-radius:999px;font-size:9px;background:#2f2c27;color:#ff9e43;margin-bottom:10px}.current .tag{background:#113e39;color:var(--green)}.milestone-card h3{margin:0 0 8px;font-size:14px;font-weight:500}.milestone-card b{display:block;color:var(--green);margin-bottom:8px;font-size:12px}.milestone-card p{margin:0;color:#9db8cc;font-size:10px;line-height:1.4}.scrollhint{text-align:center;color:#86a7bf;font-size:10px;margin:4px 0 14px}.kpis{display:grid;grid-template-columns:1.1fr .85fr .85fr .9fr;gap:10px}.card{background:#0f263a;border:1px solid #21425d;border-radius:9px;padding:18px;min-height:130px}.label{font-size:11px;font-weight:900;text-transform:uppercase;margin-bottom:14px}.big{font-size:42px;font-weight:850;color:var(--green)}.big.blue{color:var(--blue)}.big.orange{color:var(--orange);font-size:19px}.bottom{display:grid;grid-template-columns:1fr 1.25fr .8fr;gap:10px;margin-top:10px}.list{display:grid;gap:10px;font-size:11px;color:#b7ccdc}.risk{display:flex;justify-content:space-between;gap:12px;background:#132d43;border-radius:6px;padding:10px}.risk strong.high{color:#ff6a5e}.risk strong.med{color:#ff9b31}.risk strong.low{color:#ffcb3f}.legend-row{display:flex;gap:8px;align-items:center;color:#a9c0d2}.legend-dot{width:9px;height:9px;border-radius:50%}.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;z-index:80}.drawer-backdrop.open{display:block}.drawer{position:absolute;top:0;right:0;width:min(620px,95vw);height:100%;overflow:auto;background:#081a2d;border-left:1px solid #1d405d;padding:22px}.drawer-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1b3c57;padding-bottom:12px}.close{background:none;border:1px solid #28445d;color:#fff;border-radius:7px;padding:6px 9px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:12px 0}.field label{display:block;color:#9bb1c2;font-size:11px;margin-bottom:6px}.field input{width:100%;background:#10263c;border:1px solid #1d405d;border-radius:7px;color:#fff;padding:10px}.drawer-actions{position:sticky;bottom:0;background:#081a2d;border-top:1px solid #1b3c57;padding:12px 0;display:flex;justify-content:flex-end;gap:8px}.save{background:linear-gradient(135deg,#28cec3,#149aae);border:0;color:#fff;border-radius:7px;padding:10px 16px;font-weight:800}.cancel{background:#0a1a2a;border:1px solid #284661;color:#fff;border-radius:7px;padding:10px 16px}#print-report{display:none}@media print{body{background:#fff;color:#162334}.topbar,main,.drawer-backdrop{display:none!important}#print-report{display:block}@page{size:A4 landscape;margin:9mm}.pr-page{page-break-after:always;min-height:185mm;padding:2mm 2mm 0;font-family:Arial,sans-serif;color:#1b2a3a;position:relative}.pr-page:last-child{page-break-after:auto}.pr-topline{height:4px;background:linear-gradient(90deg,#ff9f43,#2fcdb6);margin:-2mm -2mm 7mm}.pr-head{display:flex;justify-content:space-between;border-bottom:1px solid #dbe3e9;padding-bottom:4mm;margin-bottom:4mm}.pr-brand{font-size:8px;color:#23af9d;font-weight:800;letter-spacing:.14em}.pr-title{font-size:18px;font-weight:700;margin-left:10px}.pr-meta{text-align:right;font-size:8px}.pr-meta b{display:block;font-size:9px}.pr-synth{background:#f2f6f8;border-left:3px solid #ff9a3b;padding:4mm;margin-bottom:4mm}.pr-synth .kicker{font-size:7px;color:#21af9f;font-weight:800;letter-spacing:.14em}.pr-synth h2{font-size:15px;margin:2mm 0 1mm}.pr-synth p{font-size:8px;margin:0;color:#667786}.pr-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-bottom:4mm}.pr-kpi{border:1px solid #d8e0e6;padding:3mm}.pr-kpi span{display:block;font-size:7px;color:#677987}.pr-kpi b{display:block;font-size:18px;color:#23af9f;margin-top:2mm}.pr-kpi b.red{color:#e95a52}.pr-grid{display:grid;grid-template-columns:31% 69%;gap:4mm}.pr-box{border:1px solid #dbe3e9;padding:3mm}.pr-box h3{font-size:12px;margin:0 0 2mm}.pr-label{font-size:7px;color:#6b7e8d;font-weight:700;margin:2mm 0 1mm}.pr-bullet{font-size:7.2px;line-height:1.35;margin:1mm 0}.pr-bullet:before{content:"•";color:#22b7a7;margin-right:4px}.pr-risk{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:3mm}.pr-risk>div{border-left:2px solid #ff9a3b;padding:2mm;background:#fafcfd}.pr-risk h4{font-size:7px;margin:0 0 1mm;color:#b46a23}.pr-risk p{font-size:7px;line-height:1.35;margin:0}.pr-epics{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5mm 4mm}.pr-epic{display:grid;grid-template-columns:16px 1fr 24px;gap:2mm;align-items:center;font-size:6.8px;border-bottom:1px solid #eef2f4;padding:1.2mm 0}.pr-n{width:14px;height:14px;border-radius:50%;background:#17364c;color:#fff;display:grid;place-items:center;font-size:6px}.pr-e-bar{height:3px;background:#dfe7eb;border-radius:8px;overflow:hidden;margin-top:1mm}.pr-e-bar span{display:block;height:100%;background:#2cc5b3}.pr-e-val{color:#c87927;font-weight:700;text-align:right}.pr-timeline-title{font-size:22px;margin:4mm 0 2mm}.pr-months{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:5mm}.pr-month{border:1px solid #d7e0e6;border-top:3px solid #2cc5b3;padding:4mm;min-height:135mm;background:#fbfcfd}.pr-month .m-k{font-size:7px;color:#22af9e;font-weight:800}.pr-month h3{font-size:14px;margin:3mm 0 5mm}.pr-item{position:relative;border-left:1px solid #c6d3dc;padding:0 0 5mm 6mm;margin-left:2mm}.pr-item:before{content:"";position:absolute;left:-3.5px;top:1mm;width:7px;height:7px;background:#2cc5b3;border-radius:50%;box-shadow:0 0 0 2px #e9f8f5}.pr-item.current{background:#fff5e8;border:1px solid #f3c889;border-radius:4px;padding:3mm;margin:0 0 4mm}.pr-item.current:before{display:none}.pr-item b{font-size:7px;color:#c17a2a}.pr-item strong{font-size:8px;margin-left:4mm}.pr-item p{font-size:7px;color:#71818e;margin:1mm 0 0 13mm}.pr-foot{position:absolute;bottom:3mm;left:2mm;right:2mm;border-top:1px solid #dce4e9;padding-top:2mm;font-size:6.5px;color:#7d8d99;display:flex;justify-content:space-between}}@media(max-width:980px){.topbar{grid-template-columns:150px 1fr auto}.meta,.week{display:none}.topbar .action{display:none}.nav{overflow-x:auto;gap:20px}.kpis,.bottom,.week-grid,.risk-wrap,.next-grid{grid-template-columns:1fr}.epic-grid{grid-template-columns:1fr}.subgrid{grid-template-columns:1fr}.front-summary{padding:20px}.hero-title h1{font-size:34px}}</style></head><body><header class="topbar"><div class="logo">NE<b>X</b>US<small>STATUS COMMAND CENTER</small></div><nav class="nav"><button class="active" data-view="overview">Visão<br>Geral</button><button data-view="revenue">Revenue<br>Cloud</button><button data-view="central">Central de<br>Projetos</button></nav><div class="meta">Atualizado em<small>20/08/2026</small></div><div class="meta week">Semana<small>34</small></div><button class="action" onclick="window.print()">↓ &nbsp; Imprimir relatório</button><button class="action primary" onclick="openEditor()">Editar status</button></header><main><section id="overview" class="view active"><div class="panel timeline-panel"><div class="panel-head"><div><h1>CRONOGRAMA DO PROJETO</h1><p>Arraste para o lado para navegar pelos próximos marcos.</p></div><div class="panel-actions"><button class="mini add">+ Adicionar etapa</button><button class="mini">✎ Editar</button><button class="mini" onclick="scrollTl(-1)">‹</button><button class="mini" onclick="scrollTl(1)">›</button></div></div><div class="timeline-scroll" id="timeline"><div class="timeline-track"><div class="month-group"><div class="month-header"><strong>AGOSTO</strong><span>Mês atual</span></div><div class="month-body"><div class="milestone top current"><div class="milestone-card"><div class="date-row"><strong>20 08</strong><span>HOJE</span></div><span class="tag">Em andamento</span><h3>Sprint 15</h3><b>Central 74,27%</b><p>Revenue com 100% estimado para o marco da sprint.</p></div></div><div class="milestone bottom"><div class="milestone-card"><div class="date-row"><strong>21 08</strong><span>AGOSTO</span></div><span class="tag">Planejado</span><h3>Plano de Virada</h3><b>Entrega</b><p>Documento de cutover previsto.</p></div></div><div class="milestone top"><div class="milestone-card"><div class="date-row"><strong>04 09</strong><span>SETEMBRO</span></div><span class="tag">Planejado</span><h3>Revenue</h3><b>100% desenvolvimento</b><p>Objetivo ao final da Sprint 15.</p></div></div></div></div><div class="month-group"><div class="month-header"><strong>SETEMBRO</strong><span>Evolução</span></div><div class="month-body"><div class="milestone bottom"><div class="milestone-card"><div class="date-row"><strong>03 09</strong><span>SETEMBRO</span></div><span class="tag">Planejado</span><h3>Sprint 16</h3><b>80,24%</b><p>Central de Projetos — marco estimado.</p></div></div><div class="milestone top"><div class="milestone-card"><div class="date-row"><strong>21 09</strong><span>SETEMBRO</span></div><span class="tag">Planejado</span><h3>Sprint 17</h3><b>84,21%</b><p>Central de Projetos — marco estimado.</p></div></div></div></div><div class="month-group"><div class="month-header"><strong>OUTUBRO</strong><span>Consolidação</span></div><div class="month-body"><div class="milestone top"><div class="milestone-card"><div class="date-row"><strong>06 10</strong><span>OUTUBRO</span></div><span class="tag">Planejado</span><h3>Sprint 18</h3><b>90,42%</b><p>Central de Projetos — marco estimado.</p></div></div><div class="milestone bottom"><div class="milestone-card"><div class="date-row"><strong>22 10</strong><span>OUTUBRO</span></div><span class="tag">Planejado</span><h3>Sprint 19</h3><b>95,25%</b><p>Central de Projetos — marco estimado.</p></div></div></div></div><div class="month-group"><div class="month-header"><strong>NOVEMBRO</strong><span>Encerramento</span></div><div class="month-body"><div class="milestone current top"><div class="milestone-card"><div class="date-row"><strong>05 11</strong><span>NOVEMBRO</span></div><span class="tag">Marco final</span><h3>Conclusão prevista</h3><b>100%</b><p>Marco consolidado da Central de Projetos.</p></div></div><div class="milestone bottom"><div class="milestone-card"><div class="date-row"><strong>15 11</strong><span>NOVEMBRO</span></div><span class="tag">Encerramento</span><h3>Deadline do projeto</h3><b>Ajustes finais</b><p>Fechamento do Projeto Nexus.</p></div></div></div></div></div></div><div class="scrollhint">↔ Arraste para navegar horizontalmente</div><div class="kpis"><div class="card"><div class="label">PROGRESSO GERAL DO PROJETO</div><div class="big">79,48%</div><p style="color:#8faec5;font-size:11px">Avanço consolidado das duas frentes</p></div><div class="card"><div class="label">REVENUE CLOUD</div><div class="big">90,58%</div><div class="progress"><span style="width:90.58%"></span></div></div><div class="card"><div class="label">CENTRAL DE PROJETOS</div><div class="big blue">68,37%</div><div class="progress"><span style="width:68.37%;background:var(--blue)"></span></div></div><div class="card"><div class="label">PRÓXIMO MARCO</div><div class="big orange">21 AGO</div><b>Documento de cutover</b><p style="color:#8faec5;font-size:11px">Revenue</p></div></div><div class="bottom"><div class="card"><div class="label">DESTAQUES</div><div class="list"><div>✓ Homologação da Central em andamento</div><div>✓ Sprint 15 iniciada</div><div>✓ Recuperação gradual do cronograma da Central</div><div>△ Atenção à integração Benner</div></div></div><div class="card"><div class="label">RISCOS E ATENÇÕES</div><div class="list"><div class="risk"><span>Integração com a Benner</span><strong class="high">Alto</strong></div><div class="risk"><span>Desvio de 1,63% na Central</span><strong class="med">Médio</strong></div><div class="risk"><span>Esforço adicional de 11% fora do escopo inicial de Revenue</span><strong class="low">Baixo</strong></div></div></div><div class="card"><div class="label">LEGENDA</div><div class="list"><div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span>Concluído</div><div class="legend-row"><span class="legend-dot" style="background:var(--yellow)"></span>Em andamento</div><div class="legend-row"><span class="legend-dot" style="background:var(--orange)"></span>Planejado</div><div class="legend-row"><span class="legend-dot" style="background:var(--red)"></span>Em risco</div></div></div></div></div><div class="footer"><span>Projeto Nexus · Status executivo · Semana 34</span><span>Dados atualizados em 20/08/2026</span></div></section><section id="central" class="view"><div class="hero-title"><div class="eyebrow">FRENTE SELECIONADA</div><h1>Central de Projetos</h1><p>Status, evolução, atividades, épicos e riscos apresentados em uma visão dedicada.</p></div><div class="front-summary"><div class="front-head"><div><div class="eyebrow">FRENTE DE TRABALHO</div><h2>Central de Projetos</h2></div><span class="status-pill">1 risco</span></div><div class="front-progress">68,37% <small>concluído</small></div><div class="progress"><span style="width:68.37%"></span></div><div class="metrics-row"><div class="metric-block"><strong style="color:var(--teal)">56,76%</strong><span>UAT</span></div><div class="metric-block"><strong style="color:var(--orange)">17,64%</strong><span>homologado</span></div><div class="metric-block"><strong style="color:var(--red)">-1,63%</strong><span>desvio</span></div></div><div class="front-foot"><span>Sprint 15/20</span><span>● Em acompanhamento</span></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">RESUMO DA SEMANA</div><h2>O que avançou e o que precisa de atenção</h2></div><p>As informações operacionais continuam disponíveis sem competir com a leitura executiva.</p></div><div class="week-card"><h3>Central de Projetos</h3><div class="subgrid"><div><div class="box-title">ATIVIDADES EXECUTADAS</div><div class="bullet">Aprovação de US’s (19/08).</div><div class="bullet">Refinamento de Alocação de Recursos (18/08).</div><div class="bullet">Alinhamento do Portal e Whatsapp MKT.</div><div class="bullet">Homologação — 2ª Rodada (17/08).</div><div class="bullet">Finalização da Sprint 14 e início da Sprint 15.</div></div><div><div class="box-title">PONTOS DE ATENÇÃO</div><div class="bullet">Homologação em andamento — evidências devem ser registradas com links/imagens em pasta compartilhada.</div><div class="bullet">Revisão semanal das abas de homologação toda segunda-feira (Matheus Ledic).</div></div><div><div class="box-title">PENDÊNCIAS</div><div class="bullet">Definição da nomenclatura do campo de horas adicionais no formulário de apontamento.</div><div class="bullet">Pendência do envio da Identidade Visual MV.</div></div><div><div class="box-title">IMPEDIMENTOS</div><div class="bullet">No momento, não há impedimentos identificados.</div></div></div></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">VISÃO DETALHADA · CENTRAL DE PROJETOS</div><h2>Progresso por épico</h2></div><p>Acompanhamento das histórias concluídas em relação ao total previsto em cada épico.</p></div><div class="epic-grid" id="centralEpics"></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">GESTÃO ATIVA</div><h2>Riscos e planos de ação</h2></div><p>Impacto e resposta apresentados lado a lado.</p></div><div class="risk-wrap"><div class="risk-card"><div class="risk-card-head"><b>Central de Projetos</b><span>RISCO ATIVO</span></div><div class="risk-cols"><div class="risk-col"><h4>RISCO</h4><p>Com a inclusão de novos itens no cronograma, o percentual geral foi recalculado. Mesmo com a ampliação do escopo planejado, o desvio permanece controlado em -1,63%.</p></div><div class="risk-col action"><h4>PLANO DE AÇÃO</h4><p>Reforço da equipe com novo desenvolvedor, ampliação da atuação do arquiteto e redução de agendas de refinamento a partir da semana de 18/08 para liberar tempo dos usuários para os testes de homologação.</p></div></div></div></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">EXECUÇÃO</div><h2>Próximos passos</h2></div><p>Compromissos que conduzem o próximo status.</p></div><div class="next-grid"><div class="next-card"><span class="n">01</span><span class="tag2">Central de Projetos</span><p>Manter a 2ª rodada de homologação e o registro das evidências.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">02</span><span class="tag2">Central de Projetos</span><p>Manter o plano de recuperação do cronograma.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">03</span><span class="tag2">Central de Projetos</span><p>Concluir definições pendentes para apontamento e identidade visual.</p><small>Em acompanhamento</small></div></div></div><div class="footer"><span>Projeto Nexus · Status executivo · Semana 34</span><span>Dados atualizados em 20/08/2026</span></div></section><section id="revenue" class="view"><div class="hero-title"><div class="eyebrow">FRENTE SELECIONADA</div><h1>Revenue Cloud</h1><p>Status, evolução, atividades, épicos e riscos apresentados em uma visão dedicada.</p></div><div class="front-summary"><div class="front-head"><div><div class="eyebrow">FRENTE DE TRABALHO</div><h2>Revenue</h2></div><span class="status-pill">1 risco</span></div><div class="front-progress">90,58% <small>concluído</small></div><div class="progress"><span style="width:90.58%"></span></div><div class="metrics-row"><div class="metric-block"><strong style="color:var(--teal)">56,13%</strong><span>UAT</span></div><div class="metric-block"><strong style="color:var(--orange)">6,06%</strong><span>homologado</span></div><div class="metric-block"><strong style="color:var(--red)">-2,75%</strong><span>desvio</span></div></div><div class="front-foot"><span>Sprint 15/15</span><span>● Em acompanhamento</span></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">RESUMO DA SEMANA</div><h2>O que avançou e o que precisa de atenção</h2></div><p>As informações operacionais continuam disponíveis sem competir com a leitura executiva.</p></div><div class="week-card"><h3>Revenue</h3><div class="subgrid"><div><div class="box-title">ATIVIDADES EXECUTADAS</div><div class="bullet">Refinamento — Oportunidades e Consumo de Banco de Horas (19/08).</div><div class="bullet">Visão TO-BE (Macro) do Processo NEXUS (18/08).</div><div class="bullet">Refinamento — Movimentação Contratual, Renegociação e Reajuste (17/08).</div><div class="bullet">Assuntos Pendentes — Plano de Virada (14/08).</div><div class="bullet">Finalização da Sprint 14 e início da Sprint 15.</div></div><div><div class="box-title">PONTOS DE ATENÇÃO</div><div class="bullet">Esforço adicional de 11% referente a demandas não previstas no escopo inicial; itens direcionados ao backlog.</div><div class="bullet">Documento de cutover (Plano de Virada) com entrega prevista para 21/08.</div></div><div><div class="box-title">PENDÊNCIAS</div><div class="bullet">Dicionário de dados Salesforce para apoio do time MV — integração Benner — em andamento.</div><div class="bullet">Entrega do planejamento consolidado da quantidade de US previstas até a conclusão do projeto.</div></div><div><div class="box-title">IMPEDIMENTOS</div><div class="bullet">Integração com a Benner ainda em aberto — bloqueia parte do avanço de desenvolvimento.</div></div></div></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">VISÃO DETALHADA · REVENUE</div><h2>Progresso por épico</h2></div><p>Acompanhamento das histórias concluídas em relação ao total previsto em cada épico.</p></div><div class="epic-grid" id="revenueEpics"></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">GESTÃO ATIVA</div><h2>Riscos e planos de ação</h2></div><p>Impacto e resposta apresentados lado a lado.</p></div><div class="risk-wrap"><div class="risk-card"><div class="risk-card-head"><b>Revenue</b><span>RISCO ATIVO</span></div><div class="risk-cols"><div class="risk-col"><h4>RISCO</h4><p>Integração com a Benner. O projeto apresenta um atraso de 2,75% no cronograma.</p></div><div class="risk-col action"><h4>PLANO DE AÇÃO</h4><p>Lucas e Diego atuam diretamente nas demandas para ampliar a capacidade produtiva. Objetivo: concluir 100% do desenvolvimento até 04/09, ao final da Sprint 15, deixando as etapas seguintes exclusivamente para testes, correções de bugs e ajustes finais.</p></div></div></div></div></div><div class="section"><div class="section-title"><div><div class="eyebrow">EXECUÇÃO</div><h2>Próximos passos</h2></div><p>Compromissos que conduzem o próximo status.</p></div><div class="next-grid"><div class="next-card"><span class="n">01</span><span class="tag2">Revenue</span><p>Entregar o documento de cutover (Plano de Virada) previsto para 21/08.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">02</span><span class="tag2">Revenue</span><p>Concluir o desenvolvimento até 04/09.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">03</span><span class="tag2">Revenue</span><p>Concluir o dicionário de dados Salesforce para a integração Benner.</p><small>Em acompanhamento</small></div></div></div><div class="footer"><span>Projeto Nexus · Status executivo · Semana 34</span><span>Dados atualizados em 20/08/2026</span></div></section></main><div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target===this)closeEditor()"><div class="drawer"><div class="drawer-head"><h2>Editar status</h2><button class="close" onclick="closeEditor()">✕</button></div><div class="form-grid"><div class="field"><label>Atualizado em</label><input id="edDate" value="20/08/2026"></div><div class="field"><label>Semana</label><input id="edWeek" value="34"></div><div class="field"><label>Central concluído</label><input id="edCentral" value="68,37%"></div><div class="field"><label>Revenue concluído</label><input id="edRevenue" value="90,58%"></div></div><p style="color:#8da8bd;font-size:11px">A edição é armazenada somente neste navegador. Para publicar alterações oficiais, atualize o repositório.</p><div class="drawer-actions"><button class="cancel" onclick="closeEditor()">Cancelar</button><button class="save" onclick="saveEditor()">Salvar</button></div></div></div><div id="print-report"><div class="pr-page" id="prCentral"><div class="pr-topline"></div><div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Central de Projetos</span></div><div class="pr-meta"><b>Status executivo</b>Semana 34 · 20/08/2026</div></div><div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Homologação em andamento e cronograma sob recuperação controlada</h2><p>A Central segue na 2ª rodada de homologação, com recuperação gradual do cronograma e desvio atual de -1,63%.</p></div><div class="pr-kpis"><div class="pr-kpi"><span>CONCLUÍDO</span><b>68,37%</b></div><div class="pr-kpi"><span>DISPONÍVEL EM UAT</span><b>56,76%</b></div><div class="pr-kpi"><span>HOMOLOGADO</span><b>17,64%</b></div><div class="pr-kpi"><span>DESVIO DO CRONOGRAMA</span><b class="red">-1,63%</b></div></div><div class="pr-grid"><div class="pr-box"><div class="pr-brand">STATUS DA FRENTE</div><h3>Visão gerencial</h3><div class="pr-label">ATIVIDADES EXECUTADAS</div><div class="pr-bullet">Aprovação de US’s (19/08).</div><div class="pr-bullet">Refinamento de Alocação de Recursos (18/08).</div><div class="pr-bullet">Alinhamento do Portal e Whatsapp MKT.</div><div class="pr-bullet">Homologação — 2ª Rodada (17/08).</div><div class="pr-bullet">Finalização da Sprint 14 e início da Sprint 15.</div><div class="pr-label">PONTOS DE ATENÇÃO</div><div class="pr-bullet">Evidências da homologação devem ser registradas em pasta compartilhada.</div><div class="pr-label">PENDÊNCIAS</div><div class="pr-bullet">Nomenclatura do campo de horas adicionais.</div><div class="pr-bullet">Identidade Visual MV.</div><div class="pr-label">IMPEDIMENTOS</div><div class="pr-bullet">Não há impedimentos identificados.</div><div class="pr-risk"><div><h4>RISCO</h4><p>Recalculo do cronograma com desvio atual de -1,63%.</p></div><div><h4>PLANO DE AÇÃO</h4><p>Reforço do time, maior atuação do arquiteto e redução de refinamentos para liberar homologação.</p></div></div></div><div class="pr-box"><div class="pr-brand">VISÃO DETALHADA</div><h3>Progresso por épico <span style="float:right;font-size:7px;color:#6f7f8c">42 épicos</span></h3><div class="pr-epics" id="prCentralEpics"></div></div></div><div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>1/3</span></div></div><div class="pr-page" id="prRevenue"><div class="pr-topline"></div><div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Revenue</span></div><div class="pr-meta"><b>Status executivo</b>Semana 34 · 20/08/2026</div></div><div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Revenue acelera a conclusão do desenvolvimento com atenção à integração Benner</h2><p>A frente está na Sprint 15/15, com 90,58% concluído e objetivo de concluir 100% do desenvolvimento até 04/09.</p></div><div class="pr-kpis"><div class="pr-kpi"><span>CONCLUÍDO</span><b>90,58%</b></div><div class="pr-kpi"><span>DISPONÍVEL EM UAT</span><b>56,13%</b></div><div class="pr-kpi"><span>HOMOLOGADO</span><b>6,06%</b></div><div class="pr-kpi"><span>DESVIO DO CRONOGRAMA</span><b class="red">-2,75%</b></div></div><div class="pr-grid"><div class="pr-box"><div class="pr-brand">STATUS DA FRENTE</div><h3>Visão gerencial</h3><div class="pr-label">ATIVIDADES EXECUTADAS</div><div class="pr-bullet">Refinamento — Oportunidades e Consumo de Banco de Horas (19/08).</div><div class="pr-bullet">Visão TO-BE do Processo NEXUS (18/08).</div><div class="pr-bullet">Movimentação Contratual, Renegociação e Reajuste (17/08).</div><div class="pr-label">PONTOS DE ATENÇÃO</div><div class="pr-bullet">Esforço adicional de 11% fora do escopo inicial.</div><div class="pr-bullet">Documento de cutover previsto para 21/08.</div><div class="pr-label">PENDÊNCIAS</div><div class="pr-bullet">Dicionário Salesforce para integração Benner.</div><div class="pr-bullet">Planejamento consolidado de US até a conclusão.</div><div class="pr-label">IMPEDIMENTOS</div><div class="pr-bullet">Integração Benner ainda em aberto.</div><div class="pr-risk"><div><h4>RISCO</h4><p>Integração com a Benner e atraso de 2,75%.</p></div><div><h4>PLANO DE AÇÃO</h4><p>Reforçar capacidade e concluir desenvolvimento até 04/09.</p></div></div></div><div class="pr-box"><div class="pr-brand">VISÃO DETALHADA</div><h3>Progresso por épico <span style="float:right;font-size:7px;color:#6f7f8c">27 épicos</span></h3><div class="pr-epics" id="prRevenueEpics"></div></div></div><div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>2/3</span></div></div><div class="pr-page" id="prTimeline"><div class="pr-topline"></div><div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Cronograma executivo</span></div><div class="pr-meta"><b>Agosto a novembro de 2026</b>Base: status de 20/08/2026</div></div><div class="pr-brand" style="margin-top:8mm">LINHA DO TEMPO</div><div class="pr-timeline-title">Próximos marcos do projeto</div><p style="font-size:8px;color:#6f7f8c;margin:0">Visão consolidada dos ciclos, homologação e encerramento previsto.</p><div class="pr-months"><div class="pr-month"><div class="m-k">MÊS ATUAL</div><h3>Agosto 2026</h3><div class="pr-item current"><b>20/08</b><strong>Hoje · Sprint 15</strong><p>Central 74,27% · Revenue 100% estimado</p></div><div class="pr-item"><b>21/08</b><strong>Plano de Virada</strong><p>Entrega prevista do documento de cutover</p></div></div><div class="pr-month"><div class="m-k">EVOLUÇÃO</div><h3>Setembro 2026</h3><div class="pr-item"><b>03/09</b><strong>Sprint 16</strong><p>80,24% — Central</p></div><div class="pr-item"><b>04/09</b><strong>Revenue</strong><p>Objetivo: 100% desenvolvimento</p></div><div class="pr-item"><b>21/09</b><strong>Sprint 17</strong><p>84,21% — Central</p></div></div><div class="pr-month"><div class="m-k">CONSOLIDAÇÃO</div><h3>Outubro 2026</h3><div class="pr-item"><b>06/10</b><strong>Sprint 18</strong><p>90,42% — Central</p></div><div class="pr-item"><b>22/10</b><strong>Sprint 19</strong><p>95,25% — Central</p></div></div><div class="pr-month"><div class="m-k">ENCERRAMENTO</div><h3>Novembro 2026</h3><div class="pr-item"><b>05/11</b><strong>Marco 100%</strong><p>Conclusão prevista da Central</p></div><div class="pr-item"><b>15/11</b><strong>Deadline final</strong><p>Encerramento do Projeto Nexus</p></div></div></div><div class="pr-foot"><span>* Percentuais e datas estimados podem variar conforme a evolução do projeto.</span><span>3/3</span></div></div></div><script>const centralEpics=[['Gestão e Visualização Gantt',6,6],['Gestão de Visões e Calendários',3,4],['Gestão e Visualização Task Board',1,4],['Parâmetros da Central de Projetos',3,3],['Gestão de Orçamento',8,8],['Gestão de Projetos',5,5],['Gestão de Fases do Projeto',3,3],['Gestão de Fluxo Financeiro',2,4],['Gestão de Versão de Projetos',6,6],['Gestão de Linhas do Projeto',7,7],['Gestão de Mudanças',2,2],['Gestão de Recursos',3,3],['Gestão de Recursos Parceiros',2,2],['Gestão de Disponibilidade de Recursos',1,2],['Gestão e Integração de Despesas',2,3],['Alocação de Recursos',3,5],['Solicitação de Alocação de Recursos',2,2],['Gestão de Riscos',2,2],['Integração Jira',1,2],['Modelos de Projetos',2,2],['Apontamento de Horas',2,5],['Aprovação de Apontamentos de Horas',0,1],['Reconhecimento de Receitas para Faturamento',0,2],['One Page Projeto',0,2],['Geração de Status Report',0,2],['Gestão de Projetos Ágeis',0,2],['Indicadores do Risco',0,1],['Indicadores do Projeto',1,3],['Indicadores dos Recursos',0,1],['Indicadores Financeiros',1,2],['Gestão do Cliente e Plano de Ação',0,1],['Gestão Estratégica da Carteira',0,2],['Acompanhamento de Indicadores de Relacionamento',0,2],['Criação de Agente Inteligente contextualizado em Projetos ou Programas',0,3],['Criação de Agente Inteligente contextualizado em recursos e geração de conteúdo',0,2],['Frontend / API para conversa do Agente - Portal Apontamento de Horas',0,2],['Portal de Clientes',0,4],['Portal de Ofertas de Parceiros',0,3],['Incidentes de Projetos e Programas acessível pelo portal do cliente',0,2],['Notificações via WhatsApp',0,3],['Integração Idocuments para geração e ativação de processos documentais',0,6],['Implementação da Automação da agenda',0,3]];const revenueEpics=[['Fundação Comercial de Produtos e Catálogos (Revenue)',3,3],['Fundação do Objeto Conta',4,4],['Esforço Adicional Conta',0,2],['Fundação do Objeto Produtos',3,3],['Processo de Vendas',1,1],['Gestão do Processo de Cotações',1,1],['Gestão do Processo de Arquitetura',2,2],['Dados adicionais da Cotação',2,2],['Plataforma de Planilhas de Cálculos',3,3],['Cálculo de Esforço de Projetos',5,5],['Cálculo de Preços Avançados',3,3],['Cálculo de Margem dos Projetos',2,2],['Precificação de Despesas de Projetos',2,2],['Personalizações de Cálculos de Projetos na Cotação',1,1],['Documentos Anexos Comerciais',1,4],['Processo de Infraestrutura',1,2],['Geração de Contratos',2,3],['Geração de Ativos',1,3],['Execução de Contrato',2,3],['Parametrização do Faturamento',3,3],['Processo de Faturamento (Billing)',4,6],['Integração Benner Faturamento',0,2],['Integração Benner Recebimento',0,2],['Gestão de Renovações e Reajustes',0,3],['Prontuário do Cliente',3,3],['Prontuário do Cliente Esforço Adicional',2,3],['Cadastro de Produtos Arquitetura para Validação e Testes',4,4]];function renderEpics(id,data,printId){const html=data.map((e,i)=>{let p=e[2]?Math.round(e[1]/e[2]*100):0;return `<div class="epic"><div class="num">${i+1}</div><div>${e[0]}</div><strong>${e[1]}/${e[2]}</strong><div class="bar"><span style="width:${p}%"></span></div></div>`}).join('');document.getElementById(id).innerHTML=html;const ph=data.map((e,i)=>{let p=e[2]?Math.round(e[1]/e[2]*100):0;return `<div class="pr-epic"><div class="pr-n">${i+1}</div><div>${e[0]}<div class="pr-e-bar"><span style="width:${p}%"></span></div></div><div class="pr-e-val">${e[1]}/${e[2]}</div></div>`}).join('');document.getElementById(printId).innerHTML=ph}renderEpics('centralEpics',centralEpics,'prCentralEpics');renderEpics('revenueEpics',revenueEpics,'prRevenueEpics');document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.view).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}));const tl=document.getElementById('timeline');let isDown=false,startX,sl;tl.addEventListener('mousedown',e=>{isDown=true;tl.classList.add('dragging');startX=e.pageX-tl.offsetLeft;sl=tl.scrollLeft});['mouseleave','mouseup'].forEach(ev=>tl.addEventListener(ev,()=>{isDown=false;tl.classList.remove('dragging')}));tl.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-tl.offsetLeft;tl.scrollLeft=sl-(x-startX)});function scrollTl(dir){tl.scrollBy({left:dir*500,behavior:'smooth'})}function openEditor(){document.getElementById('drawerBackdrop').classList.add('open')}function closeEditor(){document.getElementById('drawerBackdrop').classList.remove('open')}function saveEditor(){localStorage.setItem('nexus-edits',JSON.stringify({date:edDate.value,week:edWeek.value,central:edCentral.value,revenue:edRevenue.value}));closeEditor();alert('Alterações salvas neste navegador.')}</script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projeto Nexus · Status Executivo</title>
+<style>
+:root{
+  --bg:#07111d;--bg2:#081827;--panel:#0d2236;--panel2:#10283e;--line:#1d405d;
+  --text:#f5f8fb;--muted:#8da8bd;--teal:#2fd4bf;--teal2:#20b7c4;--blue:#2a9cff;
+  --orange:#ff8d2d;--yellow:#ffc148;--red:#ff6b61;--green:#46dda8;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:
+radial-gradient(circle at 96% 4%,rgba(38,208,195,.08),transparent 27%),
+linear-gradient(180deg,var(--bg),#06111e 55%,#07111d);color:var(--text)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:40;display:grid;grid-template-columns:180px 1fr 170px 88px 170px 140px;gap:18px;align-items:center;padding:16px 4vw;background:#06111d;border-bottom:1px solid #183149}
+.logo{font-size:30px;letter-spacing:.13em;font-weight:300}.logo b{color:var(--teal);font-weight:300}.logo small{display:block;font-size:8px;letter-spacing:.20em;color:#6988a0;margin-top:6px}
+.nav{display:flex;gap:34px;align-items:center}.nav button{border:0;background:none;color:#8fa7b9;font-size:14px;padding:18px 0;border-bottom:2px solid transparent}.nav button.active{color:#fff;border-color:var(--teal)}
+.meta{font-size:13px;line-height:1.5}.meta small{display:block;color:#819bad}.week{padding-left:20px;border-left:1px dashed #27425c}
+.action{border:1px solid #24435d;background:#091a2a;color:#fff;border-radius:8px;padding:12px 15px;font-weight:800;font-size:13px}.action.primary{background:linear-gradient(135deg,#28cec3,#149aae);border:0}
+main{padding:0 4vw 36px}.view{display:none}.view.active{display:block}
+.hero-title{margin:34px 0 26px}.eyebrow{font-size:10px;letter-spacing:.16em;color:var(--teal);font-weight:900;text-transform:uppercase}.hero-title h1{font-size:42px;margin:10px 0 7px;font-weight:400}.hero-title p{color:#8ca8bd;margin:0;font-size:13px}
+.panel{background:linear-gradient(180deg,rgba(12,33,52,.98),rgba(8,25,40,.98));border:1px solid #17344d;border-radius:12px;padding:22px 24px}
+.front-summary{padding:26px;border-radius:11px;background:#0b2034;border:1px solid #173954}
+.front-head{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #1d3a55;padding-bottom:18px}
+.front-head h2{margin:0;font-weight:500;font-size:22px}.status-pill{color:#ff9f3a;background:#34291f;padding:6px 10px;border-radius:999px;font-size:10px}
+.front-progress{font-size:52px;font-weight:850;margin:22px 0 8px}.front-progress small{font-size:12px;color:#8ba8bd;font-weight:400}
+.progress{height:7px;background:#29445d;border-radius:999px;overflow:hidden}.progress span{display:block;height:100%;border-radius:inherit;background:var(--teal)}
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;padding-top:12px;border-top:1px solid #18364f}
+.metric-block{text-align:center;border-right:1px solid #1c3a54}.metric-block:last-child{border:0}.metric-block strong{display:block;font-size:20px}.metric-block span{font-size:10px;color:#819cb1}
+.front-foot{display:flex;justify-content:space-between;color:#90aabd;font-size:10px;margin-top:18px}
+.section{padding:38px 0;border-bottom:1px solid #153049}.section-title{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:18px}.section-title h2{font-size:34px;font-weight:400;margin:7px 0}.section-title p{max-width:250px;color:#829db1;font-size:11px}
+.week-card{background:#0b2035;border:1px solid #193a55;border-top:1px solid var(--teal);padding:20px 24px}
+.week-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.week-block h3{font-weight:500}
+.subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.box-title{font-size:9px;color:#7895ab;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.bullet{margin:8px 0;color:#b7cad8;font-size:11px;line-height:1.45}.bullet:before{content:"•";color:var(--teal);margin-right:8px}
+.epic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px;background:#0b2035;border:1px solid #193a55;border-radius:10px;padding:14px}
+.epic{display:grid;grid-template-columns:25px 1fr 34px 72px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #17334c;font-size:10px}
+.num{width:18px;height:18px;border-radius:50%;background:#14334d;display:grid;place-items:center;color:#d9e5ee;font-size:9px}.epic strong{color:#ff9b35}
+.bar{height:5px;background:#284159;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:var(--teal)}
+.risk-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.risk-card{background:#0b2035;border:1px solid #193a55;padding:16px;max-width:680px}.risk-card-head{display:flex;justify-content:space-between;margin-bottom:12px}.risk-card-head span{font-size:9px;color:var(--orange);font-weight:900}.risk-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}.risk-col h4{font-size:9px;letter-spacing:.08em;color:var(--orange);margin:0 0 8px}.risk-col.action h4{color:var(--teal)}.risk-col p{color:#b5c8d7;font-size:11px;line-height:1.55;margin:0}
+.next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.next-card{min-height:150px;background:#0b2035;border:1px solid #193a55;padding:16px}.next-card .n{color:var(--teal);font-size:12px;font-weight:900}.next-card .tag2{float:right;background:#103c39;color:#9cf0df;border-radius:999px;padding:5px 8px;font-size:8px}.next-card p{margin-top:28px;color:#dbe6ee;font-size:11px;line-height:1.5}.next-card small{color:#80b9ae;font-size:9px}
+.footer{display:flex;justify-content:space-between;padding:20px 0;color:#6f899d;font-size:9px}
+.timeline-panel{margin-top:22px}.panel-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid #18344d;padding-bottom:14px}.panel-head h1{font-size:24px;margin:0 0 7px;font-weight:500}.panel-head p{margin:0;color:var(--muted);font-size:13px}
+.panel-actions{display:flex;gap:8px}.mini{background:#0a1a2a;border:1px solid #284661;color:#fff;border-radius:8px;padding:9px 12px;font-weight:700;font-size:11px}.mini.add{color:var(--green);border-color:#14785f}
+.timeline-scroll{overflow-x:auto;overflow-y:hidden;cursor:grab;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:var(--green) #10283d;padding:10px 0 8px}.timeline-scroll.dragging{cursor:grabbing;user-select:none;scroll-behavior:auto}
+.timeline-track{display:flex;gap:16px;width:max-content;padding:14px 8px 22px;position:relative;align-items:stretch}
+.month-group{flex:0 0 360px;border:1px solid #28506e;border-radius:12px;overflow:hidden;background:#0a1d30;scroll-snap-align:start}
+.month-header{height:58px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 18px;border-bottom:1px solid #28506e;background:linear-gradient(90deg,#123b4d,#102941)}
+.month-header strong{font-size:13px;letter-spacing:.14em;color:#fff}.month-header span{font-size:10px;color:#b9d1e1;text-transform:uppercase}
+.month-body{display:grid;grid-template-columns:1fr;gap:12px;padding:16px;align-content:start}
+.milestone{width:auto;height:auto;position:relative}.milestone-card{position:static;width:auto;min-height:0;border:1px solid #31536d;border-left:4px solid var(--orange);background:#102a40;border-radius:9px;padding:14px 15px}.milestone.current .milestone-card{border-left-color:var(--green);background:#0f3040}
+.milestone:after{display:none}
+.date-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}.date-row strong{font-size:15px;color:#fff;white-space:nowrap}.date-row span{font-size:9px;color:#b9d1e1;text-transform:uppercase;text-align:right}.tag{display:inline-block;padding:5px 8px;border-radius:999px;font-size:9px;background:#3a2d21;color:#ffc27a;margin-bottom:10px}.current .tag{background:#16483f;color:#7ff0ce}
+.milestone-card h3{margin:0 0 7px;font-size:15px;color:#fff}.milestone-card b{display:block;color:#e8f2f8;font-size:11px;margin-bottom:7px}.milestone-card p{margin:0;color:#c0d3df;font-size:11px;line-height:1.55}
+.milestone-card h3{margin:0 0 8px;font-size:14px;font-weight:500}.milestone-card b{display:block;color:var(--green);margin-bottom:8px;font-size:12px}.milestone-card p{margin:0;color:#9db8cc;font-size:10px;line-height:1.4}.scrollhint{text-align:center;color:#86a7bf;font-size:10px;margin:4px 0 14px}
+.kpis{display:grid;grid-template-columns:1.1fr .85fr .85fr .9fr;gap:10px}.card{background:#0f263a;border:1px solid #21425d;border-radius:9px;padding:18px;min-height:130px}.label{font-size:11px;font-weight:900;text-transform:uppercase;margin-bottom:14px}.big{font-size:42px;font-weight:850;color:var(--green)}.big.blue{color:var(--blue)}.big.orange{color:var(--orange);font-size:19px}
+.bottom{display:grid;grid-template-columns:1fr 1.25fr .8fr;gap:10px;margin-top:10px}.list{display:grid;gap:10px;font-size:11px;color:#b7ccdc}.risk{display:flex;justify-content:space-between;gap:12px;background:#132d43;border-radius:6px;padding:10px}.risk strong.high{color:#ff6a5e}.risk strong.med{color:#ff9b31}.risk strong.low{color:#ffcb3f}.legend-row{display:flex;gap:8px;align-items:center;color:#a9c0d2}.legend-dot{width:9px;height:9px;border-radius:50%}
+
+/* Modal editor */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;z-index:80}.drawer-backdrop.open{display:block}.drawer{position:absolute;top:0;right:0;width:min(620px,95vw);height:100%;overflow:auto;background:#081a2d;border-left:1px solid #1d405d;padding:22px}.drawer-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1b3c57;padding-bottom:12px}.close{background:none;border:1px solid #28445d;color:#fff;border-radius:7px;padding:6px 9px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin:12px 0}.field label{display:block;color:#9bb1c2;font-size:11px;margin-bottom:6px}.field input{width:100%;background:#10263c;border:1px solid #1d405d;border-radius:7px;color:#fff;padding:10px}.drawer-actions{position:sticky;bottom:0;background:#081a2d;border-top:1px solid #1b3c57;padding:12px 0;display:flex;justify-content:flex-end;gap:8px}.save{background:linear-gradient(135deg,#28cec3,#149aae);border:0;color:#fff;border-radius:7px;padding:10px 16px;font-weight:800}.cancel{background:#0a1a2a;border:1px solid #284661;color:#fff;border-radius:7px;padding:10px 16px}
+
+/* PRINT REPORT */
+#print-report{display:none}
+@media print{
+  body{background:#fff;color:#162334}
+  .topbar,main,.drawer-backdrop{display:none!important}
+  #print-report{display:block}
+  @page{size:A4 landscape;margin:9mm}
+  .pr-page{page-break-after:always;min-height:185mm;padding:2mm 2mm 0;font-family:Arial,sans-serif;color:#1b2a3a}
+  .pr-page:last-child{page-break-after:auto}
+  .pr-topline{height:4px;background:linear-gradient(90deg,#ff9f43,#2fcdb6);margin:-2mm -2mm 7mm}
+  .pr-head{display:flex;justify-content:space-between;border-bottom:1px solid #dbe3e9;padding-bottom:4mm;margin-bottom:4mm}
+  .pr-brand{font-size:8px;color:#23af9d;font-weight:800;letter-spacing:.14em}.pr-title{font-size:18px;font-weight:700;margin-left:10px}
+  .pr-meta{text-align:right;font-size:8px}.pr-meta b{display:block;font-size:9px}
+  .pr-synth{background:#f2f6f8;border-left:3px solid #ff9a3b;padding:4mm;margin-bottom:4mm}.pr-synth .kicker{font-size:7px;color:#21af9f;font-weight:800;letter-spacing:.14em}.pr-synth h2{font-size:15px;margin:2mm 0 1mm}.pr-synth p{font-size:8px;margin:0;color:#667786}
+  .pr-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-bottom:4mm}.pr-kpi{border:1px solid #d8e0e6;padding:3mm}.pr-kpi span{display:block;font-size:7px;color:#677987}.pr-kpi b{display:block;font-size:18px;color:#23af9f;margin-top:2mm}.pr-kpi b.red{color:#e95a52}
+  .pr-grid{display:grid;grid-template-columns:31% 69%;gap:4mm}.pr-box{border:1px solid #dbe3e9;padding:3mm}.pr-box h3{font-size:12px;margin:0 0 2mm}.pr-label{font-size:7px;color:#6b7e8d;font-weight:700;margin:2mm 0 1mm}.pr-bullet{font-size:7.2px;line-height:1.35;margin:1mm 0}.pr-bullet:before{content:"•";color:#22b7a7;margin-right:4px}
+  .pr-risk{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:3mm}.pr-risk>div{border-left:2px solid #ff9a3b;padding:2mm;background:#fafcfd}.pr-risk h4{font-size:7px;margin:0 0 1mm;color:#b46a23}.pr-risk p{font-size:7px;line-height:1.35;margin:0}
+  .pr-epics{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5mm 4mm}.pr-epic{display:grid;grid-template-columns:16px 1fr 24px;gap:2mm;align-items:center;font-size:6.8px;border-bottom:1px solid #eef2f4;padding:1.2mm 0}.pr-n{width:14px;height:14px;border-radius:50%;background:#17364c;color:#fff;display:grid;place-items:center;font-size:6px}.pr-e-bar{height:3px;background:#dfe7eb;border-radius:8px;overflow:hidden;margin-top:1mm}.pr-e-bar span{display:block;height:100%;background:#2cc5b3}.pr-e-val{color:#c87927;font-weight:700;text-align:right}
+  .pr-timeline-title{font-size:22px;margin:4mm 0 2mm}.pr-months{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:5mm}.pr-month{border:1px solid #d7e0e6;border-top:3px solid #2cc5b3;padding:4mm;min-height:135mm;background:#fbfcfd}.pr-month .m-k{font-size:7px;color:#22af9e;font-weight:800}.pr-month h3{font-size:14px;margin:3mm 0 5mm}.pr-item{position:relative;border-left:1px solid #c6d3dc;padding:0 0 5mm 6mm;margin-left:2mm}.pr-item:before{content:"";position:absolute;left:-3.5px;top:1mm;width:7px;height:7px;background:#2cc5b3;border-radius:50%;box-shadow:0 0 0 2px #e9f8f5}.pr-item.current{background:#fff5e8;border:1px solid #f3c889;border-radius:4px;padding:3mm;margin:0 0 4mm}.pr-item.current:before{display:none}.pr-item b{font-size:7px;color:#c17a2a}.pr-item strong{font-size:8px;margin-left:4mm}.pr-item p{font-size:7px;color:#71818e;margin:1mm 0 0 13mm}.pr-foot{position:absolute;bottom:3mm;left:2mm;right:2mm;border-top:1px solid #dce4e9;padding-top:2mm;font-size:6.5px;color:#7d8d99;display:flex;justify-content:space-between}
+}
+@media(max-width:980px){
+  .topbar{grid-template-columns:150px 1fr auto}.meta,.week{display:none}.topbar .action{display:none}.nav{overflow-x:auto;gap:20px}
+  .kpis,.bottom,.week-grid,.risk-wrap,.next-grid{grid-template-columns:1fr}.epic-grid{grid-template-columns:1fr}.subgrid{grid-template-columns:1fr}.front-summary{padding:20px}.hero-title h1{font-size:34px}
+}
+
+/* ===== MODO DE EDIÇÃO COMPLETO ===== */
+.editor-help{margin:18px 0;padding:15px;border:1px solid #1d405d;border-radius:10px;background:#0d2438;color:#bcd0de;font-size:12px;line-height:1.55}
+.editor-help b{color:#fff}
+.editor-help p{margin:6px 0 0}
+.editor-menu{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}
+.editor-menu button{background:#0c2237;border:1px solid #244662;color:#c7d8e5;border-radius:8px;padding:10px}
+.editor-actions-stack{display:grid;gap:9px;margin:18px 0}
+.wide{width:100%}
+.danger{border-color:#713446!important;color:#ff9aac!important}
+.editor-note{margin:20px 0;color:#8da8bd;font-size:11px;line-height:1.6;border-top:1px solid #1b3c57;padding-top:16px}
+.editor-note ol{padding-left:18px}
+.context-edit{display:none;align-items:center;gap:6px;border:1px solid #2a5871;background:#0b2235;color:#8ff0dd;border-radius:8px;padding:8px 11px;font-size:11px;font-weight:800;white-space:nowrap}
+body.edit-mode .context-edit{display:inline-flex}
+body.edit-mode [data-inline-edit="1"]{outline:1px dashed rgba(54,217,189,.48);outline-offset:3px;border-radius:3px;cursor:text}
+body.edit-mode [data-inline-edit="1"]:focus{outline:2px solid var(--teal);background:rgba(54,217,189,.06)}
+.edit-toolbar{display:none;gap:6px;align-items:center;margin-top:10px}
+body.edit-mode .edit-toolbar{display:flex}
+.edit-add,.edit-remove{border:1px solid #27614f;background:#0d302b;color:#8ff0dd;border-radius:7px;padding:6px 9px;font-size:10px;font-weight:800}
+.edit-remove{border-color:#633044;background:#28131b;color:#ff9aac;position:absolute;right:7px;top:7px;z-index:3}
+.edit-host{position:relative}
+body.edit-mode .bullet{padding-right:25px;position:relative}
+body.edit-mode .bullet:hover:after{content:"duplo clique para editar";position:absolute;right:4px;bottom:-13px;font-size:8px;color:#5e829a}
+body.edit-mode .next-card,body.edit-mode .milestone,body.edit-mode .epic{position:relative}
+.edit-mode-banner{display:none;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:80;background:#0b2d2a;border:1px solid var(--teal);color:#dffdf7;border-radius:999px;padding:10px 18px;font-size:12px;font-weight:800;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+body.edit-mode .edit-mode-banner{display:block}
+@media(max-width:900px){.editor-menu{grid-template-columns:1fr}.context-edit{padding:6px 8px}}
+
+
+/* ===== EDITOR FORMULÁRIO V3 ===== */
+.editor-drawer{width:min(860px,96vw)}
+.editor-tabs-v3{display:flex;gap:8px;flex-wrap:wrap;padding:16px 0;border-bottom:1px solid #1b3c57;position:sticky;top:-24px;background:#081a2d;z-index:5}
+.editor-tabs-v3 button{background:#0d2337;border:1px solid #244662;color:#9db5c7;border-radius:8px;padding:9px 12px;font-weight:700}
+.editor-tabs-v3 button.active{color:#fff;border-color:var(--teal);background:#12354b}
+.editor-form-content{padding:14px 0 90px}
+.edit-section{border:1px solid #1c3f5a;border-radius:10px;background:#0b2034;padding:14px;margin:12px 0}
+.edit-section h3{margin:0 0 12px;font-size:15px}
+.edit-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.edit-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.edit-field{margin:9px 0}
+.edit-field label{display:block;color:#89a7bb;font-size:11px;margin-bottom:6px}
+.edit-field input,.edit-field textarea,.edit-field select{width:100%;background:#102941;border:1px solid #28506c;border-radius:7px;color:#fff;padding:10px;font:inherit}
+.edit-field textarea{min-height:92px;resize:vertical;line-height:1.4}
+.editor-list-row{display:grid;grid-template-columns:1fr 85px 85px 38px;gap:7px;align-items:end;padding:8px 0;border-bottom:1px solid #17344d}
+.editor-list-row.timeline-row{grid-template-columns:95px 110px 1fr 130px 1.2fr 20px 38px}
+.editor-list-row .remove-row{height:39px;border:1px solid #6b3042;background:#2d1620;color:#ff9aae;border-radius:7px;font-weight:900}
+.editor-add-row{margin-top:10px;border:1px solid #18775e;background:#0f312d;color:#9cf0df;border-radius:7px;padding:9px 11px;font-weight:800}
+.editor-tip{font-size:11px;color:#8eaabd;line-height:1.5;background:#0b2639;border-left:3px solid var(--teal);padding:10px 12px;margin:8px 0 14px}
+.print-preview-backdrop{display:none;position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.72);padding:20px}
+.print-preview-backdrop.open{display:block}
+.print-preview-shell{height:100%;background:#071420;border:1px solid #24445f;border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
+.print-preview-head{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:16px 20px;border-bottom:1px solid #1c3c56}
+.print-preview-head h2{margin:4px 0 0}
+.print-preview-actions{display:flex;gap:8px}
+#printPreviewFrame{flex:1;width:100%;border:0;background:#fff}
+@media(max-width:900px){
+  .edit-grid-2,.edit-grid-3{grid-template-columns:1fr}
+  .editor-list-row,.editor-list-row.timeline-row{grid-template-columns:1fr 1fr}
+  .editor-list-row .remove-row{grid-column:1/-1}
+  .print-preview-head{align-items:flex-start;flex-direction:column}
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="logo">NE<b>X</b>US<small>STATUS COMMAND CENTER</small></div>
+  <nav class="nav">
+    <button class="active" data-view="overview">Visão<br>Geral</button>
+    <button data-view="revenue">Revenue<br>Cloud</button>
+    <button data-view="central">Central de<br>Projetos</button>
+  </nav>
+  <div class="meta">Atualizado em<small>20/08/2026</small></div>
+  <div class="meta week">Semana<small>34</small></div>
+  <button class="action" onclick="openPrintPreview()">↓ &nbsp; Imprimir relatório</button>
+  <button class="action primary" onclick="openEditor()">Editar status</button>
+</header>
+
+<main>
+<section id="overview" class="view active">
+  <div class="panel timeline-panel">
+    <div class="panel-head">
+      <div><h1>CRONOGRAMA DO PROJETO</h1><p>Arraste para o lado para navegar pelos próximos marcos.</p></div>
+      <div class="panel-actions"><button class="mini add" onclick="openEditor('timeline',true)">+ Adicionar etapa</button><button class="mini" onclick="openEditor('timeline')">✎ Editar</button><button class="mini" onclick="scrollTl(-1)">‹</button><button class="mini" onclick="scrollTl(1)">›</button></div>
+    </div>
+    <div class="timeline-scroll" id="timeline">
+      <div class="timeline-track">
+        <div class="month-group">
+          <div class="month-header"><strong>AGOSTO</strong><span>Base do planejamento</span></div>
+          <div class="month-body">
+            <div class="milestone current"><div class="milestone-card"><div class="date-row"><strong>20 08</strong><span>Status consolidado</span></div><span class="tag">Em andamento</span><h3>Sprint 15</h3><b>Central de Projetos 74,27%</b><p>Revenue em sua última sprint de desenvolvimento.</p></div></div>
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>21 08</strong><span>Revenue</span></div><span class="tag">Entregue</span><h3>Plano de Virada</h3><b>Documento de cutover</b><p>Marco utilizado como base para a preparação das próximas etapas.</p></div></div>
+          </div>
+        </div>
+        <div class="month-group">
+          <div class="month-header"><strong>SETEMBRO</strong><span>Evolução</span></div>
+          <div class="month-body">
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>04 09</strong><span>Revenue</span></div><span class="tag">Marco de entrega</span><h3>Desenvolvimento concluído</h3><b>Fim da Sprint 15</b><p>Conclusão prevista do desenvolvimento da frente Revenue.</p></div></div>
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>07 09 — 25 09</strong><span>Revenue · Sottelli</span></div><span class="tag">Preparação para homologação</span><h3>Testes Sottelli em UAT</h3><b>Documentação, ajustes e melhorias</b><p>Testes em UAT, entrega da documentação para homologação e aplicação dos ajustes e melhorias identificados pela Sottelli.</p></div></div>
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>28 09 — 09 10</strong><span>Revenue · MV</span></div><span class="tag">Homologação</span><h3>Homologação de Revenue</h3><b>Felipe presencial em Recife de 28/09 a 09/10</b><p>Execução da homologação com acompanhamento presencial. Lucas estará presencialmente em Recife de 05/10 a 09/10.</p></div></div>
+          </div>
+        </div>
+        <div class="month-group">
+          <div class="month-header"><strong>OUTUBRO</strong><span>Consolidação</span></div>
+          <div class="month-body">
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>05 10 — 09 10</strong><span>Revenue · Recife</span></div><span class="tag">Acompanhamento presencial</span><h3>Lucas em Recife</h3><b>Apoio à homologação</b><p>Atuação presencial de Lucas na etapa final da homologação de Revenue.</p></div></div>
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>12 10</strong><span>Revenue · Sottelli</span></div><span class="tag">Pós-homologação</span><h3>Ajustes e correção de bugs</h3><b>Sem inclusão de melhorias</b><p>Tratamento dos retornos da homologação encerrada em 09/10. Nesta etapa não serão incluídas novas melhorias.</p></div></div>
+            <div class="milestone"><div class="milestone-card"><div class="date-row"><strong>19 10</strong><span>Central de Projetos</span></div><span class="tag">Início da homologação</span><h3>Homologação da Central de Projetos</h3><b>Revenue concluída e maior massa de dados disponível</b><p>O início após a conclusão de Revenue permitirá uma homologação mais consistente e integrada.</p></div></div>
+          </div>
+        </div>
+        <div class="month-group">
+          <div class="month-header"><strong>NOVEMBRO</strong><span>Encerramento</span></div>
+          <div class="month-body">
+            <div class="milestone current"><div class="milestone-card"><div class="date-row"><strong>13 11</strong><span>Central de Projetos</span></div><span class="tag">Marco final</span><h3>Entrega final do desenvolvimento</h3><b>Encerramento do Projeto Nexus</b><p>Conclusão da Central de Projetos e data final do projeto.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scrollhint">↔ Arraste para navegar horizontalmente</div>
+
+    <div class="kpis">
+      <div class="card"><div class="label">PROGRESSO GERAL DO PROJETO</div><div class="big">79,48%</div><p style="color:#8faec5;font-size:11px">Avanço consolidado das duas frentes</p></div>
+      <div class="card"><div class="label">REVENUE CLOUD</div><div class="big">90,58%</div><div class="progress"><span style="width:90.58%"></span></div></div>
+      <div class="card"><div class="label">CENTRAL DE PROJETOS</div><div class="big blue">68,37%</div><div class="progress"><span style="width:68.37%;background:var(--blue)"></span></div></div>
+      <div class="card"><div class="label">PRÓXIMO MARCO</div><div class="big orange">21 AGO</div><b>Documento de cutover</b><p style="color:#8faec5;font-size:11px">Revenue</p></div>
+    </div>
+    <div class="bottom">
+      <div class="card"><div class="label">DESTAQUES</div><div class="list"><div>✓ Homologação da Central em andamento</div><div>✓ Sprint 15 iniciada</div><div>✓ Recuperação gradual do cronograma da Central</div><div>△ Atenção à integração Benner</div></div></div>
+      <div class="card"><div class="label">RISCOS E ATENÇÕES</div><div class="list"><div class="risk"><span>Integração com a Benner</span><strong class="high">Alto</strong></div><div class="risk"><span>Desvio de 1,63% na Central</span><strong class="med">Médio</strong></div><div class="risk"><span>Esforço adicional de 11% fora do escopo inicial de Revenue</span><strong class="low">Baixo</strong></div></div></div>
+      <div class="card"><div class="label">LEGENDA</div><div class="list"><div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span>Concluído</div><div class="legend-row"><span class="legend-dot" style="background:var(--yellow)"></span>Em andamento</div><div class="legend-row"><span class="legend-dot" style="background:var(--orange)"></span>Planejado</div><div class="legend-row"><span class="legend-dot" style="background:var(--red)"></span>Em risco</div></div></div>
+    </div>
+  </div>
+  <div class="footer"><span>Projeto Nexus · Status executivo · Semana 34</span><span>Dados atualizados em 20/08/2026</span></div>
+</section>
+
+<section id="central" class="view">
+  <div class="hero-title"><div class="eyebrow">FRENTE SELECIONADA</div><h1>Central de Projetos</h1><p>Status, evolução, atividades, épicos e riscos apresentados em uma visão dedicada.</p></div>
+  <div class="front-summary">
+    <div class="front-head"><div><div class="eyebrow">FRENTE DE TRABALHO</div><h2>Central de Projetos</h2></div><span class="status-pill">1 risco</span></div>
+    <div class="front-progress">68,37% <small>concluído</small></div><div class="progress"><span style="width:68.37%"></span></div>
+    <div class="metrics-row"><div class="metric-block"><strong style="color:var(--teal)">56,76%</strong><span>UAT</span></div><div class="metric-block"><strong style="color:var(--orange)">17,64%</strong><span>homologado</span></div><div class="metric-block"><strong style="color:var(--red)">-1,63%</strong><span>desvio</span></div></div>
+    <div class="front-foot"><span>Sprint 15/20</span><span>● Em acompanhamento</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">RESUMO DA SEMANA</div><h2>O que avançou e o que precisa de atenção</h2></div><p>As informações operacionais continuam disponíveis sem competir com a leitura executiva.</p></div>
+    <div class="week-card"><h3>Central de Projetos</h3><div class="subgrid">
+      <div><div class="box-title">ATIVIDADES EXECUTADAS</div><div class="bullet">Aprovação de US’s (19/08).</div><div class="bullet">Refinamento de Alocação de Recursos (18/08).</div><div class="bullet">Alinhamento do Portal e Whatsapp MKT.</div><div class="bullet">Homologação — 2ª Rodada (17/08).</div><div class="bullet">Finalização da Sprint 14 e início da Sprint 15.</div></div>
+      <div><div class="box-title">PONTOS DE ATENÇÃO</div><div class="bullet">Homologação em andamento — evidências devem ser registradas com links/imagens em pasta compartilhada.</div><div class="bullet">Revisão semanal das abas de homologação toda segunda-feira (Matheus Ledic).</div></div>
+      <div><div class="box-title">PENDÊNCIAS</div><div class="bullet">Definição da nomenclatura do campo de horas adicionais no formulário de apontamento.</div><div class="bullet">Pendência do envio da Identidade Visual MV.</div></div>
+      <div><div class="box-title">IMPEDIMENTOS</div><div class="bullet">No momento, não há impedimentos identificados.</div></div>
+    </div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">VISÃO DETALHADA · CENTRAL DE PROJETOS</div><h2>Progresso por épico</h2></div><p>Acompanhamento das histórias concluídas em relação ao total previsto em cada épico.</p></div>
+    <div class="epic-grid" id="centralEpics"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">GESTÃO ATIVA</div><h2>Riscos e planos de ação</h2></div><p>Impacto e resposta apresentados lado a lado.</p></div>
+    <div class="risk-wrap"><div class="risk-card"><div class="risk-card-head"><b>Central de Projetos</b><span>RISCO ATIVO</span></div><div class="risk-cols"><div class="risk-col"><h4>RISCO</h4><p>Com a inclusão de novos itens no cronograma, o percentual geral foi recalculado. Mesmo com a ampliação do escopo planejado, o desvio permanece controlado em -1,63%.</p></div><div class="risk-col action"><h4>PLANO DE AÇÃO</h4><p>Reforço da equipe com novo desenvolvedor, ampliação da atuação do arquiteto e redução de agendas de refinamento a partir da semana de 18/08 para liberar tempo dos usuários para os testes de homologação.</p></div></div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">EXECUÇÃO</div><h2>Próximos passos</h2></div><p>Compromissos que conduzem o próximo status.</p></div>
+    <div class="next-grid"><div class="next-card"><span class="n">01</span><span class="tag2">Central de Projetos</span><p>Manter a 2ª rodada de homologação e o registro das evidências.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">02</span><span class="tag2">Central de Projetos</span><p>Manter o plano de recuperação do cronograma.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">03</span><span class="tag2">Central de Projetos</span><p>Concluir definições pendentes para apontamento e identidade visual.</p><small>Em acompanhamento</small></div></div>
+  </div>
+  <div class="footer"><span>Projeto Nexus · Status executivo · Semana 34</span><span>Dados atualizados em 20/08/2026</span></div>
+</section>
+
+<section id="revenue" class="view">
+  <div class="hero-title"><div class="eyebrow">FRENTE SELECIONADA</div><h1>Revenue Cloud</h1><p>Status, evolução, atividades, épicos e riscos apresentados em uma visão dedicada.</p></div>
+  <div class="front-summary">
+    <div class="front-head"><div><div class="eyebrow">FRENTE DE TRABALHO</div><h2>Revenue</h2></div><span class="status-pill">1 risco</span></div>
+    <div class="front-progress">90,58% <small>concluído</small></div><div class="progress"><span style="width:90.58%"></span></div>
+    <div class="metrics-row"><div class="metric-block"><strong style="color:var(--teal)">56,13%</strong><span>UAT</span></div><div class="metric-block"><strong style="color:var(--orange)">6,06%</strong><span>homologado</span></div><div class="metric-block"><strong style="color:var(--red)">-2,75%</strong><span>desvio</span></div></div>
+    <div class="front-foot"><span>Sprint 15/15</span><span>● Em acompanhamento</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">RESUMO DA SEMANA</div><h2>O que avançou e o que precisa de atenção</h2></div><p>As informações operacionais continuam disponíveis sem competir com a leitura executiva.</p></div>
+    <div class="week-card"><h3>Revenue</h3><div class="subgrid">
+      <div><div class="box-title">ATIVIDADES EXECUTADAS</div><div class="bullet">Refinamento — Oportunidades e Consumo de Banco de Horas (19/08).</div><div class="bullet">Visão TO-BE (Macro) do Processo NEXUS (18/08).</div><div class="bullet">Refinamento — Movimentação Contratual, Renegociação e Reajuste (17/08).</div><div class="bullet">Assuntos Pendentes — Plano de Virada (14/08).</div><div class="bullet">Finalização da Sprint 14 e início da Sprint 15.</div></div>
+      <div><div class="box-title">PONTOS DE ATENÇÃO</div><div class="bullet">Esforço adicional de 11% referente a demandas não previstas no escopo inicial; itens direcionados ao backlog.</div><div class="bullet">Documento de cutover (Plano de Virada) com entrega prevista para 21/08.</div></div>
+      <div><div class="box-title">PENDÊNCIAS</div><div class="bullet">Dicionário de dados Salesforce para apoio do time MV — integração Benner — em andamento.</div><div class="bullet">Entrega do planejamento consolidado da quantidade de US previstas até a conclusão do projeto.</div></div>
+      <div><div class="box-title">IMPEDIMENTOS</div><div class="bullet">Integração com a Benner ainda em aberto — bloqueia parte do avanço de desenvolvimento.</div></div>
+    </div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">VISÃO DETALHADA · REVENUE</div><h2>Progresso por épico</h2></div><p>Acompanhamento das histórias concluídas em relação ao total previsto em cada épico.</p></div>
+    <div class="epic-grid" id="revenueEpics"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">GESTÃO ATIVA</div><h2>Riscos e planos de ação</h2></div><p>Impacto e resposta apresentados lado a lado.</p></div>
+    <div class="risk-wrap"><div class="risk-card"><div class="risk-card-head"><b>Revenue</b><span>RISCO ATIVO</span></div><div class="risk-cols"><div class="risk-col"><h4>RISCO</h4><p>Integração com a Benner. O projeto apresenta um atraso de 2,75% no cronograma.</p></div><div class="risk-col action"><h4>PLANO DE AÇÃO</h4><p>Lucas e Diego atuam diretamente nas demandas para ampliar a capacidade produtiva. Objetivo: concluir 100% do desenvolvimento até 04/09, ao final da Sprint 15, deixando as etapas seguintes exclusivamente para testes, correções de bugs e ajustes finais.</p></div></div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><div><div class="eyebrow">EXECUÇÃO</div><h2>Próximos passos</h2></div><p>Compromissos que conduzem o próximo status.</p></div>
+    <div class="next-grid"><div class="next-card"><span class="n">01</span><span class="tag2">Revenue</span><p>Entregar o documento de cutover (Plano de Virada) previsto para 21/08.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">02</span><span class="tag2">Revenue</span><p>Concluir o desenvolvimento até 04/09.</p><small>Em acompanhamento</small></div><div class="next-card"><span class="n">03</span><span class="tag2">Revenue</span><p>Concluir o dicionário de dados Salesforce para a integração Benner.</p><small>Em acompanhamento</small></div></div>
+  </div>
+  <div class="footer"><span>Projeto Nexus · Status executivo · Semana 34</span><span>Dados atualizados em 20/08/2026</span></div>
+</section>
+</main>
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="if(event.target===this)closeEditor()">
+  <div class="drawer editor-drawer">
+    <div class="drawer-head">
+      <div>
+        <div class="eyebrow">CENTRAL DE EDIÇÃO</div>
+        <h2>Editar status semanal</h2>
+      </div>
+      <button class="close" onclick="closeEditor()">✕</button>
+    </div>
+
+    <div class="editor-tabs-v3">
+      <button data-editor-tab="general" onclick="switchEditorTab('general')">Geral</button>
+      <button data-editor-tab="overview" onclick="switchEditorTab('overview')">Visão Geral</button>
+      <button data-editor-tab="revenue" onclick="switchEditorTab('revenue')">Revenue</button>
+      <button data-editor-tab="central" onclick="switchEditorTab('central')">Central de Projetos</button>
+      <button data-editor-tab="timeline" onclick="switchEditorTab('timeline')">Cronograma</button>
+    </div>
+
+    <div id="editorFormContent" class="editor-form-content"></div>
+
+    <div class="drawer-actions">
+      <button class="cancel" onclick="closeEditor()">Cancelar</button>
+      <button class="save" onclick="saveCurrentEditor()">Salvar alterações</button>
+    </div>
+  </div>
+</div>
+
+<div class="print-preview-backdrop" id="printPreviewBackdrop">
+  <div class="print-preview-shell">
+    <div class="print-preview-head">
+      <div>
+        <div class="eyebrow">RELATÓRIO EXECUTIVO</div>
+        <h2>Pré-visualização para impressão</h2>
+      </div>
+      <div class="print-preview-actions">
+        <button class="cancel" onclick="closePrintPreview()">Fechar</button>
+        <button class="save" onclick="printExecutiveReport()">Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+    <iframe id="printPreviewFrame" title="Pré-visualização do relatório"></iframe>
+  </div>
+</div>
+
+<!-- Relatório de impressão --><!-- Relatório de impressão -->
+<div id="print-report">
+  <div class="pr-page" id="prCentral">
+    <div class="pr-topline"></div>
+    <div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Central de Projetos</span></div><div class="pr-meta"><b>Status executivo</b>Semana 34 · 20/08/2026</div></div>
+    <div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Homologação em andamento e cronograma sob recuperação controlada</h2><p>A Central segue na 2ª rodada de homologação, com recuperação gradual do cronograma e desvio atual de -1,63%.</p></div>
+    <div class="pr-kpis"><div class="pr-kpi"><span>CONCLUÍDO</span><b>68,37%</b></div><div class="pr-kpi"><span>DISPONÍVEL EM UAT</span><b>56,76%</b></div><div class="pr-kpi"><span>HOMOLOGADO</span><b>17,64%</b></div><div class="pr-kpi"><span>DESVIO DO CRONOGRAMA</span><b class="red">-1,63%</b></div></div>
+    <div class="pr-grid"><div class="pr-box"><div class="pr-brand">STATUS DA FRENTE</div><h3>Visão gerencial</h3><div class="pr-label">ATIVIDADES EXECUTADAS</div><div class="pr-bullet">Aprovação de US’s (19/08).</div><div class="pr-bullet">Refinamento de Alocação de Recursos (18/08).</div><div class="pr-bullet">Alinhamento do Portal e Whatsapp MKT.</div><div class="pr-bullet">Homologação — 2ª Rodada (17/08).</div><div class="pr-bullet">Finalização da Sprint 14 e início da Sprint 15.</div><div class="pr-label">PONTOS DE ATENÇÃO</div><div class="pr-bullet">Evidências da homologação devem ser registradas em pasta compartilhada.</div><div class="pr-label">PENDÊNCIAS</div><div class="pr-bullet">Nomenclatura do campo de horas adicionais.</div><div class="pr-bullet">Identidade Visual MV.</div><div class="pr-label">IMPEDIMENTOS</div><div class="pr-bullet">Não há impedimentos identificados.</div><div class="pr-risk"><div><h4>RISCO</h4><p>Recalculo do cronograma com desvio atual de -1,63%.</p></div><div><h4>PLANO DE AÇÃO</h4><p>Reforço do time, maior atuação do arquiteto e redução de refinamentos para liberar homologação.</p></div></div></div><div class="pr-box"><div class="pr-brand">VISÃO DETALHADA</div><h3>Progresso por épico <span style="float:right;font-size:7px;color:#6f7f8c">42 épicos</span></h3><div class="pr-epics" id="prCentralEpics"></div></div></div>
+    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>1/3</span></div>
+  </div>
+  <div class="pr-page" id="prRevenue">
+    <div class="pr-topline"></div>
+    <div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Revenue</span></div><div class="pr-meta"><b>Status executivo</b>Semana 34 · 20/08/2026</div></div>
+    <div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Revenue acelera a conclusão do desenvolvimento com atenção à integração Benner</h2><p>A frente está na Sprint 15/15, com 90,58% concluído e objetivo de concluir 100% do desenvolvimento até 04/09.</p></div>
+    <div class="pr-kpis"><div class="pr-kpi"><span>CONCLUÍDO</span><b>90,58%</b></div><div class="pr-kpi"><span>DISPONÍVEL EM UAT</span><b>56,13%</b></div><div class="pr-kpi"><span>HOMOLOGADO</span><b>6,06%</b></div><div class="pr-kpi"><span>DESVIO DO CRONOGRAMA</span><b class="red">-2,75%</b></div></div>
+    <div class="pr-grid"><div class="pr-box"><div class="pr-brand">STATUS DA FRENTE</div><h3>Visão gerencial</h3><div class="pr-label">ATIVIDADES EXECUTADAS</div><div class="pr-bullet">Refinamento — Oportunidades e Consumo de Banco de Horas (19/08).</div><div class="pr-bullet">Visão TO-BE do Processo NEXUS (18/08).</div><div class="pr-bullet">Movimentação Contratual, Renegociação e Reajuste (17/08).</div><div class="pr-label">PONTOS DE ATENÇÃO</div><div class="pr-bullet">Esforço adicional de 11% fora do escopo inicial.</div><div class="pr-bullet">Documento de cutover previsto para 21/08.</div><div class="pr-label">PENDÊNCIAS</div><div class="pr-bullet">Dicionário Salesforce para integração Benner.</div><div class="pr-bullet">Planejamento consolidado de US até a conclusão.</div><div class="pr-label">IMPEDIMENTOS</div><div class="pr-bullet">Integração Benner ainda em aberto.</div><div class="pr-risk"><div><h4>RISCO</h4><p>Integração com a Benner e atraso de 2,75%.</p></div><div><h4>PLANO DE AÇÃO</h4><p>Reforçar capacidade e concluir desenvolvimento até 04/09.</p></div></div></div><div class="pr-box"><div class="pr-brand">VISÃO DETALHADA</div><h3>Progresso por épico <span style="float:right;font-size:7px;color:#6f7f8c">27 épicos</span></h3><div class="pr-epics" id="prRevenueEpics"></div></div></div>
+    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>2/3</span></div>
+  </div>
+  <div class="pr-page" id="prTimeline" style="position:relative">
+    <div class="pr-topline"></div>
+    <div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Cronograma executivo</span></div><div class="pr-meta"><b>Agosto a novembro de 2026</b>Base: status de 20/08/2026</div></div>
+    <div class="pr-brand" style="margin-top:8mm">LINHA DO TEMPO</div><div class="pr-timeline-title">Próximos marcos do projeto</div><p style="font-size:8px;color:#6f7f8c;margin:0">Visão consolidada dos ciclos, homologação e encerramento previsto.</p>
+    <div class="pr-months">
+      <div class="pr-month"><div class="m-k">MÊS ATUAL</div><h3>Agosto 2026</h3><div class="pr-item current"><b>20/08</b><strong>Hoje · Sprint 15</strong><p>Central 74,27% · Revenue 100% estimado</p></div><div class="pr-item"><b>21/08</b><strong>Plano de Virada</strong><p>Entrega prevista do documento de cutover</p></div></div>
+      <div class="pr-month"><div class="m-k">EVOLUÇÃO</div><h3>Setembro 2026</h3><div class="pr-item"><b>03/09</b><strong>Sprint 16</strong><p>80,24% — Central</p></div><div class="pr-item"><b>04/09</b><strong>Revenue</strong><p>Objetivo: 100% desenvolvimento</p></div><div class="pr-item"><b>21/09</b><strong>Sprint 17</strong><p>84,21% — Central</p></div></div>
+      <div class="pr-month"><div class="m-k">CONSOLIDAÇÃO</div><h3>Outubro 2026</h3><div class="pr-item"><b>06/10</b><strong>Sprint 18</strong><p>90,42% — Central</p></div><div class="pr-item"><b>22/10</b><strong>Sprint 19</strong><p>95,25% — Central</p></div></div>
+      <div class="pr-month"><div class="m-k">ENCERRAMENTO</div><h3>Novembro 2026</h3><div class="pr-item"><b>13/11</b><strong>Entrega final</strong><p>Conclusão da Central de Projetos e encerramento do Projeto Nexus</p></div></div>
+    </div>
+    <div class="pr-foot"><span>* Percentuais e datas estimados podem variar conforme a evolução do projeto.</span><span>3/3</span></div>
+  </div>
+</div>
+
+<script>
+const centralEpics=[
+['Gestão e Visualização Gantt',6,6],['Gestão de Visões e Calendários',3,4],['Gestão e Visualização Task Board',1,4],['Parâmetros da Central de Projetos',3,3],
+['Gestão de Orçamento',8,8],['Gestão de Projetos',5,5],['Gestão de Fases do Projeto',3,3],['Gestão de Fluxo Financeiro',2,4],
+['Gestão de Versão de Projetos',6,6],['Gestão de Linhas do Projeto',7,7],['Gestão de Mudanças',2,2],['Gestão de Recursos',3,3],
+['Gestão de Recursos Parceiros',2,2],['Gestão de Disponibilidade de Recursos',1,2],['Gestão e Integração de Despesas',2,3],['Alocação de Recursos',3,5],
+['Solicitação de Alocação de Recursos',2,2],['Gestão de Riscos',2,2],['Integração Jira',1,2],['Modelos de Projetos',2,2],
+['Apontamento de Horas',2,5],['Aprovação de Apontamentos de Horas',0,1],['Reconhecimento de Receitas para Faturamento',0,2],['One Page Projeto',0,2],
+['Geração de Status Report',0,2],['Gestão de Projetos Ágeis',0,2],['Indicadores do Risco',0,1],['Indicadores do Projeto',1,3],
+['Indicadores dos Recursos',0,1],['Indicadores Financeiros',1,2],['Gestão do Cliente e Plano de Ação',0,1],['Gestão Estratégica da Carteira',0,2],
+['Acompanhamento de Indicadores de Relacionamento',0,2],['Criação de Agente Inteligente contextualizado em Projetos ou Programas',0,3],
+['Criação de Agente Inteligente contextualizado em recursos e geração de conteúdo',0,2],['Frontend / API para conversa do Agente - Portal Apontamento de Horas',0,2],
+['Portal de Clientes',0,4],['Portal de Ofertas de Parceiros',0,3],['Incidentes de Projetos e Programas acessível pelo portal do cliente',0,2],
+['Notificações via WhatsApp',0,3],['Integração Idocuments para geração e ativação de processos documentais',0,6],['Implementação da Automação da agenda',0,3]
+];
+const revenueEpics=[
+['Fundação Comercial de Produtos e Catálogos (Revenue)',3,3],['Fundação do Objeto Conta',4,4],['Esforço Adicional Conta',0,2],['Fundação do Objeto Produtos',3,3],
+['Processo de Vendas',1,1],['Gestão do Processo de Cotações',1,1],['Gestão do Processo de Arquitetura',2,2],['Dados adicionais da Cotação',2,2],
+['Plataforma de Planilhas de Cálculos',3,3],['Cálculo de Esforço de Projetos',5,5],['Cálculo de Preços Avançados',3,3],['Cálculo de Margem dos Projetos',2,2],
+['Precificação de Despesas de Projetos',2,2],['Personalizações de Cálculos de Projetos na Cotação',1,1],['Documentos Anexos Comerciais',1,4],['Processo de Infraestrutura',1,2],
+['Geração de Contratos',2,3],['Geração de Ativos',1,3],['Execução de Contrato',2,3],['Parametrização do Faturamento',3,3],
+['Processo de Faturamento (Billing)',4,6],['Integração Benner Faturamento',0,2],['Integração Benner Recebimento',0,2],['Gestão de Renovações e Reajustes',0,3],
+['Prontuário do Cliente',3,3],['Prontuário do Cliente Esforço Adicional',2,3],['Cadastro de Produtos Arquitetura para Validação e Testes',4,4]
+];
+function renderEpics(id,data,printId){
+ const html=data.map((e,i)=>{let p=e[2]?Math.round(e[1]/e[2]*100):0;return `<div class="epic"><div class="num">${i+1}</div><div>${e[0]}</div><strong>${e[1]}/${e[2]}</strong><div class="bar"><span style="width:${p}%"></span></div></div>`}).join('');
+ document.getElementById(id).innerHTML=html;
+ const ph=data.map((e,i)=>{let p=e[2]?Math.round(e[1]/e[2]*100):0;return `<div class="pr-epic"><div class="pr-n">${i+1}</div><div>${e[0]}<div class="pr-e-bar"><span style="width:${p}%"></span></div></div><div class="pr-e-val">${e[1]}/${e[2]}</div></div>`}).join('');
+ document.getElementById(printId).innerHTML=ph;
+}
+renderEpics('centralEpics',centralEpics,'prCentralEpics'); renderEpics('revenueEpics',revenueEpics,'prRevenueEpics');
+
+document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+ btn.classList.add('active'); document.getElementById(btn.dataset.view).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'});
+}));
+const tl=document.getElementById('timeline'); let isDown=false,startX,sl;
+tl.addEventListener('mousedown',e=>{isDown=true;tl.classList.add('dragging');startX=e.pageX-tl.offsetLeft;sl=tl.scrollLeft});
+['mouseleave','mouseup'].forEach(ev=>tl.addEventListener(ev,()=>{isDown=false;tl.classList.remove('dragging')}));
+tl.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-tl.offsetLeft;tl.scrollLeft=sl-(x-startX)});
+function scrollTl(dir){tl.scrollBy({left:dir*500,behavior:'smooth'})}
+
+const EDIT_STORAGE_KEY='nexus-dashboard-form-editor-v3';
+let activeEditorTab='general';
+
+function q(sel, root=document){ return root.querySelector(sel); }
+function qa(sel, root=document){ return [...root.querySelectorAll(sel)]; }
+function txt(el){ return el ? el.textContent.trim() : ''; }
+function esc(v=''){ return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function val(id){ const el=document.getElementById(id); return el?el.value:''; }
+function setText(sel,value,root=document){ const el=q(sel,root); if(el) el.textContent=value; }
+function linesFrom(group){ return qa(':scope > .bullet',group).map(x=>txt(x)); }
+function setBullets(group,items){
+  qa(':scope > .bullet',group).forEach(x=>x.remove());
+  items.filter(Boolean).forEach(item=>{
+    const d=document.createElement('div'); d.className='bullet'; d.textContent=item; group.appendChild(d);
+  });
+}
+
+function openEditor(tab='general', addNew=false){
+  document.getElementById('drawerBackdrop').classList.add('open');
+  switchEditorTab(tab, addNew);
+}
+function closeEditor(){ document.getElementById('drawerBackdrop').classList.remove('open'); }
+
+function switchEditorTab(tab, addNew=false){
+  activeEditorTab=tab;
+  qa('[data-editor-tab]').forEach(b=>b.classList.toggle('active',b.dataset.editorTab===tab));
+  const c=document.getElementById('editorFormContent');
+  if(tab==='general') c.innerHTML=buildGeneralForm();
+  if(tab==='overview') c.innerHTML=buildOverviewForm();
+  if(tab==='revenue') c.innerHTML=buildFrontForm('revenue');
+  if(tab==='central') c.innerHTML=buildFrontForm('central');
+  if(tab==='timeline') c.innerHTML=buildTimelineForm();
+  if(addNew && tab==='timeline') addEditorTimelineRow();
+}
+
+function field(label,id,value,type='text'){
+  return `<div class="edit-field"><label>${label}</label><input id="${id}" type="${type}" value="${esc(value)}"></div>`;
+}
+function area(label,id,value){
+  return `<div class="edit-field"><label>${label}</label><textarea id="${id}">${esc(value)}</textarea></div>`;
+}
+
+function buildGeneralForm(){
+  const meta=qa('.topbar .meta small');
+  return `<div class="editor-tip">Edite aqui os dados que mudam a cada status. As alterações também serão levadas para o relatório de impressão.</div>
+  <div class="edit-section"><h3>Identificação do status</h3><div class="edit-grid-2">
+  ${field('Atualizado em','f_date',txt(meta[0]))}
+  ${field('Semana','f_week',txt(meta[1]))}
+  </div></div>`;
+}
+
+function buildOverviewForm(){
+  const ov=document.getElementById('overview');
+  const cards=qa('.kpis .card',ov);
+  const highlights=qa('.bottom .card',ov)[0];
+  const risks=qa('.bottom .card',ov)[1];
+  return `<div class="editor-tip">Esta tela altera os cards executivos da Visão Geral. O cronograma possui uma aba própria.</div>
+  <div class="edit-section"><h3>Indicadores executivos</h3><div class="edit-grid-2">
+    ${field('Progresso geral','ov_general',txt(q('.big',cards[0])))}
+    ${field('Revenue Cloud','ov_revenue',txt(q('.big',cards[1])))}
+    ${field('Central de Projetos','ov_central',txt(q('.big',cards[2])))}
+    ${field('Próximo marco — data','ov_next_date',txt(q('.big',cards[3])))}
+    ${field('Próximo marco — título','ov_next_title',txt(q('b',cards[3])))}
+    ${field('Próximo marco — frente','ov_next_front',txt(q('p',cards[3])))}
+  </div></div>
+  <div class="edit-section"><h3>Destaques</h3>
+    ${area('Um item por linha','ov_highlights',qa('.list > div',highlights).map(x=>txt(x)).join('\n'))}
+  </div>
+  <div class="edit-section"><h3>Riscos e atenções</h3>
+    <div id="overviewRiskRows">${buildOverviewRiskRows(risks)}</div>
+    <button class="editor-add-row" type="button" onclick="addOverviewRiskRow()">+ Adicionar risco</button>
+  </div>`;
+}
+function buildOverviewRiskRows(riskCard){
+  return qa('.risk',riskCard).map((r,i)=>{
+    const s=txt(q('span',r)), level=txt(q('strong',r));
+    return `<div class="editor-list-row" data-overview-risk>
+      ${field('Risco',`ov_risk_${i}`,s)}
+      ${field('Nível',`ov_level_${i}`,level)}
+      <div></div><button class="remove-row" type="button" onclick="this.closest('[data-overview-risk]').remove()">×</button>
+    </div>`;
+  }).join('');
+}
+function addOverviewRiskRow(){
+  const box=document.getElementById('overviewRiskRows'), i=box.children.length;
+  const div=document.createElement('div');div.className='editor-list-row';div.dataset.overviewRisk='';
+  div.innerHTML=`${field('Risco',`ov_risk_${i}`,'Novo risco')}${field('Nível',`ov_level_${i}`,'Médio')}<div></div><button class="remove-row" type="button" onclick="this.closest('[data-overview-risk]').remove()">×</button>`;
+  box.appendChild(div);
+}
+
+function getFrontData(front){
+  const root=document.getElementById(front);
+  const groups=qa('.week-card .subgrid > div',root);
+  const metrics=qa('.metric-block strong',root);
+  return {
+    root,
+    concluded:(txt(q('.front-progress',root)).match(/-?\d+[,.]\d+%/)||[''])[0],
+    uat:txt(metrics[0]), homolog:txt(metrics[1]), deviation:txt(metrics[2]),
+    sprint:txt(q('.front-foot span:first-child',root)),
+    status:txt(q('.front-foot span:last-child',root)),
+    activities:linesFrom(groups[0]||document.createElement('div')),
+    attention:linesFrom(groups[1]||document.createElement('div')),
+    pending:linesFrom(groups[2]||document.createElement('div')),
+    blockers:linesFrom(groups[3]||document.createElement('div')),
+    risk:txt(q('.risk-col:not(.action) p',root)),
+    action:txt(q('.risk-col.action p',root)),
+    next:qa('.next-card',root).map(c=>({text:txt(q('p',c)),status:txt(q('small',c)),tag:txt(q('.tag2',c))})),
+    epics:qa('.epic',root).map(e=>{
+      const ratio=txt(q('strong',e)).split('/');
+      return {name:txt(e.children[1]), done:ratio[0]||'0', total:ratio[1]||'1'};
+    })
+  };
+}
+
+function buildFrontForm(front){
+  const d=getFrontData(front);
+  const title=front==='revenue'?'Revenue':'Central de Projetos';
+  return `<div class="editor-tip">Edite ${title} por formulário. Nada precisa ser apagado diretamente no dashboard.</div>
+  <div class="edit-section"><h3>Indicadores</h3><div class="edit-grid-3">
+    ${field('Concluído',`${front}_concluded`,d.concluded)}
+    ${field('UAT',`${front}_uat`,d.uat)}
+    ${field('Homologado',`${front}_homolog`,d.homolog)}
+    ${field('Desvio',`${front}_deviation`,d.deviation)}
+    ${field('Sprint',`${front}_sprint`,d.sprint)}
+    ${field('Status',`${front}_status`,d.status)}
+  </div></div>
+  <div class="edit-section"><h3>Resumo da semana</h3>
+    ${area('Atividades executadas — um item por linha',`${front}_activities`,d.activities.join('\n'))}
+    ${area('Pontos de atenção — um item por linha',`${front}_attention`,d.attention.join('\n'))}
+    ${area('Pendências — um item por linha',`${front}_pending`,d.pending.join('\n'))}
+    ${area('Impedimentos — um item por linha',`${front}_blockers`,d.blockers.join('\n'))}
+  </div>
+  <div class="edit-section"><h3>Risco e plano de ação</h3>
+    ${area('Risco',`${front}_risk`,d.risk)}
+    ${area('Plano de ação',`${front}_action`,d.action)}
+  </div>
+  <div class="edit-section"><h3>Próximos passos</h3>
+    <div id="${front}NextRows">${buildNextRows(front,d.next)}</div>
+    <button class="editor-add-row" type="button" onclick="addNextEditorRow('${front}')">+ Adicionar próximo passo</button>
+  </div>
+  <div class="edit-section"><h3>Progresso por épico</h3>
+    <div id="${front}EpicRows">${buildEpicRows(front,d.epics)}</div>
+    <button class="editor-add-row" type="button" onclick="addEpicEditorRow('${front}')">+ Adicionar épico</button>
+  </div>`;
+}
+function buildNextRows(front,rows){
+  return rows.map((x,i)=>`<div class="editor-list-row" data-next-row>
+    ${field('Descrição',`${front}_next_text_${i}`,x.text)}
+    ${field('Status',`${front}_next_status_${i}`,x.status)}
+    ${field('Tag',`${front}_next_tag_${i}`,x.tag)}
+    <button class="remove-row" type="button" onclick="this.closest('[data-next-row]').remove()">×</button>
+  </div>`).join('');
+}
+function addNextEditorRow(front){
+  const box=document.getElementById(front+'NextRows'),i=box.children.length;
+  const d=document.createElement('div');d.className='editor-list-row';d.dataset.nextRow='';
+  d.innerHTML=`${field('Descrição',`${front}_next_text_${i}`,'Novo próximo passo')}${field('Status',`${front}_next_status_${i}`,'Em acompanhamento')}${field('Tag',`${front}_next_tag_${i}`,front==='revenue'?'Revenue':'Central de Projetos')}<button class="remove-row" type="button" onclick="this.closest('[data-next-row]').remove()">×</button>`;
+  box.appendChild(d);
+}
+function buildEpicRows(front,rows){
+  return rows.map((x,i)=>`<div class="editor-list-row" data-epic-row>
+    ${field('Épico',`${front}_epic_name_${i}`,x.name)}
+    ${field('Concluído',`${front}_epic_done_${i}`,x.done,'number')}
+    ${field('Total',`${front}_epic_total_${i}`,x.total,'number')}
+    <button class="remove-row" type="button" onclick="this.closest('[data-epic-row]').remove()">×</button>
+  </div>`).join('');
+}
+function addEpicEditorRow(front){
+  const box=document.getElementById(front+'EpicRows'),i=box.children.length;
+  const d=document.createElement('div');d.className='editor-list-row';d.dataset.epicRow='';
+  d.innerHTML=`${field('Épico',`${front}_epic_name_${i}`,'Novo épico')}${field('Concluído',`${front}_epic_done_${i}`,'0','number')}${field('Total',`${front}_epic_total_${i}`,'1','number')}<button class="remove-row" type="button" onclick="this.closest('[data-epic-row]').remove()">×</button>`;
+  box.appendChild(d);
+}
+
+function buildTimelineForm(){
+  const groups=qa('#timeline .month-group');
+  const rows=[];
+  groups.forEach((g,gi)=>{
+    const month=txt(q('.month-header strong',g));
+    qa('.milestone',g).forEach(m=>{
+      const card=q('.milestone-card',m);
+      rows.push({
+        month, date:txt(q('.date-row strong',card)), label:txt(q('.date-row span',card)),
+        tag:txt(q('.tag',card)), title:txt(q('h3',card)), value:txt(q('b',card)), desc:txt(q('p',card))
+      });
+    });
+  });
+  return `<div class="editor-tip">Cada linha abaixo é um marco do cronograma. Informe a data no formato DD/MM. O mês e a posição na linha do tempo serão definidos automaticamente pela data.</div>
+    <div id="timelineEditorRows">${rows.map((x,i)=>timelineRowHtml(x,i)).join('')}</div>
+    <button class="editor-add-row" type="button" onclick="addEditorTimelineRow()">+ Adicionar etapa</button>`;
+}
+
+const MONTH_NAMES=['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'];
+function monthNumberFromName(name=''){
+  const n=String(name).trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const normalized=MONTH_NAMES.map(m=>m.normalize('NFD').replace(/[\u0300-\u036f]/g,''));
+  const idx=normalized.indexOf(n);
+  return idx>=0?idx+1:null;
+}
+function normalizeDateForEditor(dateText='', monthName=''){
+  const raw=String(dateText).trim();
+  const parts=raw.split(/\s+[—–-]\s+/).map(part=>part.match(/\d+/g)||[]);
+  const first=parts[0]||[];
+  let d=first[0]||'';
+  let m=first[1]||'';
+  if(!m){
+    const mn=monthNumberFromName(monthName);
+    if(mn)m=String(mn);
+  }
+  if(!d)return '';
+  const start=`${String(parseInt(d,10)||'').padStart(2,'0')}/${String(parseInt(m,10)||'').padStart(2,'0')}`;
+  if(parts.length<2||parts[1].length<2)return start;
+  const end=`${String(parseInt(parts[1][0],10)||'').padStart(2,'0')}/${String(parseInt(parts[1][1],10)||'').padStart(2,'0')}`;
+  return `${start} — ${end}`;
+}
+function parseTimelineDate(dateText=''){
+  const nums=String(dateText).trim().match(/\d+/g)||[];
+  if(nums.length<2)return null;
+  const d=parseInt(nums[0],10), m=parseInt(nums[1],10);
+  const explicitYear=nums.find((n,i)=>i>1&&n.length===4);
+  const y=parseInt(explicitYear||'2026',10);
+  if(!d||!m||m<1||m>12||d<1||d>31)return null;
+  return {day:d,month:m,year:y,key:y*10000+m*100+d};
+}
+function formatTimelineDateLabel(dateText=''){
+  return normalizeDateForEditor(dateText).replace(/\s+—\s+/,' — ');
+}
+
+function timelineRowHtml(x,i){
+  const cleanDate = normalizeDateForEditor(x.date, x.month);
+  return `<div class="editor-list-row timeline-row" data-timeline-row>
+    ${field('Data (DD/MM)',`tl_date_${i}`,cleanDate)}
+    ${field('Status',`tl_tag_${i}`,x.tag)}
+    ${field('Título',`tl_title_${i}`,x.title)}
+    ${field('Valor',`tl_value_${i}`,x.value)}
+    ${field('Descrição',`tl_desc_${i}`,x.desc)}
+    <div></div>
+    <button class="remove-row" type="button" onclick="this.closest('[data-timeline-row]').remove()">×</button>
+  </div>`;
+}
+function addEditorTimelineRow(){
+  const box=document.getElementById('timelineEditorRows'),i=box.children.length;
+  const d=document.createElement('div');d.className='editor-list-row timeline-row';d.dataset.timelineRow='';
+  d.innerHTML=timelineRowHtml({date:'',month:'',tag:'Planejado',title:'Novo marco',value:'',desc:''},i).replace(/^<div[^>]*>|<\/div>$/g,'');
+  box.appendChild(d);
+  const first=d.querySelector('input'); if(first) first.focus();
+}
+
+function saveCurrentEditor(){
+  if(activeEditorTab==='general') saveGeneral();
+  if(activeEditorTab==='overview') saveOverview();
+  if(activeEditorTab==='revenue') saveFront('revenue');
+  if(activeEditorTab==='central') saveFront('central');
+  if(activeEditorTab==='timeline') saveTimeline();
+  persistState();
+  syncPrintReport();
+  closeEditor();
+}
+function saveGeneral(){
+  const meta=qa('.topbar .meta small');
+  if(meta[0]) meta[0].textContent=val('f_date');
+  if(meta[1]) meta[1].textContent=val('f_week');
+  qa('.footer span:first-child').forEach(x=>x.textContent=x.textContent.replace(/Semana\s+\d+/,'Semana '+val('f_week')));
+  qa('.footer span:last-child').forEach(x=>x.textContent='Dados atualizados em '+val('f_date'));
+}
+function pctNumber(s){ return Math.max(0,Math.min(100,parseFloat(String(s).replace('%','').replace(',','.'))||0)); }
+function updateCardProgress(card,value){
+  const b=q('.big',card); if(b)b.textContent=value;
+  const p=q('.progress span',card); if(p)p.style.width=pctNumber(value)+'%';
+}
+function saveOverview(){
+  const ov=document.getElementById('overview'),cards=qa('.kpis .card',ov);
+  updateCardProgress(cards[0],val('ov_general'));
+  updateCardProgress(cards[1],val('ov_revenue'));
+  updateCardProgress(cards[2],val('ov_central'));
+  setText('.big',val('ov_next_date'),cards[3]);setText('b',val('ov_next_title'),cards[3]);setText('p',val('ov_next_front'),cards[3]);
+  const hCard=qa('.bottom .card',ov)[0], hList=q('.list',hCard); hList.innerHTML='';
+  val('ov_highlights').split('\n').map(x=>x.trim()).filter(Boolean).forEach(x=>{const d=document.createElement('div');d.textContent=x;hList.appendChild(d)});
+  const rCard=qa('.bottom .card',ov)[1], rList=q('.list',rCard); rList.innerHTML='';
+  qa('[data-overview-risk]',document.getElementById('editorFormContent')).forEach(row=>{
+    const inputs=qa('input',row); if(!inputs[0].value.trim())return;
+    const d=document.createElement('div');d.className='risk';
+    const level=inputs[1].value.trim()||'Médio'; const cls=/alto/i.test(level)?'high':/baixo/i.test(level)?'low':'med';
+    d.innerHTML=`<span>${esc(inputs[0].value.trim())}</span><strong class="${cls}">${esc(level)}</strong>`;rList.appendChild(d);
+  });
+}
+function saveFront(front){
+  const root=document.getElementById(front), groups=qa('.week-card .subgrid > div',root), metrics=qa('.metric-block strong',root);
+  const concluded=val(front+'_concluded');
+  q('.front-progress',root).childNodes[0].nodeValue=concluded+' ';
+  q('.front-summary > .progress span',root).style.width=pctNumber(concluded)+'%';
+  metrics[0].textContent=val(front+'_uat');metrics[1].textContent=val(front+'_homolog');metrics[2].textContent=val(front+'_deviation');
+  q('.front-foot span:first-child',root).textContent=val(front+'_sprint');q('.front-foot span:last-child',root).textContent=val(front+'_status');
+  setBullets(groups[0],val(front+'_activities').split('\n').map(x=>x.trim()));
+  setBullets(groups[1],val(front+'_attention').split('\n').map(x=>x.trim()));
+  setBullets(groups[2],val(front+'_pending').split('\n').map(x=>x.trim()));
+  setBullets(groups[3],val(front+'_blockers').split('\n').map(x=>x.trim()));
+  setText('.risk-col:not(.action) p',val(front+'_risk'),root);setText('.risk-col.action p',val(front+'_action'),root);
+
+  const nextGrid=q('.next-grid',root); nextGrid.innerHTML='';
+  qa('[data-next-row]',document.getElementById('editorFormContent')).forEach((row,i)=>{
+    const inputs=qa('input',row);const c=document.createElement('div');c.className='next-card';
+    c.innerHTML=`<span class="n">${String(i+1).padStart(2,'0')}</span><span class="tag2">${esc(inputs[2].value)}</span><p>${esc(inputs[0].value)}</p><small>${esc(inputs[1].value)}</small>`;
+    nextGrid.appendChild(c);
+  });
+  const epicGrid=q('.epic-grid',root); epicGrid.innerHTML='';
+  qa('[data-epic-row]',document.getElementById('editorFormContent')).forEach((row,i)=>{
+    const inputs=qa('input',row),done=parseInt(inputs[1].value)||0,total=Math.max(1,parseInt(inputs[2].value)||1),p=Math.round(done/total*100);
+    const e=document.createElement('div');e.className='epic';
+    e.innerHTML=`<div class="num">${i+1}</div><div>${esc(inputs[0].value)}</div><strong>${done}/${total}</strong><div class="bar"><span style="width:${p}%"></span></div>`;
+    epicGrid.appendChild(e);
+  });
+}
+function saveTimeline(){
+  const track=q('#timeline .timeline-track');
+  const rows=[];
+  qa('[data-timeline-row]',document.getElementById('editorFormContent')).forEach(row=>{
+    const ins=qa('input',row);
+    const parsed=parseTimelineDate(ins[0].value);
+    if(!parsed) return;
+    rows.push({
+      day:parsed.day, monthNum:parsed.month, year:parsed.year, sortKey:parsed.key,
+      dateLabel:formatTimelineDateLabel(ins[0].value),
+      month:MONTH_NAMES[parsed.month-1],
+      tag:ins[1].value,
+      title:ins[2].value,
+      value:ins[3].value,
+      desc:ins[4].value
+    });
+  });
+
+  rows.sort((a,b)=>a.sortKey-b.sortKey);
+
+  const byMonth=new Map();
+  rows.forEach(item=>{
+    const key=`${item.year}-${String(item.monthNum).padStart(2,'0')}`;
+    if(!byMonth.has(key)) byMonth.set(key,{month:item.month,year:item.year,items:[]});
+    byMonth.get(key).items.push(item);
+  });
+
+  track.innerHTML='';
+  const groups=[...byMonth.values()];
+  groups.forEach((group,gi)=>{
+    const g=document.createElement('div');g.className='month-group';
+    const phase=gi===0?'Mês atual':gi===groups.length-1?'Encerramento':'Evolução';
+    g.innerHTML=`<div class="month-header"><strong>${esc(group.month)}</strong><span>${phase}</span></div><div class="month-body"></div>`;
+    const body=q('.month-body',g);
+
+    group.items.forEach((x,i)=>{
+      const m=document.createElement('div');
+      m.className='milestone '+(i%2?'bottom':'top')+(/final|conclu/i.test(x.tag)?' current':'');
+      m.innerHTML=`<div class="milestone-card">
+        <div class="date-row"><strong>${esc(x.dateLabel.replaceAll('/',' '))}</strong><span>${esc(group.month)}</span></div>
+        <span class="tag">${esc(x.tag)}</span>
+        <h3>${esc(x.title)}</h3>
+        <b>${esc(x.value)}</b>
+        <p>${esc(x.desc)}</p>
+      </div>`;
+      body.appendChild(m);
+    });
+    track.appendChild(g);
+  });
+
+  bindTimelineDrag();
+}
+function persistState(){
+  const clone=document.querySelector('main').cloneNode(true);
+  localStorage.setItem(EDIT_STORAGE_KEY,JSON.stringify({main:clone.innerHTML,date:txt(qa('.topbar .meta small')[0]),week:txt(qa('.topbar .meta small')[1])}));
+}
+function restoreState(){
+  try{
+    const d=JSON.parse(localStorage.getItem(EDIT_STORAGE_KEY)||'null');if(!d)return;
+    document.querySelector('main').innerHTML=d.main;
+    const meta=qa('.topbar .meta small');if(meta[0])meta[0].textContent=d.date;if(meta[1])meta[1].textContent=d.week;
+    bindNavigation();bindTimelineDrag();
+  }catch(e){console.warn(e)}
+}
+function bindNavigation(){
+  qa('.nav button').forEach(btn=>{
+    btn.onclick=()=>{
+      qa('.nav button').forEach(b=>b.classList.remove('active'));qa('.view').forEach(v=>v.classList.remove('active'));
+      btn.classList.add('active');document.getElementById(btn.dataset.view).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});
+    };
+  });
+}
+function bindTimelineDrag(){
+  const t=document.getElementById('timeline'); if(!t)return;
+  let down=false,sx=0,sl=0;
+  t.onmousedown=e=>{down=true;t.classList.add('dragging');sx=e.pageX-t.offsetLeft;sl=t.scrollLeft};
+  t.onmouseup=t.onmouseleave=()=>{down=false;t.classList.remove('dragging')};
+  t.onmousemove=e=>{if(!down)return;e.preventDefault();t.scrollLeft=sl-((e.pageX-t.offsetLeft)-sx)};
+}
+
+function syncPrintFront(front,printId){
+  const root=document.getElementById(front),pr=document.getElementById(printId);if(!root||!pr)return;
+  const metrics=qa('.metric-block strong',root),k=qa('.pr-kpi b',pr);
+  const concluded=(txt(q('.front-progress',root)).match(/-?\d+[,.]\d+%/)||[''])[0];
+  if(k[0])k[0].textContent=concluded;if(k[1])k[1].textContent=txt(metrics[0]);if(k[2])k[2].textContent=txt(metrics[1]);if(k[3])k[3].textContent=txt(metrics[2]);
+
+  const pg=q('.pr-grid .pr-box:first-child',pr),groups=qa('.week-card .subgrid > div',root);
+  const labels=qa('.pr-label',pg);
+  const replaceAfter=(labelEl,items)=>{
+    let n=labelEl.nextElementSibling;while(n && !n.classList.contains('pr-label') && !n.classList.contains('pr-risk')){const next=n.nextElementSibling;n.remove();n=next}
+    items.slice().reverse().forEach(item=>{const d=document.createElement('div');d.className='pr-bullet';d.textContent=item;labelEl.insertAdjacentElement('afterend',d)});
+  };
+  replaceAfter(labels[0],linesFrom(groups[0]));replaceAfter(labels[1],linesFrom(groups[1]));replaceAfter(labels[2],linesFrom(groups[2]));replaceAfter(labels[3],linesFrom(groups[3]));
+  setText('.pr-risk > div:first-child p',txt(q('.risk-col:not(.action) p',root)),pg);
+  setText('.pr-risk > div:last-child p',txt(q('.risk-col.action p',root)),pg);
+
+  const pe=q('.pr-epics',pr);pe.innerHTML='';
+  qa('.epic',root).forEach((e,i)=>{
+    const ratio=txt(q('strong',e)),parts=ratio.split('/'),p=parts[1]?Math.round((+parts[0]||0)/(+parts[1]||1)*100):0;
+    const d=document.createElement('div');d.className='pr-epic';
+    d.innerHTML=`<div class="pr-n">${i+1}</div><div>${esc(txt(e.children[1]))}<div class="pr-e-bar"><span style="width:${p}%"></span></div></div><div class="pr-e-val">${esc(ratio)}</div>`;pe.appendChild(d);
+  });
+  const count=q('.pr-grid .pr-box:nth-child(2) h3 span',pr);if(count)count.textContent=qa('.epic',root).length+' épicos';
+}
+function syncPrintReport(){
+  const meta=qa('.topbar .meta small'),date=txt(meta[0]),week=txt(meta[1]);
+  qa('#print-report .pr-meta').forEach((m,i)=>{
+    if(i<2)m.innerHTML=`<b>Status executivo</b>Semana ${esc(week)} · ${esc(date)}`;
+  });
+  syncPrintFront('central','prCentral');syncPrintFront('revenue','prRevenue');
+
+  const prTimeline=q('#prTimeline .pr-months');if(prTimeline){
+    prTimeline.innerHTML='';
+    const printableItems=[];
+    qa('#timeline .month-group').forEach(g=>{
+      qa('.milestone',g).forEach(m=>{
+        const c=q('.milestone-card',m);
+        const rawDate=txt(q('.date-row strong',c));
+        const parsed=parseTimelineDate(rawDate);
+        if(!parsed)return;
+        printableItems.push({
+          day:parsed.day, monthNum:parsed.month, year:parsed.year, key:parsed.key,
+          dateLabel:formatTimelineDateLabel(rawDate),
+          title:txt(q('h3',c)), value:txt(q('b',c)), desc:txt(q('p',c)),
+          current:m.classList.contains('current')
+        });
+      });
+    });
+    printableItems.sort((a,b)=>a.key-b.key);
+    const grouped=new Map();
+    printableItems.forEach(x=>{
+      const key=`${x.year}-${String(x.monthNum).padStart(2,'0')}`;
+      if(!grouped.has(key))grouped.set(key,{monthNum:x.monthNum,year:x.year,items:[]});
+      grouped.get(key).items.push(x);
+    });
+    const groups=[...grouped.values()];
+    groups.forEach((group,gi)=>{
+      const pm=document.createElement('div');pm.className='pr-month';
+      const month=MONTH_NAMES[group.monthNum-1];
+      pm.innerHTML=`<div class="m-k">${gi===0?'MÊS ATUAL':gi===groups.length-1?'ENCERRAMENTO':'EVOLUÇÃO'}</div><h3>${esc(month)} ${group.year}</h3>`;
+      group.items.forEach(x=>{
+        const it=document.createElement('div');it.className='pr-item'+(x.current?' current':'');
+        it.innerHTML=`<b>${esc(x.dateLabel)}</b><strong>${esc(x.title)}</strong><p>${esc((x.value?x.value+' · ':'')+x.desc)}</p>`;
+        pm.appendChild(it);
+      });
+      prTimeline.appendChild(pm);
+    });
+  }
+  const base=q('#prTimeline .pr-meta');if(base)base.innerHTML=`<b>Cronograma executivo</b>Base: status de ${esc(date)}`;
+}
+
+function buildPrintDocument(){
+  syncPrintReport();
+  const report=document.getElementById('print-report').innerHTML;
+
+  const printCss = `
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#edf2f4;color:#172432;font-family:Arial,Helvetica,sans-serif}
+  body{padding:14px}
+  #print-report{display:block}
+  .pr-page{
+    position:relative;
+    width:297mm;
+    min-height:210mm;
+    margin:0 auto 14px;
+    padding:9mm 10mm 8mm;
+    background:#fff;
+    color:#1b2a3a;
+    overflow:hidden;
+    page-break-after:always;
+    box-shadow:0 8px 28px rgba(17,37,51,.12)
+  }
+  .pr-page:last-child{page-break-after:auto}
+  .pr-topline{
+    height:4px;
+    background:linear-gradient(90deg,#ff9f43 0%,#2fcdb6 60%,#2fcdb6 100%);
+    margin:-9mm -10mm 7mm
+  }
+  .pr-head{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    border-bottom:1px solid #dbe3e9;padding-bottom:4mm;margin-bottom:4mm
+  }
+  .pr-head>div:first-child{display:flex;align-items:center}
+  .pr-brand{font-size:7px;color:#23af9d;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+  .pr-title{font-size:18px;font-weight:700;margin-left:9px;color:#172432}
+  .pr-meta{text-align:right;font-size:7px;color:#6f7f8c;line-height:1.45}
+  .pr-meta b{display:block;font-size:8px;color:#172432;margin-bottom:1mm}
+  .pr-synth{
+    position:relative;background:#f2f6f8;border-left:3px solid #ff9a3b;
+    padding:4mm 4mm 3mm;margin-bottom:4mm
+  }
+  .pr-synth .kicker{font-size:6.6px;color:#21af9f;font-weight:800;letter-spacing:.14em}
+  .pr-synth h2{font-size:15px;line-height:1.15;margin:2mm 0 1mm;color:#172432}
+  .pr-synth p{font-size:7.2px;line-height:1.35;margin:0;color:#667786}
+  .pr-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-bottom:4mm}
+  .pr-kpi{border:1px solid #d8e0e6;padding:3mm 3.5mm;min-height:20mm;background:#fff}
+  .pr-kpi span{display:block;font-size:6.5px;color:#677987;font-weight:700}
+  .pr-kpi b{display:block;font-size:17px;color:#23af9f;margin-top:2mm}
+  .pr-kpi b.red{color:#e95a52}
+  .pr-grid{display:grid;grid-template-columns:31.5% 68.5%;gap:4mm;align-items:start}
+  .pr-box{border:1px solid #dbe3e9;padding:3.5mm;background:#fff;min-height:0}
+  .pr-grid>.pr-box:first-child{border-top:3px solid #2cc5b3;background:#f7fafb}
+  .pr-box h3{font-size:11px;margin:1.5mm 0 2.2mm;color:#172432}
+  .pr-label{
+    font-size:6.3px;color:#6b7e8d;font-weight:700;
+    margin:2.4mm 0 1mm;text-transform:uppercase
+  }
+  .pr-bullet{font-size:6.5px;line-height:1.25;margin:.8mm 0;color:#435665}
+  .pr-bullet:before{content:"•";color:#22b7a7;margin-right:4px;font-weight:bold}
+  .pr-risk{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:2.7mm}
+  .pr-risk>div{border-left:2px solid #ff9a3b;padding:2mm;background:#fff}
+  .pr-risk h4{font-size:6.1px;margin:0 0 1mm;color:#b46a23}
+  .pr-risk p{font-size:6.1px;line-height:1.28;margin:0;color:#425564}
+  .pr-epics{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    column-gap:4mm;row-gap:0
+  }
+  .pr-epic{
+    display:grid;grid-template-columns:15px 1fr 22px;
+    gap:1.6mm;align-items:center;
+    font-size:5.7px;border-bottom:1px solid #edf1f3;padding:1mm 0;
+    min-height:7mm
+  }
+  .pr-n{
+    width:13px;height:13px;border-radius:50%;background:#17364c;color:#fff;
+    display:grid;place-items:center;font-size:5.4px;font-weight:700
+  }
+  .pr-e-bar{height:2.4px;background:#dfe7eb;border-radius:8px;overflow:hidden;margin-top:.8mm}
+  .pr-e-bar span{display:block;height:100%;background:#2cc5b3}
+  .pr-e-val{color:#c87927;font-weight:700;text-align:right;white-space:nowrap}
+  .pr-timeline-title{font-size:22px;line-height:1.05;margin:4mm 0 2mm;color:#172432}
+  .pr-months{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:5mm}
+  .pr-month{
+    border:1px solid #d7e0e6;border-top:3px solid #2cc5b3;
+    padding:4mm;min-height:145mm;background:#fbfcfd
+  }
+  .pr-month .m-k{font-size:6.4px;color:#22af9e;font-weight:800;letter-spacing:.08em}
+  .pr-month h3{
+    font-size:14px;font-weight:400;margin:3mm 0 5mm;
+    padding-bottom:3mm;border-bottom:1px solid #dfe6ea
+  }
+  .pr-item{
+    position:relative;border-left:1px solid #c6d3dc;
+    padding:0 0 5mm 6mm;margin-left:2mm;min-height:15mm
+  }
+  .pr-item:before{
+    content:"";position:absolute;left:-3.5px;top:1mm;width:7px;height:7px;
+    background:#2cc5b3;border-radius:50%;box-shadow:0 0 0 2px #e9f8f5
+  }
+  .pr-item.current{
+    background:#fff5e8;border:1px solid #f3c889;border-radius:5px;
+    padding:3mm;margin:0 0 4mm
+  }
+  .pr-item.current:before{display:none}
+  .pr-item b{font-size:6.5px;color:#c17a2a}
+  .pr-item strong{font-size:7px;margin-left:4mm;color:#273947}
+  .pr-item p{font-size:6.2px;line-height:1.25;color:#71818e;margin:1mm 0 0 13mm}
+  .pr-foot{
+    position:absolute;bottom:4mm;left:10mm;right:10mm;
+    border-top:1px solid #dce4e9;padding-top:2mm;
+    font-size:5.8px;color:#7d8d99;display:flex;justify-content:space-between
+  }
+
+  @media print{
+    html,body{background:#fff!important}
+    body{padding:0!important}
+    .pr-page{
+      box-shadow:none!important;
+      margin:0!important;
+      width:297mm!important;
+      min-height:210mm!important;
+      page-break-after:always!important
+    }
+    .pr-page:last-child{page-break-after:auto!important}
+    @page{size:A4 landscape;margin:0}
+  }
+  `;
+
+  return `<!doctype html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Projeto Nexus · Relatório Executivo</title>
+    <style>${printCss}</style>
+  </head>
+  <body>
+    <div id="print-report">${report}</div>
+  </body>
+  </html>`;
+}
+function openPrintPreview(){
+  const frame=document.getElementById('printPreviewFrame');
+  frame.srcdoc=buildPrintDocument();
+  document.getElementById('printPreviewBackdrop').classList.add('open');
+}
+function closePrintPreview(){document.getElementById('printPreviewBackdrop').classList.remove('open')}
+function printExecutiveReport(){
+  syncPrintReport();
+  const f=document.getElementById('printPreviewFrame');
+  f.srcdoc=buildPrintDocument();
+  setTimeout(()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){alert('Não foi possível abrir a caixa de impressão neste navegador.')}} ,350);
+}
+
+window.addEventListener('load',()=>{restoreState();bindNavigation();bindTimelineDrag();syncPrintReport();});
+</script>
+</body></html>
