@@ -57,6 +57,7 @@ main{padding:0 4vw 36px}.view{display:none}.view.active{display:block}
 .milestone:after{display:none}
 .date-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:9px}.date-row strong{font-size:15px;color:#fff;white-space:nowrap}.date-row span{font-size:9px;color:#b9d1e1;text-transform:uppercase;text-align:right}.tag{display:inline-block;padding:5px 8px;border-radius:999px;font-size:9px;background:#3a2d21;color:#ffc27a;margin-bottom:10px}.current .tag{background:#16483f;color:#7ff0ce}
 .milestone-card h3{margin:0 0 7px;font-size:15px;color:#fff}.milestone-card b{display:block;color:#e8f2f8;font-size:11px;margin-bottom:7px}.milestone-card p{margin:0;color:#c0d3df;font-size:11px;line-height:1.55}
+.exec-board{min-width:1380px;padding:18px 8px 8px}.exec-axis,.exec-lane{display:grid;grid-template-columns:160px repeat(12,minmax(86px,1fr))}.exec-axis{min-height:48px;color:#a9c0d2;border-bottom:1px solid #29465e}.exec-axis .axis-month{padding:8px 12px;border-left:1px solid #29465e;font-size:11px;font-weight:800;letter-spacing:.12em}.exec-axis .aug{grid-column:2/4}.exec-axis .sep{grid-column:4/8}.exec-axis .oct{grid-column:8/12}.exec-axis .nov{grid-column:12/14}.exec-lane{min-height:132px;border-bottom:1px solid #203b52}.exec-lane-label{grid-column:1;padding:25px 16px 0 4px}.exec-lane-label strong{display:block;color:#fff;font-size:14px}.exec-lane-label span{display:block;color:#9bb4c6;font-size:10px;margin-top:5px}.exec-track{grid-column:2/14;display:grid;grid-template-columns:repeat(12,minmax(86px,1fr));grid-template-rows:42px 32px 44px;position:relative;padding-top:16px}.exec-track:before{content:"";position:absolute;left:0;right:0;top:42px;height:2px;background:#36536a}.exec-period{align-self:center;height:24px;border:1px solid #369ee8;background:#183e62;border-radius:999px;position:relative;z-index:2;color:#fff}.exec-period.plan{border-color:#8295a5;background:#263849}.exec-period.orange{border-color:#ff9138;background:#4b3426}.exec-period.green{border-color:#37d4ab;background:#17493f}.exec-period .period-label{position:absolute;left:10px;top:31px;min-width:max-content;color:#d8e7f0;font-size:10px;line-height:1.4}.exec-period .period-label b{display:block;color:#fff;font-size:11px;margin-bottom:2px}.exec-pin{align-self:center;justify-self:center;position:relative;z-index:4;width:18px;height:18px;transform:rotate(45deg);background:#ff8d2d;border:3px solid #0a1d30;box-shadow:0 0 0 1px #ffb46f}.exec-pin.blue{background:#2a9cff;box-shadow:0 0 0 1px #8bc8ff}.exec-pin.green{background:#46dda8;box-shadow:0 0 0 1px #91f3d6}.exec-pin-label{align-self:start;justify-self:center;text-align:center;color:#bcd0de;font-size:10px;line-height:1.35;min-width:128px;z-index:5}.exec-pin-label b{display:block;color:#fff;font-size:12px}.timeline-source{display:none}.exec-caption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 4px 2px;color:#a9c0d2;font-size:10px}.exec-caption strong{color:#fff}
 .milestone-card h3{margin:0 0 8px;font-size:14px;font-weight:500}.milestone-card b{display:block;color:var(--green);margin-bottom:8px;font-size:12px}.milestone-card p{margin:0;color:#9db8cc;font-size:10px;line-height:1.4}.scrollhint{text-align:center;color:#86a7bf;font-size:10px;margin:4px 0 14px}
 .kpis{display:grid;grid-template-columns:1.1fr .85fr .85fr .9fr;gap:10px}.card{background:#0f263a;border:1px solid #21425d;border-radius:9px;padding:18px;min-height:130px}.label{font-size:11px;font-weight:900;text-transform:uppercase;margin-bottom:14px}.big{font-size:42px;font-weight:850;color:var(--green)}.big.blue{color:var(--blue)}.big.orange{color:var(--orange);font-size:19px}
 .bottom{display:grid;grid-template-columns:1fr 1.25fr .8fr;gap:10px;margin-top:10px}.list{display:grid;gap:10px;font-size:11px;color:#b7ccdc}.risk{display:flex;justify-content:space-between;gap:12px;background:#132d43;border-radius:6px;padding:10px}.risk strong.high{color:#ff6a5e}.risk strong.med{color:#ff9b31}.risk strong.low{color:#ffcb3f}.legend-row{display:flex;gap:8px;align-items:center;color:#a9c0d2}.legend-dot{width:9px;height:9px;border-radius:50%}
@@ -87,7 +88,10 @@ main{padding:0 4vw 36px}.view{display:none}.view.active{display:block}
 @media(max-width:980px){
   .topbar{grid-template-columns:150px 1fr auto}.meta,.week{display:none}.topbar .action{display:none}.nav{overflow-x:auto;gap:20px}
   .kpis,.bottom,.week-grid,.risk-wrap,.next-grid{grid-template-columns:1fr}.epic-grid{grid-template-columns:1fr}.subgrid{grid-template-columns:1fr}.front-summary{padding:20px}.hero-title h1{font-size:34px}
+  .exec-board{min-width:1240px}.exec-axis,.exec-lane{grid-template-columns:140px repeat(12,minmax(80px,1fr))}.exec-track{grid-template-columns:repeat(12,minmax(80px,1fr))}
 }
+
+.exec-period .period-label.inside{position:static;display:block;padding:4px 10px;color:#fff;white-space:nowrap}.exec-period .period-label.inside b{display:inline;font-size:10px;margin:0}
 
 /* ===== MODO DE EDIÇÃO COMPLETO ===== */
 .editor-help{margin:18px 0;padding:15px;border:1px solid #1d405d;border-radius:10px;background:#0d2438;color:#bcd0de;font-size:12px;line-height:1.55}
@@ -174,7 +178,41 @@ body.edit-mode .edit-mode-banner{display:block}
       <div class="panel-actions"><button class="mini add" onclick="openEditor('timeline',true)">+ Adicionar etapa</button><button class="mini" onclick="openEditor('timeline')">✎ Editar</button><button class="mini" onclick="scrollTl(-1)">‹</button><button class="mini" onclick="scrollTl(1)">›</button></div>
     </div>
     <div class="timeline-scroll" id="timeline">
-      <div class="timeline-track">
+      <div class="exec-board">
+        <div class="exec-axis"><span class="axis-month aug">AGOSTO</span><span class="axis-month sep">SETEMBRO</span><span class="axis-month oct">OUTUBRO</span><span class="axis-month nov">NOVEMBRO</span></div>
+        <div class="exec-lane">
+          <div class="exec-lane-label"><strong>Revenue</strong><span>Conclusão e homologação</span></div>
+          <div class="exec-track">
+            <div class="exec-pin" style="grid-column:3;grid-row:1"></div><div class="exec-pin-label" style="grid-column:3;grid-row:3"><b>04/09</b>Desenvolvimento concluído</div>
+            <div class="exec-period" style="grid-column:3/6;grid-row:1"><span class="period-label"><b>07/09 a 25/09</b>Testes Sottelli em UAT · documentação · ajustes e melhorias</span></div>
+            <div class="exec-period orange" style="grid-column:6/8;grid-row:1"><span class="period-label"><b>28/09 a 09/10</b>Homologação de Revenue</span></div>
+            <div class="exec-pin blue" style="grid-column:8;grid-row:1"></div><div class="exec-pin-label" style="grid-column:8;grid-row:2"><b>12/10</b>Ajustes e bugs<br>sem melhorias</div>
+          </div>
+        </div>
+        <div class="exec-lane">
+          <div class="exec-lane-label"><strong>Atuação presencial</strong><span>Recife</span></div>
+          <div class="exec-track">
+            <div class="exec-period green" style="grid-column:6/8;grid-row:1"><span class="period-label inside"><b>Felipe · 28/09 a 09/10</b></span></div>
+            <div class="exec-period plan" style="grid-column:7/8;grid-row:2"><span class="period-label inside"><b>Lucas · 05/10 a 09/10</b></span></div>
+          </div>
+        </div>
+        <div class="exec-lane">
+          <div class="exec-lane-label"><strong>Central de Projetos</strong><span>Homologação e entrega</span></div>
+          <div class="exec-track">
+            <div class="exec-period" style="grid-column:9/13;grid-row:1"><span class="period-label"><b>19/10 a 13/11</b>Homologação com Revenue concluída e maior massa de dados</span></div>
+            <div class="exec-pin green" style="grid-column:12;grid-row:1"></div><div class="exec-pin-label" style="grid-column:12;grid-row:2"><b>13/11</b>Entrega final do desenvolvimento</div>
+          </div>
+        </div>
+        <div class="exec-lane">
+          <div class="exec-lane-label"><strong>Projeto Nexus</strong><span>Encerramento</span></div>
+          <div class="exec-track">
+            <div class="exec-period plan" style="grid-column:3/12;grid-row:1"><span class="period-label"><b>Consolidação das entregas</b>Testes, homologações, correções e fechamento</span></div>
+            <div class="exec-pin green" style="grid-column:12;grid-row:1"></div><div class="exec-pin-label" style="grid-column:12;grid-row:2"><b>13/11</b>Data final do Projeto Nexus</div>
+          </div>
+        </div>
+        <div class="exec-caption"><span><strong>Leitura executiva:</strong> Revenue é concluída antes do início da homologação da Central de Projetos.</span><span>Data final: <strong>13/11/2026</strong></span></div>
+      </div>
+      <div class="timeline-track timeline-source" aria-hidden="true">
         <div class="month-group">
           <div class="month-header"><strong>AGOSTO</strong><span>Base do planejamento</span></div>
           <div class="month-body">
