@@ -846,6 +846,17 @@ function updateCardProgress(card,value){
   const b=q('.big',card); if(b)b.textContent=value;
   const p=q('.progress span',card); if(p)p.style.width=pctNumber(value)+'%';
 }
+function formatPercent(value){return Number(value).toFixed(2).replace('.',',')+'%'}
+function syncOverviewFromFronts(){
+  const ov=document.getElementById('overview'),revenue=document.getElementById('revenue'),central=document.getElementById('central');
+  if(!ov||!revenue||!central)return;
+  const cards=qa('.kpis .card',ov);if(cards.length<3)return;
+  const revenueValue=pctNumber(txt(q('.front-progress',revenue)));
+  const centralValue=pctNumber(txt(q('.front-progress',central)));
+  updateCardProgress(cards[1],formatPercent(revenueValue));
+  updateCardProgress(cards[2],formatPercent(centralValue));
+  updateCardProgress(cards[0],formatPercent((revenueValue+centralValue)/2));
+}
 function saveOverview(){
   const ov=document.getElementById('overview'),cards=qa('.kpis .card',ov);
   updateCardProgress(cards[0],val('ov_general'));
@@ -861,6 +872,7 @@ function saveOverview(){
     const level=inputs[1].value.trim()||'Médio'; const cls=/alto/i.test(level)?'high':/baixo/i.test(level)?'low':'med';
     d.innerHTML=`<span>${esc(inputs[0].value.trim())}</span><strong class="${cls}">${esc(level)}</strong>`;rList.appendChild(d);
   });
+  syncOverviewFromFronts();
 }
 function saveFront(front){
   const root=document.getElementById(front), groups=qa('.week-card .subgrid > div',root), metrics=qa('.metric-block strong',root);
@@ -888,6 +900,7 @@ function saveFront(front){
     e.innerHTML=`<div class="num">${i+1}</div><div>${esc(inputs[0].value)}</div><strong>${done}/${total}</strong><div class="bar"><span style="width:${p}%"></span></div>`;
     epicGrid.appendChild(e);
   });
+  syncOverviewFromFronts();
 }
 function saveTimeline(){
   const track=q('#timeline .timeline-track');
@@ -951,7 +964,7 @@ function restoreState(){
     const d=JSON.parse(localStorage.getItem(EDIT_STORAGE_KEY)||'null');if(!d)return;
     document.querySelector('main').innerHTML=d.main;
     const meta=qa('.topbar .meta small');if(meta[0])meta[0].textContent=d.date;if(meta[1])meta[1].textContent=d.week;
-    bindNavigation();bindTimelineDrag();renderExecutiveCalendar();
+    bindNavigation();bindTimelineDrag();renderExecutiveCalendar();syncOverviewFromFronts();
   }catch(e){console.warn(e)}
 }
 function bindNavigation(){
@@ -1195,6 +1208,6 @@ function printExecutiveReport(){
   setTimeout(()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){alert('Não foi possível abrir a caixa de impressão neste navegador.')}} ,350);
 }
 
-window.addEventListener('load',()=>{restoreState();bindNavigation();bindTimelineDrag();renderExecutiveCalendar();syncPrintReport();});
+window.addEventListener('load',()=>{restoreState();bindNavigation();bindTimelineDrag();renderExecutiveCalendar();syncOverviewFromFronts();syncPrintReport();});
 </script>
 </body></html>
