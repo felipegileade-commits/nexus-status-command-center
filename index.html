@@ -160,6 +160,16 @@ body.edit-mode .edit-mode-banner{display:block}
 
 .calendar-grid{grid-template-rows:48px 56px 270px 108px}
 .cal-lane.project{grid-template-rows:42px repeat(3,68px)}
+.calendar-board{min-width:2800px}
+.calendar-grid{grid-template-columns:180px repeat(85,minmax(30px,1fr));grid-template-rows:48px 56px 370px}
+.cal-sprint-band{grid-row:2/4}
+.cal-lane{grid-column:2/87;grid-template-columns:repeat(85,minmax(30px,1fr))}
+.cal-lane.project{grid-template-rows:42px repeat(4,78px);padding-top:14px}
+.cal-card{min-width:0;overflow:hidden;padding:10px 12px;font-size:11px;line-height:1.45}
+.cal-card b{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+.cal-note{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.cal-note span{display:inline-block;padding:4px 7px;border:1px solid #2a9cff;border-radius:999px;background:#153d63;color:#fff;font-size:9px;font-weight:700;white-space:nowrap}
+.cal-row-label[style*="grid-row:4"],.cal-lane.presence{display:none}
 </style>
 </head>
 <body>
@@ -731,12 +741,12 @@ function renderExecutiveCalendar(){
   if(!project||!presence)return;
   const items=readTimelineItems();
   project.innerHTML='';presence.innerHTML='';
-  const occupied=[[],[]];
+  const occupied=[[],[],[],[]];
   const laneFor=(start,end)=>{
-    for(let lane=0;lane<2;lane++){
+    for(let lane=0;lane<4;lane++){
       if(!occupied[lane].some(x=>start<x.end&&end>x.start)){occupied[lane].push({start,end});return lane+2;}
     }
-    return 3;
+    return 5;
   };
   const addBar=(root,start,end,label,kind='',row=1)=>{
     const bar=document.createElement('div');bar.className='cal-bar'+(kind==='mv'?' mv':'');
@@ -749,11 +759,11 @@ function renderExecutiveCalendar(){
     const start=Math.max(1,Math.min(85,timelineDayIndex(item.range.start)));
     const finish=Math.max(start,Math.min(85,timelineDayIndex(item.range.end)));
     const isLucas=/lucas em recife/i.test(titleText);
-    if(isLucas){addBar(presence,start,finish,`${titleText} · ${item.dateText.replace(' — ',' a ')}`,'',2);return;}
+    if(isLucas)return;
     const kind=executiveKind(item),isRange=finish>start;
-    const width=isRange?finish-start+1:Math.min(10,86-start);
+    const width=isRange?finish-start+1:Math.min(9,86-start);
     const cardStart=isRange?start:Math.max(1,Math.min(start-3,86-width));
-    const cardEnd=Math.min(86,cardStart+Math.max(7,width));
+    const cardEnd=Math.min(86,cardStart+Math.max(9,width));
     const row=laneFor(cardStart,cardEnd);
     if(isRange)addBar(project,start,finish,`${item.dateText.replace(' — ',' a ')} · ${kind==='mv'?'MV':kind==='sottelli'?'Sottelli':item.label}`,kind,1);
     else{
@@ -761,9 +771,11 @@ function renderExecutiveCalendar(){
     }
     const card=document.createElement('div');card.className=`cal-card${kind?' '+kind:''}`;
     card.style.gridColumn=`${cardStart}/${cardEnd}`;card.style.gridRow=row;
-    card.innerHTML=`<b>${esc(item.dateText.replace(' — ',' a '))} · ${esc(titleText)}</b>${esc(item.desc||item.value)}`;
+    const displayTitle=titleText.replace(/\bCP\b/gi,'Central de Projetos');
+    const presenceInfo=/homologa[cç][aã]o de revenue/i.test(titleText)
+      ? '<div class="cal-note"><span>Felipe presencial · 28/09 a 09/10</span><span>Lucas presencial · 05/10 a 09/10</span></div>' : '';
+    card.innerHTML=`<b>${esc(item.dateText.replace(' — ',' a '))} · ${esc(displayTitle)}</b>${esc(item.desc||item.value)}${presenceInfo}`;
     project.appendChild(card);
-    if(/homologa[cç][aã]o de revenue/i.test(titleText))addBar(presence,start,finish,'Felipe · 28/09 a 09/10','',1);
   });
 }
 
