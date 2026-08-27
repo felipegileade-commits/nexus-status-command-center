@@ -772,9 +772,10 @@ function renderExecutiveCalendar(){
     const isLucas=/lucas em recife/i.test(titleText);
     if(isLucas)return;
     const kind=executiveKind(item),isRange=finish>start;
-    const width=isRange?finish-start+1:Math.min(9,86-start);
-    const cardStart=isRange?start:Math.max(1,Math.min(start-3,86-width));
-    const cardEnd=Math.min(86,cardStart+Math.max(9,width));
+    const width=isRange?finish-start+1:9;
+    const cardSpan=Math.max(9,width);
+    const cardStart=isRange?start:Math.max(1,Math.min(start-3,86-cardSpan));
+    const cardEnd=Math.min(86,cardStart+cardSpan);
     const row=laneFor(cardStart,cardEnd);
     if(isRange)addBar(project,start,finish,`${item.dateText.replace(' — ',' a ')} · ${kind==='mv'?'MV':kind==='sottelli'?'Sottelli':item.label}`,kind,1);
     else{
@@ -788,6 +789,11 @@ function renderExecutiveCalendar(){
     card.innerHTML=`<b>${esc(item.dateText.replace(' — ',' a '))} · ${esc(displayTitle)}</b>${esc(item.desc||item.value)}${presenceInfo}`;
     project.appendChild(card);
   });
+  const cardHeights=qa('.cal-card',project).map(card=>card.scrollHeight);
+  const rowHeight=Math.max(104,(cardHeights.length?Math.max(...cardHeights):86)+20);
+  project.style.gridTemplateRows=`42px repeat(4,${rowHeight}px)`;
+  const grid=q('#timeline .calendar-grid');
+  if(grid)grid.style.gridTemplateRows=`48px 56px ${56+rowHeight*4}px`;
 }
 
 function timelineRowHtml(x,i){
