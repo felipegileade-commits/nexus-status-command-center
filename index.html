@@ -1,3 +1,4 @@
+OK
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -170,12 +171,16 @@ body.edit-mode .edit-mode-banner{display:block}
 .cal-note{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
 .cal-note span{display:inline-block;padding:4px 7px;border:1px solid #2a9cff;border-radius:999px;background:#153d63;color:#fff;font-size:9px;font-weight:700;white-space:nowrap}
 .cal-row-label[style*="grid-row:4"],.cal-lane.presence{display:none}
-.cal-sprint-band[data-sprint="15"]{background:rgba(47,212,191,.10);box-shadow:inset 0 0 0 2px rgba(47,212,191,.48)}
-.cal-sprint-band[data-sprint="16"]{background:rgba(42,156,255,.035);box-shadow:inset 0 0 0 1px rgba(77,120,151,.48)}
-.cal-sprint-band[data-sprint="17"]{background:rgba(47,212,191,.035);box-shadow:inset 0 0 0 1px rgba(61,122,139,.48)}
-.cal-sprint-band[data-sprint="18"]{background:rgba(42,156,255,.035);box-shadow:inset 0 0 0 1px rgba(77,120,151,.48)}
-.cal-sprint-band[data-sprint="19"]{background:rgba(47,212,191,.035);box-shadow:inset 0 0 0 1px rgba(61,122,139,.48)}
-.cal-sprint-band[data-sprint="20"]{background:rgba(70,221,168,.065);box-shadow:inset 0 0 0 2px rgba(70,221,168,.42)}
+.cal-sprint-band{position:relative;margin:4px;border:1px solid #31526a!important;border-radius:14px;overflow:hidden;box-shadow:none!important}
+.cal-sprint-band:after{content:"";position:absolute;left:0;right:0;top:50px;border-top:1px solid rgba(129,169,195,.28)}
+.cal-sprint-title{margin:18px 16px;padding:0;border:0!important;border-radius:0;background:transparent!important;overflow:visible;color:#fff}
+.cal-sprint-title.current{border:0!important;background:transparent!important}
+.cal-sprint-band[data-sprint="15"]{background:rgba(47,212,191,.10);border-color:rgba(47,212,191,.58)!important}
+.cal-sprint-band[data-sprint="16"]{background:rgba(42,156,255,.035);border-color:rgba(77,120,151,.52)!important}
+.cal-sprint-band[data-sprint="17"]{background:rgba(47,212,191,.035);border-color:rgba(61,122,139,.52)!important}
+.cal-sprint-band[data-sprint="18"]{background:rgba(42,156,255,.035);border-color:rgba(77,120,151,.52)!important}
+.cal-sprint-band[data-sprint="19"]{background:rgba(47,212,191,.035);border-color:rgba(61,122,139,.52)!important}
+.cal-sprint-band[data-sprint="20"]{background:rgba(70,221,168,.065);border-color:rgba(70,221,168,.52)!important}
 .cal-bar.avoid-start span{padding-left:82px}
 </style>
 </head>
