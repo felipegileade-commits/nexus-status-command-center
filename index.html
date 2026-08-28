@@ -845,7 +845,7 @@ function updateCardProgress(card,value){
   const b=q('.big',card); if(b)b.textContent=value;
   const p=q('.progress span',card); if(p)p.style.width=pctNumber(value)+'%';
 }
-function formatPercent(value){return (Math.round((Number(value)+Number.EPSILON)*100)/100).toFixed(2).replace('.',',')+'%'}
+function formatPercent(value){return (Math.round((Number(value)+1e-9)*100)/100).toFixed(2).replace('.',',')+'%'}
 function syncOverviewFromFronts(){
   const ov=document.getElementById('overview'),revenue=document.getElementById('revenue'),central=document.getElementById('central');
   if(!ov||!revenue||!central)return;
