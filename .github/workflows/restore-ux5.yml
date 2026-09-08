@@ -1,0 +1,30 @@
+name: Restore stable UX5
+on:
+  push:
+    paths:
+      - 'restore_ux5.py'
+      - '.github/workflows/restore-ux5.yml'
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore stable wrapper
+        run: python restore_ux5.py
+      - name: Validate syntax marker
+        run: grep -q "UX5_COLLISION_FREE_COMPACT" index.html
+      - name: Commit rollback
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Rollback: restore stable timeline UX5"
+            git push
+          fi
