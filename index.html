@@ -21,7 +21,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}#ap
   const loading=document.getElementById('loading');
 
   try{localStorage.clear()}catch(e){}
-  frame.src='/legacy-index.html?v=20260908-ux4';
+  frame.src='/legacy-index.html?v=20260908-ux5';
 
   function setBullets(container,items){
     if(!container)return;
@@ -99,6 +99,11 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}#ap
       #timeline .timeline-detail-label{font-size:10px;color:#8da8bd;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
       #timeline .timeline-detail-close{position:absolute;right:16px;top:14px;border:0;background:transparent;color:#b8cbd8;font-size:20px;line-height:1;cursor:pointer}
       #timeline .timeline-detail-close:hover{color:#fff}
+      /* UX5_COLLISION_FREE_COMPACT */
+      #timeline .cal-lane.project{grid-template-rows:58px 42px 68px 68px!important}
+      #timeline .cal-card{min-height:54px!important;max-height:58px!important;height:58px!important;padding:9px 11px!important;border-radius:10px!important;border-left-width:3px!important;display:block!important;overflow:hidden!important}
+      #timeline .cal-card b{display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:11px!important;line-height:1.25!important;margin:0!important;white-space:normal!important}
+      #timeline .cal-card.timeline-selected{transform:translateY(-1px)}
       @media(max-width:980px){#timeline .timeline-detail.open{grid-template-columns:1fr}#timeline .timeline-detail-main{border-right:0;border-bottom:1px solid #24435d}}
       @media(max-width:980px){#timeline .calendar-board{min-width:2200px}}
       `;
@@ -122,47 +127,27 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}#ap
     const cards=[...project.querySelectorAll('.cal-card')];
     const marks=[...project.querySelectorAll('.cal-mark')];
     const bars=[...project.querySelectorAll('.cal-bar')];
-    cards.forEach(card=>{
-      if(!card.dataset.uxBaseRow)card.dataset.uxBaseRow=String(parseInt(card.style.gridRow||'2',10)||2);
-      const base=parseInt(card.dataset.uxBaseRow,10)||2;
-      card.style.gridRow=String(Math.max(3,base+1));
-    });
-    marks.forEach(mark=>mark.style.gridRow='2');
-    bars.forEach(bar=>bar.style.gridRow='1');
-    const maxH=Math.max(104,...cards.map(c=>c.scrollHeight||104));
-    const rowH=Math.min(160,Math.max(116,maxH+18));
-    project.style.gridTemplateRows=`58px 42px repeat(4,${rowH}px)`;
-    const grid=d.querySelector('#timeline .calendar-grid');
-    if(grid)grid.style.gridTemplateRows=`48px 64px ${100+rowH*4}px`;
-    /* UX4_CLICKABLE_MILESTONES */
-    function getDetailPanel(){
-      let panel=d.querySelector('#timeline .timeline-detail');
-      if(panel)return panel;
-      panel=d.createElement('div');
-      panel.className='timeline-detail';
-      panel.innerHTML='<div class="timeline-detail-main"><button class="timeline-detail-close" type="button" aria-label="Fechar">×</button><div class="timeline-detail-kicker">Detalhe do marco</div><h3></h3><p class="timeline-detail-desc"></p></div><div class="timeline-detail-side"><div class="timeline-detail-label">Observações</div><p class="timeline-detail-observation"></p></div>';
-      const caption=d.querySelector('#timeline .calendar-caption');
-      if(caption)caption.insertAdjacentElement('afterend',panel);
-      panel.querySelector('.timeline-detail-close').onclick=()=>{
-        panel.classList.remove('open');
-        d.querySelectorAll('#timeline .timeline-selected').forEach(x=>x.classList.remove('timeline-selected'));
-      };
-      return panel;
-    }
-    const startCol=el=>parseInt(String(el?.style.gridColumn||'').split('/')[0].trim(),10)||0;
-    const openDetail=(card,mark)=>{
-      if(!card)return;
-      d.querySelectorAll('#timeline .timeline-selected').forEach(x=>x.classList.remove('timeline-selected'));
-      card.classList.add('timeline-selected');if(mark)mark.classList.add('timeline-selected');
-      const panel=getDetailPanel();
-      panel.querySelector('h3').textContent=card.dataset.timelineTitle||'Marco do projeto';
-      panel.querySelector('.timeline-detail-desc').textContent=card.dataset.timelineDesc||'Sem descrição complementar.';
-      panel.querySelector('.timeline-detail-observation').textContent=card.dataset.timelineObs||card.dataset.timelineDesc||'Sem observações adicionais.';
-      panel.classList.add('open');
-      panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+    const compactOccupied=[];
+    const originalStartCol=card=>{
+      if(!card.dataset.uxOriginalColumn)card.dataset.uxOriginalColumn=String(card.style.gridColumn||'');
+      return parseInt(card.dataset.uxOriginalColumn.split('/')[0].trim(),10)||startCol(card)||1;
+    };
+    const compactSpanFor=card=>{
+      const t=(card.dataset.timelineTitle||card.querySelector('b')?.textContent||'').trim();
+      return t.length>45?9:t.length>30?8:t.length>18?7:6;
+    };
+    const placeCompactCard=card=>{
+      const anchor=originalStartCol(card);
+      const span=compactSpanFor(card);
+      const start=Math.max(1,Math.min(86-span,anchor));
+      const finish=start+span;
+      let rowIndex=compactOccupied.findIndex(row=>!row.some(x=>start<x.finish+1&&finish>x.start-1));
+      if(rowIndex<0){rowIndex=compactOccupied.length;compactOccupied.push([])}
+      compactOccupied[rowIndex].push({start,finish});
+      card.style.gridColumn=`${start}/${finish}`;
+      card.style.gridRow=String(3+rowIndex);
     };
     cards.forEach(card=>{
-      card.style.gridRow='3';
       if(card.dataset.uxCompact!=='1'){
         const b=card.querySelector('b');
         if(!b)return;
@@ -179,8 +164,9 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}#ap
         card.innerHTML='<b></b>';
         card.querySelector('b').textContent=title;
       }
+      placeCompactCard(card);
       card.onclick=()=>{
-        const c=startCol(card);
+        const c=originalStartCol(card);
         const mark=marks.map(m=>({m,dist:Math.abs(startCol(m)-c)})).sort((a,b)=>a.dist-b.dist)[0]?.m||null;
         openDetail(card,mark);
       };
@@ -193,8 +179,9 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}#ap
         openDetail(card,mark);
       };
     });
-    project.style.gridTemplateRows='58px 42px 112px';
-    if(grid)grid.style.gridTemplateRows='48px 64px 265px';
+    const compactRows=Math.max(1,compactOccupied.length);
+    project.style.gridTemplateRows=`58px 42px repeat(${compactRows},68px)`;
+    if(grid)grid.style.gridTemplateRows=`48px 64px ${100+compactRows*68}px`;
     getDetailPanel();
   }
 
