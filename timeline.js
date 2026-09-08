@@ -103,6 +103,16 @@
     return host;
   }
 
+  // The board element is replaced whenever the timeline data changes, so a
+  // reference captured in a closure goes stale. Keep the last render's inputs at
+  // module level and always look the board up fresh.
+  let lastW=null,lastXs=null;
+  function replaceNow(){
+    if(!lastW||!lastXs)return;
+    const b=lastW.document.querySelector('.ux11-board');
+    if(b)place(b,lastXs);
+  }
+
   function place(board,xs){
     const track=board.querySelector('.ux11-track');if(!track)return;
     const width=track.clientWidth||1080,gap=7,lanes=[];
@@ -143,7 +153,7 @@
     if(!xs.length)return false; // keep the original timeline visible until data is ready
     styles(d);
     const sig=signature(xs);let board=t.querySelector('.ux11-board');
-    if(board&&board.dataset.signature===sig&&!force){place(board,xs);return true}
+    if(board&&board.dataset.signature===sig&&!force){lastW=w;lastXs=xs;place(board,xs);return true}
     if(board)board.remove();
     board=d.createElement('div');board.className='ux11-board';board.dataset.signature=sig;
     board.innerHTML='<div class="ux11-chart"><div class="ux11-labels"><div class="ux11-label sprints">Sprints</div><div class="ux11-label windows">Janelas</div><div class="ux11-label marks">Marcos</div></div><div class="ux11-track"></div></div><div class="ux11-hint">Clique no losango ou no quadro para abrir os detalhes do marco.</div>';
@@ -169,7 +179,18 @@
     };
     place(board,xs);
     detailHost(t);
-    if(typeof w.ResizeObserver==='function'){const ro=new w.ResizeObserver(()=>place(board,xs));ro.observe(track);board.__ux11ResizeObserver=ro}
+    lastW=w;lastXs=xs;
+    // The first place() runs before layout settles, so the track still reports its
+    // pre-layout width and the right-most card lands past the real edge. Re-place
+    // once the frame has painted, and again whenever the timeline is resized.
+    const raf=cb=>{try{w.requestAnimationFrame(cb)}catch(e){w.setTimeout(cb,16)}};
+    raf(()=>{replaceNow();raf(replaceNow)});
+    w.setTimeout(replaceNow,300);
+    if(!w.__ux11Resize){
+      w.__ux11Resize=true;
+      w.addEventListener('resize',replaceNow);
+      if(typeof w.ResizeObserver==='function')new w.ResizeObserver(replaceNow).observe(t);
+    }
     return true;
   }
 
