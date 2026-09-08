@@ -13,6 +13,67 @@
   const frame=document.getElementById('app');
   const loading=document.getElementById('loading');
 
+  // --- Sessao de edicao -----------------------------------------------------
+  // A leitura continua anonima (a chave publishable basta). A escrita manda o
+  // access_token do Supabase Auth, que o RLS exige. Guardamos em sessionStorage
+  // e nao em localStorage porque o shell limpa o localStorage ao iniciar, e
+  // porque o token nao precisa sobreviver ao fechamento da aba.
+  const AUTH_KEY='nexus_editor_token';
+  const getToken=()=>{try{return sessionStorage.getItem(AUTH_KEY)||''}catch(e){return ''}};
+  const setToken=t=>{try{t?sessionStorage.setItem(AUTH_KEY,t):sessionStorage.removeItem(AUTH_KEY)}catch(e){}};
+
+  function writeHeaders(){
+    const h={...HEADERS,Prefer:'return=minimal'};
+    const t=getToken();
+    if(t)h.Authorization='Bearer '+t;
+    return h;
+  }
+
+  async function signIn(email,password){
+    const res=await fetch(SB_URL+'/auth/v1/token?grant_type=password',{
+      method:'POST',headers:HEADERS,body:JSON.stringify({email,password})
+    });
+    const body=await res.json().catch(()=>({}));
+    if(!res.ok||!body.access_token)throw new Error(body.error_description||body.msg||body.error||('Falha na autenticação ('+res.status+')'));
+    setToken(body.access_token);
+  }
+
+  // Overlay de login na pagina hospedeira. A senha e digitada pelo usuario e vai
+  // direto para o Supabase; nada dela e guardado.
+  function askLogin(aviso){
+    return new Promise(resolve=>{
+      const el=document.createElement('div');
+      el.style.cssText='position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(4,12,20,.82);font:14px Inter,Segoe UI,Arial,sans-serif';
+      el.innerHTML='<form style="width:320px;max-width:88vw;background:#0d253a;border:1px solid #28506e;border-radius:14px;padding:22px;box-shadow:0 18px 50px rgba(0,0,0,.35)">'
+        +'<div style="color:#2fd4bf;font-size:10px;letter-spacing:.12em;font-weight:800;margin-bottom:6px">SESSÃO DE EDIÇÃO</div>'
+        +'<h2 style="color:#fff;font-size:18px;margin:0 0 14px;font-weight:600">Entrar para salvar</h2>'
+        +'<p data-erro style="color:#ff8d7a;font-size:12px;margin:0 0 12px;display:none"></p>'
+        +'<input name="email" type="email" required placeholder="E-mail" autocomplete="username" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:10px 12px;border-radius:9px;border:1px solid #2b4d68;background:#081c2d;color:#fff;font-size:13px">'
+        +'<input name="senha" type="password" required placeholder="Senha" autocomplete="current-password" style="width:100%;box-sizing:border-box;margin-bottom:14px;padding:10px 12px;border-radius:9px;border:1px solid #2b4d68;background:#081c2d;color:#fff;font-size:13px">'
+        +'<div style="display:flex;gap:8px">'
+        +'<button type="submit" style="flex:1;padding:10px;border:0;border-radius:9px;background:#2fd4bf;color:#052029;font-weight:700;font-size:13px;cursor:pointer">Entrar</button>'
+        +'<button type="button" data-cancelar style="padding:10px 14px;border:1px solid #2b4d68;border-radius:9px;background:transparent;color:#b8cbd8;font-size:13px;cursor:pointer">Cancelar</button>'
+        +'</div></form>';
+      const form=el.querySelector('form'),erro=el.querySelector('[data-erro]'),botao=el.querySelector('button[type=submit]');
+      if(aviso){erro.textContent=aviso;erro.style.display='block'}
+      const fechar=ok=>{el.remove();resolve(ok)};
+      el.querySelector('[data-cancelar]').onclick=()=>fechar(false);
+      form.onsubmit=async e=>{
+        e.preventDefault();
+        botao.disabled=true;botao.textContent='Entrando…';
+        try{
+          await signIn(form.email.value.trim(),form.senha.value);
+          fechar(true);
+        }catch(err){
+          erro.textContent=String(err.message||err);erro.style.display='block';
+          botao.disabled=false;botao.textContent='Entrar';
+        }
+      };
+      document.body.appendChild(el);
+      form.email.focus();
+    });
+  }
+
   try{localStorage.clear()}catch(e){}
   frame.src='/legacy-index.html?v=20260908-fix4';
 
@@ -235,9 +296,32 @@
   }
 
   async function save(w){
-    const state=capture(w);
-    const res=await fetch(STATE_URL,{method:'PATCH',headers:{...HEADERS,Prefer:'return=minimal'},body:JSON.stringify({payload:state,updated_at:new Date().toISOString()})});
+    if(READONLY)return;
+    // O estado e capturado antes de qualquer pedido de login para que a edicao
+    // pendente nao se perca enquanto o usuario digita a senha.
+    const body=JSON.stringify({payload:capture(w),updated_at:new Date().toISOString()});
+    const enviar=()=>fetch(STATE_URL,{method:'PATCH',headers:writeHeaders(),body});
+    let res=await enviar();
+    if(res.status===401||res.status===403){
+      setToken('');
+      const ok=await askLogin('Entre com sua conta para salvar as alterações.');
+      if(!ok)throw new Error('Alterações não salvas — login cancelado.');
+      res=await enviar();
+    }
     if(!res.ok)throw new Error('Falha ao salvar: '+res.status+' '+await res.text());
+  }
+
+  // Um save que falha em silencio e pior do que um erro visivel: foi assim que
+  // dez marcos sumiram sem ninguem perceber.
+  function toast(msg,erro){
+    const t=document.createElement('div');
+    t.textContent=msg;
+    t.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:11;'
+      +'padding:11px 18px;border-radius:10px;font:13px Inter,Segoe UI,Arial,sans-serif;'
+      +'box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:78vw;text-align:center;'
+      +(erro?'background:#4a1620;border:1px solid #a33;color:#ffd9d2':'background:#0f3b39;border:1px solid #2fd4bf;color:#d6fff8');
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),erro?9000:2600);
   }
 
   async function load(w){
@@ -272,7 +356,11 @@
       watchTimeline(w);
       if(READONLY)lockdown(w);
       else{
-        const sharedPersist=function(){save(w).catch(err=>console.error('[Nexus Supabase]',err))};
+        const sharedPersist=function(){
+          save(w)
+            .then(()=>toast('Status salvo.'))
+            .catch(err=>{console.error('[Nexus Supabase]',err);toast(String(err.message||err),true)});
+        };
         try{w.persistState=sharedPersist;w.eval('persistState = window.persistState')}catch(e){}
       }
     }catch(err){console.error('[Nexus Supabase]',err)}
