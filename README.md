@@ -11,9 +11,18 @@ que abrem a URL.
 
 | Arquivo | Papel |
 | --- | --- |
-| `index.html` | Casca da aplicação. Carrega o app num `<iframe>`, injeta os ajustes visuais do cronograma e sincroniza o estado com o Supabase. |
+| `index.html` | Página de edição. Define `NEXUS_READONLY=false` e carrega o shell. |
+| `view.html` | Página do cliente, somente leitura. Define `NEXUS_READONLY=true`. |
+| `shell.js` | Carrega o app num `<iframe>`, injeta os ajustes visuais do cronograma e sincroniza o estado com o Supabase. Compartilhado pelas duas páginas. |
 | `legacy-index.html` | O app em si: markup das três abas, CSS e a lógica do editor de status e da impressão. |
 | `timeline.js` | Renderizador do cronograma executivo (setembro → novembro): sprints, janelas de trabalho, marcos clicáveis e painel de detalhe. |
+
+## Os dois links
+
+- **Edição** — `/` (ou `/index.html`): mostra "Editar status", "+ Adicionar etapa" e "✎ Editar", e grava no Supabase.
+- **Cliente** — `/view.html`: mesma leitura, sem nenhum caminho de edição. Esconde os três botões e o drawer do editor por CSS no `<head>` do iframe (a restauração do estado troca o `innerHTML` do `<main>`, então esconder só no DOM não bastaria) e substitui `openEditor`, `saveCurrentEditor` e `persistState` por no-ops. Imprimir relatório continua disponível.
+
+Importante: isso impede a edição **pela interface**, não no servidor. Ver a pendência abaixo.
 
 Não há build nem dependências: são três arquivos estáticos servidos direto. O
 deploy é automático na Vercel a cada push na `main`.
@@ -42,9 +51,19 @@ versões — a última gravação vence.
 ## Pendência conhecida
 
 A chave publishable do Supabase está no cliente (é o esperado para esse tipo de
-chave), mas o `PATCH` grava direto na linha `id=main`. **Confirmar se a policy
-RLS da tabela restringe escrita**; se estiver aberta, qualquer pessoa com o link
-consegue sobrescrever o status compartilhado.
+chave), mas o `PATCH` grava direto na linha `id=main` e a policy RLS da tabela
+aceita escrita anônima. Na prática: qualquer pessoa que conheça a URL do Supabase
+e a chave — ambas visíveis no `shell.js` — consegue sobrescrever o status, mesmo
+usando apenas `view.html`. O modo somente leitura remove a edição da interface,
+que resolve o acidente, não o acesso deliberado.
+
+Fechar isso exige restringir `UPDATE` no RLS e autenticar quem edita (Supabase
+Auth na página de edição, ou uma edge function com segredo). Enquanto não for
+feito, `view.html` é uma barreira de conveniência.
+
+Vale saber também que o estado é último-save-vence: uma aba aberta há muito tempo
+que salve sobrescreve tudo com o que ela tem em memória. Recarregue antes de
+editar.
 
 ## Convenção de versão dos assets
 
