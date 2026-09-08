@@ -107,6 +107,10 @@
   // reference captured in a closure goes stale. Keep the last render's inputs at
   // module level and always look the board up fresh.
   let lastW=null,lastXs=null;
+  // Boards this page load actually wired up. The shell persists the whole <main>
+  // to Supabase and re-injects it on load, so a board can arrive from saved HTML
+  // with its click handlers stripped. Such a board must be rebuilt, never reused.
+  const wired=new WeakSet();
   function replaceNow(){
     if(!lastW||!lastXs)return;
     const b=lastW.document.querySelector('.ux11-board');
@@ -153,9 +157,9 @@
     if(!xs.length)return false; // keep the original timeline visible until data is ready
     styles(d);
     const sig=signature(xs);let board=t.querySelector('.ux11-board');
-    if(board&&board.dataset.signature===sig&&!force){lastW=w;lastXs=xs;place(board,xs);return true}
+    if(board&&board.dataset.signature===sig&&!force&&wired.has(board)){lastW=w;lastXs=xs;place(board,xs);return true}
     if(board)board.remove();
-    board=d.createElement('div');board.className='ux11-board';board.dataset.signature=sig;
+    board=d.createElement('div');board.className='ux11-board';board.dataset.signature=sig;wired.add(board);
     board.innerHTML='<div class="ux11-chart"><div class="ux11-labels"><div class="ux11-label sprints">Sprints</div><div class="ux11-label windows">Janelas</div><div class="ux11-label marks">Marcos</div></div><div class="ux11-track"></div></div><div class="ux11-hint">Clique no losango ou no quadro para abrir os detalhes do marco.</div>';
     t.prepend(board);
     // only hide the old board after UX11 has been rendered successfully
