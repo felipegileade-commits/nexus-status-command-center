@@ -203,8 +203,25 @@
     const ok=build(w,false);
     if(ok&&!w.__ux11Observer){
       w.__ux11Observer=true;
-      const src=w.document.querySelector('#timeline .timeline-source');
-      if(src){let timer=null;new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>build(w,true),90)}).observe(src,{childList:true,subtree:true,characterData:true})}
+      // Watch <main> rather than the timeline source: the shell replaces the whole
+      // of <main> when it restores the saved state, which destroys both the source
+      // node and the board we just wired. <main> itself survives, so observing it
+      // catches the restore as well as ordinary edits to the timeline data.
+      const main=w.document.querySelector('main');
+      if(main){
+        // build() edits <main>, so the callback must stay inert unless something
+        // actually needs rebuilding, or it would retrigger itself forever.
+        const check=()=>{
+          const b=w.document.querySelector('.ux11-board');
+          if(!b||!wired.has(b)){build(w,true);return}
+          let sig='';
+          try{sig=signature(items(w))}catch(e){return}
+          if(sig&&b.dataset.signature!==sig)build(w,true);
+        };
+        let timer=null;
+        new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{check()}catch(e){}},90)})
+          .observe(main,{childList:true,subtree:true,characterData:true});
+      }
     }
     return ok;
   }
