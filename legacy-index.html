@@ -843,7 +843,29 @@ function updateCardProgress(card,value){
   const p=q('.progress span',card); if(p)p.style.width=pctNumber(value)+'%';
 }
 function formatPercent(value){return (Math.round((Number(value)+1e-9)*100)/100).toFixed(2).replace('.',',')+'%'}
+// Sinais que precisam seguir o conteudo da frente, e nao ficar fixos no HTML:
+// um risco sem texto nao pode exibir card nem contar na pilula, e o desvio so e
+// vermelho quando ha atraso de fato (negativo). Positivo significa adiantado.
+function syncFrontSignals(){
+  ['revenue','central'].forEach(front=>{
+    const root=document.getElementById(front);if(!root)return;
+    const risco=txt(q('.risk-col:not(.action) p',root)),acao=txt(q('.risk-col.action p',root));
+    const temRisco=!!(risco||acao);
+    const wrap=q('.risk-wrap',root),secao=wrap?wrap.closest('.section'):null;
+    if(secao)secao.style.display=temRisco?'':'none';
+    const pill=q('.status-pill',root);
+    if(pill){pill.textContent=temRisco?'1 risco':'Sem riscos';pill.style.opacity=temRisco?'':'.6'}
+    const desvio=qa('.metric-block strong',root)[2];
+    if(desvio){
+      const n=parseFloat(txt(desvio).replace('%','').replace(',','.'));
+      desvio.style.color=(!isNaN(n)&&n<0)?'var(--red)':'var(--green)';
+    }
+  });
+}
 function syncOverviewFromFronts(){
+  // Chamado no carregamento (rebind) e ao fim de saveFront, entao serve de
+  // gancho unico para os sinais acima. Fica antes das saidas antecipadas.
+  syncFrontSignals();
   const ov=document.getElementById('overview'),revenue=document.getElementById('revenue'),central=document.getElementById('central');
   if(!ov||!revenue||!central)return;
   const cards=qa('.kpis .card',ov);if(cards.length<3)return;
@@ -1037,8 +1059,11 @@ function syncPrintFront(front,printId){
     items.slice().reverse().forEach(item=>{const d=document.createElement('div');d.className='pr-bullet';d.textContent=item;labelEl.insertAdjacentElement('afterend',d)});
   };
   replaceAfter(labels[0],linesFrom(groups[0]));replaceAfter(labels[1],linesFrom(groups[1]));replaceAfter(labels[2],linesFrom(groups[2]));replaceAfter(labels[3],linesFrom(groups[3]));
-  setText('.pr-risk > div:first-child p',txt(q('.risk-col:not(.action) p',root)),pg);
-  setText('.pr-risk > div:last-child p',txt(q('.risk-col.action p',root)),pg);
+  const prRisco=txt(q('.risk-col:not(.action) p',root)),prAcao=txt(q('.risk-col.action p',root));
+  setText('.pr-risk > div:first-child p',prRisco,pg);
+  setText('.pr-risk > div:last-child p',prAcao,pg);
+  const prRiskBox=q('.pr-risk',pg);
+  if(prRiskBox)prRiskBox.style.display=(prRisco||prAcao)?'':'none';
 
   const pe=q('.pr-epics',pr);pe.innerHTML='';
   qa('.epic',root).forEach((e,i)=>{

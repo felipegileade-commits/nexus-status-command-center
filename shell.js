@@ -75,7 +75,7 @@
   }
 
   try{localStorage.clear()}catch(e){}
-  frame.src='/legacy-index.html?v=20260908-fix4';
+  frame.src='/legacy-index.html?v=20260908-sinais1';
 
   function setBullets(container,items){
     if(!container)return;
