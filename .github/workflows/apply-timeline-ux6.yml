@@ -1,0 +1,41 @@
+name: Apply Timeline UX6
+on:
+  push:
+    paths:
+      - 'apply_timeline_ux6.py'
+      - '.github/workflows/apply-timeline-ux6.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply executive timeline patch
+        run: python apply_timeline_ux6.py
+      - name: Validate patched wrapper
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('index.html').read_text()
+          assert 'UX6_EXECUTIVE_LANES' in s
+          assert 'ux6-milestone-strip' in s
+          assert "grid-template-columns:150px repeat(85,minmax(16px,1fr))" in s
+          scripts=re.findall(r'<script>(.*?)</script>', s, flags=re.S)
+          assert scripts, 'inline script not found'
+          Path('/tmp/index-inline.js').write_text(scripts[-1])
+          print('Static UX6 validation passed')
+          PY
+          node --check /tmp/index-inline.js
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "UX: executive timeline lanes and clean milestone cards"
+            git push
+          fi
