@@ -1,0 +1,36 @@
+name: Export Full Repository
+
+on:
+  push:
+    branches: [export-repository]
+    paths:
+      - '.github/workflows/export-full-repository.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Create source archive
+        run: |
+          echo "Repository: felipegileade-commits/nexus-status-command-center" > SOURCE_INFO.txt
+          echo "Branch: main" >> SOURCE_INFO.txt
+          echo "Commit: $(git rev-parse HEAD)" >> SOURCE_INFO.txt
+          zip -r nexus-status-command-center-completo.zip . -x '.git/*' 'nexus-status-command-center-completo.zip'
+
+      - name: Upload complete repository
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexus-status-command-center-completo
+          path: nexus-status-command-center-completo.zip
+          if-no-files-found: error
+          retention-days: 7
