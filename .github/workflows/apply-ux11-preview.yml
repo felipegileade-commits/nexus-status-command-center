@@ -1,4 +1,5 @@
 name: Apply UX11 preview
+# UX11 September-first validation
 on:
   push:
     branches: [timeline-ux11-preview]
@@ -39,7 +40,7 @@ jobs:
       - name: Validate compact card collision algorithm
         run: |
           node <<'JS'
-          const starts=[3,6,27,41,48,73]; // 04/09,07/09,28/09,12/10,19/10,13/11 from Sep 1
+          const starts=[3,6,27,41,48,73];
           const titles=['Desenvolvimento concluído','Testes Sottelli em UAT','Homologação de Revenue','Ajustes e correção de bugs','Homologação da Central de Projetos','Entrega final do desenvolvimento'];
           const total=73,gap=7;
           for(const width of [1040,1080,1200,1500]){
