@@ -1,0 +1,26 @@
+name: Apply Timeline UX5
+on:
+  push:
+    paths:
+      - 'apply_timeline_ux5.py'
+      - '.github/workflows/apply-timeline-ux5.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply timeline patch
+        run: python apply_timeline_ux5.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "UX: compact timeline cards without overlap"
+            git push
+          fi
