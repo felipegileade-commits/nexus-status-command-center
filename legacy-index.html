@@ -1050,7 +1050,13 @@ function syncPrintFront(front,printId){
   const root=document.getElementById(front),pr=document.getElementById(printId);if(!root||!pr)return;
   const metrics=qa('.metric-block strong',root),k=qa('.pr-kpi b',pr);
   const concluded=(txt(q('.front-progress',root)).match(/-?\d+[,.]\d+%/)||[''])[0];
-  if(k[0])k[0].textContent=concluded;if(k[1])k[1].textContent=txt(metrics[0]);if(k[2])k[2].textContent=txt(metrics[1]);if(k[3])k[3].textContent=txt(metrics[2]);
+  if(k[0])k[0].textContent=concluded;if(k[1])k[1].textContent=txt(metrics[0]);if(k[2])k[2].textContent=txt(metrics[1]);
+  if(k[3]){
+    k[3].textContent=txt(metrics[2]);
+    // Mesma convencao da tela: negativo e atraso (vermelho), positivo e adiantado.
+    const n=parseFloat(txt(metrics[2]).replace('%','').replace(',','.'));
+    k[3].classList.toggle('red',!isNaN(n)&&n<0);
+  }
 
   const pg=q('.pr-grid .pr-box:first-child',pr),groups=qa('.week-card .subgrid > div',root);
   const labels=qa('.pr-label',pg);
