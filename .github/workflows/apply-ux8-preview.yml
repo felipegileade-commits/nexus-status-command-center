@@ -1,0 +1,33 @@
+name: Apply UX8 Preview
+on:
+  push:
+    branches:
+      - timeline-ux8-preview
+    paths:
+      - 'apply_ux8_preview.py'
+      - 'timeline_ux8.js'
+      - '.github/workflows/apply-ux8-preview.yml'
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate UX8 JavaScript
+        run: node --check timeline_ux8.js
+      - name: Apply preview injector
+        run: python apply_ux8_preview.py
+      - name: Validate injected script
+        run: grep -q 'timeline_ux8.js?v=20260908-ux8-preview' index.html
+      - name: Commit preview
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Preview: tested UX8 timeline layout"
+            git push
+          fi
