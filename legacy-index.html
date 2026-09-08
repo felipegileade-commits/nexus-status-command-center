@@ -1124,6 +1124,93 @@ function syncPrintReport(){
     });
   }
   const base=q('#prTimeline .pr-meta');if(base)base.innerHTML=`<b>Cronograma executivo</b>Base: status de ${esc(date)}`;
+  syncPrintTimeline();
+}
+
+// O cronograma em faixas do relatorio era HTML fixo, escrito a mao, e por isso
+// nunca acompanhou as edicoes. Aqui ele passa a ser gerado dos mesmos marcos que
+// alimentam a tela.
+function syncPrintTimeline(){
+  const exec=document.querySelector('#prTimeline .pr-exec');if(!exec)return;
+  const tracks=qa('.prx-lane .prx-track',exec);if(tracks.length<3)return;
+
+  const DIA=86400000, INICIO=new Date(2026,7,1), FIM=new Date(2026,10,30), COLS=12;
+  const TOTAL=Math.max(1,Math.round((FIM-INICIO)/DIA));
+  const coluna=d=>Math.min(COLS,Math.max(1,1+Math.floor(((d-INICIO)/DIA)/TOTAL*COLS)));
+  const dm=d=>`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+  const paraData=p=>p?new Date(p.year,p.month-1,p.day):null;
+
+  const itens=[];
+  qa('#timeline .timeline-source .month-group').forEach(g=>{
+    const mes=txt(q('.month-header strong',g));
+    qa('.milestone',g).forEach(m=>{
+      const c=q('.milestone-card',m);
+      const faixa=parseTimelineRange(normalizeDateForEditor(txt(q('.date-row strong',c)),mes));
+      if(!faixa)return;
+      const ini=paraData(faixa.start),fim=paraData(faixa.end)||ini;
+      if(!ini||ini<INICIO||ini>FIM)return;
+      itens.push({ini,fim,label:txt(q('.date-row span',c)),titulo:txt(q('h3',c)),
+                  valor:txt(q('b',c)),desc:txt(q('p',c)),atual:m.classList.contains('current')});
+    });
+  });
+  itens.sort((a,b)=>a.ini-b.ini);
+
+  const faixaDe=x=>{
+    const t=`${x.label} ${x.titulo} ${x.valor} ${x.desc}`.toLowerCase();
+    if(/^sprint\s+\d+/i.test(x.titulo.trim()))return 0;
+    if(/recife/.test(t))return 1;
+    if(/central de projetos/.test(t))return 2;
+    if(/revenue/.test(t))return 1;
+    return 2;
+  };
+  const classe=x=>{
+    const t=`${x.label} ${x.titulo} ${x.valor} ${x.desc}`.toLowerCase();
+    if(/entrega final|encerramento/.test(t))return 'green milestone';
+    if(/homologa/.test(t))return 'orange';
+    if(/conclu/.test(t))return 'green';
+    return '';
+  };
+
+  const porFaixa=[[],[],[]];
+  itens.forEach(x=>porFaixa[faixaDe(x)].push(x));
+
+  porFaixa.forEach((lista,i)=>{
+    const track=tracks[i];track.innerHTML='';
+    // Um titulo que se repete na faixa e uma serie recorrente: mostrar so a data,
+    // senao dez rotulos iguais tomam a linha inteira.
+    const vezes={};lista.forEach(x=>{vezes[x.titulo]=(vezes[x.titulo]||0)+1});
+    const linhas=[];
+    lista.forEach(x=>{
+      const c1=coluna(x.ini),c2=Math.max(c1+1,coluna(x.fim)+1);
+      let linha=linhas.findIndex(ocupadas=>!ocupadas.some(o=>c1<o.fim&&c2>o.ini));
+      if(linha<0){linha=linhas.length;linhas.push([])}
+      linhas[linha].push({ini:c1,fim:c2});
+      const eSprint=/^sprint\s+(\d+)/i.exec(x.titulo.trim());
+      const periodo=x.fim>x.ini?`${dm(x.ini)}–${dm(x.fim)}`:dm(x.ini);
+      let html;
+      if(eSprint)html=`<b>S${eSprint[1]} · ${dm(x.ini)}</b>`;
+      else if(vezes[x.titulo]>1)html=`<b>${esc(dm(x.ini))}</b>`;
+      else html=`<b>${esc(periodo)}${x.titulo?' · '+esc(x.titulo):''}</b>`;
+      const el=document.createElement('div');
+      el.className=('prx-bar '+(eSprint?(x.atual?'green':''):classe(x))).trim();
+      el.style.gridColumn=`${c1}/${c2}`;el.style.gridRow=String(linha+1);
+      el.innerHTML=html;
+      track.appendChild(el);
+    });
+  });
+
+  // O resumo tambem estava congelado ("cinco sprints restantes").
+  const resumo=q('.prx-summary',exec);
+  if(resumo){
+    const pe=txt(q('#central .front-foot span:first-child'))||'';
+    const sp=pe.match(/(\d+)\s*\/\s*(\d+)/);
+    const ultima=itens.length?itens.reduce((a,b)=>(b.fim>a?b.fim:a),itens[0].fim):null;
+    const partes=[];
+    if(sp)partes.push(`Sprint ${sp[1]} em andamento; ${Math.max(0,+sp[2]-+sp[1])} sprints restantes.`);
+    partes.push('Revenue será concluída antes da homologação da Central de Projetos.');
+    if(ultima)partes.push(`Data final do Projeto Nexus: <b>${dm(ultima)}/${ultima.getFullYear()}</b>.`);
+    resumo.innerHTML='<b>Leitura executiva:</b> '+partes.join(' ');
+  }
 }
 
 function buildPrintDocument(){
