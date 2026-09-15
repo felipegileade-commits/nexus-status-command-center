@@ -13,7 +13,7 @@
 
   const months=[['SETEMBRO','01/09','30/09'],['OUTUBRO','01/10','31/10'],['NOVEMBRO','01/11','13/11']];
   const sprints=[
-    ['Sprint 15','01/09','07/09','21/08 a 07/09',true],
+    ['Sprint 15','01/09','07/09','21/08 a 07/09'],
     ['Sprint 16','08/09','22/09','08/09 a 22/09'],
     ['Sprint 17','23/09','07/10','23/09 a 07/10'],
     ['Sprint 18','08/10','22/10','08/10 a 22/10'],
@@ -167,7 +167,9 @@
     const track=board.querySelector('.ux11-track');
     months.forEach(([name,a,b])=>{const da=parse(a),db=parse(b),m=d.createElement('div');m.className='ux11-month';m.style.left=pct(da)+'%';m.style.width=(pct(db)-pct(da)+100/TOTAL)+'%';m.innerHTML=`${name}<small>2026</small>`;track.appendChild(m);const l=d.createElement('div');l.className='ux11-gridline';l.style.left=pct(da)+'%';track.appendChild(l)});
     ticks.forEach(x=>{const e=d.createElement('div');e.className='ux11-tick';e.style.left=pct(parse(x))+'%';e.textContent=x;track.appendChild(e)});
-    sprints.forEach(([name,a,b,label,current])=>{const e=d.createElement('div');e.className='ux11-sprint'+(current?' current':'');e.style.left=pct(parse(a))+'%';e.style.width=Math.max(4,pct(parse(b))-pct(parse(a)))+'%';e.innerHTML=`${name}<br>${label}`;track.appendChild(e)});
+    // A sprint atual e a que contem a data de hoje, nao uma marcada a mao.
+    const hoje=new Date();hoje.setHours(0,0,0,0);
+    sprints.forEach(([name,a,b,label])=>{const ini=parse(a),fim=parse(b);const current=ini&&fim&&hoje>=ini&&hoje<=fim;const e=d.createElement('div');e.className='ux11-sprint'+(current?' current':'');e.style.left=pct(parse(a))+'%';e.style.width=Math.max(4,pct(parse(b))-pct(parse(a)))+'%';e.innerHTML=`${name}<br>${label}`;track.appendChild(e)});
     xs.filter(x=>x.end>x.start&&(/uat/i.test(x.title||'')||/homologa[cç][aã]o de revenue/i.test(x.title||''))).slice(0,2).forEach(x=>{const e=d.createElement('div');e.className='ux11-window '+x.kind;e.style.left=pct(x.start)+'%';e.style.width=Math.max(5,pct(x.end)-pct(x.start))+'%';e.textContent=`${fmt(x.start)} – ${fmt(x.end)} · ${owner(x.kind)}${/uat/i.test(x.title||'')?' (UAT)':''}`;track.appendChild(e)});
     const rail=d.createElement('div');rail.className='ux11-rail';track.appendChild(rail);
     xs.forEach((item,i)=>{

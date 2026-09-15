@@ -1,0 +1,43 @@
+name: Sincronizar Jira
+
+# Roda toda segunda as 07h (Brasilia) e sob demanda. Atualiza no painel apenas o
+# que e fato no Jira: sprint atual das frentes e um retrato dos epicos para o
+# editor. Nao mexe em percentuais, textos nem no x/y dos epicos.
+#
+# Segredos necessarios (Settings > Secrets and variables > Actions):
+#   JIRA_EMAIL            e-mail da conta Atlassian que gera o token
+#   JIRA_API_TOKEN        token de API (id.atlassian.com > Security > API tokens)
+#   SUPABASE_SERVICE_KEY  chave service_role do projeto (Supabase > Settings > API)
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'   # 10:00 UTC = 07:00 em Brasilia
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'So mostrar o que mudaria, sem gravar'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Sincronizar
+        env:
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
+            node scripts/sync-jira.mjs --dry-run
+          else
+            node scripts/sync-jira.mjs
+          fi

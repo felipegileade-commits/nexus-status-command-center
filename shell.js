@@ -79,7 +79,7 @@
   }
 
   try{localStorage.clear()}catch(e){}
-  frame.src='/legacy-index.html?v=20260908-pdf1';
+  frame.src='/legacy-index.html?v=20260915-jira1';
 
   function setBullets(container,items){
     if(!container)return;
@@ -339,6 +339,7 @@
   async function load(w){
     const res=await fetch(STATE_URL,{headers:HEADERS,cache:'no-store'});if(!res.ok)throw new Error('Falha ao carregar: '+res.status);
     const rows=await res.json(),payload=rows?.[0]?.payload||{},d=w.document;
+    try{w.__nexusJira=payload.jira||null}catch(e){}
     if(payload.main){d.querySelector('main').innerHTML=payload.main;const meta=d.querySelectorAll('.topbar .meta small');if(meta[0]&&payload.date!=null)meta[0].textContent=payload.date;if(meta[1]&&payload.week!=null)meta[1].textContent=payload.week;rebind(w)}
     else if(payload.seed){applySeed(w,payload.seed);if(!READONLY)await save(w)}
   }

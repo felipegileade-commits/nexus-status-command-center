@@ -78,3 +78,22 @@ O cronograma passou por várias iterações (UX4 a UX11) aplicadas por scripts d
 patch e workflows do GitHub Actions. Esse maquinário foi removido — ele reescrevia
 o `index.html` automaticamente e chegou a deixar chamadas quebradas em produção.
 As pontas dos branches de preview estão preservadas nas tags `archive/*`.
+
+## Sincronização com o Jira
+
+`scripts/sync-jira.mjs` lê os projetos MVREV e MVPMO e grava no painel apenas o
+que é fato: a sprint ativa de cada frente (rodapé "Sprint N/M") e um retrato em
+`payload.jira` — itens por etapa, story points, épicos e divergências entre a
+lista do painel e a do Jira. O editor mostra esse retrato como "Referência do
+Jira" na aba de cada frente. Percentuais, textos e o `x/y` dos épicos continuam
+manuais: são julgamento, não dado.
+
+O job `.github/workflows/sync-jira.yml` roda toda segunda às 07h (Brasília) e
+sob demanda em Actions → "Sincronizar Jira" → Run workflow (por padrão em
+dry-run, só mostra o que mudaria). Precisa dos segredos `JIRA_EMAIL`,
+`JIRA_API_TOKEN` e `SUPABASE_SERVICE_KEY`. A chave de serviço ignora o RLS —
+é o único caminho de escrita fora do editor logado, e nunca deve sair dos
+segredos do GitHub.
+
+Detalhe de método: nomes de tipo e status com acento não casam no JQL desta
+instância; o script usa IDs numéricos.

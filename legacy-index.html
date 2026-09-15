@@ -184,6 +184,7 @@ body.edit-mode .edit-mode-banner{display:block}
 .cal-sprint-band[data-sprint="19"]{background:rgba(47,212,191,.09);border-color:rgba(47,212,191,.48)!important}
 .cal-sprint-band[data-sprint="20"]{background:rgba(70,221,168,.12);border-color:rgba(70,221,168,.58)!important}
 .cal-bar.avoid-start span{padding-left:82px}
+.jira-ref{border:1px dashed #2b4d68;background:rgba(31,95,139,.08)}.jira-ref h3 small{font-weight:400;color:#8da8bd;margin-left:8px;font-size:11px}.jira-ref p{margin:4px 0;font-size:12px;color:#b8cbd8}
 </style>
 </head>
 <body>
@@ -596,6 +597,25 @@ function getFrontData(front){
   };
 }
 
+
+// Retrato do Jira gravado pelo job sync-jira (payload.jira). Só leitura: serve
+// para calibrar os números digitados, não para substituí-los.
+function jiraReferenceBlock(front){
+  const j=window.__nexusJira, f=j&&j.frentes&&j.frentes[front];
+  if(!f)return '';
+  const dia=iso=>iso?new Date(iso).toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}):'';
+  const lido=j.lidoEm?new Date(j.lidoEm).toLocaleDateString('pt-BR'):'';
+  const sp=f.sprint?esc(f.sprint.nome)+' ('+dia(f.sprint.inicio)+' a '+dia(f.sprint.fim)+')':'sem sprint ativa';
+  const e=f.etapas||{};
+  const drift=[];
+  if(f.drift&&f.drift.soNoJira&&f.drift.soNoJira.length)drift.push('<b>No Jira e não aqui:</b> '+f.drift.soNoJira.map(esc).join(' · '));
+  if(f.drift&&f.drift.soNoPainel&&f.drift.soNoPainel.length)drift.push('<b>Aqui e não no Jira:</b> '+f.drift.soNoPainel.map(esc).join(' · '));
+  return '<div class="edit-section jira-ref"><h3>Referência do Jira <small>lido em '+esc(lido)+'</small></h3>'
+    +'<p><b>Sprint ativa:</b> '+sp+'</p>'
+    +'<p><b>'+f.itens+' itens · '+f.pontos+' pts</b> — início '+(e.inicio||0)+' · em andamento '+(e.meio||0)+' · em UAT '+(e.uat||0)+' · prod/concluído '+(e.prod||0)+'</p>'
+    +(drift.length?'<p>'+drift.join('<br>')+'</p>':'<p>Lista de épicos igual à do Jira.</p>')
+    +'</div>';
+}
 function buildFrontForm(front){
   const d=getFrontData(front);
   const title=front==='revenue'?'Revenue':'Central de Projetos';
@@ -622,6 +642,7 @@ function buildFrontForm(front){
     <div id="${front}NextRows">${buildNextRows(front,d.next)}</div>
     <button class="editor-add-row" type="button" onclick="addNextEditorRow('${front}')">+ Adicionar próximo passo</button>
   </div>
+  ${jiraReferenceBlock(front)}
   <div class="edit-section"><h3>Progresso por épico</h3>
     <div id="${front}EpicRows">${buildEpicRows(front,d.epics)}</div>
     <button class="editor-add-row" type="button" onclick="addEpicEditorRow('${front}')">+ Adicionar épico</button>
