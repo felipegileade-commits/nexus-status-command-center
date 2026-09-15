@@ -362,6 +362,12 @@
             .catch(err=>{console.error('[Nexus Supabase]',err);toast(String(err.message||err),true)});
         };
         try{w.persistState=sharedPersist;w.eval('persistState = window.persistState')}catch(e){}
+        // /?login abre o login de imediato. Serve para validar as credenciais
+        // antes de fechar o RLS e para entrar sem depender de um save falhar.
+        if(/[?&]login\b/.test(location.search)){
+          askLogin('Entre para validar seu acesso de edição.')
+            .then(ok=>toast(ok?'Login confirmado. Você pode salvar.':'Login cancelado.',!ok));
+        }
       }
     }catch(err){console.error('[Nexus Supabase]',err)}
     loading.style.display='none';frame.style.opacity='1';
