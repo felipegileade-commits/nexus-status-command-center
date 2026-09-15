@@ -22,8 +22,12 @@
   const getToken=()=>{try{return sessionStorage.getItem(AUTH_KEY)||''}catch(e){return ''}};
   const setToken=t=>{try{t?sessionStorage.setItem(AUTH_KEY,t):sessionStorage.removeItem(AUTH_KEY)}catch(e){}};
 
+  // Pedimos a linha de volta em vez de return=minimal: com RLS, uma escrita sem
+  // permissao nao gera erro, o banco responde 2xx e afeta zero linhas. So dando
+  // para distinguir "gravou" de "ignorou" olhando se voltou alguma linha.
+  const WRITE_URL=SB_URL+'/rest/v1/status_report_state?id=eq.main&select=updated_at';
   function writeHeaders(){
-    const h={...HEADERS,Prefer:'return=minimal'};
+    const h={...HEADERS,Prefer:'return=representation'};
     const t=getToken();
     if(t)h.Authorization='Bearer '+t;
     return h;
@@ -300,15 +304,23 @@
     // O estado e capturado antes de qualquer pedido de login para que a edicao
     // pendente nao se perca enquanto o usuario digita a senha.
     const body=JSON.stringify({payload:capture(w),updated_at:new Date().toISOString()});
-    const enviar=()=>fetch(STATE_URL,{method:'PATCH',headers:writeHeaders(),body});
-    let res=await enviar();
-    if(res.status===401||res.status===403){
+    // Resultado: 'gravou', 'sem-permissao' (token ausente, expirado ou barrado
+    // pelo RLS) ou um erro real.
+    const enviar=async()=>{
+      const res=await fetch(WRITE_URL,{method:'PATCH',headers:writeHeaders(),body});
+      if(res.status===401||res.status===403)return 'sem-permissao';
+      if(!res.ok)throw new Error('Falha ao salvar: '+res.status+' '+await res.text());
+      const rows=await res.json().catch(()=>[]);
+      return (Array.isArray(rows)&&rows.length>0)?'gravou':'sem-permissao';
+    };
+    let r=await enviar();
+    if(r==='sem-permissao'){
       setToken('');
       const ok=await askLogin('Entre com sua conta para salvar as alterações.');
       if(!ok)throw new Error('Alterações não salvas — login cancelado.');
-      res=await enviar();
+      r=await enviar();
+      if(r!=='gravou')throw new Error('O banco recusou a gravação mesmo após o login. Confira se o usuário foi criado com "Auto Confirm".');
     }
-    if(!res.ok)throw new Error('Falha ao salvar: '+res.status+' '+await res.text());
   }
 
   // Um save que falha em silencio e pior do que um erro visivel: foi assim que
