@@ -84,6 +84,21 @@
     [cards[1],cards[2]].forEach(c=>{if(c.querySelector('.nx-kpi-note'))return;const p=w.document.createElement('p');p.className='nx-kpi-note nx-live';p.textContent='US desenvolvidas (esforço planejado já implementado)';c.appendChild(p)});
   }
 
+  // Métricas das frentes (UAT / homologado / desvio) vindas do Jira — decisão do Felipe em 16/09.
+  // UAT = concluído + em homologação; homologado = concluído; desvio = data/desvio.json.
+  function metricasFrentes(w,j){
+    if(!j||!j.frentes)return;
+    const fmtPct=n=>(n==null||isNaN(n))?null:String(Number(n).toFixed(2)).replace('.',',')+'%';
+    const fmtDesvio=n=>(n==null||isNaN(n))?null:(n>0?'+':'')+String(Number(n).toFixed(2)).replace('.',',')+'%';
+    [['central','central'],['revenue','revenue']].forEach(([sec,k])=>{
+      const f=j.frentes[k],root=w.document.getElementById(sec);if(!f||!root)return;
+      const m=root.querySelectorAll('.metrics-row .metric-block strong');if(m.length<3)return;
+      const vals=[fmtPct(f.pctUat),fmtPct(f.pctHomologado),fmtDesvio(f.desvio)];
+      vals.forEach((v,i)=>{if(v==null||m[i].dataset.nxAuto===v)return;m[i].textContent=v;m[i].dataset.nxAuto=v;m[i].title='Lido do Jira em '+dhm(j.lidoEm)});
+      if(vals[2]!=null)m[2].style.color=f.desvio<0?'var(--red)':'var(--green)';
+    });
+  }
+
   function proximoMarco(w){
     const xs=frame.__nexusTimelineItems;if(!Array.isArray(xs)||!xs.length)return;
     const d=w.document,card=d.querySelector('#overview .kpis .card:nth-child(4)');if(!card)return;
@@ -101,14 +116,14 @@
 
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
-    carregar(w).then(j=>{if(j)painel(w,j)});
+    carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j)}});
     legendasAvanco(w);
     proximoMarco(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados)metricasFrentes(w,dados);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

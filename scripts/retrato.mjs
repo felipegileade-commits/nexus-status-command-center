@@ -25,8 +25,15 @@ for (const [id, , nomes] of ETAPAS) for (const n of nomes) ETAPA_DE[n] = id;
 
 export const FRENTES = { revenue: { nome: 'Revenue Cloud', projeto: 'MVREV' }, central: { nome: 'Central de Projetos', projeto: 'MVPMO' } };
 
+// data/desvio.json (opcional): desvio de cronograma por frente, calculado à mão a partir
+// da planilha de sprints (o sync não lê a planilha). Entra no retrato como está.
+function lerDesvios() {
+  try { return JSON.parse(fs.readFileSync('data/desvio.json', 'utf8')); } catch { return null; }
+}
+
 export function retrato(itens, sprints, lidoEm) {
-  const out = { lidoEm: lidoEm || new Date().toISOString(), etapas: ETAPAS.map(([id, nome]) => ({ id, nome })), frentes: {} };
+  const desvios = lerDesvios();
+  const out = { lidoEm: lidoEm || new Date().toISOString(), etapas: ETAPAS.map(([id, nome]) => ({ id, nome })), desvio: desvios ? { calculadoEm: desvios.calculadoEm, metodo: desvios.metodo } : null, frentes: {} };
   for (const [chave, f] of Object.entries(FRENTES)) {
     const xs = itens.filter(i => i.project === f.projeto && i.type !== 'Subtarefa' && i.type !== 'Épico');
     const zero = () => ({ prod: 0, uat: 0, testado: 0, qa: 0, dev: 0, upstream: 0, fase2: 0, cancelado: 0, semEtapa: [] });
@@ -49,6 +56,7 @@ export function retrato(itens, sprints, lidoEm) {
       pctUat: pct(tot.prod + tot.uat),                                     // já chegou ao cliente (UAT ou além)
       pctEntregue: pct(tot.prod + tot.uat),                                // painel: US entregues
       pctDesenvolvido: pct(tot.prod + tot.uat + tot.testado + tot.qa),     // saiu do desenvolvimento
+      desvio: desvios?.[chave]?.desvio ?? null,                          // cronograma (data/desvio.json)
       sprint: sprints?.[chave] || null,
       epicos: Object.values(porEpico).sort((a, b) => b.total - a.total)
     };

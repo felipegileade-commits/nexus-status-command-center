@@ -1,0 +1,6 @@
+{
+ "calculadoEm": "2026-09-16",
+ "metodo": "Esforço planejado por épico (planilha de sprints) ponderado pelo status dos cards no Jira, menos o percentual alinhado até a data. Revenue exclui os épicos que são só fase 2 (Infraestrutura, Benner Faturamento/Recebimento); Central exclui os 4 épicos sem card no Jira.",
+ "revenue": { "desvio": -9.7, "desenvolvidoJira": 90.9, "alinhado": 100.63 },
+ "central": { "desvio": -18.6, "desenvolvidoJira": 55.4, "alinhado": 74.0 }
+}
