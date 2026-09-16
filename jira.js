@@ -45,6 +45,9 @@
       .nx-jira-front .pct{display:block;margin-top:6px;font-size:18px;font-weight:900;color:#46dda8;line-height:1}
       .nx-jira-front .pct small{display:block;font-size:9px;color:#8faec5;font-weight:600;margin-top:3px}
       .nx-kpi-note{margin:6px 0 0;color:#8faec5;font-size:10px}
+      .metric-block .nx-desvio-nota{display:block;margin-top:5px;color:#8faec5;font-size:10px;line-height:1.35;font-weight:500}
+      .pr-kpi .nx-desvio-nota{display:block;margin-top:1.5mm;font-size:6.5px;color:#677987;line-height:1.3}
+      .timeline-panel .panel-actions button[onclick*="scrollTl"]{display:none!important}
             .nx-jira-bar{display:flex;height:22px;border-radius:999px;overflow:hidden;background:#0b1a28;border:1px solid #1f3d55}
       .nx-jira-bar span{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#06131d;min-width:0;overflow:hidden;white-space:nowrap}
       .nx-jira-bar span.dev,.nx-jira-bar span.cancelado{color:#d7e3eb}
@@ -109,6 +112,11 @@
       const vals=[fmtPct(f.pctUat),fmtPct(f.pctHomologado),fmtDesvio(f.desvio)];
       vals.forEach((v,i)=>{if(v==null||m[i].dataset.nxAuto===v)return;m[i].textContent=v;m[i].dataset.nxAuto=v;m[i].title='Lido do Jira em '+dhm(j.lidoEm)});
       if(vals[2]!=null)m[2].style.color=f.desvio<0?'var(--red)':'var(--green)';
+      // subtítulo do desvio (de onde vem o atraso); nx-live para não ir ao estado salvo
+      const bloco=m[2].parentElement;let nota=bloco.querySelector('.nx-desvio-nota');
+      if(f.desvioNota){if(!nota){nota=w.document.createElement('small');nota.className='nx-desvio-nota nx-live';bloco.appendChild(nota)}if(nota.textContent!==f.desvioNota)nota.textContent=f.desvioNota}else if(nota)nota.remove();
+      const pr=w.document.querySelector(sec==='central'?'#prCentral':'#prRevenue');const kp=pr&&pr.querySelectorAll('.pr-kpi')[3];
+      if(kp&&f.desvioNota){let pn=kp.querySelector('.nx-desvio-nota');if(!pn){pn=w.document.createElement('small');pn.className='nx-desvio-nota nx-live';kp.appendChild(pn)}pn.textContent=f.desvioNota}
     });
   }
 

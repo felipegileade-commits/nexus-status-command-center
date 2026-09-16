@@ -36,7 +36,7 @@
  ],
  "desvio": {
   "calculadoEm": "2026-09-16",
-  "metodo": "Esforço planejado por épico (planilha de sprints) ponderado pelo status dos cards no Jira, menos o percentual alinhado até a data. Revenue exclui os épicos que são só fase 2 (Infraestrutura, Benner Faturamento/Recebimento); Central exclui os 4 épicos sem card no Jira."
+  "metodo": "Esforço planejado por épico (planilha de sprints) ponderado pelo status dos cards no Jira, menos o percentual alinhado até a data. Revenue exclui os épicos que são só fase 2 (Infraestrutura, Benner Faturamento/Recebimento); Central exclui os 4 épicos sem card no Jira. 'aguardaCliente' = esforço em refino/aprovação do cliente; 'doLiberado' = desenvolvido sobre o que já foi liberado ao time."
  },
  "frentes": {
   "revenue": {
@@ -58,6 +58,7 @@
    "pctEntregue": 44.8,
    "pctDesenvolvido": 89.5,
    "desvio": -9.7,
+   "desvioNota": "2,2% do escopo aguarda refino/aprovação · 92,9% do liberado já desenvolvido",
    "sprint": {
     "nome": "Sprint 16 - Final",
     "numero": 16,
@@ -478,6 +479,7 @@
    "pctEntregue": 17.7,
    "pctDesenvolvido": 64.2,
    "desvio": -18.6,
+   "desvioNota": "40,5% do escopo aguarda refino/aprovação · 93% do liberado já desenvolvido",
    "sprint": {
     "nome": "Sprint 16",
     "numero": 16,

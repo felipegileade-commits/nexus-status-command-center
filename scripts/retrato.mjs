@@ -57,6 +57,7 @@ export function retrato(itens, sprints, lidoEm) {
       pctEntregue: pct(tot.prod + tot.uat),                                // painel: US entregues
       pctDesenvolvido: pct(tot.prod + tot.uat + tot.testado + tot.qa),     // saiu do desenvolvimento
       desvio: desvios?.[chave]?.desvio ?? null,                          // cronograma (data/desvio.json)
+      desvioNota: desvios?.[chave]?.nota ?? null,                        // subtítulo do desvio
       sprint: sprints?.[chave] || null,
       epicos: Object.values(porEpico).sort((a, b) => b.total - a.total)
     };
