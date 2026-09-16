@@ -20,7 +20,7 @@ on:
         default: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   sync:
@@ -41,3 +41,12 @@ jobs:
           else
             node scripts/sync-jira.mjs
           fi
+      - name: Commitar data/jira.json
+        if: github.event_name != 'workflow_dispatch' || inputs.dry_run != true
+        run: |
+          if git diff --quiet -- data/jira.json; then echo "data/jira.json sem mudanca"; exit 0; fi
+          git config user.name "sync-jira[bot]"
+          git config user.email "sync-jira@users.noreply.github.com"
+          git add data/jira.json
+          git commit -m "Atualiza retrato do Jira (data/jira.json)"
+          git push

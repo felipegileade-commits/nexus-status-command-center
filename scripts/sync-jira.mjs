@@ -2,6 +2,8 @@
 //   - sprint atual de cada frente (numero e datas), no rodape das frentes
 //   - um retrato dos epicos e da distribuicao por etapa, guardado em payload.jira
 //     para o editor exibir como referencia
+//   - data/jira.json, o retrato executivo que o painel "Onde estao as entregas"
+//     (jira.js) mostra ao cliente; o workflow commita o arquivo quando muda
 //
 // Nao toca em percentuais, bullets, riscos, proximos passos nem no x/y de cada
 // epico: isso e julgamento gerencial e continua manual. Divergencias na lista de
@@ -18,6 +20,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { retrato as retratoExecutivo } from './retrato.mjs';
 
 const JIRA_URL = 'https://sottelli.atlassian.net';
 const SB_URL = 'https://abxamhsdtqvifzoijklt.supabase.co';
@@ -83,7 +86,7 @@ async function lerJira() {
   const projetos = Object.values(FRENTES).map(f => f.projeto).join(',');
   const epicos = await jiraSearch(`project in (${projetos}) AND issuetype = ${TIPO.epico}`, ['summary', 'project']);
   const itens = await jiraSearch(`project in (${projetos}) AND issuetype in (${TIPO.entrega.join(',')})`,
-                                 ['parent', 'status', 'project', 'customfield_10024']);
+                                 ['parent', 'status', 'project', 'issuetype', 'customfield_10024']);
   const sprints = {};
   for (const [chave, f] of Object.entries(FRENTES)) {
     const j = await jiraGet(`/rest/agile/1.0/board/${f.board}/sprint?state=active`);
@@ -206,7 +209,19 @@ for (const chave of Object.keys(FRENTES)) {
   if (drift.soNoPainel.length) log.push(`  epicos so no painel: ${drift.soNoPainel.join(' | ')}`);
 }
 
+// Retrato executivo para o painel do cliente (data/jira.json)
+const itensPlanos = jira.itens.map(it => ({
+  key: it.key, project: it.fields.project.key, type: it.fields.issuetype?.name || '', status: it.fields.status?.name || '',
+  parent: it.fields.parent?.key || null, parentName: it.fields.parent?.fields?.summary || null
+}));
+const sprintsExec = {};
+for (const chave of Object.keys(FRENTES)) { const s = snapshot.frentes[chave].sprint; sprintsExec[chave] = s ? { nome: s.nome, numero: s.numero, inicio: s.inicio, fim: s.fim } : null; }
+const exec = retratoExecutivo(itensPlanos, sprintsExec, snapshot.lidoEm);
+for (const f of Object.values(exec.frentes)) log.push(`${f.nome}: painel -> concluído ${f.prod} · homologação ${f.uat} · QA ${f.qa} · dev/fila ${f.dev} (${f.bloqueado} bloq.) · cancelado ${f.cancelado}` + (f.semEtapa.length ? ` · SEM ETAPA: ${f.semEtapa.join(', ')}` : ''));
+
 console.log(log.join('\n'));
 if (DRY) { console.log('\n(dry-run: nada gravado)'); process.exit(0); }
+fs.mkdirSync('data', { recursive: true });
+fs.writeFileSync('data/jira.json', JSON.stringify(exec, null, 1) + '\n');
 await gravarPayload({ ...payload, main: html, jira: snapshot });
-console.log('\nGravado.');
+console.log('\nGravado (Supabase + data/jira.json).');

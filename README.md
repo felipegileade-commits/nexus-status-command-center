@@ -15,7 +15,9 @@ que abrem a URL.
 | `view.html` | Página do cliente, somente leitura. Define `NEXUS_READONLY=true`. |
 | `shell.js` | Carrega o app num `<iframe>`, injeta os ajustes visuais do cronograma e sincroniza o estado com o Supabase. Compartilhado pelas duas páginas. |
 | `legacy-index.html` | O app em si: markup das três abas, CSS e a lógica do editor de status e da impressão. |
-| `timeline.js` | Renderizador do cronograma executivo (setembro → novembro): sprints, janelas de trabalho, marcos clicáveis e painel de detalhe. |
+| `timeline.js` | Renderizador do cronograma executivo (setembro → novembro): sprints, janelas de trabalho, marcos clicáveis e painel de detalhe. Marca a linha "Hoje", os marcos já passados (✓) e o marco em curso pela data. |
+| `jira.js` | Painel "Onde estão as entregas": posição dos itens de cada frente na esteira (concluído → homologação → testes QA → desenvolvimento), lido de `data/jira.json`. Também calcula o cartão "Próximo marco" pela data de hoje. |
+| `data/jira.json` | Retrato executivo do Jira. Gerado por `scripts/sync-jira.mjs` (workflow) ou por `scripts/retrato.mjs` a partir de um dump de itens. |
 
 ## Os dois links
 
@@ -82,11 +84,16 @@ As pontas dos branches de preview estão preservadas nas tags `archive/*`.
 ## Sincronização com o Jira
 
 `scripts/sync-jira.mjs` lê os projetos MVREV e MVPMO e grava no painel apenas o
-que é fato: a sprint ativa de cada frente (rodapé "Sprint N/M") e um retrato em
+que é fato: a sprint ativa de cada frente (rodapé "Sprint N/M"), um retrato em
 `payload.jira` — itens por etapa, story points, épicos e divergências entre a
-lista do painel e a do Jira. O editor mostra esse retrato como "Referência do
+lista do painel e a do Jira — e o `data/jira.json` que alimenta o painel "Onde
+estão as entregas" na Visão Geral (o workflow commita o arquivo quando muda).
+As etapas do painel estão em `scripts/retrato.mjs` (`ETAPAS`): é lá que se
+ajusta a qual coluna cada status do Jira pertence. O editor mostra esse retrato como "Referência do
 Jira" na aba de cada frente. Percentuais, textos e o `x/y` dos épicos continuam
-manuais: são julgamento, não dado.
+manuais: são julgamento, não dado. O cartão "Próximo marco" da Visão Geral é
+calculado pela data (primeiro marco do cronograma a partir de hoje) — o valor
+digitado no editor é sobrescrito ao carregar.
 
 O job `.github/workflows/sync-jira.yml` roda toda segunda às 07h (Brasília) e
 sob demanda em Actions → "Sincronizar Jira" → Run workflow (por padrão em

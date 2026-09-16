@@ -32,7 +32,10 @@
   };
   const owner=k=>k==='mv'?'MV':k==='sottelli'?'Sottelli':k==='final'?'Projeto Nexus':'Sottelli';
   const category=item=>{const t=(item.title||'').toLowerCase();if(/homologa/.test(t))return 'Homologação';if(/uat|teste/.test(t))return 'Testes';if(/ajuste|bug/.test(t))return 'Ajustes';if(/entrega|conclu/.test(t))return 'Desenvolvimento';return 'Planejamento'};
-  const status=item=>{const t=`${item.tag||''} ${item.title||''}`.toLowerCase();if(/entregue|conclu|final/.test(t))return 'Concluído';if(/uat|homologa|andamento/.test(t))return 'Em andamento';return 'Planejado'};
+  const hojeZero=()=>{const h=new Date();h.setHours(0,0,0,0);return h};
+  const passado=item=>{const fim=item.end&&item.end>item.start?item.end:item.start;return !!fim&&fim<hojeZero()};
+  const emCurso=item=>!!item.start&&!!item.end&&item.end>item.start&&item.start<=hojeZero()&&item.end>=hojeZero();
+  const status=item=>{const t=`${item.tag||''} ${item.title||''}`.toLowerCase();if(passado(item)||/entregue|conclu/.test(t))return 'Concluído';if(emCurso(item)||/andamento/.test(t))return 'Em andamento';return 'Planejado'};
 
   function read(w){
     try{
@@ -68,6 +71,8 @@
   }
 
   const signature=xs=>JSON.stringify(xs.map(x=>[x.dateText,x.title,x.value,x.desc,x.kind]));
+  // Marcos já interpretados (datas, tipo), para o jira.js calcular o próximo marco.
+  const expose=xs=>{frame.__nexusTimelineItems=xs;try{frame.dispatchEvent(new CustomEvent('nexus-timeline'))}catch(e){}};
 
   function styles(d){
     if(d.getElementById('ux11-style'))return;
@@ -87,6 +92,9 @@
       #timeline .ux11-card{position:absolute;height:42px;border-radius:8px;border:1px solid #31526a;border-left:3px solid #ff8d2d;background:linear-gradient(180deg,#102a40,#0d2336);padding:6px 8px;color:#fff;cursor:pointer;box-shadow:0 7px 16px rgba(0,0,0,.12);z-index:6;text-align:left}.ux11-card.sottelli{border-left-color:#2fd4bf}.ux11-card.mv{border-left-color:#2a9cff}.ux11-card.final{border-left-color:#46dda8}.ux11-card:hover,.ux11-card.active{border-color:#2fd4bf;transform:translateY(-1px)}.ux11-card .date{font-size:8px;font-weight:900;color:#cfe0ea;margin-bottom:2px}.ux11-card .title{font-size:9px;font-weight:800;line-height:1.12;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
       #timeline .ux11-stem{position:absolute;width:1px;background:#41637b;z-index:3}
       #timeline .ux11-hint{margin:10px 0 0;color:#8da8bd;font-size:10px}
+      #timeline .ux11-today{position:absolute;top:50px;bottom:0;width:0;border-left:2px dashed #ff8d2d;z-index:5;pointer-events:none}#timeline .ux11-today i{position:absolute;top:-2px;left:-1px;transform:translateX(-50%);background:#ff8d2d;color:#071b2a;font:900 8px/1 Inter,Segoe UI,Arial,sans-serif;letter-spacing:.08em;padding:3px 6px;border-radius:999px;white-space:nowrap;font-style:normal}
+      #timeline .ux11-diamond.done{background:#1f7a62;box-shadow:0 0 0 1px #46dda8;opacity:.85}#timeline .ux11-card.done{opacity:.62;border-left-color:#46dda8}#timeline .ux11-card.done .date::before{content:'✓ ';color:#46dda8}#timeline .ux11-card.live{border-color:#ff8d2d;box-shadow:0 0 0 1px rgba(255,141,45,.35)}#timeline .ux11-diamond.live{box-shadow:0 0 0 2px #ff8d2d}
+      #timeline .ux11-legend{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0 0;font-size:9px;color:#8da8bd}#timeline .ux11-legend i{display:inline-block;width:9px;height:9px;transform:rotate(45deg);margin-right:5px;vertical-align:-1px;background:#ff8d2d}#timeline .ux11-legend i.done{background:#1f7a62;box-shadow:0 0 0 1px #46dda8}#timeline .ux11-legend i.sottelli{background:#2fd4bf}#timeline .ux11-legend i.mv{background:#2a9cff}#timeline .ux11-legend i.final{background:#46dda8}#timeline .ux11-legend i.today{transform:none;width:0;height:10px;border-left:2px dashed #ff8d2d;background:none}
       .ux11-detail-host{margin:12px 0 4px}
       .ux11-detail{display:none;border:1px solid #2b5878;border-radius:12px;background:linear-gradient(180deg,#0c2438,#081c2d);grid-template-columns:1.1fr 1fr;overflow:hidden;box-shadow:0 14px 32px rgba(0,0,0,.20)}.ux11-detail.open{display:grid}.ux11-detail-main{padding:18px 20px}.ux11-detail-side{padding:18px 20px;border-left:1px solid #23435d}.ux11-detail-kicker{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2fd4bf;font-weight:900;margin-bottom:7px}.ux11-detail h3{margin:0 0 13px;font-size:18px}.ux11-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;border-top:1px solid #1e3b53;padding-top:12px}.ux11-meta span{font-size:8px;color:#83a1b5}.ux11-meta b{display:block;color:#fff;font-size:9px;margin-top:4px}.ux11-detail-side h4{margin:0 0 6px;color:#91aabd;font-size:8px;text-transform:uppercase;letter-spacing:.08em}.ux11-detail-side p{margin:0 0 12px;color:#c1d2dd;font-size:10px;line-height:1.5}.ux11-status{display:inline-block;border-radius:999px;padding:3px 8px;background:#16483f;color:#7ff0ce}
       @media(max-width:980px){#timeline .ux11-board{min-width:1040px}.ux11-detail.open{grid-template-columns:1fr}.ux11-detail-side{border-left:0;border-top:1px solid #23435d}}
@@ -157,7 +165,7 @@
     if(!xs.length)return false; // keep the original timeline visible until data is ready
     styles(d);
     const sig=signature(xs);let board=t.querySelector('.ux11-board');
-    if(board&&board.dataset.signature===sig&&!force&&wired.has(board)){lastW=w;lastXs=xs;place(board,xs);return true}
+    if(board&&board.dataset.signature===sig&&!force&&wired.has(board)){lastW=w;lastXs=xs;expose(xs);place(board,xs);return true}
     if(board)board.remove();
     board=d.createElement('div');board.className='ux11-board';board.dataset.signature=sig;wired.add(board);
     board.innerHTML='<div class="ux11-chart"><div class="ux11-labels"><div class="ux11-label sprints">Sprints</div><div class="ux11-label windows">Janelas</div><div class="ux11-label marks">Marcos</div></div><div class="ux11-track"></div></div><div class="ux11-hint">Clique no losango ou no quadro para abrir os detalhes do marco.</div>';
@@ -172,9 +180,12 @@
     sprints.forEach(([name,a,b,label])=>{const ini=parse(a),fim=parse(b);const current=ini&&fim&&hoje>=ini&&hoje<=fim;const e=d.createElement('div');e.className='ux11-sprint'+(current?' current':'');e.style.left=pct(parse(a))+'%';e.style.width=Math.max(4,pct(parse(b))-pct(parse(a)))+'%';e.innerHTML=`${name}<br>${label}`;track.appendChild(e)});
     xs.filter(x=>x.end>x.start&&(/uat/i.test(x.title||'')||/homologa[cç][aã]o de revenue/i.test(x.title||''))).slice(0,2).forEach(x=>{const e=d.createElement('div');e.className='ux11-window '+x.kind;e.style.left=pct(x.start)+'%';e.style.width=Math.max(5,pct(x.end)-pct(x.start))+'%';e.textContent=`${fmt(x.start)} – ${fmt(x.end)} · ${owner(x.kind)}${/uat/i.test(x.title||'')?' (UAT)':''}`;track.appendChild(e)});
     const rail=d.createElement('div');rail.className='ux11-rail';track.appendChild(rail);
+    if(hoje>=START&&hoje<=END){const today=d.createElement('div');today.className='ux11-today';today.style.left=pct(hoje)+'%';today.innerHTML=`<i>HOJE ${fmt(hoje)}</i>`;track.appendChild(today)}
+    const legend=d.createElement('div');legend.className='ux11-legend';legend.innerHTML='<span><i class="today"></i>Hoje</span><span><i class="done"></i>Marco concluído</span><span><i class="sottelli"></i>Sottelli</span><span><i class="mv"></i>MV</span><span><i></i>Marco conjunto</span><span><i class="final"></i>Entrega final</span>';board.appendChild(legend);
     xs.forEach((item,i)=>{
-      const diamond=d.createElement('button');diamond.type='button';diamond.className='ux11-diamond '+item.kind;diamond.style.left=pct(item.start)+'%';diamond.dataset.idx=String(i);diamond.setAttribute('aria-label',`Abrir ${fmt(item.start)} ${item.title}`);track.appendChild(diamond);
-      const card=d.createElement('button');card.type='button';card.className='ux11-card '+item.kind;card.dataset.idx=String(i);const date=item.end>item.start?`${fmt(item.start)} a ${fmt(item.end)}`:fmt(item.start);card.innerHTML=`<div class="date">${esc(date)}</div><div class="title">${esc(item.title||item.value||'Marco')}</div>`;track.appendChild(card);
+      const extra=passado(item)?' done':emCurso(item)?' live':'';
+      const diamond=d.createElement('button');diamond.type='button';diamond.className='ux11-diamond '+item.kind+extra;diamond.style.left=pct(item.start)+'%';diamond.dataset.idx=String(i);diamond.setAttribute('aria-label',`Abrir ${fmt(item.start)} ${item.title}`);track.appendChild(diamond);
+      const card=d.createElement('button');card.type='button';card.className='ux11-card '+item.kind+extra;card.dataset.idx=String(i);const date=item.end>item.start?`${fmt(item.start)} a ${fmt(item.end)}`:fmt(item.start);card.innerHTML=`<div class="date">${esc(date)}</div><div class="title">${esc(item.title||item.value||'Marco')}</div>`;track.appendChild(card);
       const open=e=>{e.preventDefault();e.stopPropagation();show(t,board,xs,i)};
       diamond.onclick=open;card.onclick=open;
     });
@@ -185,7 +196,7 @@
     };
     place(board,xs);
     detailHost(t);
-    lastW=w;lastXs=xs;
+    lastW=w;lastXs=xs;expose(xs);
     // The first place() runs before layout settles, so the track still reports its
     // pre-layout width and the right-most card lands past the real edge. Re-place
     // once the frame has painted, and again whenever the timeline is resized.

@@ -292,7 +292,7 @@
     // The timeline is rendered from the source data on every load. Persisting the
     // rendered board would store markup whose click handlers cannot survive
     // serialization, so drop it and restore the source board it hides.
-    clone.querySelectorAll('.ux11-board,.ux11-detail-host').forEach(x=>x.remove());
+    clone.querySelectorAll('.ux11-board,.ux11-detail-host,.nx-live').forEach(x=>x.remove());
     clone.querySelectorAll('.calendar-board').forEach(x=>{x.style.display=''});
     const ov=clone.querySelector('#overview');if(ov)ov.classList.add('active');
     const meta=d.querySelectorAll('.topbar .meta small');
