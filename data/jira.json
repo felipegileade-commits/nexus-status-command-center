@@ -1,5 +1,5 @@
 {
- "lidoEm": "2026-09-16T19:30:00-03:00",
+ "lidoEm": "2026-09-16T17:45:00-03:00",
  "etapas": [
   {
    "id": "prod",
@@ -7,15 +7,27 @@
   },
   {
    "id": "uat",
-   "nome": "Homologação (cliente)"
+   "nome": "Homologação com o cliente"
+  },
+  {
+   "id": "testado",
+   "nome": "Testado pelo QA · aguardando UAT"
   },
   {
    "id": "qa",
-   "nome": "Testes QA"
+   "nome": "Em teste QA"
   },
   {
    "id": "dev",
-   "nome": "Desenvolvimento / fila"
+   "nome": "Em desenvolvimento"
+  },
+  {
+   "id": "upstream",
+   "nome": "Refino / aprovação (upstream)"
+  },
+  {
+   "id": "fase2",
+   "nome": "Fora do escopo (fase 2)"
   },
   {
    "id": "cancelado",
@@ -27,16 +39,20 @@
    "nome": "Revenue Cloud",
    "projeto": "MVREV",
    "total": 290,
-   "ativos": 275,
-   "prod": 70,
+   "ativos": 239,
+   "prod": 80,
    "uat": 27,
-   "qa": 117,
-   "dev": 61,
+   "testado": 55,
+   "qa": 52,
+   "dev": 8,
+   "upstream": 17,
+   "fase2": 36,
    "cancelado": 15,
-   "bloqueado": 36,
    "semEtapa": [],
-   "pctConcluido": 25.5,
-   "pctHomologado": 35.3,
+   "pctHomologado": 33.5,
+   "pctUat": 44.8,
+   "pctEntregue": 44.8,
+   "pctDesenvolvido": 89.5,
    "sprint": {
     "nome": "Sprint 16 - Final",
     "numero": 16,
@@ -50,10 +66,12 @@
      "total": 22,
      "prod": 0,
      "uat": 0,
-     "qa": 13,
+     "testado": 4,
+     "qa": 9,
      "dev": 2,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 7,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -62,10 +80,12 @@
      "total": 20,
      "prod": 6,
      "uat": 7,
-     "qa": 2,
-     "dev": 5,
+     "testado": 1,
+     "qa": 1,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 3,
      "cancelado": 0,
-     "bloqueado": 3,
      "semEtapa": []
     },
     {
@@ -74,34 +94,40 @@
      "total": 20,
      "prod": 20,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
      "key": "MVREV-72",
      "nome": "Parametrização do Faturamento",
      "total": 20,
-     "prod": 0,
+     "prod": 5,
      "uat": 0,
-     "qa": 19,
-     "dev": 1,
+     "testado": 5,
+     "qa": 9,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
      "key": "MVREV-58",
      "nome": "Processo de Vendas",
      "total": 17,
-     "prod": 0,
+     "prod": 1,
      "uat": 0,
-     "qa": 15,
-     "dev": 2,
+     "testado": 7,
+     "qa": 7,
+     "dev": 1,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -110,10 +136,12 @@
      "total": 16,
      "prod": 0,
      "uat": 0,
-     "qa": 12,
-     "dev": 3,
+     "testado": 10,
+     "qa": 2,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 1,
      "cancelado": 1,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -122,10 +150,12 @@
      "total": 15,
      "prod": 13,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 2,
+     "dev": 1,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -134,10 +164,12 @@
      "total": 13,
      "prod": 9,
      "uat": 0,
+     "testado": 0,
      "qa": 1,
-     "dev": 3,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 3,
      "cancelado": 0,
-     "bloqueado": 3,
      "semEtapa": []
     },
     {
@@ -146,10 +178,12 @@
      "total": 12,
      "prod": 1,
      "uat": 0,
-     "qa": 11,
+     "testado": 4,
+     "qa": 7,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -158,10 +192,12 @@
      "total": 11,
      "prod": 5,
      "uat": 4,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 1,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -170,10 +206,12 @@
      "total": 11,
      "prod": 0,
      "uat": 5,
+     "testado": 0,
      "qa": 1,
-     "dev": 5,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 4,
      "cancelado": 0,
-     "bloqueado": 4,
      "semEtapa": []
     },
     {
@@ -182,10 +220,12 @@
      "total": 11,
      "prod": 0,
      "uat": 0,
-     "qa": 11,
+     "testado": 9,
+     "qa": 2,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -194,10 +234,12 @@
      "total": 10,
      "prod": 5,
      "uat": 3,
-     "qa": 2,
+     "testado": 2,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -206,22 +248,26 @@
      "total": 10,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 10,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 10,
      "cancelado": 0,
-     "bloqueado": 10,
      "semEtapa": []
     },
     {
      "key": "MVREV-419",
      "nome": "Esforço Adicional Conta",
      "total": 10,
-     "prod": 0,
+     "prod": 1,
      "uat": 0,
-     "qa": 9,
+     "testado": 2,
+     "qa": 6,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 1,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -230,10 +276,12 @@
      "total": 9,
      "prod": 7,
      "uat": 1,
+     "testado": 0,
      "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 1,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -242,10 +290,12 @@
      "total": 8,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 8,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 8,
      "cancelado": 0,
-     "bloqueado": 8,
      "semEtapa": []
     },
     {
@@ -254,10 +304,12 @@
      "total": 6,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 2,
-     "dev": 4,
+     "dev": 3,
+     "upstream": 0,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -266,22 +318,26 @@
      "total": 6,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 3,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 1,
      "cancelado": 2,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
      "key": "MVREV-268",
      "nome": "Calculo de Margem dos Projetos",
      "total": 5,
-     "prod": 0,
+     "prod": 3,
      "uat": 0,
-     "qa": 5,
+     "testado": 1,
+     "qa": 1,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -290,10 +346,12 @@
      "total": 4,
      "prod": 1,
      "uat": 3,
+     "testado": 0,
      "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -302,10 +360,12 @@
      "total": 3,
      "prod": 0,
      "uat": 0,
-     "qa": 3,
+     "testado": 2,
+     "qa": 1,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -314,10 +374,12 @@
      "total": 2,
      "prod": 1,
      "uat": 0,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -326,10 +388,12 @@
      "total": 2,
      "prod": 0,
      "uat": 1,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -338,10 +402,12 @@
      "total": 2,
      "prod": 1,
      "uat": 0,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -350,10 +416,12 @@
      "total": 2,
      "prod": 0,
      "uat": 1,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -362,10 +430,12 @@
      "total": 2,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 2,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 2,
      "cancelado": 0,
-     "bloqueado": 2,
      "semEtapa": []
     },
     {
@@ -374,10 +444,12 @@
      "total": 2,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 2,
+     "dev": 1,
+     "upstream": 0,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     }
    ]
@@ -386,16 +458,20 @@
    "nome": "Central de Projetos",
    "projeto": "MVPMO",
    "total": 241,
-   "ativos": 240,
+   "ativos": 226,
    "prod": 40,
    "uat": 0,
-   "qa": 105,
-   "dev": 95,
+   "testado": 60,
+   "qa": 45,
+   "dev": 9,
+   "upstream": 72,
+   "fase2": 14,
    "cancelado": 1,
-   "bloqueado": 14,
    "semEtapa": [],
-   "pctConcluido": 16.7,
-   "pctHomologado": 16.7,
+   "pctHomologado": 17.7,
+   "pctUat": 17.7,
+   "pctEntregue": 17.7,
+   "pctDesenvolvido": 64.2,
    "sprint": {
     "nome": "Sprint 16",
     "numero": 16,
@@ -409,10 +485,12 @@
      "total": 20,
      "prod": 6,
      "uat": 0,
-     "qa": 6,
-     "dev": 7,
+     "testado": 6,
+     "qa": 0,
+     "dev": 1,
+     "upstream": 5,
+     "fase2": 1,
      "cancelado": 1,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -421,10 +499,12 @@
      "total": 16,
      "prod": 5,
      "uat": 0,
-     "qa": 8,
-     "dev": 3,
+     "testado": 7,
+     "qa": 1,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -433,10 +513,12 @@
      "total": 15,
      "prod": 5,
      "uat": 0,
-     "qa": 9,
-     "dev": 1,
+     "testado": 8,
+     "qa": 1,
+     "dev": 0,
+     "upstream": 0,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -445,10 +527,12 @@
      "total": 12,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 1,
-     "dev": 11,
+     "dev": 0,
+     "upstream": 9,
+     "fase2": 2,
      "cancelado": 0,
-     "bloqueado": 2,
      "semEtapa": []
     },
     {
@@ -457,10 +541,12 @@
      "total": 12,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 8,
-     "dev": 4,
+     "dev": 2,
+     "upstream": 0,
+     "fase2": 2,
      "cancelado": 0,
-     "bloqueado": 2,
      "semEtapa": []
     },
     {
@@ -469,10 +555,12 @@
      "total": 11,
      "prod": 2,
      "uat": 0,
-     "qa": 4,
-     "dev": 5,
+     "testado": 2,
+     "qa": 2,
+     "dev": 2,
+     "upstream": 3,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -481,10 +569,12 @@
      "total": 10,
      "prod": 3,
      "uat": 0,
-     "qa": 5,
-     "dev": 2,
+     "testado": 3,
+     "qa": 2,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -493,10 +583,12 @@
      "total": 10,
      "prod": 0,
      "uat": 0,
-     "qa": 6,
-     "dev": 4,
+     "testado": 1,
+     "qa": 5,
+     "dev": 1,
+     "upstream": 3,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -505,10 +597,12 @@
      "total": 10,
      "prod": 2,
      "uat": 0,
-     "qa": 5,
-     "dev": 3,
+     "testado": 2,
+     "qa": 3,
+     "dev": 0,
+     "upstream": 3,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -517,10 +611,12 @@
      "total": 9,
      "prod": 1,
      "uat": 0,
-     "qa": 5,
-     "dev": 3,
+     "testado": 4,
+     "qa": 1,
+     "dev": 1,
+     "upstream": 1,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -529,10 +625,12 @@
      "total": 8,
      "prod": 4,
      "uat": 0,
-     "qa": 4,
+     "testado": 2,
+     "qa": 2,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -541,10 +639,12 @@
      "total": 7,
      "prod": 2,
      "uat": 0,
-     "qa": 4,
-     "dev": 1,
+     "testado": 1,
+     "qa": 3,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -553,10 +653,12 @@
      "total": 7,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 7,
+     "dev": 0,
+     "upstream": 5,
+     "fase2": 2,
      "cancelado": 0,
-     "bloqueado": 2,
      "semEtapa": []
     },
     {
@@ -565,10 +667,12 @@
      "total": 6,
      "prod": 2,
      "uat": 0,
-     "qa": 3,
-     "dev": 1,
+     "testado": 3,
+     "qa": 0,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -577,10 +681,12 @@
      "total": 6,
      "prod": 0,
      "uat": 0,
-     "qa": 3,
-     "dev": 3,
+     "testado": 3,
+     "qa": 0,
+     "dev": 0,
+     "upstream": 3,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -589,10 +695,12 @@
      "total": 6,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 6,
+     "dev": 0,
+     "upstream": 6,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -601,10 +709,12 @@
      "total": 5,
      "prod": 2,
      "uat": 0,
-     "qa": 1,
-     "dev": 2,
+     "testado": 1,
+     "qa": 0,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -613,10 +723,12 @@
      "total": 5,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 5,
+     "dev": 0,
+     "upstream": 5,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -625,10 +737,12 @@
      "total": 4,
      "prod": 0,
      "uat": 0,
-     "qa": 4,
+     "testado": 3,
+     "qa": 1,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -637,10 +751,12 @@
      "total": 4,
      "prod": 0,
      "uat": 0,
-     "qa": 3,
-     "dev": 1,
+     "testado": 3,
+     "qa": 0,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -649,10 +765,12 @@
      "total": 4,
      "prod": 0,
      "uat": 0,
-     "qa": 2,
-     "dev": 2,
+     "testado": 2,
+     "qa": 0,
+     "dev": 1,
+     "upstream": 0,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -661,10 +779,12 @@
      "total": 4,
      "prod": 0,
      "uat": 0,
-     "qa": 1,
-     "dev": 3,
+     "testado": 1,
+     "qa": 0,
+     "dev": 0,
+     "upstream": 3,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -673,10 +793,12 @@
      "total": 3,
      "prod": 1,
      "uat": 0,
-     "qa": 2,
+     "testado": 2,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -685,10 +807,12 @@
      "total": 3,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 3,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -697,10 +821,12 @@
      "total": 3,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 3,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 1,
      "cancelado": 0,
-     "bloqueado": 1,
      "semEtapa": []
     },
     {
@@ -709,10 +835,12 @@
      "total": 2,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 2,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -721,10 +849,12 @@
      "total": 2,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 2,
+     "dev": 0,
+     "upstream": 2,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -733,10 +863,12 @@
      "total": 2,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 1,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -745,10 +877,12 @@
      "total": 2,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 1,
      "dev": 1,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -757,10 +891,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -769,10 +905,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -781,10 +919,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
-     "qa": 1,
+     "testado": 1,
+     "qa": 0,
      "dev": 0,
+     "upstream": 0,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -793,10 +933,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -805,10 +947,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -817,10 +961,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -829,10 +975,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -841,10 +989,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     },
     {
@@ -853,10 +1003,12 @@
      "total": 1,
      "prod": 0,
      "uat": 0,
+     "testado": 0,
      "qa": 0,
-     "dev": 1,
+     "dev": 0,
+     "upstream": 1,
+     "fase2": 0,
      "cancelado": 0,
-     "bloqueado": 0,
      "semEtapa": []
     }
    ]

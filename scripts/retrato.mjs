@@ -6,12 +6,19 @@
 
 import fs from 'node:fs';
 
+// Etapas do painel executivo. Regras acordadas com o Felipe em 16/09:
+//   - Aguardando/Pós Review = QA ja testou, aguardando deploy em UAT (esteira QAStream)
+//   - Em Espera/Bloqueado = fora do escopo, backlog de uma possivel fase 2 (nao conta como ativo)
+//   - Backlog/refinamento/prototipagem/aprovacao = upstream, nao e desenvolvimento
 export const ETAPAS = [
-  ['prod', 'Concluído',            ['Deploy em Prod. realizado', 'PRONTO PARA DEPLOY EM PROD', 'CONCLUÍDO', 'VALIDADO']],
-  ['uat',  'Homologação (cliente)', ['EM HOMOLOGAÇÃO', 'Liberado para deploy']],
-  ['qa',   'Testes QA',            ['Realizando Deploy em QA', 'PRONTO PARA TESTES', 'EM TESTE QA', 'Aguardando Review', 'Pós Review', 'BUG EM CORREÇÃO']],
-  ['dev',  'Desenvolvimento / fila', ['BACKLOG', 'Em refinamento', 'Em prototipagem', 'EM APROVAÇÃO DO CLIENTE', 'Pronto para DEV', 'PRONTO PARA DESENVOLVIMENTO', 'EM DESENVOLVIMENTO', 'Em Espera/Bloqueado']],
-  ['cancelado', 'Cancelado',       ['Cancelado', 'Bug Bloqueado ou Cancelado']]
+  ['prod',     'Concluído',                        ['Deploy em Prod. realizado', 'PRONTO PARA DEPLOY EM PROD', 'CONCLUÍDO', 'VALIDADO']],
+  ['uat',      'Homologação com o cliente',        ['EM HOMOLOGAÇÃO', 'Liberado para deploy']],
+  ['testado',  'Testado pelo QA · aguardando UAT', ['Aguardando Review', 'Pós Review']],
+  ['qa',       'Em teste QA',                      ['Realizando Deploy em QA', 'PRONTO PARA TESTES', 'EM TESTE QA', 'BUG EM CORREÇÃO']],
+  ['dev',      'Em desenvolvimento',               ['Pronto para DEV', 'PRONTO PARA DESENVOLVIMENTO', 'EM DESENVOLVIMENTO']],
+  ['upstream', 'Refino / aprovação (upstream)',    ['BACKLOG', 'Em refinamento', 'Em prototipagem', 'EM APROVAÇÃO DO CLIENTE']],
+  ['fase2',    'Fora do escopo (fase 2)',          ['Em Espera/Bloqueado']],
+  ['cancelado','Cancelado',                        ['Cancelado', 'Bug Bloqueado ou Cancelado']]
 ];
 const ETAPA_DE = {};
 for (const [id, , nomes] of ETAPAS) for (const n of nomes) ETAPA_DE[n] = id;
@@ -22,7 +29,7 @@ export function retrato(itens, sprints, lidoEm) {
   const out = { lidoEm: lidoEm || new Date().toISOString(), etapas: ETAPAS.map(([id, nome]) => ({ id, nome })), frentes: {} };
   for (const [chave, f] of Object.entries(FRENTES)) {
     const xs = itens.filter(i => i.project === f.projeto && i.type !== 'Subtarefa' && i.type !== 'Épico');
-    const zero = () => ({ prod: 0, uat: 0, qa: 0, dev: 0, cancelado: 0, bloqueado: 0, semEtapa: [] });
+    const zero = () => ({ prod: 0, uat: 0, testado: 0, qa: 0, dev: 0, upstream: 0, fase2: 0, cancelado: 0, semEtapa: [] });
     const tot = zero(), porEpico = {};
     for (const i of xs) {
       const e = ETAPA_DE[i.status];
@@ -31,14 +38,17 @@ export function retrato(itens, sprints, lidoEm) {
         if (!c) continue;
         if (c.total != null) c.total++;
         if (e) c[e]++; else c.semEtapa.push(i.key + ' · ' + i.status);
-        if (i.status === 'Em Espera/Bloqueado') c.bloqueado++;
       }
     }
-    const ativos = xs.length - tot.cancelado;
+    // ativos = escopo desta fase: sem cancelados e sem fase 2
+    const ativos = xs.length - tot.cancelado - tot.fase2;
+    const pct = n => ativos ? Math.round(n / ativos * 1000) / 10 : 0;
     out.frentes[chave] = {
       nome: f.nome, projeto: f.projeto, total: xs.length, ativos, ...tot,
-      pctConcluido: ativos ? Math.round(tot.prod / ativos * 1000) / 10 : 0,
-      pctHomologado: ativos ? Math.round((tot.prod + tot.uat) / ativos * 1000) / 10 : 0,
+      pctHomologado: pct(tot.prod),                                        // aprovado pelo cliente / concluído
+      pctUat: pct(tot.prod + tot.uat),                                     // já chegou ao cliente (UAT ou além)
+      pctEntregue: pct(tot.prod + tot.uat),                                // painel: US entregues
+      pctDesenvolvido: pct(tot.prod + tot.uat + tot.testado + tot.qa),     // saiu do desenvolvimento
       sprint: sprints?.[chave] || null,
       epicos: Object.values(porEpico).sort((a, b) => b.total - a.total)
     };
@@ -55,5 +65,5 @@ if (process.argv[1] && process.argv[1].endsWith('retrato.mjs')) {
   };
   const r = retrato(itens, sprints, lidoEm);
   fs.writeFileSync('data/jira.json', JSON.stringify(r, null, 1));
-  for (const f of Object.values(r.frentes)) console.log(f.nome, f.total, 'itens |', JSON.stringify({ prod: f.prod, uat: f.uat, qa: f.qa, dev: f.dev, bloq: f.bloqueado, canc: f.cancelado }), '| concluído', f.pctConcluido + '%', '| sem etapa:', f.semEtapa.length);
+  for (const f of Object.values(r.frentes)) console.log(f.nome, f.total, 'itens, ativos', f.ativos, '|', JSON.stringify({ prod: f.prod, uat: f.uat, testado: f.testado, qa: f.qa, dev: f.dev, upstream: f.upstream, fase2: f.fase2, canc: f.cancelado }), '| entregue', f.pctEntregue + '%', 'UAT', f.pctUat + '%', 'homologado', f.pctHomologado + '%', 'desenvolvido', f.pctDesenvolvido + '%', '| sem etapa:', f.semEtapa.length);
 }

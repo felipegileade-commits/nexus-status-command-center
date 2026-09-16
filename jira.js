@@ -11,7 +11,8 @@
   if(!frame)return;
 
   const VERSION=(document.currentScript&&/[?&]v=([^&]+)/.exec(document.currentScript.src)||[])[1]||'';
-  const CORES={prod:'#46dda8',uat:'#2a9cff',qa:'#f5c451',dev:'#41637b',cancelado:'#2b3d4d'};
+  const CORES={prod:'#46dda8',uat:'#2a9cff',testado:'#8fd3ff',qa:'#f5c451',dev:'#ff8d2d',upstream:'#41637b',fase2:'#2b3d4d',cancelado:'#1d2a36'};
+  const NOMES={prod:'Concluído',uat:'Homologação com o cliente',testado:'Testado pelo QA · aguardando UAT',qa:'Em teste QA',dev:'Em desenvolvimento',upstream:'Refino / aprovação',fase2:'Fora do escopo (fase 2)',cancelado:'Cancelado'};
   const MESES=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
   const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const dm=iso=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso||''));if(m)return `${m[3]}/${m[2]}`;const d=new Date(iso);return isNaN(d)?'':`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`};
@@ -50,20 +51,22 @@
       .nx-jira-nums{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:7px;font-size:10px;color:#c1d2dd}
       .nx-jira-nums i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:-1px}
       .nx-jira-nums b{color:#fff;margin-right:2px}
-      .nx-jira-nums .muted{color:#8da8bd}
+      .nx-jira-nums .muted{color:#8da8bd}.nx-jira-nums .muted b{color:#8da8bd}
       @media(max-width:760px){.nx-jira-row{grid-template-columns:1fr}}
       @media print{.nx-jira{break-inside:avoid;background:#fff;color:#111;border-color:#bbb}.nx-jira-head p,.nx-jira-stamp,.nx-jira-front span,.nx-jira-nums{color:#444}.nx-jira-front b,.nx-jira-nums b{color:#111}}
     `;d.head.appendChild(s);
   }
 
   function linha(f){
-    const partes=['prod','uat','qa','dev','cancelado'].map(id=>[id,Number(f[id])||0]).filter(([,n])=>n>0);
+    // A barra mostra só o escopo ativo; fase 2 e cancelados ficam como nota.
+    const partes=['prod','uat','testado','qa','dev','upstream'].map(id=>[id,Number(f[id])||0]).filter(([,n])=>n>0);
     const total=partes.reduce((a,[,n])=>a+n,0)||1;
-    const nomes={prod:'Concluído',uat:'Homologação com o cliente',qa:'Testes QA',dev:'Desenvolvimento / fila',cancelado:'Cancelado'};
+    const nomes=NOMES;
+    const fora=[['fase2',Number(f.fase2)||0],['cancelado',Number(f.cancelado)||0]].filter(([,n])=>n>0);
     const bar=partes.map(([id,n])=>`<span class="${id}" style="width:${(n/total*100).toFixed(2)}%;background:${CORES[id]}" title="${esc(nomes[id])}: ${n}">${n/total>0.07?n:''}</span>`).join('');
-    const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}${id==='dev'&&f.bloqueado?` <span class="muted">(${f.bloqueado} bloqueado${f.bloqueado>1?'s':''})</span>`:''}</div>`).join('');
+    const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('')+fora.map(([id,n])=>`<div class="muted"><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('');
     const sprint=f.sprint&&f.sprint.nome?`${esc(f.sprint.nome)}${f.sprint.inicio?` · ${dm(f.sprint.inicio)} a ${dm(f.sprint.fim)}`:''}`:'';
-    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctHomologado??0).replace('.',',')}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
+    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctEntregue??f.pctHomologado??0).replace('.',',')}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
   }
 
   function painel(w,j){
