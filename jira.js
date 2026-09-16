@@ -51,7 +51,7 @@
       .nx-jira-nums{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:7px;font-size:10px;color:#c1d2dd}
       .nx-jira-nums i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:-1px}
       .nx-jira-nums b{color:#fff;margin-right:2px}
-      .nx-jira-nums .muted{color:#8da8bd}.nx-jira-nums .muted b{color:#8da8bd}
+      .nx-jira-fora{margin-top:5px;font-size:10px;color:#7f9bb0}.nx-jira-fora b{color:#a9c0d0}
       @media(max-width:760px){.nx-jira-row{grid-template-columns:1fr}}
       @media print{.nx-jira{break-inside:avoid;background:#fff;color:#111;border-color:#bbb}.nx-jira-head p,.nx-jira-stamp,.nx-jira-front span,.nx-jira-nums{color:#444}.nx-jira-front b,.nx-jira-nums b{color:#111}}
     `;d.head.appendChild(s);
@@ -64,9 +64,10 @@
     const nomes=NOMES;
     const fora=[['fase2',Number(f.fase2)||0],['cancelado',Number(f.cancelado)||0]].filter(([,n])=>n>0);
     const bar=partes.map(([id,n])=>`<span class="${id}" style="width:${(n/total*100).toFixed(2)}%;background:${CORES[id]}" title="${esc(nomes[id])}: ${n}">${n/total>0.07?n:''}</span>`).join('');
-    const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('')+fora.map(([id,n])=>`<div class="muted"><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('');
+    const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('');
+    const foraTxt=fora.length?`<div class="nx-jira-fora">Fora da barra: ${fora.map(([id,n])=>`<b>${n}</b> ${esc(nomes[id]).toLowerCase()}`).join(' · ')}</div>`:'';
     const sprint=f.sprint&&f.sprint.nome?`${esc(f.sprint.nome)}${f.sprint.inicio?` · ${dm(f.sprint.inicio)} a ${dm(f.sprint.fim)}`:''}`:'';
-    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctEntregue??f.pctHomologado??0).replace('.',',')}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
+    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctEntregue??f.pctHomologado??0).replace('.',',')}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div>${foraTxt}</div></div>`;
   }
 
   function painel(w,j){
@@ -76,6 +77,18 @@
     if(!el){el=d.createElement('div');el.className='nx-jira nx-live';kpis.insertAdjacentElement('afterend',el)}
     const frentes=['revenue','central'].map(k=>j.frentes[k]).filter(Boolean);
     el.innerHTML=`<div class="nx-jira-head"><div><div class="label">Onde estão as entregas</div><h3>US entregues × US desenvolvidas</h3><p>Os percentuais acima medem <b>US desenvolvidas</b> (esforço planejado já implementado, pela planilha de sprints). Aqui é o que já foi <b>entregue</b>: a posição de cada item no Jira — concluído, em homologação com o cliente, em testes ou ainda em desenvolvimento/fila.</p></div><div class="nx-jira-stamp">Lido do Jira em<br><b>${esc(dhm(j.lidoEm))}</b></div></div>${frentes.map(linha).join('')}`;
+  }
+
+  // 'Atualizado em' e 'Semana' seguem a leitura do Jira (semana ISO).
+  function cabecalho(w,j){
+    if(!j||!j.lidoEm)return;const dt=new Date(j.lidoEm);if(isNaN(dt))return;
+    const data=`${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}/${dt.getFullYear()}`;
+    const t=new Date(Date.UTC(dt.getFullYear(),dt.getMonth(),dt.getDate()));t.setUTCDate(t.getUTCDate()+4-(t.getUTCDay()||7));
+    const semana=String(Math.ceil(((t-Date.UTC(t.getUTCFullYear(),0,1))/86400000+1)/7));
+    const meta=w.document.querySelectorAll('.topbar .meta small');
+    if(meta[0]&&meta[0].textContent!==data)meta[0].textContent=data;
+    if(meta[1]&&meta[1].textContent!==semana)meta[1].textContent=semana;
+    w.document.querySelectorAll('.footer span').forEach(x=>{const s=x.textContent.replace(/Semana\s+\d+/,'Semana '+semana).replace(/\d{2}\/\d{2}\/\d{4}/,data);if(s!==x.textContent)x.textContent=s});
   }
 
   function legendasAvanco(w){
@@ -116,14 +129,14 @@
 
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
-    carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j)}});
+    carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}});
     legendasAvanco(w);
     proximoMarco(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados)metricasFrentes(w,dados);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
