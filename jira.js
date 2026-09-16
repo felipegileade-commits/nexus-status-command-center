@@ -14,7 +14,7 @@
   const CORES={prod:'#46dda8',uat:'#2a9cff',qa:'#f5c451',dev:'#41637b',cancelado:'#2b3d4d'};
   const MESES=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
   const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const dm=iso=>{const d=new Date(iso);return isNaN(d)?'':`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`};
+  const dm=iso=>{const m=/^(d{4})-(d{2})-(d{2})$/.exec(String(iso||''));if(m)return `${m[3]}/${m[2]}`;const d=new Date(iso);return isNaN(d)?'':`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`};
   const dhm=iso=>{const d=new Date(iso);return isNaN(d)?'':`${dm(iso)} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
 
   let dados=null,carregando=null;
@@ -41,9 +41,7 @@
       .nx-jira-row:first-of-type{border-top:0}
       .nx-jira-front b{display:block;font-size:13px}
       .nx-jira-front span{display:block;color:#8faec5;font-size:10px;margin-top:2px}
-      .nx-jira-front .pct{display:inline-block;margin-top:6px;font-size:18px;font-weight:900;color:#46dda8}
-      .nx-jira-front .pct small{font-size:9px;color:#8faec5;font-weight:600;margin-left:4px}
-      .nx-jira-bar{display:flex;height:22px;border-radius:999px;overflow:hidden;background:#0b1a28;border:1px solid #1f3d55}
+            .nx-jira-bar{display:flex;height:22px;border-radius:999px;overflow:hidden;background:#0b1a28;border:1px solid #1f3d55}
       .nx-jira-bar span{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#06131d;min-width:0;overflow:hidden;white-space:nowrap}
       .nx-jira-bar span.dev,.nx-jira-bar span.cancelado{color:#d7e3eb}
       .nx-jira-nums{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:7px;font-size:10px;color:#c1d2dd}
@@ -62,7 +60,7 @@
     const bar=partes.map(([id,n])=>`<span class="${id}" style="width:${(n/total*100).toFixed(2)}%;background:${CORES[id]}" title="${esc(nomes[id])}: ${n}">${n/total>0.07?n:''}</span>`).join('');
     const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}${id==='dev'&&f.bloqueado?` <span class="muted">(${f.bloqueado} bloqueado${f.bloqueado>1?'s':''})</span>`:''}</div>`).join('');
     const sprint=f.sprint&&f.sprint.nome?`${esc(f.sprint.nome)}${f.sprint.inicio?` · ${dm(f.sprint.inicio)} a ${dm(f.sprint.fim)}`:''}`:'';
-    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctHomologado??0).replace('.',',')}%<small>concluído ou em homologação</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
+    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
   }
 
   function painel(w,j){
@@ -71,7 +69,7 @@
     let el=d.querySelector('#overview .nx-jira');
     if(!el){el=d.createElement('div');el.className='nx-jira nx-live';kpis.insertAdjacentElement('afterend',el)}
     const frentes=['revenue','central'].map(k=>j.frentes[k]).filter(Boolean);
-    el.innerHTML=`<div class="nx-jira-head"><div><div class="label">Onde estão as entregas</div><h3>Posição dos itens na esteira, direto do Jira</h3><p>Os percentuais acima medem o avanço do desenvolvimento. Aqui é a fotografia de cada item: o que já está concluído, o que está com o cliente em homologação, o que está em testes e o que ainda está em desenvolvimento ou na fila.</p></div><div class="nx-jira-stamp">Lido do Jira em<br><b>${esc(dhm(j.lidoEm))}</b></div></div>${frentes.map(linha).join('')}`;
+    el.innerHTML=`<div class="nx-jira-head"><div><div class="label">Onde estão as entregas</div><h3>Posição dos itens na esteira, direto do Jira</h3><p>Os percentuais acima são o avanço do projeto. Aqui é a fotografia de cada item no Jira: o que já está concluído, o que está com o cliente em homologação, o que está em testes e o que ainda está em desenvolvimento ou na fila.</p></div><div class="nx-jira-stamp">Lido do Jira em<br><b>${esc(dhm(j.lidoEm))}</b></div></div>${frentes.map(linha).join('')}`;
   }
 
   function proximoMarco(w){
