@@ -41,6 +41,9 @@
       .nx-jira-row:first-of-type{border-top:0}
       .nx-jira-front b{display:block;font-size:13px}
       .nx-jira-front span{display:block;color:#8faec5;font-size:10px;margin-top:2px}
+      .nx-jira-front .pct{display:block;margin-top:6px;font-size:18px;font-weight:900;color:#46dda8;line-height:1}
+      .nx-jira-front .pct small{display:block;font-size:9px;color:#8faec5;font-weight:600;margin-top:3px}
+      .nx-kpi-note{margin:6px 0 0;color:#8faec5;font-size:10px}
             .nx-jira-bar{display:flex;height:22px;border-radius:999px;overflow:hidden;background:#0b1a28;border:1px solid #1f3d55}
       .nx-jira-bar span{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#06131d;min-width:0;overflow:hidden;white-space:nowrap}
       .nx-jira-bar span.dev,.nx-jira-bar span.cancelado{color:#d7e3eb}
@@ -60,7 +63,7 @@
     const bar=partes.map(([id,n])=>`<span class="${id}" style="width:${(n/total*100).toFixed(2)}%;background:${CORES[id]}" title="${esc(nomes[id])}: ${n}">${n/total>0.07?n:''}</span>`).join('');
     const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}${id==='dev'&&f.bloqueado?` <span class="muted">(${f.bloqueado} bloqueado${f.bloqueado>1?'s':''})</span>`:''}</div>`).join('');
     const sprint=f.sprint&&f.sprint.nome?`${esc(f.sprint.nome)}${f.sprint.inicio?` · ${dm(f.sprint.inicio)} a ${dm(f.sprint.fim)}`:''}`:'';
-    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
+    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctHomologado??0).replace('.',',')}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div></div></div>`;
   }
 
   function painel(w,j){
@@ -69,7 +72,13 @@
     let el=d.querySelector('#overview .nx-jira');
     if(!el){el=d.createElement('div');el.className='nx-jira nx-live';kpis.insertAdjacentElement('afterend',el)}
     const frentes=['revenue','central'].map(k=>j.frentes[k]).filter(Boolean);
-    el.innerHTML=`<div class="nx-jira-head"><div><div class="label">Onde estão as entregas</div><h3>Posição dos itens na esteira, direto do Jira</h3><p>Os percentuais acima são o avanço do projeto. Aqui é a fotografia de cada item no Jira: o que já está concluído, o que está com o cliente em homologação, o que está em testes e o que ainda está em desenvolvimento ou na fila.</p></div><div class="nx-jira-stamp">Lido do Jira em<br><b>${esc(dhm(j.lidoEm))}</b></div></div>${frentes.map(linha).join('')}`;
+    el.innerHTML=`<div class="nx-jira-head"><div><div class="label">Onde estão as entregas</div><h3>US entregues × US desenvolvidas</h3><p>Os percentuais acima medem <b>US desenvolvidas</b> (esforço planejado já implementado, pela planilha de sprints). Aqui é o que já foi <b>entregue</b>: a posição de cada item no Jira — concluído, em homologação com o cliente, em testes ou ainda em desenvolvimento/fila.</p></div><div class="nx-jira-stamp">Lido do Jira em<br><b>${esc(dhm(j.lidoEm))}</b></div></div>${frentes.map(linha).join('')}`;
+  }
+
+  function legendasAvanco(w){
+    const cards=w.document.querySelectorAll('#overview .kpis .card');if(cards.length<3)return;
+    const p1=cards[0].querySelector('p');if(p1)p1.textContent='US desenvolvidas · média das duas frentes';
+    [cards[1],cards[2]].forEach(c=>{if(c.querySelector('.nx-kpi-note'))return;const p=w.document.createElement('p');p.className='nx-kpi-note nx-live';p.textContent='US desenvolvidas (esforço planejado já implementado)';c.appendChild(p)});
   }
 
   function proximoMarco(w){
@@ -90,12 +99,13 @@
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j)painel(w,j)});
+    legendasAvanco(w);
     proximoMarco(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
