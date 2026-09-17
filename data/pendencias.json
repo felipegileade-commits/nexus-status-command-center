@@ -70,7 +70,7 @@
    "nivel": "Médio",
    "frente": "Geral",
    "titulo": "Demandas fora do escopo consumindo o time",
-   "desc": "Painel paralelo de US (Netlify) com pedidos de manutenção, WhatsApp na org, treinamento de Salesforce para o PMO, documentação adicional de homologação (4 itens), plano de testes até novembro. Formalizado internamente em 26/08.",
+   "desc": "Painel paralelo de US (Netlify) com pedidos de manutenção, treinamento de Salesforce para o PMO, documentação adicional de homologação (4 itens), plano de testes até novembro. Formalizado internamente em 26/08.",
    "impacto": "Horas de Scrum Master, requisitos e arquitetura",
    "acao": "Tratar como solicitação formal (comercial), não como apoio do projeto."
   }
