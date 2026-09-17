@@ -130,7 +130,8 @@
 
   try{localStorage.clear()}catch(e){}
   // Gate: o iframe (e tudo que ele carrega) so entra depois do login.
-  exigirLogin().then(ok=>{if(ok)frame.src='/legacy-index.html?v=20260915-jira1'});
+  // view.html (cliente) continua aberta, sem a aba de riscos; o editor exige login.
+  (READONLY?Promise.resolve(true):exigirLogin()).then(ok=>{if(ok)frame.src='/legacy-index.html?v=20260915-jira1'});
 
   function setBullets(container,items){
     if(!container)return;
