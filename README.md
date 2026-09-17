@@ -63,9 +63,26 @@ Fechar isso exige restringir `UPDATE` no RLS e autenticar quem edita (Supabase
 Auth na página de edição, ou uma edge function com segredo). Enquanto não for
 feito, `view.html` é uma barreira de conveniência.
 
-Vale saber também que o estado é último-save-vence: uma aba aberta há muito tempo
-que salve sobrescreve tudo com o que ela tem em memória. Recarregue antes de
-editar.
+## Edição simultânea (merge por bloco)
+
+O estado é um documento único, mas o `shell.js` evita que um editor apague o
+outro. Cada aba guarda o `updated_at` e o conteúdo da versão que carregou; o
+`PATCH` só grava se o banco ainda estiver nessa versão (filtro
+`updated_at=eq.<versão carregada>`, atômico). Se outra pessoa salvou antes:
+
+1. O shell lê a versão nova e encaixa nela **só o bloco que esta aba editou** — a
+   aba do drawer aberta ao salvar: Dados gerais (data/semana), Visão Geral,
+   Cronograma, Revenue Cloud ou Central de Projetos. Visão Geral e relatório de
+   impressão são recalculados a partir das frentes a cada carga, então não
+   precisam entrar no merge.
+2. Grava a versão mesclada, recarrega a página e avisa ("seu bloco X foi
+   encaixado na versão dela").
+3. Se as duas edições caíram no **mesmo bloco**, não há merge honesto: avisa,
+   descarta a edição local e recarrega. A pessoa refaz só aquele bloco.
+
+Chaves extras do payload (ex.: `jira`, gravado pelo sync) são preservadas no
+save. Para testar sem gravar, o editor expõe `window.__nexusMerge.mesclar(local,
+novo, bloco)`.
 
 ## Convenção de versão dos assets
 

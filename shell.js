@@ -26,10 +26,24 @@
   // permissao nao gera erro, o banco responde 2xx e afeta zero linhas. So dando
   // para distinguir "gravou" de "ignorou" olhando se voltou alguma linha.
   const WRITE_URL=SB_URL+'/rest/v1/status_report_state?id=eq.main&select=updated_at';
-  // updated_at da versao que esta aba carregou. O save so grava se o banco ainda
-  // estiver nessa versao; se outra pessoa salvou no meio, avisamos e recarregamos
-  // em vez de sobrescrever o trabalho dela (o estado e ultimo-save-vence).
-  let loadedAt='';
+  // Versao que esta aba carregou: updated_at, conteudo e demais chaves do payload
+  // (ex.: jira, gravado pelo sync). O save so grava se o banco ainda estiver nessa
+  // versao. Se outra pessoa salvou no meio, o bloco editado aqui e encaixado na
+  // versao mais nova (merge por bloco); so quando as duas edicoes cairam no mesmo
+  // bloco e que avisamos e recarregamos, porque ai nao ha merge honesto.
+  let loadedAt='',loaded={main:'',date:'',week:''},extras={};
+
+  // Blocos do editor (abas do drawer) e o que cada um altera na pagina. 'general'
+  // muda so data/semana (e os rodapes derivados). O cronograma vive dentro de
+  // #overview, por isso 'overview' preserva #timeline e 'timeline' troca so ele.
+  const BLOCOS={
+    general:{nome:'Dados gerais (data e semana)',sel:[]},
+    overview:{nome:'Visão Geral',sel:['#overview'],preservar:['#timeline']},
+    timeline:{nome:'Cronograma',sel:['#timeline']},
+    revenue:{nome:'Revenue Cloud',sel:['#revenue']},
+    central:{nome:'Central de Projetos',sel:['#central']}
+  };
+  const TOAST_KEY='nexus_toast';
   function writeHeaders(){
     const h={...HEADERS,Prefer:'return=representation'};
     const t=getToken();
@@ -303,48 +317,106 @@
     return {main:clone.innerHTML,date:meta[0]?.textContent||'',week:meta[1]?.textContent||''};
   }
 
-  async function save(w){
+  // Documento inerte (DOMParser nao carrega imagens nem roda script) so para
+  // recortar e encaixar blocos de HTML.
+  const parseMain=html=>new DOMParser().parseFromString('<main>'+html+'</main>','text/html').querySelector('main');
+  // HTML de um bloco sem os sub-blocos que pertencem a outra aba do editor.
+  function htmlBloco(root,sel,preservar){
+    const e=root.querySelector(sel);if(!e)return '';
+    const c=e.cloneNode(true);(preservar||[]).forEach(ps=>c.querySelectorAll(ps).forEach(x=>x.remove()));
+    return c.outerHTML;
+  }
+  function ajustarRodapes(root,date,week){
+    root.querySelectorAll('.footer span:first-child').forEach(x=>x.textContent=x.textContent.replace(/Semana\s+\d+/,'Semana '+week));
+    root.querySelectorAll('.footer span:last-child').forEach(x=>x.textContent='Dados atualizados em '+date);
+  }
+
+  // Encaixa o bloco editado nesta aba ('local', baseado em 'loaded') na versao mais
+  // nova do banco ('novo'). Devolve o payload mesclado, ou null quando a outra
+  // pessoa mexeu no mesmo bloco — ai quem decide e o usuario, nao o merge.
+  function mesclar(local,novo,bloco){
+    const b=BLOCOS[bloco];if(!b)return null;
+    const base=parseMain(loaded.main),alvo=parseMain(novo.main),meu=parseMain(local.main);
+    let date=novo.date,week=novo.week;
+    if(bloco==='general'){
+      if(novo.date!==loaded.date||novo.week!==loaded.week)return null;
+      date=local.date;week=local.week;
+    }else{
+      for(const sel of b.sel){
+        if(htmlBloco(alvo,sel,b.preservar)!==htmlBloco(base,sel,b.preservar))return null;
+        const de=meu.querySelector(sel),para=alvo.querySelector(sel);
+        if(!de||!para)return null;
+        const guardados=(b.preservar||[]).map(ps=>[ps,para.querySelector(ps)]);
+        const fonte=de.cloneNode(true);
+        for(const [ps,g] of guardados){const x=fonte.querySelector(ps);if(x&&g)x.replaceWith(g);}
+        para.replaceWith(fonte);
+      }
+    }
+    ajustarRodapes(alvo,date,week);
+    return {main:alvo.innerHTML,date,week};
+  }
+
+  async function lerBanco(){
+    const res=await fetch(STATE_URL,{headers:HEADERS,cache:'no-store'});
+    if(!res.ok)throw new Error('Falha ao ler o status: '+res.status);
+    const row=(await res.json())?.[0]||{},pl=row.payload||{};
+    return {at:row.updated_at||'',main:pl.main||'',date:pl.date||'',week:pl.week||'',extras:Object.fromEntries(Object.entries(pl).filter(([k])=>!['main','date','week'].includes(k)))};
+  }
+
+  async function save(w,bloco){
     if(READONLY)return;
     // O estado e capturado antes de qualquer pedido de login para que a edicao
     // pendente nao se perca enquanto o usuario digita a senha.
-    const body=JSON.stringify({payload:capture(w),updated_at:new Date().toISOString()});
-    // Resultado: 'gravou', 'conflito' (alguem salvou depois que esta aba carregou),
+    const local=capture(w);
+    let payload=local,versao=loadedAt,ext=extras,mesclado=null;
+    // Resultado: 'gravou', 'conflito' (alguem salvou depois da versao 'versao'),
     // 'sem-permissao' (token ausente, expirado ou barrado pelo RLS) ou um erro real.
-    // O filtro updated_at=eq.<versao carregada> torna a checagem atomica: duas abas
-    // que salvem ao mesmo tempo nao conseguem as duas afetar a linha.
+    // O filtro updated_at=eq.<versao> torna a checagem atomica: duas abas que salvem
+    // ao mesmo tempo nao conseguem as duas afetar a linha.
     const enviar=async()=>{
-      const url=loadedAt?WRITE_URL+'&updated_at=eq.'+encodeURIComponent(loadedAt):WRITE_URL;
+      const url=versao?WRITE_URL+'&updated_at=eq.'+encodeURIComponent(versao):WRITE_URL;
+      const body=JSON.stringify({payload:{...ext,...payload},updated_at:new Date().toISOString()});
       const res=await fetch(url,{method:'PATCH',headers:writeHeaders(),body});
       if(res.status===401||res.status===403)return 'sem-permissao';
       if(!res.ok)throw new Error('Falha ao salvar: '+res.status+' '+await res.text());
       const rows=await res.json().catch(()=>[]);
-      if(Array.isArray(rows)&&rows.length>0){loadedAt=rows[0].updated_at||loadedAt;return 'gravou'}
+      if(Array.isArray(rows)&&rows.length>0){versao=rows[0].updated_at||versao;return 'gravou'}
       // Zero linhas: ou o RLS barrou, ou a versao mudou. Olhar o banco decide.
-      return (await versaoNoBanco())!==loadedAt?'conflito':'sem-permissao';
+      return (await lerBanco()).at!==versao?'conflito':'sem-permissao';
     };
-    let r=await enviar();
-    if(r==='conflito'){
-      const quando=await versaoNoBanco();
-      const hora=quando?new Date(quando).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
-      alert('O status foi salvo por outra pessoa'+(hora?' em '+hora:'')+', depois que você abriu esta aba.\n\n'
-        +'Para não apagar o que ela fez, suas alterações não foram gravadas. A página vai recarregar com a versão atual; refaça sua edição e salve de novo.');
-      location.reload();
-      throw new Error('Alterações não salvas — o status mudou no banco. Recarregando.');
+    for(let tentativa=0;tentativa<4;tentativa++){
+      let r=await enviar();
+      if(r==='sem-permissao'){
+        setToken('');
+        const ok=await askLogin('Entre com sua conta para salvar as alterações.');
+        if(!ok)throw new Error('Alterações não salvas — login cancelado.');
+        r=await enviar();
+        if(r==='sem-permissao')throw new Error('O banco recusou a gravação mesmo após o login. Confira se o usuário foi criado com "Auto Confirm".');
+      }
+      if(r==='gravou'){
+        loadedAt=versao;loaded={main:payload.main,date:payload.date,week:payload.week};extras=ext;
+        if(mesclado){
+          // A pagina ainda mostra so a edicao local; recarrega para exibir a versao
+          // mesclada (a do banco) e avisa depois do reload.
+          try{sessionStorage.setItem(TOAST_KEY,'Salvo. Outra pessoa alterou o status às '+mesclado.hora+'; seu bloco "'+mesclado.nome+'" foi encaixado na versão dela.')}catch(e){}
+          location.reload();
+        }
+        return;
+      }
+      // Conflito: tenta encaixar o bloco editado na versao mais nova.
+      const novo=await lerBanco();
+      const hora=novo.at?new Date(novo.at).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+      const m=bloco?mesclar(local,novo,bloco):null;
+      if(!m){
+        const nome=BLOCOS[bloco]?.nome;
+        alert((nome?'Outra pessoa alterou o mesmo bloco ("'+nome+'")':'O status foi salvo por outra pessoa')+(hora?' em '+hora:'')+', depois que você abriu esta aba.\n\n'
+          +'Para não apagar o que ela fez, suas alterações'+(nome?' nesse bloco':'')+' não foram gravadas. A página vai recarregar com a versão atual; refaça sua edição e salve de novo.');
+        location.reload();
+        throw new Error('Alterações não salvas — o status mudou no banco. Recarregando.');
+      }
+      payload=m;versao=novo.at;ext=novo.extras;mesclado={hora,nome:BLOCOS[bloco].nome};
     }
-    if(r==='sem-permissao'){
-      setToken('');
-      const ok=await askLogin('Entre com sua conta para salvar as alterações.');
-      if(!ok)throw new Error('Alterações não salvas — login cancelado.');
-      r=await enviar();
-      if(r!=='gravou')throw new Error('O banco recusou a gravação mesmo após o login. Confira se o usuário foi criado com "Auto Confirm".');
-    }
-  }
-
-  async function versaoNoBanco(){
-    try{
-      const res=await fetch(SB_URL+'/rest/v1/status_report_state?id=eq.main&select=updated_at',{headers:HEADERS,cache:'no-store'});
-      const rows=await res.json();return rows?.[0]?.updated_at||'';
-    }catch(e){return ''}
+    throw new Error('Não consegui salvar: o status mudou várias vezes seguidas. Recarregue a página e tente de novo.');
   }
 
   // Um save que falha em silencio e pior do que um erro visivel: foi assim que
@@ -357,13 +429,15 @@
       +'box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:78vw;text-align:center;'
       +(erro?'background:#4a1620;border:1px solid #a33;color:#ffd9d2':'background:#0f3b39;border:1px solid #2fd4bf;color:#d6fff8');
     document.body.appendChild(t);
-    setTimeout(()=>t.remove(),erro?9000:2600);
+    setTimeout(()=>t.remove(),erro?9000:(msg.length>60?7000:2600));
   }
 
   async function load(w){
     const res=await fetch(STATE_URL,{headers:HEADERS,cache:'no-store'});if(!res.ok)throw new Error('Falha ao carregar: '+res.status);
     const rows=await res.json(),payload=rows?.[0]?.payload||{},d=w.document;
     loadedAt=rows?.[0]?.updated_at||'';
+    loaded={main:payload.main||'',date:payload.date||'',week:payload.week||''};
+    extras=Object.fromEntries(Object.entries(payload).filter(([k])=>!['main','date','week'].includes(k)));
     try{w.__nexusJira=payload.jira||null}catch(e){}
     if(payload.main){d.querySelector('main').innerHTML=payload.main;const meta=d.querySelectorAll('.topbar .meta small');if(meta[0]&&payload.date!=null)meta[0].textContent=payload.date;if(meta[1]&&payload.week!=null)meta[1].textContent=payload.week;rebind(w)}
     else if(payload.seed){applySeed(w,payload.seed);if(!READONLY)await save(w)}
@@ -386,6 +460,8 @@
     try{w.eval('openEditor=window.openEditor;saveCurrentEditor=window.saveCurrentEditor;persistState=window.persistState')}catch(e){}
   }
 
+  if(!READONLY)window.__nexusMerge={mesclar,setLoaded:(v)=>{loaded=v}};
+
   frame.addEventListener('load',async()=>{
     const w=frame.contentWindow;
     try{
@@ -395,7 +471,11 @@
       if(READONLY)lockdown(w);
       else{
         const sharedPersist=function(){
-          save(w)
+          // Bloco = aba do drawer que estava aberta ao salvar (saveCurrentEditor
+          // chama persistState antes de fechar o drawer).
+          let bloco=null;
+          try{if(w.document.getElementById('drawerBackdrop')?.classList.contains('open'))bloco=w.eval('typeof activeEditorTab==="string"?activeEditorTab:null')}catch(e){}
+          save(w,bloco)
             .then(()=>toast('Status salvo.'))
             .catch(err=>{console.error('[Nexus Supabase]',err);toast(String(err.message||err),true)});
         };
@@ -409,5 +489,6 @@
       }
     }catch(err){console.error('[Nexus Supabase]',err)}
     loading.style.display='none';frame.style.opacity='1';
+    try{const m=sessionStorage.getItem(TOAST_KEY);if(m){sessionStorage.removeItem(TOAST_KEY);toast(m)}}catch(e){}
   },{once:true});
 })();
