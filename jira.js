@@ -45,6 +45,17 @@
       .nx-jira-front .pct{display:block;margin-top:6px;font-size:18px;font-weight:900;color:#46dda8;line-height:1}
       .nx-jira-front .pct small{display:block;font-size:9px;color:#8faec5;font-weight:600;margin-top:3px}
       .nx-kpi-note{margin:6px 0 0;color:#8faec5;font-size:10px}
+      .nx-homolog{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
+      .nx-homolog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+      .nx-homolog-head .label{margin:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
+      .nx-homolog-src{font-size:10px;color:var(--muted)}
+      .nx-homolog-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+      .nx-homolog-grid div{text-align:center;padding:8px 4px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03))}
+      .nx-homolog-grid b{display:block;font-size:20px;font-weight:800;color:var(--text)}
+      .nx-homolog-grid b.ok{color:var(--green)}.nx-homolog-grid b.warn{color:var(--orange)}
+      .nx-homolog-grid span{display:block;font-size:9.5px;color:var(--muted);margin-top:3px;line-height:1.3}
+      .nx-homolog-nota{margin:10px 0 0;font-size:11px;color:var(--muted)}
+      @media(max-width:900px){.nx-homolog-grid{grid-template-columns:repeat(4,1fr)}}
       .metric-block .nx-desvio-nota{display:block;margin-top:5px;color:#8faec5;font-size:10px;line-height:1.35;font-weight:500}
       .pr-kpi .nx-desvio-nota{display:block;margin-top:1.5mm;font-size:6.5px;color:#677987;line-height:1.3}
       .timeline-panel .panel-actions button[onclick*="scrollTl"]{display:none!important}
@@ -94,6 +105,31 @@
     w.document.querySelectorAll('.footer span').forEach(x=>{const s=x.textContent.replace(/Semana\s+\d+/,'Semana '+semana).replace(/\d{2}\/\d{2}\/\d{4}/,data);if(s!==x.textContent)x.textContent=s});
   }
 
+  // Bloco "Homologação em números" na frente Central, lido de /data/homologacao.json (planilha da MV).
+  let homolog=null,carregandoH=null;
+  function carregarHomolog(){
+    if(homolog)return Promise.resolve(homolog);if(carregandoH)return carregandoH;
+    carregandoH=fetch('/data/homologacao.json'+(VERSION?'?v='+VERSION:''),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(h=>{homolog=h;return h});
+    return carregandoH;
+  }
+  function blocoHomolog(w,h){
+    const c=h&&h.central;if(!c)return;const d=w.document,sec=d.getElementById('central');if(!sec)return;
+    const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-homolog'))return;
+    const el=d.createElement('div');el.className='nx-homolog nx-live';
+    const naoBug=c.melhorias+c.ajustes;
+    el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(h.fonte)} · ${esc(dm(h.lidoEm))}</span></div>
+      <div class="nx-homolog-grid">
+        <div><b>${c.usTestaveis}</b><span>US testáveis</span></div>
+        <div><b class="ok">${c.aprovadas}</b><span>aprovadas</span></div>
+        <div><b class="warn">${c.reprovadas}</b><span>reprovadas · ${c.reprovadasSemBug} sem bug</span></div>
+        <div><b>${c.naoIniciadas}</b><span>não iniciadas</span></div>
+        <div><b>${c.apontamentos}</b><span>apontamentos</span></div>
+        <div><b>${c.bugs}</b><span>bugs (${Math.round(c.bugs/c.apontamentos*100)}%)</span></div>
+        <div><b>${naoBug}</b><span>melhorias e ajustes (${Math.round(naoBug/c.apontamentos*100)}%)</span></div>
+      </div><p class="nx-homolog-nota">${esc(c.nota||'')}</p>`;
+    fs.appendChild(el);
+  }
+
   function legendasAvanco(w){
     const cards=w.document.querySelectorAll('#overview .kpis .card');if(cards.length<3)return;
     const p1=cards[0].querySelector('p');if(p1)p1.textContent='US desenvolvidas · média das duas frentes';
@@ -137,14 +173,15 @@
 
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
-    carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}});
+    carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
+      carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});});
     legendasAvanco(w);
     proximoMarco(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

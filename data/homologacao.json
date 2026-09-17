@@ -1,0 +1,10 @@
+{
+ "lidoEm": "2026-09-16",
+ "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV)",
+ "central": {
+  "usTestaveis": 47, "aprovadas": 10, "reprovadas": 18, "naoIniciadas": 18, "pendenteCorrecao": 1,
+  "apontamentos": 115, "bugs": 22, "melhorias": 52, "ajustes": 41,
+  "reprovadasSemBug": 12,
+  "nota": "12 das 18 reprovadas não registram nenhum bug: os apontamentos são melhorias ou ajustes de regra, não defeitos."
+ }
+}
