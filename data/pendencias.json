@@ -2,72 +2,223 @@
  "atualizadoEm": "2026-09-17",
  "fontes": "Jira, atas Gemini (aprovações e refinos), Google Calendar, Gmail (até 16/09), planilha de sprints, dashboard de homologação da MV, planilha 'Acompanhamento férias Andressa'",
  "riscos": [
-  {"nivel":"Alto","frente":"Central","titulo":"Homologação estendida de 08/09 para 13/11 sem contrapartida de capacidade",
-   "desc":"Prevista de 17/08 a 08/09 (3 semanas), a homologação passou a semanal até 13/11 (+9 semanas). A MV pediu duas agendas semanais de 3 h; a Sottelli mantém só sexta 9h–12h. E-mail de 14/09 apresentou as opções 1 (priorizar homologação → 2 sprints adicionais) e 2 (priorizar a Sprint); resposta da MV pedida até 19/09.",
-   "impacto":"Sprint 16 e cronograma até novembro", "acao":"Decisão formal da MV entre opção 1 e 2 até 19/09; agenda de homologação fechada com data de término."},
-  {"nivel":"Alto","frente":"Central","titulo":"40,5% do esforço da Central ainda em definição (72 histórias sem aprovação)",
-   "desc":"Reconhecimento de Receitas, Fluxo Financeiro, Indicadores, Task Board, One Page, Status Report, Portal de Clientes, Portal de Ofertas e parte de Apontamento de Horas e Alocação seguem em refino/aprovação. Só 4,2% está na fila de desenvolvimento; 93% do liberado já está desenvolvido.",
-   "impacto":"Entrega final 13/11", "acao":"Aprovar, devolver ou retirar do escopo desta fase cada história, com data."},
-  {"nivel":"Alto","frente":"Central","titulo":"Refinos parados de 18/08 a 15/09 e itens da Sprint 16 em desenvolvimento sem aprovação",
-   "desc":"Quatro semanas sem refinamento por causa das agendas de homologação. Retomados em 15/09. Risco direto de retrabalho no que já está em desenvolvimento.",
-   "impacto":"Retrabalho na Sprint 16", "acao":"Lista prévia das US de cada refino com antecedência (pedido da MV em 14/09) e presença das áreas certas."},
-  {"nivel":"Alto","frente":"Central","titulo":"Homologação gerando mudança de regra, não correção de defeito",
-   "desc":"Placar da planilha da MV (16/09): 47 US testáveis · 10 aprovadas · 18 reprovadas · 18 não iniciadas. 115 apontamentos: 22 bugs (19%), 52 melhorias, 41 ajustes. 12 das 18 reprovadas não registram nenhum bug. Dependências futuras tratadas como impedimento; dificuldade com a plataforma registrada como defeito.",
-   "impacto":"Volume de ajustes fora do escopo aprovado", "acao":"Homologar por US/cenário; só é bug o que contraria critério de aceite aprovado; melhoria/ajuste vai para backlog ou change request."},
-  {"nivel":"Alto","frente":"Geral","titulo":"Reforço de time solicitado e não confirmado",
-   "desc":"Pontuado em 26/08 e 14/09: sem reforço, o time não atende às melhorias demandadas pela homologação e às agendas adicionais sem tirar horas do desenvolvimento.",
-   "impacto":"Capacidade da Sprint 16 e seguintes", "acao":"Decisão interna Sottelli/MV sobre reforço ou sprints adicionais."},
-  {"nivel":"Médio","frente":"Central","titulo":"Disponibilidade da MV durante a homologação",
-   "desc":"Helder de férias até 01/10; Tatiana em licença até 25/11; Janilson ausente 07–11/09. Testes de 25, 26 e 27/08 cancelados pela MV; série 'Testes PMO' remarcada 3× e cancelada em 01/09; sessão de 24/08 com 2 aceites em 23 convidados.",
-   "impacto":"Sessões sem quórum ou sem quem decide", "acao":"Confirmar participantes e substitutos por sessão."},
-  {"nivel":"Médio","frente":"Revenue","titulo":"Homologação de Revenue concentrada em 28/09–09/10",
-   "desc":"27 US em homologação com o cliente e 55 testadas pelo QA aguardando UAT. O plano da MV previa concluir a homologação de Revenue até 13/08. Felipe presencial em Recife 28/09–09/10; Lucas 05–09/10.",
-   "impacto":"Ajustes pós-homologação (12/10) comprimidos", "acao":"Fechar agenda e responsáveis por área antes de 28/09."},
-  {"nivel":"Alto","frente":"Revenue","titulo":"Integração com a Benner",
-   "desc":"Épicos Benner Faturamento e Benner Recebimento (70 pontos) sem itens ativos no Jira — só bloqueados. Dependem de definição e ambiente da MV/Benner.",
-   "impacto":"Escopo de faturamento", "acao":"Decisão da MV sobre fase 2 ou desbloqueio com data."},
-  {"nivel":"Médio","frente":"Geral","titulo":"Demandas fora do escopo consumindo o time",
-   "desc":"Painel paralelo de US (Netlify) com pedidos de manutenção, WhatsApp na org, treinamento de Salesforce para o PMO, documentação adicional de homologação (4 itens), plano de testes até novembro. Formalizado internamente em 26/08.",
-   "impacto":"Horas de Scrum Master, requisitos e arquitetura", "acao":"Tratar como solicitação formal (comercial), não como apoio do projeto."}
+  {
+   "nivel": "Alto",
+   "frente": "Central",
+   "titulo": "Homologação estendida de 08/09 para 13/11 sem contrapartida de capacidade",
+   "desc": "Prevista de 17/08 a 08/09 (3 semanas), a homologação passou a semanal até 13/11 (+9 semanas). A MV pediu duas agendas semanais de 3 h; a Sottelli mantém só sexta 9h–12h. E-mail de 14/09 apresentou as opções 1 (priorizar homologação → 2 sprints adicionais) e 2 (priorizar a Sprint); resposta da MV pedida até 19/09.",
+   "impacto": "Sprint 16 e cronograma até novembro",
+   "acao": "Decisão formal da MV entre opção 1 e 2 até 19/09; agenda de homologação fechada com data de término."
+  },
+  {
+   "nivel": "Alto",
+   "frente": "Central",
+   "titulo": "40,5% do esforço da Central ainda em definição (72 histórias sem aprovação)",
+   "desc": "Reconhecimento de Receitas, Fluxo Financeiro, Indicadores, Task Board, One Page, Status Report, Portal de Clientes, Portal de Ofertas e parte de Apontamento de Horas e Alocação seguem em refino/aprovação. Só 4,2% está na fila de desenvolvimento; 93% do liberado já está desenvolvido.",
+   "impacto": "Entrega final 13/11",
+   "acao": "Aprovar, devolver ou retirar do escopo desta fase cada história, com data."
+  },
+  {
+   "nivel": "Alto",
+   "frente": "Central",
+   "titulo": "Refinos parados de 18/08 a 15/09 e itens da Sprint 16 em desenvolvimento sem aprovação",
+   "desc": "Quatro semanas sem refinamento por causa das agendas de homologação. Retomados em 15/09. Risco direto de retrabalho no que já está em desenvolvimento.",
+   "impacto": "Retrabalho na Sprint 16",
+   "acao": "Lista prévia das US de cada refino com antecedência (pedido da MV em 14/09) e presença das áreas certas."
+  },
+  {
+   "nivel": "Alto",
+   "frente": "Central",
+   "titulo": "Homologação gerando mudança de regra, não correção de defeito",
+   "desc": "Placar da planilha da MV (16/09): 47 US testáveis · 10 aprovadas · 18 reprovadas · 18 não iniciadas. 115 apontamentos: 22 bugs (19%), 52 melhorias, 41 ajustes. 12 das 18 reprovadas não registram nenhum bug. Dependências futuras tratadas como impedimento; dificuldade com a plataforma registrada como defeito.",
+   "impacto": "Volume de ajustes fora do escopo aprovado",
+   "acao": "Homologar por US/cenário; só é bug o que contraria critério de aceite aprovado; melhoria/ajuste vai para backlog ou change request."
+  },
+  {
+   "nivel": "Alto",
+   "frente": "Geral",
+   "titulo": "Reforço de time solicitado e não confirmado",
+   "desc": "Pontuado em 26/08 e 14/09: sem reforço, o time não atende às melhorias demandadas pela homologação e às agendas adicionais sem tirar horas do desenvolvimento.",
+   "impacto": "Capacidade da Sprint 16 e seguintes",
+   "acao": "Decisão interna Sottelli/MV sobre reforço ou sprints adicionais."
+  },
+  {
+   "nivel": "Médio",
+   "frente": "Central",
+   "titulo": "Disponibilidade da MV durante a homologação",
+   "desc": "Helder de férias até 01/10; Tatiana em licença até 25/11; Janilson ausente 07–11/09. Testes de 25, 26 e 27/08 cancelados pela MV; série 'Testes PMO' remarcada 3× e cancelada em 01/09; sessão de 24/08 com 2 aceites em 23 convidados.",
+   "impacto": "Sessões sem quórum ou sem quem decide",
+   "acao": "Confirmar participantes e substitutos por sessão."
+  },
+  {
+   "nivel": "Médio",
+   "frente": "Revenue",
+   "titulo": "Homologação de Revenue concentrada em 28/09–09/10",
+   "desc": "27 US em homologação com o cliente e 55 testadas pelo QA aguardando UAT. O plano da MV previa concluir a homologação de Revenue até 13/08. Felipe presencial em Recife 28/09–09/10; Lucas 05–09/10.",
+   "impacto": "Ajustes pós-homologação (12/10) comprimidos",
+   "acao": "Fechar agenda e responsáveis por área antes de 28/09."
+  },
+  {
+   "nivel": "Alto",
+   "frente": "Revenue",
+   "titulo": "Integração com a Benner",
+   "desc": "Épicos Benner Faturamento e Benner Recebimento (70 pontos) sem itens ativos no Jira — só bloqueados. Dependem de definição e ambiente da MV/Benner.",
+   "impacto": "Escopo de faturamento",
+   "acao": "Decisão da MV sobre fase 2 ou desbloqueio com data."
+  },
+  {
+   "nivel": "Médio",
+   "frente": "Geral",
+   "titulo": "Demandas fora do escopo consumindo o time",
+   "desc": "Painel paralelo de US (Netlify) com pedidos de manutenção, WhatsApp na org, treinamento de Salesforce para o PMO, documentação adicional de homologação (4 itens), plano de testes até novembro. Formalizado internamente em 26/08.",
+   "impacto": "Horas de Scrum Master, requisitos e arquitetura",
+   "acao": "Tratar como solicitação formal (comercial), não como apoio do projeto."
+  }
  ],
  "pendenciasMV": [
-  {"item":"Resposta à escolha de prioridade (opção 1 × opção 2) e ao reforço/sprints adicionais","desde":"14/09","prazo":"19/09","status":"Aguardando — MV faria call interno em 14/09"},
-  {"item":"Homologação: 18 de 47 US ainda não iniciadas; 1 pendente de correção","desde":"17/08","prazo":"13/11","status":"Em andamento (semanal, sextas 9h–12h)"},
-  {"item":"Aprovação das 72 histórias em definição (refino/aprovação)","desde":"—","prazo":"a definir","status":"Aprovação de USs quinzenal até 10/11; refino Indicadores do Projeto marcado para 08/10 14h–16h"},
-  {"item":"US 433 (Interface de modelos) reprovada em 16/09 → novo refino","desde":"16/09","prazo":"24/09","status":"Refino agendado"},
-  {"item":"US 436 (Validação de alocação) sem consenso — bloquear × notificar","desde":"16/09","prazo":"—","status":"Decisão interna da MV pendente (mesmo debate do refino de 04/08)"},
-  {"item":"Nome final do campo 'horas adicionais' (portal do consultor)","desde":"19/08","prazo":"—","status":"Prometido por chat; não localizado no e-mail"},
-  {"item":"Modelos de TEP para programas e projetos de migração","desde":"22/07","prazo":"—","status":"Recebidos em 15/07 apenas os modelos Implantação e Pós-venda"},
-  {"item":"Cálculo de exposição ao risco (probabilidade × controle) para a US de riscos","desde":"18/03","prazo":"—","status":"Não localizado no e-mail"},
-  {"item":"Validação do material de homologação — 'essa não é a versão final' (31/07)","desde":"31/07","prazo":"—","status":"Versão final da MV não localizada; material da Sottelli enviado em 04/08"}
+  {
+   "item": "Resposta à escolha de prioridade (opção 1 × opção 2) e ao reforço/sprints adicionais",
+   "desde": "14/09",
+   "prazo": "19/09",
+   "status": "Aguardando — MV faria call interno em 14/09"
+  },
+  {
+   "item": "Homologação: 18 das 47 US testáveis ainda não iniciadas; 1 pendente de correção (lote = sprints 6 a 15)",
+   "desde": "17/08",
+   "prazo": "13/11",
+   "status": "Em andamento (semanal, sextas 9h–12h)"
+  },
+  {
+   "item": "Aprovação das 72 histórias em definição (refino/aprovação)",
+   "desde": "—",
+   "prazo": "a definir",
+   "status": "Aprovação de USs quinzenal até 10/11; refino Indicadores do Projeto marcado para 08/10 14h–16h"
+  },
+  {
+   "item": "US 433 (Interface de modelos) reprovada em 16/09 → novo refino",
+   "desde": "16/09",
+   "prazo": "24/09",
+   "status": "Refino agendado"
+  },
+  {
+   "item": "US 436 (Validação de alocação) sem consenso — bloquear × notificar",
+   "desde": "16/09",
+   "prazo": "—",
+   "status": "Decisão interna da MV pendente (mesmo debate do refino de 04/08)"
+  },
+  {
+   "item": "Nome final do campo 'horas adicionais' (portal do consultor)",
+   "desde": "19/08",
+   "prazo": "—",
+   "status": "Prometido por chat; não localizado no e-mail"
+  },
+  {
+   "item": "Modelos de TEP para programas e projetos de migração",
+   "desde": "22/07",
+   "prazo": "—",
+   "status": "Recebidos em 15/07 apenas os modelos Implantação e Pós-venda"
+  },
+  {
+   "item": "Cálculo de exposição ao risco (probabilidade × controle) para a US de riscos",
+   "desde": "18/03",
+   "prazo": "—",
+   "status": "Não localizado no e-mail"
+  },
+  {
+   "item": "Validação do material de homologação — 'essa não é a versão final' (31/07)",
+   "desde": "31/07",
+   "prazo": "—",
+   "status": "Versão final da MV não localizada; material da Sottelli enviado em 04/08"
+  }
  ],
  "pendenciasSottelli": [
-  {"item":"Enviar com antecedência a lista de US de cada refino, para a MV acionar as áreas","desde":"14/09","prazo":"antes de cada refino","status":"Pedido da MV em 14/09"},
-  {"item":"Validar com Lucas o modelo de versões V0/V1/V2 e a 'margem total'","desde":"01/07","prazo":"—","status":"Pendente"},
-  {"item":"Plano de testes até novembro, com premissas (por US/cenário, dependências, responsáveis da MV)","desde":"26/08","prazo":"—","status":"Pendente"},
-  {"item":"Documentação adicional de homologação pedida pela MV (fluxo completo, predecessoras/sucessoras, integrações futuras, dados manuais)","desde":"26/08","prazo":"—","status":"Em andamento"},
-  {"item":"Preparação de massa e suporte para as sessões de sexta","desde":"17/08","prazo":"semanal","status":"Em andamento"}
+  {
+   "item": "Enviar com antecedência a lista de US de cada refino, para a MV acionar as áreas",
+   "desde": "14/09",
+   "prazo": "antes de cada refino",
+   "status": "Pedido da MV em 14/09"
+  },
+  {
+   "item": "Validar com Lucas o modelo de versões V0/V1/V2 e a 'margem total'",
+   "desde": "01/07",
+   "prazo": "—",
+   "status": "Pendente"
+  },
+  {
+   "item": "Plano de testes até novembro, com premissas (por US/cenário, dependências, responsáveis da MV)",
+   "desde": "26/08",
+   "prazo": "—",
+   "status": "Pendente"
+  },
+  {
+   "item": "Documentação adicional de homologação pedida pela MV (fluxo completo, predecessoras/sucessoras, integrações futuras, dados manuais)",
+   "desde": "26/08",
+   "prazo": "—",
+   "status": "Em andamento"
+  },
+  {
+   "item": "Preparação de massa e suporte para as sessões de sexta",
+   "desde": "17/08",
+   "prazo": "semanal",
+   "status": "Em andamento"
+  }
  ],
  "entreguesMV": [
-  {"item":"Planilha de requisitos v5","data":"05/01"},
-  {"item":"Glossário — pedido em 24/02, 1ª versão enviada pela Sottelli em 27/02","data":"27/02"},
-  {"item":"Fluxo de incidentes, riscos, issues e GMUD + manual do SharePoint","data":"03/03 (reenviado 01/04)"},
-  {"item":"Site SharePoint de gestão de pendências","data":"13/03"},
-  {"item":"Modelo de cronograma 'as is' do Project","data":"06/05"},
-  {"item":"Matriz de DRE (linhas e formas de apuração)","data":"21/05"},
-  {"item":"Mapeamento 'as is' do SharePoint (portal do cliente)","data":"27/05"},
-  {"item":"Status de projeto e processo de projetos suspensos (levantamento PMO)","data":"05/06"},
-  {"item":"Tempo de projeto e tempo médio por escopo (Gerlane)","data":"11/06"},
-  {"item":"Modelos de TEP — Implantação e Pós-venda","data":"15/07"},
-  {"item":"Painel de US do Nexus (Netlify) com documentação","data":"02/08"},
-  {"item":"Resultados semanais da homologação por e-mail","data":"desde 11/09"}
+  {
+   "item": "Planilha de requisitos v5",
+   "data": "05/01"
+  },
+  {
+   "item": "Glossário — pedido em 24/02, 1ª versão enviada pela Sottelli em 27/02",
+   "data": "27/02"
+  },
+  {
+   "item": "Fluxo de incidentes, riscos, issues e GMUD + manual do SharePoint",
+   "data": "03/03 (reenviado 01/04)"
+  },
+  {
+   "item": "Site SharePoint de gestão de pendências",
+   "data": "13/03"
+  },
+  {
+   "item": "Modelo de cronograma 'as is' do Project",
+   "data": "06/05"
+  },
+  {
+   "item": "Matriz de DRE (linhas e formas de apuração)",
+   "data": "21/05"
+  },
+  {
+   "item": "Mapeamento 'as is' do SharePoint (portal do cliente)",
+   "data": "27/05"
+  },
+  {
+   "item": "Status de projeto e processo de projetos suspensos (levantamento PMO)",
+   "data": "05/06"
+  },
+  {
+   "item": "Tempo de projeto e tempo médio por escopo (Gerlane)",
+   "data": "11/06"
+  },
+  {
+   "item": "Modelos de TEP — Implantação e Pós-venda",
+   "data": "15/07"
+  },
+  {
+   "item": "Painel de US do Nexus (Netlify) com documentação",
+   "data": "02/08"
+  },
+  {
+   "item": "Resultados semanais da homologação por e-mail",
+   "data": "desde 11/09"
+  }
  ],
  "atencao": [
   "Jul→16/09: ~18 h de aprovação + 16,5 h de homologação + ~12 h de refino ≈ 46,5 h de agenda com o cliente (≈ 140 horas-pessoa do time de arquitetura/requisitos).",
   "Reunião de 16/09: 2 de 4 US devolvidas ocuparam 49 dos 61 minutos.",
   "Aprovação de USs passou a quinzenal (16/09 → 10/11); refinos retomados em 15/09.",
   "Alocação de Recursos foi refinada 5 vezes (02/04, 16/04, 19/06, 04/08, 18/08) e ainda saiu sem consenso.",
-  "Central hoje no Jira: 9 cards em desenvolvimento, 45 em teste QA, 24 testados aguardando UAT, 36 em homologação, 40 concluídos; habilitadores não vão para homologação.",
+  "Central hoje no Jira: 40 concluídos · 47 em homologação (as 47 US testáveis do lote, sprints 6–15) · 13 testados aguardando UAT · 45 em teste QA · 9 em desenvolvimento · 72 em definição; habilitadores não vão para homologação.",
   "Cutover e cargas (plano da MV): 'Não iniciado' — dependem de homologação encerrada."
  ]
 }

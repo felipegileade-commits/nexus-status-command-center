@@ -31,8 +31,10 @@ function lerDesvios() {
   try { return JSON.parse(fs.readFileSync('data/desvio.json', 'utf8')); } catch { return null; }
 }
 
-// Central: a MV homologa as US até a Sprint 12; cards 'Pós Review' dessas sprints contam como em homologação (uat).
-const HOMOLOG_ATE_SPRINT = { MVPMO: 12 };
+// Central: o lote em homologação é a lista de US do dashboard da MV (data/homologacao-lote.json);
+// cards dessa lista em 'Pós Review' contam como em homologação com o cliente (uat).
+function lerLote() { try { return new Set(JSON.parse(fs.readFileSync('data/homologacao-lote.json', 'utf8')).central || []); } catch { return new Set(); } }
+const LOTE_HOMOLOG = lerLote();
 const maiorSprint = it => Math.max(-1, ...((it.sprints || []).map(s => +((String(s).match(/\d+/) || [-1])[0]))));
 
 export function retrato(itens, sprints, lidoEm) {
@@ -44,8 +46,7 @@ export function retrato(itens, sprints, lidoEm) {
     const tot = zero(), porEpico = {};
     for (const i of xs) {
       let e = ETAPA_DE[i.status];
-      const lim = HOMOLOG_ATE_SPRINT[i.project];
-      if (e === 'testado' && lim != null && i.status === 'Pós Review' && maiorSprint(i) >= 0 && maiorSprint(i) <= lim) e = 'uat';
+      if (e === 'testado' && i.status === 'Pós Review' && LOTE_HOMOLOG.has(i.key)) e = 'uat';
       const alvo = i.parent ? (porEpico[i.parent] = porEpico[i.parent] || { key: i.parent, nome: i.parentName || i.parent, total: 0, ...zero() }) : null;
       for (const c of [tot, alvo]) {
         if (!c) continue;
