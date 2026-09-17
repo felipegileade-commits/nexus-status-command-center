@@ -67,8 +67,8 @@
       const el=document.createElement('div');
       el.style.cssText='position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(4,12,20,.82);font:14px Inter,Segoe UI,Arial,sans-serif';
       el.innerHTML='<form style="width:320px;max-width:88vw;background:#0d253a;border:1px solid #28506e;border-radius:14px;padding:22px;box-shadow:0 18px 50px rgba(0,0,0,.35)">'
-        +'<div style="color:#2fd4bf;font-size:10px;letter-spacing:.12em;font-weight:800;margin-bottom:6px">SESSÃO DE EDIÇÃO</div>'
-        +'<h2 style="color:#fff;font-size:18px;margin:0 0 14px;font-weight:600">Entrar para salvar</h2>'
+        +'<div style="color:#2fd4bf;font-size:10px;letter-spacing:.12em;font-weight:800;margin-bottom:6px">ACESSO RESTRITO</div>'
+        +'<h2 style="color:#fff;font-size:18px;margin:0 0 14px;font-weight:600">Entrar no status</h2>'
         +'<p data-erro style="color:#ff8d7a;font-size:12px;margin:0 0 12px;display:none"></p>'
         +'<input name="email" type="email" required placeholder="E-mail" autocomplete="username" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:10px 12px;border-radius:9px;border:1px solid #2b4d68;background:#081c2d;color:#fff;font-size:13px">'
         +'<input name="senha" type="password" required placeholder="Senha" autocomplete="current-password" style="width:100%;box-sizing:border-box;margin-bottom:14px;padding:10px 12px;border-radius:9px;border:1px solid #2b4d68;background:#081c2d;color:#fff;font-size:13px">'
@@ -96,8 +96,24 @@
     });
   }
 
+  // O token e conferido no Supabase (/auth/v1/user); token vencido ou inventado
+  // nao passa. Cancelar deixa a pagina vazia com o aviso.
+  async function tokenValido(){
+    const t=getToken();if(!t)return false;
+    try{const r=await fetch(SB_URL+'/auth/v1/user',{headers:{apikey:SB_KEY,Authorization:'Bearer '+t}});return r.ok}catch(e){return false}
+  }
+  async function exigirLogin(){
+    for(;;){
+      if(await tokenValido())return true;
+      setToken('');
+      const ok=await askLogin('Este status é restrito. Entre com sua conta.');
+      if(!ok){loading.textContent='Acesso restrito. Recarregue a página para entrar.';return false}
+    }
+  }
+
   try{localStorage.clear()}catch(e){}
-  frame.src='/legacy-index.html?v=20260915-jira1';
+  // Gate: o iframe (e tudo que ele carrega) so entra depois do login.
+  exigirLogin().then(ok=>{if(ok)frame.src='/legacy-index.html?v=20260915-jira1'});
 
   function setBullets(container,items){
     if(!container)return;

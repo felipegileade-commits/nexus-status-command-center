@@ -1,4 +1,4 @@
-// Aba "Riscos e pendências": quarta guia da navegação, lida de /data/pendencias.json.
+// Aba "Riscos e pendências": quarta guia da navegação, lida de /data/p-9c4e1b7a3f.json.
 // Só no editor (index.html): é apoio interno e não entra na view do cliente (decisão do Felipe, 17/09).
 // Renderizada em tempo de carga (classe nx-live, o shell.js não grava no estado).
 (()=>{
@@ -9,7 +9,7 @@
   let dados=null,carregando=null;
   function carregar(){
     if(dados)return Promise.resolve(dados);if(carregando)return carregando;
-    carregando=fetch('/data/pendencias.json'+(VERSION?'?v='+VERSION:''),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{dados=j;return j});
+    carregando=fetch('/data/p-9c4e1b7a3f.json'+(VERSION?'?v='+VERSION:''),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{dados=j;return j});
     return carregando;
   }
   function styles(d){
