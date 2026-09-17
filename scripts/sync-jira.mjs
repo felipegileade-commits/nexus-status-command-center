@@ -86,7 +86,7 @@ async function lerJira() {
   const projetos = Object.values(FRENTES).map(f => f.projeto).join(',');
   const epicos = await jiraSearch(`project in (${projetos}) AND issuetype = ${TIPO.epico}`, ['summary', 'project']);
   const itens = await jiraSearch(`project in (${projetos}) AND issuetype in (${TIPO.entrega.join(',')})`,
-                                 ['parent', 'status', 'project', 'issuetype', 'customfield_10024']);
+                                 ['parent', 'status', 'project', 'issuetype', 'customfield_10024', 'customfield_10020']);
   const sprints = {};
   for (const [chave, f] of Object.entries(FRENTES)) {
     const j = await jiraGet(`/rest/agile/1.0/board/${f.board}/sprint?state=active`);
@@ -212,7 +212,8 @@ for (const chave of Object.keys(FRENTES)) {
 // Retrato executivo para o painel do cliente (data/jira.json)
 const itensPlanos = jira.itens.map(it => ({
   key: it.key, project: it.fields.project.key, type: it.fields.issuetype?.name || '', status: it.fields.status?.name || '',
-  parent: it.fields.parent?.key || null, parentName: it.fields.parent?.fields?.summary || null
+  parent: it.fields.parent?.key || null, parentName: it.fields.parent?.fields?.summary || null,
+  sprints: (it.fields.customfield_10020 || []).map(s => s.name)
 }));
 const sprintsExec = {};
 for (const chave of Object.keys(FRENTES)) { const s = snapshot.frentes[chave].sprint; sprintsExec[chave] = s ? { nome: s.nome, numero: s.numero, inicio: s.inicio, fim: s.fim } : null; }

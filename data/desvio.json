@@ -1,8 +1,8 @@
 {
  "calculadoEm": "2026-09-16",
- "metodo": "Esforço planejado por épico (planilha de sprints) ponderado pelo status dos cards no Jira, menos o percentual alinhado até a data. Revenue exclui os épicos que são só fase 2 (Infraestrutura, Benner Faturamento/Recebimento); Central exclui os 4 épicos sem card no Jira. 'aguardaCliente' = esforço em refino/aprovação do cliente; 'doLiberado' = desenvolvido sobre o que já foi liberado ao time.",
- "revenue": { "desvio": -9.7, "desenvolvidoJira": 90.9, "alinhado": 100.63, "aguardaCliente": 2.2, "emDesenvolvimento": 6.9, "doLiberado": 92.9,
-   "nota": "2,2% do escopo aguarda refino/aprovação · 92,9% do liberado já desenvolvido" },
- "central": { "desvio": -18.6, "desenvolvidoJira": 55.4, "alinhado": 74.0, "aguardaCliente": 40.5, "emDesenvolvimento": 4.2, "doLiberado": 93.0,
-   "nota": "40,5% do escopo aguarda refino/aprovação · 93% do liberado já desenvolvido" }
+ "metodo": "Base = planilha de sprints (esforço por épico). Desenvolvido = 'Implementado até o momento'; desvio = implementado − 'Alinhado ao tempo'. O restante do escopo é repartido entre 'em desenvolvimento' e 'em definição' na proporção dos cards do Jira (fila da Sottelli × refino/aprovação do cliente). A soma das três parcelas fecha o escopo da planilha (Revenue 100,63%, que inclui os esforços adicionais; Central 100% já com os +12% de change requests).",
+ "revenue": { "desvio": -8.26, "desenvolvido": 92.37, "emDesenvolvimento": 6.3, "definicao": 2.0, "escopo": 100.63, "alinhado": 100.63,
+   "nota": "92,4% desenvolvido · 6,3% em desenvolvimento · 2,0% em definição = 100,6% do escopo (inclui esforços adicionais)" },
+ "central": { "desvio": 2.36, "desenvolvido": 76.36, "emDesenvolvimento": 2.2, "definicao": 21.4, "escopo": 100, "alinhado": 74.0,
+   "nota": "76,4% desenvolvido · 2,2% em desenvolvimento · 21,4% em definição = 100% do escopo (já com +12% de change requests)" }
 }

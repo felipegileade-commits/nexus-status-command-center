@@ -12,7 +12,7 @@
 
   const VERSION=(document.currentScript&&/[?&]v=([^&]+)/.exec(document.currentScript.src)||[])[1]||'';
   const CORES={prod:'#46dda8',uat:'#2a9cff',testado:'#8fd3ff',qa:'#f5c451',dev:'#ff8d2d',upstream:'#41637b',fase2:'#2b3d4d',cancelado:'#1d2a36'};
-  const NOMES={prod:'Concluído',uat:'Homologação com o cliente',testado:'Testado pelo QA · aguardando UAT',qa:'Em teste QA',dev:'Em desenvolvimento',upstream:'Refino / aprovação',fase2:'Fora do escopo (fase 2)',cancelado:'Cancelado'};
+  const NOMES={prod:'Concluído',uat:'Homologação com o cliente',testado:'Testado pelo QA · aguardando UAT',qa:'Em teste QA',dev:'Em desenvolvimento',upstream:'Em definição (refino / aprovação)',fase2:'Fora do escopo (fase 2)',cancelado:'Cancelado'};
   const MESES=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
   const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const dm=iso=>{const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso||''));if(m)return `${m[3]}/${m[2]}`;const d=new Date(iso);return isNaN(d)?'':`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`};

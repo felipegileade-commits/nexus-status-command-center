@@ -31,6 +31,10 @@ function lerDesvios() {
   try { return JSON.parse(fs.readFileSync('data/desvio.json', 'utf8')); } catch { return null; }
 }
 
+// Central: a MV homologa as US até a Sprint 12; cards 'Pós Review' dessas sprints contam como em homologação (uat).
+const HOMOLOG_ATE_SPRINT = { MVPMO: 12 };
+const maiorSprint = it => Math.max(-1, ...((it.sprints || []).map(s => +((String(s).match(/\d+/) || [-1])[0]))));
+
 export function retrato(itens, sprints, lidoEm) {
   const desvios = lerDesvios();
   const out = { lidoEm: lidoEm || new Date().toISOString(), etapas: ETAPAS.map(([id, nome]) => ({ id, nome })), desvio: desvios ? { calculadoEm: desvios.calculadoEm, metodo: desvios.metodo } : null, frentes: {} };
@@ -39,7 +43,9 @@ export function retrato(itens, sprints, lidoEm) {
     const zero = () => ({ prod: 0, uat: 0, testado: 0, qa: 0, dev: 0, upstream: 0, fase2: 0, cancelado: 0, semEtapa: [] });
     const tot = zero(), porEpico = {};
     for (const i of xs) {
-      const e = ETAPA_DE[i.status];
+      let e = ETAPA_DE[i.status];
+      const lim = HOMOLOG_ATE_SPRINT[i.project];
+      if (e === 'testado' && lim != null && i.status === 'Pós Review' && maiorSprint(i) >= 0 && maiorSprint(i) <= lim) e = 'uat';
       const alvo = i.parent ? (porEpico[i.parent] = porEpico[i.parent] || { key: i.parent, nome: i.parentName || i.parent, total: 0, ...zero() }) : null;
       for (const c of [tot, alvo]) {
         if (!c) continue;
