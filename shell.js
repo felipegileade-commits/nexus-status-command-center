@@ -111,6 +111,23 @@
     }
   }
 
+  // Recarga automatica quando sai versao nova: a cada 60 s le a propria pagina
+  // hospedeira (sem cache) e compara a versao do shell.js. Mudou, recarrega —
+  // exceto se o editor estiver aberto com edicao em andamento.
+  (function(){
+    const atual=(document.querySelector('script[src*="shell.js"]')||{}).src||'';
+    const versao=h=>(h.match(/shell\.js\?v=([^"'&\s]+)/)||[])[1]||'';
+    const minha=versao(atual);if(!minha)return;
+    setInterval(async()=>{
+      try{
+        const h=await (await fetch(location.pathname,{cache:'no-store'})).text();
+        const nova=versao(h);if(!nova||nova===minha)return;
+        const editando=!READONLY&&frame.contentWindow?.document?.getElementById('drawerBackdrop')?.classList.contains('open');
+        if(!editando)location.reload();
+      }catch(e){}
+    },60000);
+  })();
+
   try{localStorage.clear()}catch(e){}
   // Gate: o iframe (e tudo que ele carrega) so entra depois do login.
   exigirLogin().then(ok=>{if(ok)frame.src='/legacy-index.html?v=20260915-jira1'});
