@@ -26,6 +26,10 @@
   // permissao nao gera erro, o banco responde 2xx e afeta zero linhas. So dando
   // para distinguir "gravou" de "ignorou" olhando se voltou alguma linha.
   const WRITE_URL=SB_URL+'/rest/v1/status_report_state?id=eq.main&select=updated_at';
+  // updated_at da versao que esta aba carregou. O save so grava se o banco ainda
+  // estiver nessa versao; se outra pessoa salvou no meio, avisamos e recarregamos
+  // em vez de sobrescrever o trabalho dela (o estado e ultimo-save-vence).
+  let loadedAt='';
   function writeHeaders(){
     const h={...HEADERS,Prefer:'return=representation'};
     const t=getToken();
@@ -304,16 +308,29 @@
     // O estado e capturado antes de qualquer pedido de login para que a edicao
     // pendente nao se perca enquanto o usuario digita a senha.
     const body=JSON.stringify({payload:capture(w),updated_at:new Date().toISOString()});
-    // Resultado: 'gravou', 'sem-permissao' (token ausente, expirado ou barrado
-    // pelo RLS) ou um erro real.
+    // Resultado: 'gravou', 'conflito' (alguem salvou depois que esta aba carregou),
+    // 'sem-permissao' (token ausente, expirado ou barrado pelo RLS) ou um erro real.
+    // O filtro updated_at=eq.<versao carregada> torna a checagem atomica: duas abas
+    // que salvem ao mesmo tempo nao conseguem as duas afetar a linha.
     const enviar=async()=>{
-      const res=await fetch(WRITE_URL,{method:'PATCH',headers:writeHeaders(),body});
+      const url=loadedAt?WRITE_URL+'&updated_at=eq.'+encodeURIComponent(loadedAt):WRITE_URL;
+      const res=await fetch(url,{method:'PATCH',headers:writeHeaders(),body});
       if(res.status===401||res.status===403)return 'sem-permissao';
       if(!res.ok)throw new Error('Falha ao salvar: '+res.status+' '+await res.text());
       const rows=await res.json().catch(()=>[]);
-      return (Array.isArray(rows)&&rows.length>0)?'gravou':'sem-permissao';
+      if(Array.isArray(rows)&&rows.length>0){loadedAt=rows[0].updated_at||loadedAt;return 'gravou'}
+      // Zero linhas: ou o RLS barrou, ou a versao mudou. Olhar o banco decide.
+      return (await versaoNoBanco())!==loadedAt?'conflito':'sem-permissao';
     };
     let r=await enviar();
+    if(r==='conflito'){
+      const quando=await versaoNoBanco();
+      const hora=quando?new Date(quando).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+      alert('O status foi salvo por outra pessoa'+(hora?' em '+hora:'')+', depois que você abriu esta aba.\n\n'
+        +'Para não apagar o que ela fez, suas alterações não foram gravadas. A página vai recarregar com a versão atual; refaça sua edição e salve de novo.');
+      location.reload();
+      throw new Error('Alterações não salvas — o status mudou no banco. Recarregando.');
+    }
     if(r==='sem-permissao'){
       setToken('');
       const ok=await askLogin('Entre com sua conta para salvar as alterações.');
@@ -321,6 +338,13 @@
       r=await enviar();
       if(r!=='gravou')throw new Error('O banco recusou a gravação mesmo após o login. Confira se o usuário foi criado com "Auto Confirm".');
     }
+  }
+
+  async function versaoNoBanco(){
+    try{
+      const res=await fetch(SB_URL+'/rest/v1/status_report_state?id=eq.main&select=updated_at',{headers:HEADERS,cache:'no-store'});
+      const rows=await res.json();return rows?.[0]?.updated_at||'';
+    }catch(e){return ''}
   }
 
   // Um save que falha em silencio e pior do que um erro visivel: foi assim que
@@ -339,6 +363,7 @@
   async function load(w){
     const res=await fetch(STATE_URL,{headers:HEADERS,cache:'no-store'});if(!res.ok)throw new Error('Falha ao carregar: '+res.status);
     const rows=await res.json(),payload=rows?.[0]?.payload||{},d=w.document;
+    loadedAt=rows?.[0]?.updated_at||'';
     try{w.__nexusJira=payload.jira||null}catch(e){}
     if(payload.main){d.querySelector('main').innerHTML=payload.main;const meta=d.querySelectorAll('.topbar .meta small');if(meta[0]&&payload.date!=null)meta[0].textContent=payload.date;if(meta[1]&&payload.week!=null)meta[1].textContent=payload.week;rebind(w)}
     else if(payload.seed){applySeed(w,payload.seed);if(!READONLY)await save(w)}
