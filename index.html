@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Projeto Nexus · Status Executivo</title>
 <style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}#app{width:100%;height:100%;border:0;display:block;opacity:0;transition:opacity .15s ease}#loading{position:fixed;inset:0;display:grid;place-items:center;color:#8da8bd;font:14px Inter,Segoe UI,Arial,sans-serif;background:#07111d;z-index:2}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d}html.nx-claro,html.nx-claro body{background:#f3f6f9}html.nx-claro #loading{background:#f3f6f9;color:#64788b}#app{width:100%;height:100%;border:0;display:block;opacity:0;transition:opacity .15s ease}#loading{position:fixed;inset:0;display:grid;place-items:center;color:#8da8bd;font:14px Inter,Segoe UI,Arial,sans-serif;background:#07111d;z-index:2}
 </style>
 </head>
 <body>
 <div id="loading">Carregando status compartilhado…</div>
 <iframe id="app" title="Nexus Status Command Center"></iframe>
 <script>window.NEXUS_READONLY=false</script>
+<script src="/tema.js?v=20260916-claro"></script>
 <script src="/shell.js?v=20260916-jira2"></script>
 <script src="/timeline.js?v=20260916-jira2"></script>
 <script src="/jira.js?v=20260916-jira2"></script>

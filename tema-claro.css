@@ -1,0 +1,143 @@
+/* Tema claro do Nexus — injetado no iframe por tema.js.
+   Objetivo: leitura tranquila em sala (fundo claro, cartões brancos, acentos
+   dessaturados). Vermelho só no número, nunca em área grande.
+   Para ver o tema antigo: view.html?tema=escuro */
+:root{
+  --bg:#f3f6f9;--bg2:#eef2f6;--panel:#ffffff;--panel2:#f7f9fb;--line:#dde5ed;
+  --text:#1f3242;--muted:#64788b;--teal:#0f8f85;--teal2:#0f8f85;--blue:#2d6fb5;
+  --orange:#b8791b;--yellow:#b8791b;--red:#b74a3e;--green:#1e9a6a;--white:#1f3242;
+}
+body{background:#f3f6f9!important;color:var(--text)!important}
+
+/* barra superior e navegação */
+.topbar{background:#ffffff!important;border-bottom:1px solid var(--line)!important}
+.logo{color:#1f3242}
+.nav button{color:#64788b!important}
+.nav button.active{color:#1f3242!important;border-color:var(--teal)!important}
+.meta{color:#1f3242}.meta small{color:#64788b}
+.action,.mini{background:#ffffff!important;border:1px solid #cfd9e3!important;color:#1f3242!important;box-shadow:0 1px 2px rgba(31,50,66,.06)}
+.mini.add{color:var(--green)!important;border-color:#bfe3d3!important}
+
+/* painéis e cartões */
+.panel{background:#ffffff!important;border:1px solid var(--line)!important;box-shadow:0 6px 24px rgba(31,50,66,.06)}
+.panel-head{border-bottom:1px solid var(--line)!important}
+.panel-head h1,.hero-title h1,h1,h2,h3{color:#1f3242}
+.hero-title p,.panel-head p{color:#64788b!important}
+.card,.front-summary,.week-card,.epic-grid,.risk-card,.next-card,.month-group{background:#ffffff!important;border:1px solid var(--line)!important;box-shadow:0 2px 10px rgba(31,50,66,.05)}
+.week-card{border-top:2px solid var(--teal)!important}
+.label{color:#64788b}
+.big{color:#1f3242!important}
+.big.blue{color:var(--blue)!important}
+.big.orange{color:var(--orange)!important}
+.card b,.card strong{color:#1f3242}
+.list{color:#41566a!important}
+.risk{background:#f7f9fb!important;border:1px solid var(--line)}
+.risk span{color:#41566a}
+.risk strong.high{color:#b74a3e!important}
+.risk strong.med{color:#b8791b!important}
+.risk strong.low{color:#8a7a1e!important}
+.legend-row{color:#64788b!important}
+.nx-kpi-note{color:#64788b!important}
+
+/* frentes */
+.front-head{border-bottom:1px solid var(--line)!important}
+.front-progress{color:#1f3242}
+.front-progress small{color:#64788b}
+.progress{background:#e3eaf1!important}
+.progress span{background:var(--teal)!important}
+.metrics-row{border-top:1px solid var(--line)!important}
+.metric-block{border-right:1px solid var(--line)!important}
+.metric-block:last-child{border:0!important}
+.metric-block strong{color:#1f3242}
+.metric-block span{color:#64788b!important}
+.metric-block .nx-desvio-nota{color:#64788b!important}
+.front-foot{color:#64788b!important}
+.status-pill{background:#fbf1e3!important;color:#8f5d13!important}
+.box-title{color:#64788b!important}
+.bullet{color:#41566a!important}
+.epic{border-bottom:1px solid var(--line)!important}
+.epic strong{color:var(--orange)!important}
+.num{background:#e3eaf1!important;color:#1f3242!important}
+.bar{background:#e3eaf1!important}
+.risk-card-head span,.risk-col h4{color:var(--orange)!important}
+.risk-col.action h4{color:var(--teal)!important}
+.risk-col p{color:#41566a!important}
+.next-card p{color:#1f3242!important}
+.next-card small{color:#64788b!important}
+.next-card .tag2{background:#e4f4f0!important;color:#12735f!important}
+.footer{color:#7b8d9d!important}
+
+/* quadro antigo do cronograma (fica escondido, mas não deixa nada escuro escapar) */
+.month-header{background:#f7f9fb!important;border-bottom:1px solid var(--line)!important}
+.month-header strong,.month-header span{color:#1f3242!important}
+.milestone-card{background:#ffffff!important;border:1px solid var(--line)!important}
+.milestone-card h3,.date-row strong{color:#1f3242!important}
+.milestone-card b,.milestone-card p,.date-row span{color:#41566a!important}
+.tag{background:#fbf1e3!important;color:#8f5d13!important}
+
+/* painel "Onde estão as entregas" (jira.js) */
+.nx-jira{background:#ffffff!important;border:1px solid var(--line)!important;color:#1f3242!important}
+.nx-jira-head h3{color:#1f3242}
+.nx-jira-head p,.nx-jira-stamp,.nx-jira-front span,.nx-jira-nums,.nx-jira-fora{color:#64788b!important}
+.nx-jira-front b,.nx-jira-nums b,.nx-jira-stamp b,.nx-jira-fora b{color:#1f3242!important}
+.nx-jira-front .pct{color:var(--green)!important}
+.nx-jira-row{border-top:1px solid var(--line)!important}
+.nx-jira-bar{background:#eef2f6!important;border:1px solid var(--line)!important}
+.nx-jira-bar span{color:#ffffff!important;font-weight:700}
+.nx-jira-bar span.prod{background:#2aa27a!important}
+.nx-jira-bar span.uat{background:#3b7fc4!important}
+.nx-jira-bar span.testado{background:#7fb3dd!important}
+.nx-jira-bar span.qa{background:#d9a54a!important}
+.nx-jira-bar span.dev{background:#c8843a!important}
+.nx-jira-bar span.upstream{background:#9aabb9!important}
+.nx-jira-nums i{opacity:.9}
+
+/* cronograma executivo (timeline.js) */
+#timeline .ux11-board{color:#1f3242!important}
+#timeline .ux11-labels{color:#64788b!important}
+#timeline .ux11-track{background:#f7f9fb!important;border:1px solid var(--line)}
+#timeline .ux11-month{color:#1f3242!important;border-left:1px solid var(--line)!important}
+#timeline .ux11-month small,#timeline .ux11-tick{color:#64788b!important}
+#timeline .ux11-gridline{background:#dde5ed!important}
+#timeline .ux11-tickline{background:#e8eef4!important}
+#timeline .ux11-sprint{background:#ffffff!important;border:1px solid #cfd9e3!important;color:#41566a!important}
+#timeline .ux11-sprint.current{background:#e4f4f0!important;border-color:var(--teal)!important;color:#0f5f58!important}
+#timeline .ux11-window{color:#ffffff!important;border:0!important}
+#timeline .ux11-window.sottelli{background:#1e9a8f!important}
+#timeline .ux11-window.mv{background:#3b7fc4!important}
+#timeline .ux11-window.milestone{background:#c8843a!important}
+#timeline .ux11-window.done{opacity:.55}
+#timeline .ux11-rail{background:#c9d4de!important}
+#timeline .ux11-diamond{border:2px solid #ffffff!important;box-shadow:0 0 0 1px #c9d4de!important;background:#c8843a!important}
+#timeline .ux11-diamond.sottelli{background:#1e9a8f!important}
+#timeline .ux11-diamond.mv{background:#3b7fc4!important}
+#timeline .ux11-diamond.final{background:#1e9a6a!important}
+#timeline .ux11-diamond.done{background:#8fc9b4!important}
+#timeline .ux11-diamond.active{box-shadow:0 0 0 2px #ffffff,0 0 0 5px rgba(15,143,133,.3)!important}
+#timeline .ux11-card{background:#ffffff!important;border:1px solid var(--line)!important;border-left:3px solid #c8843a!important;color:#1f3242!important;box-shadow:0 2px 8px rgba(31,50,66,.06)}
+#timeline .ux11-card.sottelli{border-left-color:#1e9a8f!important}
+#timeline .ux11-card.mv{border-left-color:#3b7fc4!important}
+#timeline .ux11-card.final{border-left-color:#1e9a6a!important}
+#timeline .ux11-card.done{opacity:.7;border-left-color:#8fc9b4!important}
+#timeline .ux11-card .date{color:#64788b!important}
+#timeline .ux11-card .title{color:#1f3242!important}
+#timeline .ux11-card:hover,#timeline .ux11-card.active{border-color:var(--teal)!important}
+#timeline .ux11-stem{background:#c9d4de!important}
+#timeline .ux11-today{border-left:2px dashed #c8843a!important}
+#timeline .ux11-today i{background:#c8843a!important;color:#ffffff!important}
+#timeline .ux11-legend,#timeline .ux11-hint{color:#64788b!important}
+#timeline .ux11-legend i{background:#c8843a}
+#timeline .ux11-legend i.sottelli{background:#1e9a8f}#timeline .ux11-legend i.mv{background:#3b7fc4}
+#timeline .ux11-legend i.final{background:#1e9a6a}#timeline .ux11-legend i.done{background:#8fc9b4;box-shadow:none}
+#timeline .ux11-legend i.today{border-left:2px dashed #c8843a;background:none}
+.ux11-detail{background:#ffffff!important;border:1px solid var(--line)!important;box-shadow:0 6px 24px rgba(31,50,66,.08)!important;color:#1f3242}
+.ux11-detail h3{color:#1f3242}
+.ux11-detail-side{border-left:1px solid var(--line)!important}
+.ux11-meta{border-top:1px solid var(--line)!important}
+.ux11-meta span,.ux11-detail-side h4{color:#64788b!important}
+.ux11-meta b{color:#1f3242!important}
+.ux11-detail-side p{color:#41566a!important}
+.ux11-status{background:#e4f4f0!important;color:#12735f!important}
+.ux11-detail-kicker{color:var(--teal)!important}
+
+/* barra de rolagem do editor e afins não mudam; impressão já é clara */
