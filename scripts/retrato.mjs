@@ -44,9 +44,13 @@ export function retrato(itens, sprints, lidoEm) {
     const xs = itens.filter(i => i.project === f.projeto && i.type !== 'Subtarefa' && i.type !== 'Épico');
     const zero = () => ({ prod: 0, uat: 0, testado: 0, qa: 0, dev: 0, upstream: 0, fase2: 0, cancelado: 0, semEtapa: [] });
     const tot = zero(), porEpico = {};
+    // 'Liberado para deploy' = aprovado pelo cliente na homologação (com ressalvas/ajustes): fica em uat
+    // na distribuição, mas conta como homologado no indicador (regra do Felipe, 20/09).
+    let aprovadoUat = 0;
     for (const i of xs) {
       let e = ETAPA_DE[i.status];
       if (e === 'testado' && i.status === 'Pós Review' && LOTE_HOMOLOG.has(i.key)) e = 'uat';
+      if (i.status === 'Liberado para deploy') aprovadoUat++;
       const alvo = i.parent ? (porEpico[i.parent] = porEpico[i.parent] || { key: i.parent, nome: i.parentName || i.parent, total: 0, ...zero() }) : null;
       for (const c of [tot, alvo]) {
         if (!c) continue;
@@ -59,7 +63,8 @@ export function retrato(itens, sprints, lidoEm) {
     const pct = n => ativos ? Math.round(n / ativos * 1000) / 10 : 0;
     out.frentes[chave] = {
       nome: f.nome, projeto: f.projeto, total: xs.length, ativos, ...tot,
-      pctHomologado: pct(tot.prod),                                        // aprovado pelo cliente / concluído
+      aprovadoUat,                                                          // 'Liberado para deploy' (aprovado com ressalvas)
+      pctHomologado: pct(tot.prod + aprovadoUat),                          // aprovado pelo cliente / concluído
       pctUat: pct(tot.prod + tot.uat),                                     // já chegou ao cliente (UAT ou além)
       pctEntregue: pct(tot.prod + tot.uat),                                // painel: US entregues
       pctDesenvolvido: pct(tot.prod + tot.uat + tot.testado + tot.qa),     // saiu do desenvolvimento
