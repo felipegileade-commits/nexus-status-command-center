@@ -1384,6 +1384,8 @@ function buildPrintDocument(){
   </html>`;
 }
 function openPrintPreview(){
+  // Sincroniza com o conteudo atual da tela (o payload do Supabase chega depois do load).
+  syncPrintReport();
   const frame=document.getElementById('printPreviewFrame');
   frame.srcdoc=buildPrintDocument();
   document.getElementById('printPreviewBackdrop').classList.add('open');
