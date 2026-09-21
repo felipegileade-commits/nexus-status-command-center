@@ -1431,6 +1431,15 @@ function buildPrintDocument(){
   </head>
   <body>
     <div id="print-report">${report}</div>
+    <script>
+    // Pagina A4 tem overflow:hidden: se o texto crescer, some sem aviso. Reduz a
+    // escala (zoom) do bloco de texto em passos ate caber acima do rodape.
+    document.querySelectorAll('.pr-page').forEach(function(p){
+      var grid=p.querySelector('.pr-grid'),foot=p.querySelector('.pr-foot');if(!grid||!foot)return;
+      var cabe=function(){return grid.getBoundingClientRect().bottom<=foot.getBoundingClientRect().top-4};
+      for(var f=1;!cabe()&&f>0.7;f-=0.05)grid.style.zoom=(f-0.05).toFixed(2);
+    });
+    <\/script>
   </body>
   </html>`;
 }

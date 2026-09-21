@@ -131,7 +131,7 @@
   try{localStorage.clear()}catch(e){}
   // Gate: o iframe (e tudo que ele carrega) so entra depois do login.
   // view.html (cliente) continua aberta, sem a aba de riscos; o editor exige login.
-  (READONLY?Promise.resolve(true):exigirLogin()).then(ok=>{if(ok)frame.src='/legacy-index.html?v=20260921-plano'});
+  (READONLY?Promise.resolve(true):exigirLogin()).then(ok=>{if(ok)frame.src='/legacy-index.html?v=20260921-print3'});
 
   function setBullets(container,items){
     if(!container)return;
