@@ -1,0 +1,490 @@
+{
+ "frente": "revenue",
+ "posicao": "21/09/2026",
+ "rodada": "Rodada 1 · homologação de 21/09/2026",
+ "fonte": "Revisão da lista de US aprovadas com o time de Transformação Digital da MV (Andressa), 21/09/2026",
+ "escopo": 239,
+ "formas": {
+  "mv": "Aprovada pela MV na homologação",
+  "hab": "Habilitador técnico (QA)",
+  "cfg": "Configuração técnica",
+  "prod": "Validada em produção"
+ },
+ "aprovadas": [
+  {
+   "key": "MVREV-115",
+   "titulo": "Configuração Revenue QA",
+   "tipo": "História",
+   "sprint": "Sprint 16 - Final",
+   "forma": "cfg",
+   "base": "Configuração técnica de ambiente (QA/UAT)"
+  },
+  {
+   "key": "MVREV-116",
+   "titulo": "Inclusão da características das empresa na unidade da cotação na configuração de serviços de implantação Hospitalar Soul MV",
+   "tipo": "História",
+   "sprint": "Sprint 4",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+  },
+  {
+   "key": "MVREV-128",
+   "titulo": "Correção da automação de SLA",
+   "tipo": "História",
+   "sprint": "Sprint 16 - Final",
+   "forma": "cfg",
+   "base": "Configuração técnica de ambiente (QA/UAT)"
+  },
+  {
+   "key": "MVREV-149",
+   "titulo": "Criação do objeto equipamentos das unidades",
+   "tipo": "História",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+  },
+  {
+   "key": "MVREV-157",
+   "titulo": "Configuração do revenue em UAT",
+   "tipo": "História",
+   "sprint": "Sprint 4",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-160",
+   "titulo": "Componente de Inadimplência no Prontuário do Cliente",
+   "tipo": "História",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-161",
+   "titulo": "Componente de Vendas no Prontuário do Cliente",
+   "tipo": "História",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-162",
+   "titulo": "Componente de Informações do Cliente no Prontuário",
+   "tipo": "História",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-164",
+   "titulo": "Estruturação de carga de dados do Revenue Cloud entre ambientes parte 1",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 10",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-165",
+   "titulo": "Unificação dos componentes do prontuário do cliente",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-167",
+   "titulo": "Integração para Faturamento do Prontuário do Cliente",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-168",
+   "titulo": "Integração para Inadimplência do Prontuário do Cliente",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-170",
+   "titulo": "Implementação de interface de manutenção de Planilha de Cálculos",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-174",
+   "titulo": "Estruturação de carga de dados do Revenue Cloud entre ambientes parte 2",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-182",
+   "titulo": "Adequar o prontuário para funcionamento responsivo em dispositivos tablet",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-184",
+   "titulo": "Ajustar Layout de inadimplência",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-185",
+   "titulo": "Criar um app especifico para prontuario",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-188",
+   "titulo": "Configurar os Tooltip no card de inadimplência",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-189",
+   "titulo": "Configurar card de Conta",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+  },
+  {
+   "key": "MVREV-190",
+   "titulo": "Inclusão de campos de Características das Operadoras na Unidade da Cotação",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-193",
+   "titulo": "Unificar campos de exames e público em picklist múltiplo na Unidade da Cotação",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-195",
+   "titulo": "Criação da Planilha de Cálculo de Preço - parte 1",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-197",
+   "titulo": "Criação da Classe de Teste para Card de Vendas",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 7",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-198",
+   "titulo": "Implementação da Classe de Teste para Card de Faturamento",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 7",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-199",
+   "titulo": "Implementação da Classe de Teste de Inadimplência",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-203",
+   "titulo": "Cálculo de Horas por Fase e Escopo na Precificação da Cotação",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 10",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-205",
+   "titulo": "Hook de Cálculo de Horas por Fase e Escopo na Precificação da Cotação",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 10",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-211",
+   "titulo": "Configuração, deploy, carga de Revenue no ambiente da Dream",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 7",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-222",
+   "titulo": "Hook de Cálculo de Preço por Horas na Precificação da Cotação",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 10",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-224",
+   "titulo": "Permission Set para visualização do Prontuário do Cliente",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-230",
+   "titulo": "Atualização de picklist família do produto",
+   "tipo": "História",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-231",
+   "titulo": "Exibir o apelido da conta no lado esquerdo do prontuário",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-232",
+   "titulo": "Exibir no prontuário quem cuida da conta / representante responsável",
+   "tipo": "Tarefa",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-233",
+   "titulo": "Habilitar o botão do prontuário e o acesso ao prontuário em todos os aplicativos",
+   "tipo": "Tarefa",
+   "sprint": "Sprint 10",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-234",
+   "titulo": "Corrigir filtro e retorno de ocorrências / detalhamento",
+   "tipo": "Tarefa",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-235",
+   "titulo": "Criação de novos quadros no prontuário do cliente",
+   "tipo": "Tarefa",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-236",
+   "titulo": "Inclusão de um indicador no grupo econômico",
+   "tipo": "Tarefa",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-237",
+   "titulo": "Corrigir a label de “Decafi” para “Decaf”",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-238",
+   "titulo": "Ajustar card de faturamentos para exibição fixa dos últimos 12 meses",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 8",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-239",
+   "titulo": "Ajuste da Linha do Tempo",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+  },
+  {
+   "key": "MVREV-242",
+   "titulo": "Indicadores da Linha do Tempo",
+   "tipo": "Melhoria",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+  },
+  {
+   "key": "MVREV-281",
+   "titulo": "Solicitação de Avaliação de Adesão pela Oportunidade",
+   "tipo": "História",
+   "sprint": "Sprint 11",
+   "forma": "mv",
+   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+  },
+  {
+   "key": "MVREV-296",
+   "titulo": "Prontuário do cliente no Whatsapp",
+   "tipo": "História",
+   "sprint": "Sprint 11",
+   "forma": "prod",
+   "base": "Validada pela MV em produção"
+  },
+  {
+   "key": "MVREV-389",
+   "titulo": "Retirar a Fase Onboarding da Oportunidade",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 13",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-395",
+   "titulo": "Renomear tipo de registro Empresa para Pessoa Jurídica",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-451",
+   "titulo": "Estruturação do Objeto Plano de Faturamento",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-452",
+   "titulo": "Estrutura do Objeto Rateio do Plano",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-453",
+   "titulo": "Estrutura do Objeto Composição do Plano",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-454",
+   "titulo": "Estruturação do Objeto Rateio de Resultado do Plano",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-455",
+   "titulo": "Estruturação do Objeto Pré-Nota Fiscal",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-466",
+   "titulo": "Criação do Objeto Custo Padrão (Produto e Categoria Profissional)",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-467",
+   "titulo": "Criação da Planilha de Cálculo de Custo Horas",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  },
+  {
+   "key": "MVREV-468",
+   "titulo": "Hook de Cálculo de Custo de Implementação na Precificação da Cotação",
+   "tipo": "Habilitador",
+   "sprint": "Sprint 16 - Final",
+   "forma": "hab",
+   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  }
+ ],
+ "reteste": [
+  {
+   "key": "MVREV-38",
+   "titulo": "Criação automática do Caso de Avaliação de Arquitetura",
+   "tipo": "História",
+   "sprint": "Sprint 2",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  },
+  {
+   "key": "MVREV-39",
+   "titulo": "SLA - Estruturação do Caso de Avaliação de Arquitetura",
+   "tipo": "História",
+   "sprint": "Sprint 2",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  },
+  {
+   "key": "MVREV-42",
+   "titulo": "Conclusão da Avaliação de Arquitetura com impacto na Cotação",
+   "tipo": "História",
+   "sprint": "Sprint 2",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  },
+  {
+   "key": "MVREV-82",
+   "titulo": "Criação do objeto Produto da Regra de Precificação de Projetos (Hospitalar)",
+   "tipo": "História",
+   "sprint": "Sprint 2",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  },
+  {
+   "key": "MVREV-151",
+   "titulo": "Soul MV | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
+   "tipo": "História",
+   "sprint": "Sprint 8",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  },
+  {
+   "key": "MVREV-194",
+   "titulo": "Plano de Saúde | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
+   "tipo": "História",
+   "sprint": "Sprint 8",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  },
+  {
+   "key": "MVREV-196",
+   "titulo": "Medicina Diagnostica | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
+   "tipo": "História",
+   "sprint": "Sprint 7",
+   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+  }
+ ]
+}

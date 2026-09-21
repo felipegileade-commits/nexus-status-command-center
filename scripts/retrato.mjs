@@ -35,6 +35,11 @@ function lerDesvios() {
 // cards dessa lista em 'Pós Review' contam como em homologação com o cliente (uat).
 function lerLote() { try { return new Set(JSON.parse(fs.readFileSync('data/homologacao-lote.json', 'utf8')).central || []); } catch { return new Set(); } }
 const LOTE_HOMOLOG = lerLote();
+// Revenue: a lista de US aprovadas (data/us-aprovadas.json, a mesma da aba "US Aprovadas")
+// define o que conta como homologado. Card em etapa 'prod' fora da lista volta para 'uat'
+// na distribuição e no indicador (revisão com a Transformação Digital da MV, 21/09).
+function lerAprovadas() { try { const d = JSON.parse(fs.readFileSync('data/us-aprovadas.json', 'utf8')); return { [d.frente || 'revenue']: new Set((d.aprovadas || []).map(a => a.key)) }; } catch { return {}; } }
+const APROVADAS = lerAprovadas();
 const maiorSprint = it => Math.max(-1, ...((it.sprints || []).map(s => +((String(s).match(/\d+/) || [-1])[0]))));
 
 export function retrato(itens, sprints, lidoEm) {
@@ -50,6 +55,7 @@ export function retrato(itens, sprints, lidoEm) {
     for (const i of xs) {
       let e = ETAPA_DE[i.status];
       if (e === 'testado' && i.status === 'Pós Review' && LOTE_HOMOLOG.has(i.key)) e = 'uat';
+      if (e === 'prod' && APROVADAS[chave] && !APROVADAS[chave].has(i.key)) e = 'uat';
       if (i.status === 'Liberado para deploy') aprovadoUat++;
       const alvo = i.parent ? (porEpico[i.parent] = porEpico[i.parent] || { key: i.parent, nome: i.parentName || i.parent, total: 0, ...zero() }) : null;
       for (const c of [tot, alvo]) {

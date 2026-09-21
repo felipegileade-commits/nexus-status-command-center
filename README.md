@@ -18,6 +18,7 @@ que abrem a URL.
 | `timeline.js` | Renderizador do cronograma executivo (setembro → novembro): sprints, janelas de trabalho, marcos clicáveis e painel de detalhe. Marca a linha "Hoje", os marcos já passados (✓) e o marco em curso pela data. |
 | `jira.js` | Painel "Onde estão as entregas": posição dos itens de cada frente na esteira (concluído → homologação → testes QA → desenvolvimento), lido de `data/jira.json`. Também calcula o cartão "Próximo marco" pela data de hoje. |
 | `data/jira.json` | Retrato executivo do Jira. Gerado por `scripts/sync-jira.mjs` (workflow) ou por `scripts/retrato.mjs` a partir de um dump de itens. |
+| `data/us-aprovadas.json` | Lista das US de Revenue aprovadas na homologação (com a base de cada aprovação) e das ajustadas que aguardam reteste. Alimenta a aba "US Aprovadas" (`node scripts/us-aprovadas.mjs` regrava a aba no `legacy-index.html`) e o indicador "homologado" de Revenue no retrato: card em produção fora da lista conta como em homologação. Atualizar a cada rodada de homologação. |
 
 ## Os dois links
 
