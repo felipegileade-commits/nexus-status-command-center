@@ -81,7 +81,7 @@
     const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('');
     const foraTxt=fora.length?`<div class="nx-jira-fora">Fora da barra: ${fora.map(([id,n])=>`<b>${n}</b> ${esc(nomes[id]).toLowerCase()}`).join(' · ')}</div>`:'';
     const sprint=f.sprint&&f.sprint.nome?`${esc(f.sprint.nome)}${f.sprint.inicio?` · ${dm(f.sprint.inicio)} a ${dm(f.sprint.fim)}`:''}`:'';
-    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${String(f.pctEntregue??f.pctHomologado??0).replace('.',',')}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div>${foraTxt}</div></div>`;
+    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${Math.round(f.pctEntregue??f.pctHomologado??0)}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div>${foraTxt}</div></div>`;
   }
 
   function painel(w,j){
@@ -140,7 +140,8 @@
   // UAT = concluído + em homologação; homologado = concluído; desvio = data/desvio.json.
   function metricasFrentes(w,j){
     if(!j||!j.frentes)return;
-    const fmtPct=n=>(n==null||isNaN(n))?null:String(Number(n).toFixed(2)).replace('.',',')+'%';
+    // UAT e homologado sem casas decimais (acordo com a MV em 21/09: "30%", nao "30,1%").
+    const fmtPct=n=>(n==null||isNaN(n))?null:String(Math.round(Number(n)))+'%';
     const fmtDesvio=n=>(n==null||isNaN(n))?null:(n>0?'+':'')+String(Number(n).toFixed(2)).replace('.',',')+'%';
     [['central','central'],['revenue','revenue']].forEach(([sec,k])=>{
       const f=j.frentes[k],root=w.document.getElementById(sec);if(!f||!root)return;
