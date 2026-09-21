@@ -1079,6 +1079,14 @@ function syncPrintFront(front,printId){
     k[3].classList.toggle('red',!isNaN(n)&&n<0);
   }
 
+  // Sintese executiva derivada dos numeros da tela (antes era texto fixo de 27/08).
+  const sprint=txt(q('.front-foot span',root)),desvio=txt(metrics[2]),nDesvio=parseFloat(desvio.replace('%','').replace(',','.'));
+  const nome=front==='central'?'A Central de Projetos':'A frente Revenue';
+  const h2=front==='central'?'Homologação semanal com a MV em andamento':'Desenvolvimento em conclusão e homologação com a MV em curso';
+  const situacao=isNaN(nDesvio)?'':(nDesvio<0?' e atraso de '+desvio.replace('-','')+' no cronograma':nDesvio>0?' e adiantamento de '+desvio.replace('+','')+' no cronograma':' e cronograma no prazo');
+  setText('.pr-synth h2',h2,pr);
+  setText('.pr-synth p',nome+' está na '+sprint+', com '+concluded+' desenvolvido, '+txt(metrics[0])+' disponível em UAT, '+txt(metrics[1])+' homologado'+situacao+'.',pr);
+
   const pg=q('.pr-grid .pr-box:first-child',pr),groups=qa('.week-card .subgrid > div',root);
   const labels=qa('.pr-label',pg);
   const replaceAfter=(labelEl,items)=>{
@@ -1228,7 +1236,7 @@ function syncPrintTimeline(){
     const ultima=itens.length?itens.reduce((a,b)=>(b.fim>a?b.fim:a),itens[0].fim):null;
     const partes=[];
     if(sp)partes.push(`Sprint ${sp[1]} em andamento; ${Math.max(0,+sp[2]-+sp[1])} sprints restantes.`);
-    partes.push('Revenue será concluída antes da homologação da Central de Projetos.');
+    partes.push('Homologação de Revenue com a MV de 28/09 a 09/10; homologação da Central em sessões semanais até 03/11.');
     if(ultima)partes.push(`Data final do Projeto Nexus: <b>${dm(ultima)}/${ultima.getFullYear()}</b>.`);
     resumo.innerHTML='<b>Leitura executiva:</b> '+partes.join(' ');
   }
