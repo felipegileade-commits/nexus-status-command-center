@@ -1,12 +1,12 @@
 {
- "atualizadoEm": "2026-09-17",
- "fontes": "Jira, atas Gemini (aprovações e refinos), Google Calendar, Gmail (até 16/09), planilha de sprints, dashboard de homologação da MV, planilha 'Acompanhamento férias Andressa'",
+ "atualizadoEm": "2026-09-21",
+ "fontes": "Jira, atas Gemini (aprovações e refinos), Google Calendar, Gmail (até 21/09), planilha de sprints, dashboard de homologação da MV, planilha 'Acompanhamento férias Andressa'",
  "riscos": [
   {
    "nivel": "Alto",
    "frente": "Central",
    "titulo": "Homologação estendida de 08/09 para 13/11 sem contrapartida de capacidade",
-   "desc": "Prevista de 17/08 a 08/09 (3 semanas), a homologação passou a semanal até 13/11 (+9 semanas). A MV pediu duas agendas semanais de 3 h; a Sottelli mantém só sexta 9h–12h. E-mail de 14/09 apresentou as opções 1 (priorizar homologação → 2 sprints adicionais) e 2 (priorizar a Sprint); resposta da MV pedida até 19/09.",
+   "desc": "Prevista de 17/08 a 08/09 (3 semanas), a homologação passou a semanal até 13/11 (+9 semanas). A MV pediu duas agendas semanais de 3 h; a partir de 22/09 a sessão passa a ser às terças, 14h–17h, até 03/11. E-mail de 14/09 apresentou as opções 1 (priorizar homologação → 2 sprints adicionais) e 2 (priorizar a Sprint); resposta da MV pedida até 19/09.",
    "impacto": "Sprint 16 e cronograma até novembro",
    "acao": "Decisão formal da MV entre opção 1 e 2 até 19/09; agenda de homologação fechada com data de término."
   },
@@ -30,7 +30,7 @@
    "nivel": "Alto",
    "frente": "Central",
    "titulo": "Homologação gerando mudança de regra, não correção de defeito",
-   "desc": "Placar da planilha da MV (16/09): 47 US testáveis · 10 aprovadas · 18 reprovadas · 18 não iniciadas. 115 apontamentos: 22 bugs (19%), 52 melhorias, 41 ajustes. 12 das 18 reprovadas não registram nenhum bug. Dependências futuras tratadas como impedimento; dificuldade com a plataforma registrada como defeito.",
+   "desc": "Placar da planilha da MV (18/09): 47 US testáveis · 14 aprovadas · 20 reprovadas · 11 não iniciadas · 1 pendente de correção · 1 em andamento. 132 apontamentos: 26 bugs (20%), 55 melhorias, 51 ajustes. 4 das 20 reprovadas não registram nenhum bug. Dependências futuras tratadas como impedimento; dificuldade com a plataforma registrada como defeito.",
    "impacto": "Volume de ajustes fora do escopo aprovado",
    "acao": "Homologar por US/cenário; só é bug o que contraria critério de aceite aprovado; melhoria/ajuste vai para backlog ou change request."
   },
@@ -83,10 +83,10 @@
    "status": "Aguardando — MV faria call interno em 14/09"
   },
   {
-   "item": "Homologação: 18 das 47 US testáveis ainda não iniciadas; 1 pendente de correção (lote = sprints 6 a 15)",
+   "item": "Homologação: 11 das 47 US testáveis ainda não iniciadas; 1 pendente de correção e 1 em andamento (lote = sprints 6 a 15)",
    "desde": "17/08",
    "prazo": "13/11",
-   "status": "Em andamento (semanal, sextas 9h–12h)"
+   "status": "Em andamento (semanal, terças 14h–17h, de 22/09 a 03/11)"
   },
   {
    "item": "Aprovação das 72 histórias em definição (refino/aprovação)",
@@ -117,12 +117,6 @@
    "desde": "22/07",
    "prazo": "—",
    "status": "Recebidos em 15/07 apenas os modelos Implantação e Pós-venda"
-  },
-  {
-   "item": "Cálculo de exposição ao risco (probabilidade × controle) para a US de riscos",
-   "desde": "18/03",
-   "prazo": "—",
-   "status": "Não localizado no e-mail"
   },
   {
    "item": "Validação do material de homologação — 'essa não é a versão final' (31/07)",
@@ -218,7 +212,7 @@
   "Reunião de 16/09: 2 de 4 US devolvidas ocuparam 49 dos 61 minutos.",
   "Aprovação de USs passou a quinzenal (16/09 → 10/11); refinos retomados em 15/09.",
   "Alocação de Recursos foi refinada 5 vezes (02/04, 16/04, 19/06, 04/08, 18/08) e ainda saiu sem consenso.",
-  "Central hoje no Jira: 40 concluídos · 47 em homologação (as 47 US testáveis do lote, sprints 6–15) · 13 testados aguardando UAT · 45 em teste QA · 9 em desenvolvimento · 72 em definição; habilitadores não vão para homologação.",
+  "Central hoje no Jira: 40 concluídos · 47 em homologação (14 já aprovadas pela MV, em \"Liberado para deploy\") · 13 testados aguardando UAT · 45 em teste QA · 9 em desenvolvimento · 72 em definição; habilitadores não vão para homologação.",
   "Cutover e cargas (plano da MV): 'Não iniciado' — dependem de homologação encerrada."
  ]
 }

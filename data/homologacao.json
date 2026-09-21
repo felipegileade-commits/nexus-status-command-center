@@ -1,10 +1,18 @@
 {
- "lidoEm": "2026-09-16",
+ "lidoEm": "2026-09-18",
  "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV)",
  "central": {
-  "usTestaveis": 47, "aprovadas": 10, "reprovadas": 18, "naoIniciadas": 18, "pendenteCorrecao": 1,
-  "apontamentos": 115, "bugs": 22, "melhorias": 52, "ajustes": 41,
-  "reprovadasSemBug": 12,
-  "nota": "12 das 18 reprovadas não registram nenhum bug: os apontamentos são melhorias ou ajustes de regra, não defeitos."
+  "usTestaveis": 47,
+  "aprovadas": 14,
+  "reprovadas": 20,
+  "naoIniciadas": 11,
+  "pendenteCorrecao": 1,
+  "emAndamento": 1,
+  "apontamentos": 132,
+  "bugs": 26,
+  "melhorias": 55,
+  "ajustes": 51,
+  "reprovadasSemBug": 4,
+  "nota": "4 das 20 reprovadas não registram nenhum bug: os apontamentos são melhorias ou ajustes de regra, não defeitos. As 14 aprovadas estão no Jira como \"Liberado para deploy\"."
  }
 }
