@@ -1,490 +1,940 @@
 {
- "frente": "revenue",
  "posicao": "21/09/2026",
- "rodada": "Rodada 1 · homologação de 21/09/2026",
- "fonte": "Revisão da lista de US aprovadas com o time de Transformação Digital da MV (Andressa), 21/09/2026",
- "escopo": 239,
  "formas": {
   "mv": "Aprovada pela MV na homologação",
+  "mv1": "Aprovada na 1ª homologação",
   "hab": "Habilitador técnico (QA)",
   "cfg": "Configuração técnica",
   "prod": "Validada em produção"
  },
- "aprovadas": [
-  {
-   "key": "MVREV-115",
-   "titulo": "Configuração Revenue QA",
-   "tipo": "História",
-   "sprint": "Sprint 16 - Final",
-   "forma": "cfg",
-   "base": "Configuração técnica de ambiente (QA/UAT)"
+ "frentes": {
+  "revenue": {
+   "nome": "Revenue Cloud",
+   "projeto": "MVREV",
+   "escopo": 239,
+   "controlaIndicador": true,
+   "rodada": "Rodada 1 · homologação de 21/09/2026",
+   "fonte": "Revisão da lista de US aprovadas com o time de Transformação Digital da MV (Andressa), 21/09/2026",
+   "aprovadas": [
+    {
+     "key": "MVREV-115",
+     "titulo": "Configuração Revenue QA",
+     "tipo": "História",
+     "sprint": "Sprint 16 - Final",
+     "forma": "cfg",
+     "base": "Configuração técnica de ambiente (QA/UAT)"
+    },
+    {
+     "key": "MVREV-116",
+     "titulo": "Inclusão da características das empresa na unidade da cotação na configuração de serviços de implantação Hospitalar Soul MV",
+     "tipo": "História",
+     "sprint": "Sprint 4",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+    },
+    {
+     "key": "MVREV-128",
+     "titulo": "Correção da automação de SLA",
+     "tipo": "História",
+     "sprint": "Sprint 16 - Final",
+     "forma": "cfg",
+     "base": "Configuração técnica de ambiente (QA/UAT)"
+    },
+    {
+     "key": "MVREV-149",
+     "titulo": "Criação do objeto equipamentos das unidades",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+    },
+    {
+     "key": "MVREV-157",
+     "titulo": "Configuração do revenue em UAT",
+     "tipo": "História",
+     "sprint": "Sprint 4",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-160",
+     "titulo": "Componente de Inadimplência no Prontuário do Cliente",
+     "tipo": "História",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-161",
+     "titulo": "Componente de Vendas no Prontuário do Cliente",
+     "tipo": "História",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-162",
+     "titulo": "Componente de Informações do Cliente no Prontuário",
+     "tipo": "História",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-164",
+     "titulo": "Estruturação de carga de dados do Revenue Cloud entre ambientes parte 1",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 10",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-165",
+     "titulo": "Unificação dos componentes do prontuário do cliente",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-167",
+     "titulo": "Integração para Faturamento do Prontuário do Cliente",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-168",
+     "titulo": "Integração para Inadimplência do Prontuário do Cliente",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-170",
+     "titulo": "Implementação de interface de manutenção de Planilha de Cálculos",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-174",
+     "titulo": "Estruturação de carga de dados do Revenue Cloud entre ambientes parte 2",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-182",
+     "titulo": "Adequar o prontuário para funcionamento responsivo em dispositivos tablet",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-184",
+     "titulo": "Ajustar Layout de inadimplência",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-185",
+     "titulo": "Criar um app especifico para prontuario",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-188",
+     "titulo": "Configurar os Tooltip no card de inadimplência",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-189",
+     "titulo": "Configurar card de Conta",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+    },
+    {
+     "key": "MVREV-190",
+     "titulo": "Inclusão de campos de Características das Operadoras na Unidade da Cotação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-193",
+     "titulo": "Unificar campos de exames e público em picklist múltiplo na Unidade da Cotação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-195",
+     "titulo": "Criação da Planilha de Cálculo de Preço - parte 1",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-197",
+     "titulo": "Criação da Classe de Teste para Card de Vendas",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 7",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-198",
+     "titulo": "Implementação da Classe de Teste para Card de Faturamento",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 7",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-199",
+     "titulo": "Implementação da Classe de Teste de Inadimplência",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-203",
+     "titulo": "Cálculo de Horas por Fase e Escopo na Precificação da Cotação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 10",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-205",
+     "titulo": "Hook de Cálculo de Horas por Fase e Escopo na Precificação da Cotação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 10",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-211",
+     "titulo": "Configuração, deploy, carga de Revenue no ambiente da Dream",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 7",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-222",
+     "titulo": "Hook de Cálculo de Preço por Horas na Precificação da Cotação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 10",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-224",
+     "titulo": "Permission Set para visualização do Prontuário do Cliente",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-230",
+     "titulo": "Atualização de picklist família do produto",
+     "tipo": "História",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-231",
+     "titulo": "Exibir o apelido da conta no lado esquerdo do prontuário",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-232",
+     "titulo": "Exibir no prontuário quem cuida da conta / representante responsável",
+     "tipo": "Tarefa",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-233",
+     "titulo": "Habilitar o botão do prontuário e o acesso ao prontuário em todos os aplicativos",
+     "tipo": "Tarefa",
+     "sprint": "Sprint 10",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-234",
+     "titulo": "Corrigir filtro e retorno de ocorrências / detalhamento",
+     "tipo": "Tarefa",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-235",
+     "titulo": "Criação de novos quadros no prontuário do cliente",
+     "tipo": "Tarefa",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-236",
+     "titulo": "Inclusão de um indicador no grupo econômico",
+     "tipo": "Tarefa",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-237",
+     "titulo": "Corrigir a label de “Decafi” para “Decaf”",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-238",
+     "titulo": "Ajustar card de faturamentos para exibição fixa dos últimos 12 meses",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 8",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-239",
+     "titulo": "Ajuste da Linha do Tempo",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
+    },
+    {
+     "key": "MVREV-242",
+     "titulo": "Indicadores da Linha do Tempo",
+     "tipo": "Melhoria",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
+    },
+    {
+     "key": "MVREV-281",
+     "titulo": "Solicitação de Avaliação de Adesão pela Oportunidade",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+    },
+    {
+     "key": "MVREV-296",
+     "titulo": "Prontuário do cliente no Whatsapp",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "prod",
+     "base": "Validada pela MV em produção"
+    },
+    {
+     "key": "MVREV-389",
+     "titulo": "Retirar a Fase Onboarding da Oportunidade",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 13",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-395",
+     "titulo": "Renomear tipo de registro Empresa para Pessoa Jurídica",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-451",
+     "titulo": "Estruturação do Objeto Plano de Faturamento",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-452",
+     "titulo": "Estrutura do Objeto Rateio do Plano",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-453",
+     "titulo": "Estrutura do Objeto Composição do Plano",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-454",
+     "titulo": "Estruturação do Objeto Rateio de Resultado do Plano",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-455",
+     "titulo": "Estruturação do Objeto Pré-Nota Fiscal",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-466",
+     "titulo": "Criação do Objeto Custo Padrão (Produto e Categoria Profissional)",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-467",
+     "titulo": "Criação da Planilha de Cálculo de Custo Horas",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    },
+    {
+     "key": "MVREV-468",
+     "titulo": "Hook de Cálculo de Custo de Implementação na Precificação da Cotação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 16 - Final",
+     "forma": "hab",
+     "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+    }
+   ],
+   "reteste": [
+    {
+     "key": "MVREV-38",
+     "titulo": "Criação automática do Caso de Avaliação de Arquitetura",
+     "tipo": "História",
+     "sprint": "Sprint 2",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    },
+    {
+     "key": "MVREV-39",
+     "titulo": "SLA - Estruturação do Caso de Avaliação de Arquitetura",
+     "tipo": "História",
+     "sprint": "Sprint 2",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    },
+    {
+     "key": "MVREV-42",
+     "titulo": "Conclusão da Avaliação de Arquitetura com impacto na Cotação",
+     "tipo": "História",
+     "sprint": "Sprint 2",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    },
+    {
+     "key": "MVREV-82",
+     "titulo": "Criação do objeto Produto da Regra de Precificação de Projetos (Hospitalar)",
+     "tipo": "História",
+     "sprint": "Sprint 2",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    },
+    {
+     "key": "MVREV-151",
+     "titulo": "Soul MV | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
+     "tipo": "História",
+     "sprint": "Sprint 8",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    },
+    {
+     "key": "MVREV-194",
+     "titulo": "Plano de Saúde | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
+     "tipo": "História",
+     "sprint": "Sprint 8",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    },
+    {
+     "key": "MVREV-196",
+     "titulo": "Medicina Diagnostica | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
+     "tipo": "História",
+     "sprint": "Sprint 7",
+     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
+    }
+   ]
   },
-  {
-   "key": "MVREV-116",
-   "titulo": "Inclusão da características das empresa na unidade da cotação na configuração de serviços de implantação Hospitalar Soul MV",
-   "tipo": "História",
-   "sprint": "Sprint 4",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
-  },
-  {
-   "key": "MVREV-128",
-   "titulo": "Correção da automação de SLA",
-   "tipo": "História",
-   "sprint": "Sprint 16 - Final",
-   "forma": "cfg",
-   "base": "Configuração técnica de ambiente (QA/UAT)"
-  },
-  {
-   "key": "MVREV-149",
-   "titulo": "Criação do objeto equipamentos das unidades",
-   "tipo": "História",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
-  },
-  {
-   "key": "MVREV-157",
-   "titulo": "Configuração do revenue em UAT",
-   "tipo": "História",
-   "sprint": "Sprint 4",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-160",
-   "titulo": "Componente de Inadimplência no Prontuário do Cliente",
-   "tipo": "História",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-161",
-   "titulo": "Componente de Vendas no Prontuário do Cliente",
-   "tipo": "História",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-162",
-   "titulo": "Componente de Informações do Cliente no Prontuário",
-   "tipo": "História",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-164",
-   "titulo": "Estruturação de carga de dados do Revenue Cloud entre ambientes parte 1",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 10",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-165",
-   "titulo": "Unificação dos componentes do prontuário do cliente",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-167",
-   "titulo": "Integração para Faturamento do Prontuário do Cliente",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-168",
-   "titulo": "Integração para Inadimplência do Prontuário do Cliente",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-170",
-   "titulo": "Implementação de interface de manutenção de Planilha de Cálculos",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-174",
-   "titulo": "Estruturação de carga de dados do Revenue Cloud entre ambientes parte 2",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-182",
-   "titulo": "Adequar o prontuário para funcionamento responsivo em dispositivos tablet",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-184",
-   "titulo": "Ajustar Layout de inadimplência",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-185",
-   "titulo": "Criar um app especifico para prontuario",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-188",
-   "titulo": "Configurar os Tooltip no card de inadimplência",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-189",
-   "titulo": "Configurar card de Conta",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
-  },
-  {
-   "key": "MVREV-190",
-   "titulo": "Inclusão de campos de Características das Operadoras na Unidade da Cotação",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-193",
-   "titulo": "Unificar campos de exames e público em picklist múltiplo na Unidade da Cotação",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-195",
-   "titulo": "Criação da Planilha de Cálculo de Preço - parte 1",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-197",
-   "titulo": "Criação da Classe de Teste para Card de Vendas",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 7",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-198",
-   "titulo": "Implementação da Classe de Teste para Card de Faturamento",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 7",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-199",
-   "titulo": "Implementação da Classe de Teste de Inadimplência",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-203",
-   "titulo": "Cálculo de Horas por Fase e Escopo na Precificação da Cotação",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 10",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-205",
-   "titulo": "Hook de Cálculo de Horas por Fase e Escopo na Precificação da Cotação",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 10",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-211",
-   "titulo": "Configuração, deploy, carga de Revenue no ambiente da Dream",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 7",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-222",
-   "titulo": "Hook de Cálculo de Preço por Horas na Precificação da Cotação",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 10",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-224",
-   "titulo": "Permission Set para visualização do Prontuário do Cliente",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-230",
-   "titulo": "Atualização de picklist família do produto",
-   "tipo": "História",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-231",
-   "titulo": "Exibir o apelido da conta no lado esquerdo do prontuário",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-232",
-   "titulo": "Exibir no prontuário quem cuida da conta / representante responsável",
-   "tipo": "Tarefa",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-233",
-   "titulo": "Habilitar o botão do prontuário e o acesso ao prontuário em todos os aplicativos",
-   "tipo": "Tarefa",
-   "sprint": "Sprint 10",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-234",
-   "titulo": "Corrigir filtro e retorno de ocorrências / detalhamento",
-   "tipo": "Tarefa",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-235",
-   "titulo": "Criação de novos quadros no prontuário do cliente",
-   "tipo": "Tarefa",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-236",
-   "titulo": "Inclusão de um indicador no grupo econômico",
-   "tipo": "Tarefa",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-237",
-   "titulo": "Corrigir a label de “Decafi” para “Decaf”",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-238",
-   "titulo": "Ajustar card de faturamentos para exibição fixa dos últimos 12 meses",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 8",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-239",
-   "titulo": "Ajuste da Linha do Tempo",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026)"
-  },
-  {
-   "key": "MVREV-242",
-   "titulo": "Indicadores da Linha do Tempo",
-   "tipo": "Melhoria",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Prontuário do Cliente: validado pela MV em UAT e em uso em produção"
-  },
-  {
-   "key": "MVREV-281",
-   "titulo": "Solicitação de Avaliação de Adesão pela Oportunidade",
-   "tipo": "História",
-   "sprint": "Sprint 11",
-   "forma": "mv",
-   "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
-  },
-  {
-   "key": "MVREV-296",
-   "titulo": "Prontuário do cliente no Whatsapp",
-   "tipo": "História",
-   "sprint": "Sprint 11",
-   "forma": "prod",
-   "base": "Validada pela MV em produção"
-  },
-  {
-   "key": "MVREV-389",
-   "titulo": "Retirar a Fase Onboarding da Oportunidade",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 13",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-395",
-   "titulo": "Renomear tipo de registro Empresa para Pessoa Jurídica",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-451",
-   "titulo": "Estruturação do Objeto Plano de Faturamento",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-452",
-   "titulo": "Estrutura do Objeto Rateio do Plano",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-453",
-   "titulo": "Estrutura do Objeto Composição do Plano",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-454",
-   "titulo": "Estruturação do Objeto Rateio de Resultado do Plano",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-455",
-   "titulo": "Estruturação do Objeto Pré-Nota Fiscal",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-466",
-   "titulo": "Criação do Objeto Custo Padrão (Produto e Categoria Profissional)",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-467",
-   "titulo": "Criação da Planilha de Cálculo de Custo Horas",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
-  },
-  {
-   "key": "MVREV-468",
-   "titulo": "Hook de Cálculo de Custo de Implementação na Precificação da Cotação",
-   "tipo": "Habilitador",
-   "sprint": "Sprint 16 - Final",
-   "forma": "hab",
-   "base": "Habilitador técnico: testado e aprovado pelo QA Sottelli (sem homologação funcional)"
+  "central": {
+   "nome": "Central de Projetos",
+   "projeto": "MVPMO",
+   "escopo": 226,
+   "controlaIndicador": false,
+   "rodada": "Homologação em andamento · posição de 20/09/2026",
+   "fonte": "Planilha executiva das histórias homologadas da Central (Jira MVPMO + atas das sessões de homologação com o PMO da MV), 20/09/2026",
+   "aprovadas": [
+    {
+     "key": "MVPMO-1",
+     "titulo": "Integração com a bryntum gantt - POC",
+     "tipo": "História",
+     "sprint": "Sprint 0",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-2",
+     "titulo": "Integração com a bryntum Calendar - POC",
+     "tipo": "História",
+     "sprint": "Sprint 0",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-3",
+     "titulo": "Integração com a bryntum Task Board - POC",
+     "tipo": "História",
+     "sprint": "Sprint 0",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-4",
+     "titulo": "Criação do objeto \"Projeto\"",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-9",
+     "titulo": "Criação do objeto \"Destaques do Projeto\"",
+     "tipo": "História",
+     "sprint": "Sprint 4",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-14",
+     "titulo": "Criação do objeto \"Versão do Projeto\"",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-17",
+     "titulo": "Sincronização do componente da POC \"Task Board\" com Objetos Personalizados do Salesforce",
+     "tipo": "História",
+     "sprint": "Sprint 1",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-18",
+     "titulo": "Sincronização do componente da POC \"Calendar\" com Objetos Personalizados do Salesforce",
+     "tipo": "História",
+     "sprint": "Sprint 1",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-19",
+     "titulo": "Sincronização do componente da POC \"Gantt\" com Objetos Personalizados do Salesforce - Parte 1",
+     "tipo": "História",
+     "sprint": "Sprint 1",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-27",
+     "titulo": "Criação do objeto \"Centro de Custo\"",
+     "tipo": "História",
+     "sprint": "Sprint 3",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-28",
+     "titulo": "Criação do objeto \"Unidade Vertical\"",
+     "tipo": "História",
+     "sprint": "Sprint 3",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-29",
+     "titulo": "Criação do objeto \"Cargos\"",
+     "tipo": "História",
+     "sprint": "Sprint 3",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-31",
+     "titulo": "Criação do objeto \"Habilidades\"",
+     "tipo": "História",
+     "sprint": "Sprint 3",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-32",
+     "titulo": "Criação do objeto \"Local de Trabalho\"",
+     "tipo": "História",
+     "sprint": "Sprint 3",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-33",
+     "titulo": "Criação do objeto \"Linhas do Orçamento\"",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-83",
+     "titulo": "Criação de \"Despesas Mestre\" e \"Apontamentos Despesa\"",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 6",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-84",
+     "titulo": "Criação do objeto \"Habilidades do Recurso\"",
+     "tipo": "História",
+     "sprint": "Sprint 4",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-86",
+     "titulo": "Automação e Governança de Fases do Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-92",
+     "titulo": "Criar Objeto Cadastro de Metodologia de Fases de Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 4",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-93",
+     "titulo": "Habilitador - Integração com o MOVE",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-95",
+     "titulo": "Cadastrar Entregas, Entregas dos Produto e Entregas dos Projetos",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-96",
+     "titulo": "Cadastrar Fase da Linha do Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada até 15/09/2026 — Homologação (etapa 5, Linhas/Cronograma). Planilha da MV (posição de 15/09, arquivo v3): \"Aprovado porém com melhoria proposta\"."
+    },
+    {
+     "key": "MVPMO-97",
+     "titulo": "Criar e Cadastrar o objeto \"Entrega\" da Linha do Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-99",
+     "titulo": "Aprovação de Orçamento Inicial",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-101",
+     "titulo": "Visualização da Estrutura do DRE Orçado, Planejado, Realizado e Real de Projeto, Programa e Portifólio",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada até 15/09/2026 — Homologação da Controladoria (etapa 3, Orçamento). Aprovada por Alan Mota na aba dele da planilha da MV (\"ok, testado\"); observação da MV: tela aprovada sem dados para comparação de usabilidade."
+    },
+    {
+     "key": "MVPMO-102",
+     "titulo": "Visualização de Comparativo de Versão de Orçamento de Projetos",
+     "tipo": "História",
+     "sprint": "Sprint 6",
+     "forma": "mv",
+     "base": "Aprovada até 15/09/2026 — Homologação da Controladoria (etapa 3, Orçamento). Aprovada por Alan Mota na aba dele da planilha da MV: \"é possível comparar os dois orçamentos iniciais\"."
+    },
+    {
+     "key": "MVPMO-103",
+     "titulo": "Criar Objeto Gestão de Fases do Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 4",
+     "forma": "mv1",
+     "base": "Fundação da Central (objetos e integrações) aprovada na primeira rodada de homologação; pronta para produção"
+    },
+    {
+     "key": "MVPMO-148",
+     "titulo": "Integração IBGE",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-154",
+     "titulo": "Exclusão de Versão com status de Inválida ou Rascunho",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada até 15/09/2026 — Homologação (etapa 4, Versão do Projeto). Planilha da MV (posição de 15/09, arquivo v3): \"Aprovado porém com melhoria proposta\"."
+    },
+    {
+     "key": "MVPMO-167",
+     "titulo": "Tela para filtrar e buscar lições aprendidas",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada em 21/08/2026 — [MV Central de Projetos] - Homologação (etapa 2, Onboarding & Kickoff). Aprovada por Gerlane Neri, Maira Moura e Wesley Ribeiro nas abas individuais da planilha da MV; apontamentos de melhoria registrados."
+    },
+    {
+     "key": "MVPMO-174",
+     "titulo": "Habilitador - Criação do objeto\"GMUD\"",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-180",
+     "titulo": "Habilitador - Preparar integração das bibliotecas Bryntum (Gantt, Calendar e Task Board) no Salesforce",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-187",
+     "titulo": "Obrigatoriedade de anexar documentos na conclusão de atividades do Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada em 04/09/2026 — [MV Central de Projetos] - Homologação - PMO. Resumo da reunião: \"obrigatoriedade de anexos testada com sucesso\"; planilha da MV: Aprovado."
+    },
+    {
+     "key": "MVPMO-191",
+     "titulo": "Filtragem e Visualização na Disponibilidade dos Recursos",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada em 18/09/2026 — [MV Central de Projetos] - Homologação - PMO (Alocação de Recursos). Planilha da MV salva às 12:10: \"Aprovado com ajustes\"; melhorias de filtro encaminhadas para refino."
+    },
+    {
+     "key": "MVPMO-199",
+     "titulo": "Habilitador - Atribuição em horas para atividades",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 15",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-203",
+     "titulo": "Habilitador - Ajustes do objeto \"Alocações do Projeto\"",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-225",
+     "titulo": "Interface do Calendar (Bryntum) para Atividades",
+     "tipo": "História",
+     "sprint": "Sprint 15",
+     "forma": "mv",
+     "base": "Aprovada em 11/09/2026 — [MV Central de Projetos] - Homologação - PMO (Calendário). Planilha da MV: \"Aprovado porém com ajuste proposto na linha 127\"."
+    },
+    {
+     "key": "MVPMO-228",
+     "titulo": "Inclusão de dia útil ao calendário do projeto",
+     "tipo": "História",
+     "sprint": "Sprint 9",
+     "forma": "mv",
+     "base": "Aprovada em 18/09/2026 — [MV Central de Projetos] - Homologação - PMO (Alocação de Recursos). Decisão registrada: \"aprovada com apontamentos de ajustes e necessidade de refino complementar\" (cenário internacional pendente)."
+    },
+    {
+     "key": "MVPMO-231",
+     "titulo": "Habilitador - Calculo de Datas para Linha Agrupadora",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-255",
+     "titulo": "Alternar e visualizar versões de Projetos pelo renderizador Gantt",
+     "tipo": "História",
+     "sprint": "Sprint 15",
+     "forma": "mv",
+     "base": "Aprovada em 11/09/2026 — [MV Central de Projetos] - Homologação - PMO (Gantt). Aprovada com ressalva (critério 6 removido do escopo); MV: \"bug da linha 122 já está sendo tratado em outra US\"."
+    },
+    {
+     "key": "MVPMO-258",
+     "titulo": "Habilitador - Alterações em Verticais",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 15",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-261",
+     "titulo": "Ajuste - Centro de Custo na Versão do Projeto",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 15",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-265",
+     "titulo": "Ajustes e Melhorias - Objeto Cargos",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 13",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-267",
+     "titulo": "Habilitador - Recursos Internos e Externos",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 10",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-268",
+     "titulo": "Renderizar o agrupamento de Internos e Externos",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "mv",
+     "base": "Aprovada em 18/09/2026 — [MV Central de Projetos] - Homologação - PMO (Alocação de Recursos). Decisão registrada: \"exibição segregada entre recursos internos e externos aprovada pela equipe\"."
+    },
+    {
+     "key": "MVPMO-272",
+     "titulo": "Habilitador - Comparativo em horas e datas das Versões de Projetos",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 15",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-285",
+     "titulo": "Ajuste de Período de Indisponibilidade para DateTime",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 15",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-286",
+     "titulo": "Ajustes no objeto Entregas e Atividades",
+     "tipo": "História",
+     "sprint": "Sprint 13",
+     "forma": "mv",
+     "base": "Aprovada em 04/09/2026 — [MV Central de Projetos] - Homologação - PMO. Decisão registrada: \"o item 286 é aprovado com um ponto de atenção sobre o vínculo entre entregas\"."
+    },
+    {
+     "key": "MVPMO-287",
+     "titulo": "Ajustes - Remoções e Adições de Campos na Versão do Projeto",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 15",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-288",
+     "titulo": "Estrutura de Dados para Solicitação de Recursos Externos",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 11",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-289",
+     "titulo": "Botão de Comparativo de Versões na Tela de Aprovação",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 13",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-290",
+     "titulo": "Ajuste de Hierarquia e Classificação de Tipos no Objeto Linha do Projeto",
+     "tipo": "História",
+     "sprint": "Sprint 15",
+     "forma": "mv",
+     "base": "Aprovada em 01/09/2026 — [MV Central de Projetos] - Homologação. Decisão registrada nas anotações da reunião: \"Aprovação da User Story 290 após validação bem-sucedida dos critérios de aceite\"."
+    },
+    {
+     "key": "MVPMO-309",
+     "titulo": "Criação do Objeto Candidato para Gestão de Leilão Externo",
+     "tipo": "História",
+     "sprint": "Sprint 13",
+     "forma": "mv",
+     "base": "Aprovada em 18/09/2026 — [MV Central de Projetos] - Homologação - PMO (Alocação de Recursos). Decisão registrada: \"aprovada com ressalvas após ajustes nos critérios\"; critério de aceite não considerado anotado pela MV."
+    },
+    {
+     "key": "MVPMO-314",
+     "titulo": "Criação de Objeto de Solicitação de Extensão de Prazo",
+     "tipo": "Habilitador",
+     "sprint": "Sprint 13",
+     "forma": "hab",
+     "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    }
+   ],
+   "reteste": []
   }
- ],
- "reteste": [
-  {
-   "key": "MVREV-38",
-   "titulo": "Criação automática do Caso de Avaliação de Arquitetura",
-   "tipo": "História",
-   "sprint": "Sprint 2",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  },
-  {
-   "key": "MVREV-39",
-   "titulo": "SLA - Estruturação do Caso de Avaliação de Arquitetura",
-   "tipo": "História",
-   "sprint": "Sprint 2",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  },
-  {
-   "key": "MVREV-42",
-   "titulo": "Conclusão da Avaliação de Arquitetura com impacto na Cotação",
-   "tipo": "História",
-   "sprint": "Sprint 2",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  },
-  {
-   "key": "MVREV-82",
-   "titulo": "Criação do objeto Produto da Regra de Precificação de Projetos (Hospitalar)",
-   "tipo": "História",
-   "sprint": "Sprint 2",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  },
-  {
-   "key": "MVREV-151",
-   "titulo": "Soul MV | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
-   "tipo": "História",
-   "sprint": "Sprint 8",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  },
-  {
-   "key": "MVREV-194",
-   "titulo": "Plano de Saúde | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
-   "tipo": "História",
-   "sprint": "Sprint 8",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  },
-  {
-   "key": "MVREV-196",
-   "titulo": "Medicina Diagnostica | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
-   "tipo": "História",
-   "sprint": "Sprint 7",
-   "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-  }
- ]
+ }
 }
