@@ -480,8 +480,8 @@
    "pctUat": 38.5,
    "pctEntregue": 38.5,
    "pctDesenvolvido": 64.2,
-   "desvio": 2.98,
-   "desvioNota": "83,1% desenvolvido · 1,9% em desenvolvimento · 15,1% em definição = 100% do escopo (já com +12% de change requests)",
+   "desvio": 2.44,
+   "desvioNota": "81,4% desenvolvido · 2,1% em desenvolvimento · 16,5% em definição = 100% do escopo (já com +12% de change requests)",
    "sprint": {
     "nome": "Sprint 16",
     "numero": 16,
