@@ -1,8 +1,9 @@
 {
- "calculadoEm": "2026-09-16",
+ "calculadoEm": "2026-09-24",
  "metodo": "Base = planilha de sprints (esforço por épico). Desenvolvido = 'Implementado até o momento'; desvio = implementado − 'Alinhado ao tempo'. O restante do escopo é repartido entre 'em desenvolvimento' e 'em definição' na proporção dos cards do Jira (fila da Sottelli × refino/aprovação do cliente). A soma das três parcelas fecha o escopo da planilha (Revenue 100,63%, que inclui os esforços adicionais; Central 100% já com os +12% de change requests).",
  "revenue": { "desvio": -8.26, "desenvolvido": 92.37, "emDesenvolvimento": 6.3, "definicao": 2.0, "escopo": 100.63, "alinhado": 100.63,
    "nota": "92,4% desenvolvido · 6,3% em desenvolvimento · 2,0% em definição = 100,6% do escopo (inclui esforços adicionais)" },
- "central": { "desvio": 2.36, "desenvolvido": 76.36, "emDesenvolvimento": 2.2, "definicao": 21.4, "escopo": 100, "alinhado": 74.0,
-   "nota": "76,4% desenvolvido · 2,2% em desenvolvimento · 21,4% em definição = 100% do escopo (já com +12% de change requests)" }
+ "central": { "desvio": 2.98, "desenvolvido": 83.06, "emDesenvolvimento": 1.9, "definicao": 15.1, "escopo": 100, "alinhado": 80.08,
+   "nota": "83,1% desenvolvido · 1,9% em desenvolvimento · 15,1% em definição = 100% do escopo (já com +12% de change requests)",
+   "base": "Sprint 16 da Central encerrada em 22/09: implementado = soma das sprints 0 a 16 no plano atual (83,06%); alinhado ao tempo = mesma soma na linha de base de 13/08 (80,08%)" }
 }

@@ -66,9 +66,31 @@
       .nx-jira-nums i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:-1px}
       .nx-jira-nums b{color:#fff;margin-right:2px}
       .nx-jira-fora{margin-top:5px;font-size:10px;color:#7f9bb0}.nx-jira-fora b{color:#a9c0d0}
+      .nx-jira-aprov{margin-top:5px;font-size:10px;color:#9fc7bd}.nx-jira-aprov b{color:#2fd4bf}
       @media(max-width:760px){.nx-jira-row{grid-template-columns:1fr}}
-      @media print{.nx-jira{break-inside:avoid;background:#fff;color:#111;border-color:#bbb}.nx-jira-head p,.nx-jira-stamp,.nx-jira-front span,.nx-jira-nums{color:#444}.nx-jira-front b,.nx-jira-nums b{color:#111}}
+      @media print{.nx-jira{break-inside:avoid;background:#fff;color:#111;border-color:#bbb}.nx-jira-head p,.nx-jira-stamp,.nx-jira-front span,.nx-jira-nums,.nx-jira-aprov{color:#444}.nx-jira-front b,.nx-jira-nums b{color:#111}}
     `;d.head.appendChild(s);
+  }
+
+  // Lista das US aprovadas na homologação (/data/us-aprovadas.json, a mesma da aba
+  // "US Aprovadas"): entra como nota em cada frente para a contagem bater entre as abas.
+  let aprov=null,carregandoA=null;
+  function carregarAprovadas(){
+    if(aprov)return Promise.resolve(aprov);if(carregandoA)return carregandoA;
+    carregandoA=fetch('/data/us-aprovadas.json'+(VERSION?'?v='+VERSION:''),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(a=>{aprov=a;return a});
+    return carregandoA;
+  }
+  function notaAprovadas(f){
+    const chave=Object.keys((aprov&&aprov.frentes)||{}).find(k=>aprov.frentes[k].projeto===f.projeto);
+    if(!chave)return '';
+    const fr=aprov.frentes[chave],n=(fr.aprovadas||[]).length,escopo=fr.escopo||f.ativos||f.total;
+    if(!n||!escopo)return '';
+    const pct=String(Math.round(n/escopo*1000)/10).replace('.',',');
+    // Quando há mais aprovadas do que itens em "Concluído", a diferença são as aprovadas
+    // com ressalvas — seguem em homologação até os ajustes, mas já contam no indicador.
+    const dif=n-(Number(f.prod)||0);
+    const obs=dif>0?` · inclui <b>${dif}</b> aprovadas com ressalvas, ainda em homologação`:'';
+    return `<div class="nx-jira-aprov">Aprovadas na homologação: <b>${n}</b> (${pct}%)${obs} · detalhe na aba <b>US Aprovadas</b></div>`;
   }
 
   function linha(f){
@@ -81,7 +103,7 @@
     const nums=partes.map(([id,n])=>`<div><i style="background:${CORES[id]}"></i><b>${n}</b>${esc(nomes[id])}</div>`).join('');
     const foraTxt=fora.length?`<div class="nx-jira-fora">Fora da barra: ${fora.map(([id,n])=>`<b>${n}</b> ${esc(nomes[id]).toLowerCase()}`).join(' · ')}</div>`:'';
     const sprint=f.sprint&&f.sprint.nome?`${esc(f.sprint.nome)}${f.sprint.inicio?` · ${dm(f.sprint.inicio)} a ${dm(f.sprint.fim)}`:''}`:'';
-    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${Math.round(f.pctEntregue??f.pctHomologado??0)}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div>${foraTxt}</div></div>`;
+    return `<div class="nx-jira-row"><div class="nx-jira-front"><b>${esc(f.nome)}</b><span>${f.ativos||f.total} itens ativos${sprint?` · ${sprint}`:''}</span><span class="pct">${Math.round(f.pctEntregue??f.pctHomologado??0)}%<small>US entregues · concluídas ou em homologação com o cliente</small></span></div><div><div class="nx-jira-bar">${bar}</div><div class="nx-jira-nums">${nums}</div>${foraTxt}${notaAprovadas(f)}</div></div>`;
   }
 
   function painel(w,j){
@@ -175,7 +197,8 @@
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
-      carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});});
+      carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
+      carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     proximoMarco(w);
     if(!w.__nxJiraObserver){
