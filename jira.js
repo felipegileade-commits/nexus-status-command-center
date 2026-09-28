@@ -217,10 +217,38 @@
     card.dataset.nxAuto='1';
   }
 
+  // Risco e plano de acao por frente, de /data/riscos.json.
+  // SO preenche o que esta VAZIO no painel: se o time escreveu qualquer coisa ali,
+  // o texto deles fica e este arquivo e ignorado. Nao e pintura por cima.
+  let riscos=null,carregandoR=null;
+  function carregarRiscos(){
+    if(riscos)return Promise.resolve(riscos);
+    if(carregandoR)return carregandoR;
+    carregandoR=fetch('/data/riscos.json?v='+Date.now(),{cache:'no-store'})
+      .then(r=>r.ok?r.json():null).then(j=>(riscos=j)).catch(()=>null);
+    return carregandoR;
+  }
+  function blocoRiscos(w,j){
+    if(!j||!j.frentes)return;
+    let mudou=false;
+    Object.keys(j.frentes).forEach(chave=>{
+      const f=j.frentes[chave],root=w.document.getElementById(chave);if(!f||!root)return;
+      const pRisco=root.querySelector('.risk-col:not(.action) p'),
+            pAcao=root.querySelector('.risk-col.action p');
+      if(pRisco&&!pRisco.textContent.trim()&&f.risco){pRisco.textContent=f.risco;mudou=true}
+      if(pAcao&&!pAcao.textContent.trim()&&f.acao){pAcao.textContent=f.acao;mudou=true}
+    });
+    // A secao de riscos e o selo "1 risco"/"Sem riscos" sao derivados desse texto,
+    // entao precisam ser recalculados depois de preencher.
+    if(mudou){try{w.syncOverviewFromFronts&&w.syncOverviewFromFronts()}catch(e){}
+              try{w.syncPrintReport&&w.syncPrintReport()}catch(e){}}
+  }
+
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
+      carregarRiscos().then(r=>{if(r)blocoRiscos(w,r)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     proximoMarco(w);
@@ -228,7 +256,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

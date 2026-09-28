@@ -1,0 +1,11 @@
+{
+ "_leiame": "Risco e plano de acao por frente. Isto e um FALLBACK: so e aplicado quando o campo correspondente esta VAZIO no painel. Se o time escrever qualquer coisa ali, o que eles escreveram permanece e este arquivo e ignorado. Para desligar um item, apague a entrada da frente.",
+ "atualizadoEm": "2026-09-28",
+ "frentes": {
+  "central": {
+   "risco": "Há uma velocidade reduzida na dinâmica de aprovações das US durante as homologações, resultando em uma quantidade reduzida de US repassadas nas dinâmicas.",
+   "acao": "Em andamento. As gerências de PMO e Transformação Digital estão se alinhando semanalmente para ajustar as dinâmicas e a condução, a fim de otimizar o tempo.",
+   "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe."
+  }
+ }
+}
