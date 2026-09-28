@@ -154,7 +154,7 @@
       <div class="nx-homolog-grid">
         <div><b>${c.usTestaveis}</b><span>US testáveis</span></div>
         <div><b class="ok">${c.aprovadas}</b><span>aprovadas</span></div>
-        <div><b class="warn">${c.reprovadas}</b><span>reprovadas · ${c.reprovadasSemBug} sem bug</span></div>
+        <div><b class="warn">${c.reprovadas}</b><span>reprovadas</span></div>
         <div><b>${c.naoIniciadas}</b><span>não iniciadas</span></div>
         <div><b>${c.apontamentos}</b><span>apontamentos</span></div>
         <div><b>${c.bugs}</b><span>bugs (${Math.round(c.bugs/c.apontamentos*100)}%)</span></div>

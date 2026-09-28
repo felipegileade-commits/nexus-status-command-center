@@ -1,18 +1,17 @@
 {
- "lidoEm": "2026-09-18",
+ "lidoEm": "2026-09-25",
  "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV)",
  "central": {
   "usTestaveis": 47,
-  "aprovadas": 14,
-  "reprovadas": 20,
-  "naoIniciadas": 11,
+  "aprovadas": 16,
+  "reprovadas": 25,
+  "naoIniciadas": 3,
   "pendenteCorrecao": 1,
-  "emAndamento": 1,
-  "apontamentos": 132,
-  "bugs": 26,
-  "melhorias": 55,
-  "ajustes": 51,
-  "reprovadasSemBug": 4,
-  "nota": "4 das 20 reprovadas não registram nenhum bug: os apontamentos são melhorias ou ajustes de regra, não defeitos. As 14 aprovadas estão no Jira como \"Liberado para deploy\"."
+  "emAndamento": 2,
+  "apontamentos": 151,
+  "bugs": 32,
+  "melhorias": 60,
+  "ajustes": 59,
+  "nota": "Posição da planilha da MV em 25/09: 16 aprovadas, 25 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção — 47 no total. Dos 151 apontamentos, 119 (79%) são melhorias ou ajustes e 32 (21%) são bugs. A planilha calcula 34% de sucesso sobre as 47 US testáveis."
  }
 }
