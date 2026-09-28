@@ -681,13 +681,27 @@ body.edit-mode .edit-mode-banner{display:block}
 
 <!-- Relatório de impressão --><!-- Relatório de impressão -->
 <div id="print-report">
+  <!-- Pagina de abertura: a Visao Geral faltava no impresso (pedido do Felipe em 28/09).
+       Todo o conteudo e preenchido por syncPrintOverview() a partir da tela. -->
+  <div class="pr-page" id="prOverview">
+    <div class="pr-topline"></div>
+    <div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Visão Geral</span></div><div class="pr-meta"><b>Status executivo</b>Semana 40 · 28/09/2026</div></div>
+    <div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Posição consolidada das duas frentes</h2><p></p></div>
+    <div class="pr-kpis" id="prOverviewKpis"></div>
+    <div class="pr-grid">
+      <div class="pr-box"><div class="pr-brand">O QUE AVANÇOU</div><h3>Destaques da semana</h3><div id="prOverviewDestaques"></div></div>
+      <div class="pr-box"><div class="pr-brand">GESTÃO ATIVA</div><h3>Riscos e atenções</h3><div id="prOverviewRiscos"></div></div>
+    </div>
+    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>1/4</span></div>
+  </div>
+
   <div class="pr-page" id="prCentral">
     <div class="pr-topline"></div>
     <div class="pr-head"><div><span class="pr-brand">PROJETO NEXUS</span><span class="pr-title">Central de Projetos</span></div><div class="pr-meta"><b>Status executivo</b>Semana 35 · 27/08/2026</div></div>
     <div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Homologação em andamento e cronograma sob recuperação controlada</h2><p>A Central segue na 2ª rodada de homologação, com recuperação gradual do cronograma e desvio atual de -1,63%.</p></div>
     <div class="pr-kpis"><div class="pr-kpi"><span>CONCLUÍDO</span><b>68,37%</b></div><div class="pr-kpi"><span>DISPONÍVEL EM UAT</span><b>56,76%</b></div><div class="pr-kpi"><span>HOMOLOGADO</span><b>17,64%</b></div><div class="pr-kpi"><span>DESVIO DO CRONOGRAMA</span><b class="red">-1,63%</b></div></div>
     <div class="pr-grid"><div class="pr-box"><div class="pr-brand">STATUS DA FRENTE</div><h3>Visão gerencial</h3><div class="pr-label">ATIVIDADES EXECUTADAS</div><div class="pr-bullet">Aprovação de US’s (19/08).</div><div class="pr-bullet">Refinamento de Alocação de Recursos (18/08).</div><div class="pr-bullet">Alinhamento do Portal e Whatsapp MKT.</div><div class="pr-bullet">Homologação — 2ª Rodada (17/08).</div><div class="pr-bullet">Finalização da Sprint 14 e início da Sprint 15.</div><div class="pr-label">PONTOS DE ATENÇÃO</div><div class="pr-bullet">Evidências da homologação devem ser registradas em pasta compartilhada.</div><div class="pr-label">PENDÊNCIAS</div><div class="pr-bullet">Nomenclatura do campo de horas adicionais.</div><div class="pr-bullet">Identidade Visual MV.</div><div class="pr-label">IMPEDIMENTOS</div><div class="pr-bullet">Não há impedimentos identificados.</div><div class="pr-risk"><div><h4>RISCO</h4><p>Recalculo do cronograma com desvio atual de -1,63%.</p></div><div><h4>PLANO DE AÇÃO</h4><p>Reforço do time, maior atuação do arquiteto e redução de refinamentos para liberar homologação.</p></div></div></div><div class="pr-box"><div class="pr-brand">VISÃO DETALHADA</div><h3>Progresso por épico <span style="float:right;font-size:7px;color:#6f7f8c">42 épicos</span></h3><div class="pr-epics" id="prCentralEpics"></div></div></div>
-    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>1/3</span></div>
+    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>2/4</span></div>
   </div>
   <div class="pr-page" id="prRevenue">
     <div class="pr-topline"></div>
@@ -695,7 +709,7 @@ body.edit-mode .edit-mode-banner{display:block}
     <div class="pr-synth"><div class="kicker">SÍNTESE EXECUTIVA</div><h2>Revenue acelera a conclusão do desenvolvimento com atenção à integração Benner</h2><p>A frente está na Sprint 15/15, com 90,58% concluído e objetivo de concluir 100% do desenvolvimento até 04/09.</p></div>
     <div class="pr-kpis"><div class="pr-kpi"><span>CONCLUÍDO</span><b>90,58%</b></div><div class="pr-kpi"><span>DISPONÍVEL EM UAT</span><b>56,13%</b></div><div class="pr-kpi"><span>HOMOLOGADO</span><b>6,06%</b></div><div class="pr-kpi"><span>DESVIO DO CRONOGRAMA</span><b class="red">-2,75%</b></div></div>
     <div class="pr-grid"><div class="pr-box"><div class="pr-brand">STATUS DA FRENTE</div><h3>Visão gerencial</h3><div class="pr-label">ATIVIDADES EXECUTADAS</div><div class="pr-bullet">Refinamento — Oportunidades e Consumo de Banco de Horas (19/08).</div><div class="pr-bullet">Visão TO-BE do Processo NEXUS (18/08).</div><div class="pr-bullet">Movimentação Contratual, Renegociação e Reajuste (17/08).</div><div class="pr-label">PONTOS DE ATENÇÃO</div><div class="pr-bullet">Esforço adicional de 11% fora do escopo inicial.</div><div class="pr-bullet">Documento de cutover previsto para 21/08.</div><div class="pr-label">PENDÊNCIAS</div><div class="pr-bullet">Dicionário Salesforce para integração Benner.</div><div class="pr-bullet">Planejamento consolidado de US até a conclusão.</div><div class="pr-label">IMPEDIMENTOS</div><div class="pr-bullet">Integração Benner ainda em aberto.</div><div class="pr-risk"><div><h4>RISCO</h4><p>Integração com a Benner e atraso de 2,75%.</p></div><div><h4>PLANO DE AÇÃO</h4><p>Reforçar capacidade e concluir desenvolvimento até 04/09.</p></div></div></div><div class="pr-box"><div class="pr-brand">VISÃO DETALHADA</div><h3>Progresso por épico <span style="float:right;font-size:7px;color:#6f7f8c">27 épicos</span></h3><div class="pr-epics" id="prRevenueEpics"></div></div></div>
-    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>2/3</span></div>
+    <div class="pr-foot"><span>Relatório gerencial · Sottelli e MV Saúde</span><span>3/4</span></div>
   </div>
   <div class="pr-page" id="prTimeline" style="position:relative">
     <div class="pr-topline"></div>
@@ -714,7 +728,7 @@ body.edit-mode .edit-mode-banner{display:block}
       </div></div>
       <div class="prx-summary"><b>Leitura executiva:</b> Sprint 15 em andamento; cinco sprints restantes. Revenue será concluída antes da homologação da Central de Projetos. Data final do Projeto Nexus: <b>13/11/2026</b>.</div>
     </div>
-    <div class="pr-foot"><span>* Percentuais e datas estimados podem variar conforme a evolução do projeto.</span><span>3/3</span></div>
+    <div class="pr-foot"><span>* Percentuais e datas estimados podem variar conforme a evolução do projeto.</span><span>4/4</span></div>
   </div>
 </div>
 
@@ -1445,11 +1459,50 @@ function syncPrintFront(front,printId){
   });
   const count=q('.pr-grid .pr-box:nth-child(2) h3 span',pr);if(count)count.textContent=qa('.epic',root).length+' épicos';
 }
+// Pagina de abertura do impresso, espelhando a Visao Geral da tela.
+function syncPrintOverview(){
+  const ov=document.getElementById('overview'),pr=document.getElementById('prOverview');
+  if(!ov||!pr)return;
+
+  // KPIs: os mesmos cartoes do topo da Visao Geral, na mesma ordem.
+  const kpis=q('#prOverviewKpis',pr);
+  if(kpis){
+    kpis.innerHTML='';
+    qa('.kpis .card',ov).forEach(c=>{
+      const rot=txt(q('.label',c)),val=txt(q('.big',c)),sub=txt(q('b',c));
+      if(!rot&&!val)return;
+      const d=document.createElement('div');d.className='pr-kpi';
+      const s=document.createElement('span');s.textContent=sub?rot+' · '+sub:rot;
+      const b=document.createElement('b');b.textContent=val;
+      d.appendChild(s);d.appendChild(b);kpis.appendChild(d);
+    });
+  }
+
+  // Sintese: derivada dos numeros das frentes, nao texto fixo.
+  const rev=txt(q('.front-progress',document.getElementById('revenue'))).match(/-?\d+(?:[,.]\d+)?%/),
+        cen=txt(q('.front-progress',document.getElementById('central'))).match(/-?\d+(?:[,.]\d+)?%/),
+        geral=txt(q('.kpis .card .big',ov));
+  setText('.pr-synth p','O projeto está em '+geral+' de US desenvolvidas: Revenue em '+(rev?rev[0]:'—')+' e Central de Projetos em '+(cen?cen[0]:'—')+'.',pr);
+
+  // Destaques e riscos: um bullet por linha da tela.
+  const lista=(destino,itens)=>{
+    const alvo=q(destino,pr);if(!alvo)return;
+    alvo.innerHTML='';
+    itens.forEach(t=>{const d=document.createElement('div');d.className='pr-bullet';d.textContent=t;alvo.appendChild(d)});
+  };
+  const cartao=nome=>qa('.bottom .card',ov).find(c=>txt(q('.box-title,h3,.label',c)).toUpperCase().indexOf(nome)>=0);
+  const cDest=cartao('DESTAQUE'),cRisc=cartao('RISCO');
+  lista('#prOverviewDestaques',cDest?qa('.list > div',cDest).map(x=>txt(x).replace(/^✓\s*/,'')):[]);
+  lista('#prOverviewRiscos',cRisc?qa('.risk-item',cRisc).map(x=>txt(x).replace(/\s+/g,' ')):[]);
+}
+
 function syncPrintReport(){
   const meta=qa('.topbar .meta small'),date=txt(meta[0]),week=txt(meta[1]);
   qa('#print-report .pr-meta').forEach((m,i)=>{
-    if(i<2)m.innerHTML=`<b>Status executivo</b>Semana ${esc(week)} · ${esc(date)}`;
+    // A ultima e a do cronograma, que tem texto proprio ("Base: status de ...").
+    if(i<3)m.innerHTML=`<b>Status executivo</b>Semana ${esc(week)} · ${esc(date)}`;
   });
+  syncPrintOverview();
   syncPrintFront('central','prCentral');syncPrintFront('revenue','prRevenue');
 
   const prTimeline=q('#prTimeline .pr-months');if(prTimeline){
