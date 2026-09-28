@@ -5,7 +5,7 @@
   "mv1": "Aprovada na 1ª homologação",
   "hab": "Habilitador técnico (QA)",
   "cfg": "Configuração técnica",
-  "prod": "Validada em produção"
+  "deploy": "Pronto para deploy em produção"
  },
  "frentes": {
   "revenue": {
@@ -351,6 +351,14 @@
      "sprint": "Sprint 11",
      "forma": "mv",
      "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
+    },
+    {
+     "key": "MVREV-296",
+     "titulo": "Prontuário do cliente no Whatsapp",
+     "tipo": "História",
+     "sprint": "Sprint 11",
+     "forma": "deploy",
+     "base": "Aprovada e aguardando deploy em produção (Jira: PRONTO PARA DEPLOY EM PROD)"
     },
     {
      "key": "MVREV-389",
