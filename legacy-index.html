@@ -20,6 +20,14 @@ button{cursor:pointer}
 .topbar{position:sticky;top:0;z-index:40;display:grid;grid-template-columns:180px 1fr 170px 88px 170px 140px;gap:18px;align-items:center;padding:16px 4vw;background:#06111d;border-bottom:1px solid #183149}
 .logo{font-size:30px;letter-spacing:.13em;font-weight:300}.logo b{color:var(--teal);font-weight:300}.logo small{display:block;font-size:8px;letter-spacing:.20em;color:#6988a0;margin-top:6px}
 .nav{display:flex;gap:34px;align-items:center}.nav button{border:0;background:none;color:#8fa7b9;font-size:14px;padding:18px 0;border-bottom:2px solid transparent}.nav button.active{color:#fff;border-color:var(--teal)}
+/* Seletor de frente da aba Status (Central / Revenue / As duas). */
+.frente-switch{display:flex;align-items:center;gap:10px;padding:12px 4vw;background:#08182a;border-bottom:1px solid #16304a}
+.frente-switch .fs-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#6b869b;font-weight:700;margin-right:6px}
+.frente-switch .fs-chip{border:1px solid #21435f;background:transparent;color:#9fb6c7;font-size:13px;padding:7px 16px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.frente-switch .fs-chip:hover{border-color:var(--teal);color:#d7e6ef}
+.frente-switch .fs-chip.active{background:var(--teal);border-color:var(--teal);color:#04131f;font-weight:600}
+.frente-switch[hidden]{display:none}
+@media print{.frente-switch{display:none!important}}
 .meta{font-size:13px;line-height:1.5}.meta small{display:block;color:#819bad}.week{padding-left:20px;border-left:1px dashed #27425c}
 .action{border:1px solid #24435d;background:#091a2a;color:#fff;border-radius:8px;padding:12px 15px;font-weight:800;font-size:13px}.action.primary{background:linear-gradient(135deg,#28cec3,#149aae);border:0}
 main{padding:0 4vw 36px}.view{display:none}.view.active{display:block}
@@ -249,9 +257,7 @@ body.edit-mode .edit-mode-banner{display:block}
 <header class="topbar">
   <div class="logo">NE<b>X</b>US<small>STATUS COMMAND CENTER</small></div>
   <nav class="nav">
-    <button class="active" data-view="overview">Visão<br>Geral</button>
-    <button data-view="revenue">Revenue<br>Cloud</button>
-    <button data-view="central">Central de<br>Projetos</button>
+    <button class="active" data-view="status">Status</button>
     <button data-view="plano">Plano de<br>Entrega</button>
     <button data-view="aprovadas">US<br>Aprovadas</button>
   </nav>
@@ -260,6 +266,15 @@ body.edit-mode .edit-mode-banner{display:block}
   <button class="action" onclick="openPrintPreview()">↓ &nbsp; Imprimir relatório</button>
   <button class="action primary" onclick="openEditor()">Editar status</button>
 </header>
+
+<!-- Seletor de frente da aba Status. Fica FORA do <main> de proposito: o <main> e
+     persistido no Supabase e restaurado por cima do HTML, e este bloco e so navegacao. -->
+<div class="frente-switch" id="frenteSwitch">
+  <span class="fs-label">Frente</span>
+  <button class="fs-chip active" data-front="central">Central de Projetos</button>
+  <button class="fs-chip" data-front="revenue">Revenue Cloud</button>
+  <button class="fs-chip" data-front="overview">As duas</button>
+</div>
 
 <main>
 <section id="overview" class="view active">
@@ -735,10 +750,7 @@ function renderEpics(id,data,printId){
 }
 renderEpics('centralEpics',centralEpics,'prCentralEpics'); renderEpics('revenueEpics',revenueEpics,'prRevenueEpics');
 
-document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{
- document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
- btn.classList.add('active'); document.getElementById(btn.dataset.view).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'});
-}));
+// A navegacao e ligada no window load, junto com o resto (ver o fim do arquivo).
 const tl=document.getElementById('timeline'); let isDown=false,startX,sl;
 tl.addEventListener('mousedown',e=>{isDown=true;tl.classList.add('dragging');startX=e.pageX-tl.offsetLeft;sl=tl.scrollLeft});
 ['mouseleave','mouseup'].forEach(ev=>tl.addEventListener(ev,()=>{isDown=false;tl.classList.remove('dragging')}));
@@ -1316,13 +1328,68 @@ function applyStatusReportSnapshotIfNeeded(){
   }
   syncOverviewFromFronts();syncPrintReport();persistState();localStorage.setItem(STATUS_REPORT_KEY,STATUS_REPORT_VERSION);
 }
+// Navegacao em dois niveis (decisao do Felipe em 28/09):
+//   abas    -> Status | Plano de Entrega | US Aprovadas
+//   Status  -> seletor de frente: Central de Projetos | Revenue Cloud | As duas
+// "As duas" e a antiga Visao Geral (#overview). A frente escolhida fica guardada,
+// entao o painel reabre onde a apresentacao comeca, sem precisar clicar.
+const NEXUS_FRENTE_KEY='nexus_frente_status';
+const FRENTES=['central','revenue','overview'];
+
+function frenteSalva(){
+  try{const v=localStorage.getItem(NEXUS_FRENTE_KEY);if(FRENTES.indexOf(v)>=0)return v}catch(e){}
+  return 'central';
+}
+function guardaFrente(v){try{localStorage.setItem(NEXUS_FRENTE_KEY,v)}catch(e){}}
+
+function mostraView(id){
+  qa('.view').forEach(v=>v.classList.remove('active'));
+  const alvo=document.getElementById(id);
+  if(alvo)alvo.classList.add('active');
+}
+function marcaChip(frente){
+  qa('#frenteSwitch .fs-chip').forEach(c=>c.classList.toggle('active',c.dataset.front===frente));
+}
+function abreAba(aba){
+  qa('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===aba));
+  const sw=document.getElementById('frenteSwitch');
+  if(aba==='status'){
+    const f=frenteSalva();
+    if(sw)sw.hidden=false;
+    marcaChip(f);
+    mostraView(f);
+  }else{
+    if(sw)sw.hidden=true;
+    mostraView(aba);
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// O seletor de frente so faz sentido quando a view visivel e uma das frentes.
+// Outras partes do painel (pendencias.js, por exemplo) injetam abas proprias com
+// handler proprio, entao a visibilidade e derivada do que esta ativo, nao do clique.
+function sincronizaSwitch(){
+  const sw=document.getElementById('frenteSwitch');if(!sw)return;
+  const ativa=qa('.view').find(v=>v.classList.contains('active'));
+  sw.hidden=!(ativa&&FRENTES.indexOf(ativa.id)>=0);
+}
+
 function bindNavigation(){
-  qa('.nav button').forEach(btn=>{
-    btn.onclick=()=>{
-      qa('.nav button').forEach(b=>b.classList.remove('active'));qa('.view').forEach(v=>v.classList.remove('active'));
-      btn.classList.add('active');document.getElementById(btn.dataset.view).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});
+  qa('.nav button').forEach(btn=>{btn.onclick=()=>abreAba(btn.dataset.view)});
+  const nav=document.querySelector('.nav');
+  if(nav&&!nav.dataset.switchSync){
+    nav.dataset.switchSync='1';
+    nav.addEventListener('click',()=>setTimeout(sincronizaSwitch,0));
+  }
+  qa('#frenteSwitch .fs-chip').forEach(chip=>{
+    chip.onclick=()=>{
+      const f=chip.dataset.front;
+      guardaFrente(f);marcaChip(f);mostraView(f);
+      window.scrollTo({top:0,behavior:'smooth'});
     };
   });
+  const atual=qa('.nav button').find(b=>b.classList.contains('active'));
+  abreAba(atual?atual.dataset.view:'status');
 }
 function bindTimelineDrag(){
   const t=document.getElementById('timeline'); if(!t)return;
