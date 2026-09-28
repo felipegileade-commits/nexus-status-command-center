@@ -115,8 +115,18 @@
     el.innerHTML=`<div class="nx-jira-head"><div><div class="label">Onde estão as entregas</div><h3>US entregues × US desenvolvidas</h3><p>Os percentuais acima medem <b>US desenvolvidas</b> (esforço planejado já implementado, pela planilha de sprints). Aqui é o que já foi <b>entregue</b>: a posição de cada item no Jira — concluído, em homologação com o cliente, em testes ou ainda em desenvolvimento/fila.</p></div><div class="nx-jira-stamp">Lido do Jira em<br><b>${esc(dhm(j.lidoEm))}</b></div></div>${frentes.map(linha).join('')}`;
   }
 
-  // 'Atualizado em' e 'Semana' seguem a leitura do Jira (semana ISO).
+  // 'Atualizado em' e 'Semana': DESLIGADO em 28/09 a pedido do Felipe.
+  //
+  // Esta funcao reescrevia a data, a semana e TODOS os rodapes a partir de lidoEm do
+  // data/jira.json. Como o jira.json so muda quando alguem roda o retrato.mjs na mao, o
+  // painel ficava carimbado com 21/09 / Semana 39 mesmo depois do time atualizar a data
+  // pela propria pagina -- a edicao ia para o banco e sumia da tela no carregamento
+  // seguinte. Mesma causa da legenda do desvio e das metricas das frentes.
+  //
+  // A data e a semana passam a ser o que esta gravado no painel (payload.date/week).
   function cabecalho(w,j){
+    return;
+    /* eslint-disable no-unreachable */
     if(!j||!j.lidoEm)return;const dt=new Date(j.lidoEm);if(isNaN(dt))return;
     const data=`${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}/${dt.getFullYear()}`;
     const t=new Date(Date.UTC(dt.getFullYear(),dt.getMonth(),dt.getDate()));t.setUTCDate(t.getUTCDate()+4-(t.getUTCDay()||7));
@@ -125,6 +135,7 @@
     if(meta[0]&&meta[0].textContent!==data)meta[0].textContent=data;
     if(meta[1]&&meta[1].textContent!==semana)meta[1].textContent=semana;
     w.document.querySelectorAll('.footer span').forEach(x=>{const s=x.textContent.replace(/Semana\s+\d+/,'Semana '+semana).replace(/\d{2}\/\d{2}\/\d{4}/,data);if(s!==x.textContent)x.textContent=s});
+    /* eslint-enable no-unreachable */
   }
 
   // Bloco "Homologação em números" na frente Central, lido de /data/homologacao.json (planilha da MV).
