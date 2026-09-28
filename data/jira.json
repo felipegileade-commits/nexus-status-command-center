@@ -59,7 +59,6 @@
    "pctEntregue": 40.6,
    "pctDesenvolvido": 89.5,
    "desvio": -8.26,
-   "desvioNota": "92,4% desenvolvido · 6,3% em desenvolvimento · 2,0% em definição = 100,6% do escopo (inclui esforços adicionais)",
    "sprint": {
     "nome": "Sprint 16 - Final",
     "numero": 16,
@@ -481,7 +480,6 @@
    "pctEntregue": 38.5,
    "pctDesenvolvido": 64.2,
    "desvio": 2.44,
-   "desvioNota": "81,4% desenvolvido · 2,1% em desenvolvimento · 16,5% em definição = 100% do escopo (já com +12% de change requests)",
    "sprint": {
     "nome": "Sprint 16",
     "numero": 16,
