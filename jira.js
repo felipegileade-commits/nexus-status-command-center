@@ -158,9 +158,19 @@
     [cards[1],cards[2]].forEach(c=>{if(c.querySelector('.nx-kpi-note'))return;const p=w.document.createElement('p');p.className='nx-kpi-note nx-live';p.textContent='US desenvolvidas (esforço planejado já implementado)';c.appendChild(p)});
   }
 
-  // Métricas das frentes (UAT / homologado / desvio) vindas do Jira — decisão do Felipe em 16/09.
-  // UAT = concluído + em homologação; homologado = concluído; desvio = data/desvio.json.
+  // Métricas das frentes (UAT / homologado / desvio): DESLIGADO em 28/09 a pedido do Felipe.
+  //
+  // Motivo: a porcentagem do projeto é ponderada pelo PESO DE CADA ÉPICO na planilha de
+  // gestão do cronograma. O que este arquivo calculava era contagem de card
+  // (retrato.mjs: pct = n / ativos), onde toda US vale 1 — um épico de peso 5% com uma US
+  // pesava menos que um de peso 2% com dez US. É o inverso do que a planilha diz, então
+  // qualquer número daqui diverge do número do time e sobrescrevia o que eles digitam.
+  //
+  // O painel passa a mostrar apenas o que o time escreve. Para religar, é preciso antes ler
+  // o peso de cada épico da planilha do cronograma e ponderar por ele.
   function metricasFrentes(w,j){
+    return;
+    /* eslint-disable no-unreachable */
     if(!j||!j.frentes)return;
     // UAT e homologado sem casas decimais (acordo com a MV em 21/09: "30%", nao "30,1%").
     const fmtPct=n=>(n==null||isNaN(n))?null:String(Math.round(Number(n)))+'%';
@@ -177,6 +187,7 @@
       const pr=w.document.querySelector(sec==='central'?'#prCentral':'#prRevenue');const kp=pr&&pr.querySelectorAll('.pr-kpi')[3];
       if(kp&&f.desvioNota){let pn=kp.querySelector('.nx-desvio-nota');if(!pn){pn=w.document.createElement('small');pn.className='nx-desvio-nota nx-live';kp.appendChild(pn)}pn.textContent=f.desvioNota}
     });
+    /* eslint-enable no-unreachable */
   }
 
   function proximoMarco(w){
