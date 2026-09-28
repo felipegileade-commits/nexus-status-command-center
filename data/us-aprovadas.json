@@ -353,14 +353,6 @@
      "base": "Aprovada pela MV na homologação (planilha de homologação da MV, 17/09/2026) · com ressalvas"
     },
     {
-     "key": "MVREV-296",
-     "titulo": "Prontuário do cliente no Whatsapp",
-     "tipo": "História",
-     "sprint": "Sprint 11",
-     "forma": "prod",
-     "base": "Validada pela MV em produção"
-    },
-    {
      "key": "MVREV-389",
      "titulo": "Retirar a Fase Onboarding da Oportunidade",
      "tipo": "Habilitador",

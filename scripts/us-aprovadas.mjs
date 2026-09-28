@@ -17,7 +17,8 @@ const INICIO = '<!-- us-aprovadas:inicio -->', FIM = '<!-- us-aprovadas:fim -->'
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const num = k => +String(k).split('-')[1];
-const pct = (a, b) => (Math.round(a / b * 1000) / 10).toFixed(1).replace('.', ',') + '%';
+// Regra da Andressa (28/09): porcentagem sem casa decimal.
+const pct = (a, b) => Math.round(a / b * 100) + "%";
 
 export function render(d) {
   const frentes = Object.entries(d.frentes);                       // [id, frente]
@@ -31,7 +32,7 @@ export function render(d) {
   const kpi = (n, l) => `<div class="ua-kpi"><strong>${esc(n)}</strong><span>${esc(l)}</span></div>`;
   const kpisFrente = ([id, f]) => {
     const a = f.aprovadas, tec = conta(a, 'hab') + conta(a, 'cfg');
-    return `<div class="ua-kpis" data-kpi="${id}" hidden>${kpi(a.length, 'US aprovadas')}${kpi(pct(a.length, f.escopo), `homologado (${a.length} de ${f.escopo} US do escopo)`)}${kpi(conta(a, 'mv') + conta(a, 'mv1'), 'aprovadas pela MV na homologação')}${kpi(tec, 'habilitadores e configurações técnicas')}${kpi(conta(a, 'prod'), 'validada em produção')}${kpi((f.reteste || []).length, 'ajustadas · aguardam reteste')}</div>`;
+    return `<div class="ua-kpis" data-kpi="${id}" hidden>${kpi(a.length, 'US aprovadas')}${kpi(pct(a.length, f.escopo), `homologado (${a.length} de ${f.escopo} US do escopo)`)}${kpi(conta(a, 'mv') + conta(a, 'mv1'), 'aprovadas pela MV na homologação')}${kpi(tec, 'habilitadores e configurações técnicas')}${conta(a, 'prod') ? kpi(conta(a, 'prod'), 'validada em produção') : ''}${kpi((f.reteste || []).length, 'ajustadas · aguardam reteste')}</div>`;
   };
   const kpisTodas = `<div class="ua-kpis" data-kpi="todas">${kpi(todas.length, 'US aprovadas nas duas frentes')}${frentes.map(([, f]) => kpi(pct(f.aprovadas.length, f.escopo), `${f.nome} · ${f.aprovadas.length} de ${f.escopo} US`)).join('')}${kpi(conta(todas, 'mv') + conta(todas, 'mv1'), 'aprovadas pela MV na homologação')}${kpi(conta(todas, 'hab') + conta(todas, 'cfg'), 'habilitadores e configurações técnicas')}${kpi(reteste.length, 'ajustadas · aguardam reteste')}</div>`;
 
