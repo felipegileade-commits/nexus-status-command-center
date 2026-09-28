@@ -1493,7 +1493,11 @@ function syncPrintOverview(){
   const cartao=nome=>qa('.bottom .card',ov).find(c=>txt(q('.box-title,h3,.label',c)).toUpperCase().indexOf(nome)>=0);
   const cDest=cartao('DESTAQUE'),cRisc=cartao('RISCO');
   lista('#prOverviewDestaques',cDest?qa('.list > div',cDest).map(x=>txt(x).replace(/^✓\s*/,'')):[]);
-  lista('#prOverviewRiscos',cRisc?qa('.risk-item',cRisc).map(x=>txt(x).replace(/\s+/g,' ')):[]);
+  // Cada risco e <div class="risk"><span>texto</span><strong>nivel</strong></div>.
+  lista('#prOverviewRiscos',cRisc?qa('.list .risk',cRisc).map(x=>{
+    const t=txt(q('span',x)),n=txt(q('strong',x));
+    return n?t+' — '+n:t;
+  }):[]);
 }
 
 function syncPrintReport(){
