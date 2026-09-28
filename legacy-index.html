@@ -839,7 +839,8 @@ function getFrontData(front){
   const metrics=qa('.metric-block strong',root);
   return {
     root,
-    concluded:(txt(q('.front-progress',root)).match(/-?\d+[,.]\d+%/)||[''])[0],
+    // Casa decimal opcional desde a regra da Andressa (28/09).
+    concluded:(txt(q('.front-progress',root)).match(/-?\d+(?:[,.]\d+)?%/)||[''])[0],
     uat:txt(metrics[0]), homolog:txt(metrics[1]), deviation:txt(metrics[2]),
     sprint:txt(q('.front-foot span:first-child',root)),
     status:txt(q('.front-foot span:last-child',root)),
@@ -1123,7 +1124,9 @@ function updateCardProgress(card,value){
   const b=q('.big',card); if(b)b.textContent=value;
   const p=q('.progress span',card); if(p)p.style.width=pctNumber(value)+'%';
 }
-function formatPercent(value){return (Math.round((Number(value)+1e-9)*100)/100).toFixed(2).replace('.',',')+'%'}
+// Regra da Andressa (28/09): porcentagem sem casa decimal em todo o painel.
+// >= ,5 sobe; < ,5 desce. E o que Math.round ja faz.
+function formatPercent(value){return Math.round(Number(value)+1e-9)+'%'}
 // Sinais que precisam seguir o conteudo da frente, e nao ficar fixos no HTML:
 // um risco sem texto nao pode exibir card nem contar na pilula, e o desvio so e
 // vermelho quando ha atraso de fato (negativo). Positivo significa adiantado.
@@ -1330,11 +1333,16 @@ function bindTimelineDrag(){
 function syncPrintFront(front,printId){
   const root=document.getElementById(front),pr=document.getElementById(printId);if(!root||!pr)return;
   const metrics=qa('.metric-block strong',root),k=qa('.pr-kpi b',pr);
-  const concluded=(txt(q('.front-progress',root)).match(/-?\d+[,.]\d+%/)||[''])[0];
+  // A casa decimal e opcional desde a regra da Andressa (28/09): "81%" e "81,44%" servem.
+  const concluded=(txt(q('.front-progress',root)).match(/-?\d+(?:[,.]\d+)?%/)||[''])[0];
   if(k[0])k[0].textContent=concluded;if(k[1])k[1].textContent=txt(metrics[0]);if(k[2])k[2].textContent=txt(metrics[1]);
   if(k[3]){
-    k[3].textContent=txt(metrics[2]);
-    // Mesma convencao da tela: negativo e atraso (vermelho), positivo e adiantado.
+    // O quadro de desvio saiu da tela em 28/09; sem ele, o KPI correspondente
+    // do imprimivel tambem some, em vez de sair em branco.
+    const temDesvio=!!metrics[2];
+    const bloco=k[3].closest('.pr-kpi');
+    if(bloco)bloco.style.display=temDesvio?'':'none';
+    k[3].textContent=temDesvio?txt(metrics[2]):'';
     const n=parseFloat(txt(metrics[2]).replace('%','').replace(',','.'));
     k[3].classList.toggle('red',!isNaN(n)&&n<0);
   }

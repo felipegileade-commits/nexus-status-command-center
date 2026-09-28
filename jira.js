@@ -85,7 +85,8 @@
     if(!chave)return '';
     const fr=aprov.frentes[chave],n=(fr.aprovadas||[]).length,escopo=fr.escopo||f.ativos||f.total;
     if(!n||!escopo)return '';
-    const pct=String(Math.round(n/escopo*1000)/10).replace('.',',');
+    // Regra da Andressa (28/09): porcentagem sem casa decimal em todo o painel.
+    const pct=String(Math.round(n/escopo*100));
     // Quando há mais aprovadas do que itens em "Concluído", a diferença são as aprovadas
     // com ressalvas — seguem em homologação até os ajustes, mas já contam no indicador.
     const dif=n-(Number(f.prod)||0);
