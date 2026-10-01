@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco 'Homologação em números' de cada frente. Cada quadro é {n, rotulo} e aceita cor 'ok' (verde) ou 'warn' (âmbar). A fonte e a data aparecem no cabeçalho do bloco — mantenha-as verdadeiras, é o que permite ao cliente conferir.",
+ "_leiame": "Bloco 'Homologação em números' de cada frente. Os rótulos são os MESMOS nas duas frentes de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita cor 'ok' (verde) ou 'warn' (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
  "frentes": {
   "central": {
    "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV)",
@@ -16,16 +16,18 @@
    "nota": "Posição da planilha da MV em 25/09: 16 aprovadas, 25 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção — 47 no total. Dos 151 apontamentos, 119 (79%) são melhorias ou ajustes e 32 (21%) são bugs. A planilha calcula 34% de sucesso sobre as 47 US testáveis."
   },
   "revenue": {
-   "fonte": "Jira (MVREV) e lista revisada com a Transformação Digital da MV",
-   "lidoEm": "2026-09-21",
+   "fonte": "Dashboard de homologação de Revenue, Sprints 2 a 9 (planilha da MV)",
+   "lidoEm": "2026-09-17",
    "quadros": [
-    { "n": 239, "rotulo": "US ativas no escopo" },
-    { "n": 53, "rotulo": "aprovadas na homologação", "cor": "ok" },
-    { "n": 44, "rotulo": "em homologação com o cliente" },
-    { "n": 7, "rotulo": "ajustadas · aguardam reteste", "cor": "warn" },
-    { "n": 11, "rotulo": "ainda não testadas pela MV" }
+    { "n": 37, "rotulo": "US testáveis" },
+    { "n": 16, "rotulo": "aprovadas", "cor": "ok" },
+    { "n": 14, "rotulo": "reprovadas", "cor": "warn" },
+    { "n": 0, "rotulo": "não iniciadas" },
+    { "n": 144, "rotulo": "apontamentos" },
+    { "n": 11, "rotulo": "bugs (8%)" },
+    { "n": 132, "rotulo": "melhorias e ajustes (92%)" }
    ],
-   "nota": "Das 53 aprovadas, 31 foram aprovadas pela MV na homologação, 19 são habilitadores técnicos, 2 são configurações técnicas e 1 está pronta para deploy em produção. As 7 em reteste já foram ajustadas pela Sottelli (MVREV-38, 39, 42, 82, 151, 194 e 196); as 11 não testadas são das Sprints 2 a 4 (MVREV-10 a 22). A homologação presencial em Recife, iniciada em 28/09, ainda não está refletida nestes números."
+   "nota": "Posição da planilha da MV em 17/09, cobrindo as Sprints 2 a 9: 16 aprovadas, 14 reprovadas e 7 em andamento — 37 no total. Dos 144 apontamentos, 132 (92%) são melhorias ou ajustes e 11 (8%) são bugs. A homologação presencial em Recife, iniciada em 28/09, ainda não está refletida nestes números."
   }
  }
 }
