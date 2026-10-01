@@ -466,7 +466,7 @@ body.edit-mode .edit-mode-banner{display:block}
       <div class="week-card"><div class="box-title">Responsabilidades</div><div class="pl-roles"><b>MV</b><span>Resultado da homologação, priorização, reteste e aprovação final.</span><b>Sottelli</b><span>Análise, correções, QA e liberação das correções em homologação.</span><b>Conjunto</b><span>Validação do escopo (etapa 3) e fechamento da entrega (etapa 6).</span></div></div>
     </div>
   </div>
-  <div class="footer"><span>Projeto Nexus · Plano de entrega pós-homologação · Revenue e Central de Projetos</span><span>Posição de 21/09/2026</span></div>
+  <div class="footer"><span>Projeto Nexus · Plano de entrega pós-homologação · Revenue e Central de Projetos</span><span data-nx-posicao>Posição de 21/09/2026</span></div>
 </section>
 <!-- us-aprovadas:inicio -->
 <section id="aprovadas" class="view ua-view">
@@ -598,7 +598,7 @@ body.edit-mode .edit-mode-banner{display:block}
       <tbody><tr data-frente="revenue" data-busca="mvrev-38 criação automática do caso de avaliação de arquitetura sprint 2"><td class="ua-n"></td><td class="ua-key">MVREV-38</td><td class="ua-titulo">Criação automática do Caso de Avaliação de Arquitetura</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 2</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr><tr data-frente="revenue" data-busca="mvrev-39 sla - estruturação do caso de avaliação de arquitetura sprint 2"><td class="ua-n"></td><td class="ua-key">MVREV-39</td><td class="ua-titulo">SLA - Estruturação do Caso de Avaliação de Arquitetura</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 2</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr><tr data-frente="revenue" data-busca="mvrev-42 conclusão da avaliação de arquitetura com impacto na cotação sprint 2"><td class="ua-n"></td><td class="ua-key">MVREV-42</td><td class="ua-titulo">Conclusão da Avaliação de Arquitetura com impacto na Cotação</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 2</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr><tr data-frente="revenue" data-busca="mvrev-82 criação do objeto produto da regra de precificação de projetos (hospitalar) sprint 2"><td class="ua-n"></td><td class="ua-key">MVREV-82</td><td class="ua-titulo">Criação do objeto Produto da Regra de Precificação de Projetos (Hospitalar)</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 2</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr><tr data-frente="revenue" data-busca="mvrev-151 soul mv | etapa inicial com unidades da cotação na configuração do produto sprint 8"><td class="ua-n"></td><td class="ua-key">MVREV-151</td><td class="ua-titulo">Soul MV | Etapa Inicial com Unidades da Cotação na Configuração do Produto</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 8</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr><tr data-frente="revenue" data-busca="mvrev-194 plano de saúde | etapa inicial com unidades da cotação na configuração do produto sprint 8"><td class="ua-n"></td><td class="ua-key">MVREV-194</td><td class="ua-titulo">Plano de Saúde | Etapa Inicial com Unidades da Cotação na Configuração do Produto</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 8</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr><tr data-frente="revenue" data-busca="mvrev-196 medicina diagnostica | etapa inicial com unidades da cotação na configuração do produto sprint 7"><td class="ua-n"></td><td class="ua-key">MVREV-196</td><td class="ua-titulo">Medicina Diagnostica | Etapa Inicial com Unidades da Cotação na Configuração do Produto</td><td class="ua-frente">Revenue Cloud</td><td>História</td><td class="ua-sprint">Sprint 7</td><td class="ua-base"><small>Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV</small></td></tr></tbody>
     </table><p class="ua-vazio" hidden>Nenhuma história em reteste nesta frente.</p></div>
   </div>
-  <div class="footer"><span>Projeto Nexus · US aprovadas · Revenue e Central de Projetos</span><span>Posição de 21/09/2026</span></div>
+  <div class="footer"><span>Projeto Nexus · US aprovadas · Revenue e Central de Projetos</span><span data-nx-posicao>Posição de 21/09/2026</span></div>
 </section>
 <script>
 // Filtro da aba "US Aprovadas": frente + base da aprovação + busca livre.
@@ -1389,7 +1389,16 @@ function sincronizaSwitch(){
   sw.hidden=!(ativa&&FRENTES.indexOf(ativa.id)>=0);
 }
 
+// As abas estaticas (Plano de Entrega, US Aprovadas) carregam o proprio carimbo de
+// posicao. Ele passa a seguir a data do status em vez de ficar fixo no HTML.
+function syncPosicao(){
+  const data=txt(qa(".topbar .meta small")[0]);
+  if(!data)return;
+  qa("[data-nx-posicao]").forEach(el=>{el.textContent="Posição de "+data});
+}
+
 function bindNavigation(){
+  syncPosicao();
   qa('.nav button').forEach(btn=>{btn.onclick=()=>abreAba(btn.dataset.view)});
   const nav=document.querySelector('.nav');
   if(nav&&!nav.dataset.switchSync){
