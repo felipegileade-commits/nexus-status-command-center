@@ -146,22 +146,24 @@
     carregandoH=fetch('/data/homologacao.json'+(VERSION?'?v='+VERSION:''),{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(h=>{homolog=h;return h});
     return carregandoH;
   }
+  // Bloco "Homologação em números", uma vez por frente declarada em data/homologacao.json.
+  // Cada frente tem a sua propria fonte e data, porque nao saem do mesmo lugar: a Central vem
+  // da planilha da MV e Revenue vem do Jira com a lista revisada pela Transformacao Digital.
   function blocoHomolog(w,h){
-    const c=h&&h.central;if(!c)return;const d=w.document,sec=d.getElementById('central');if(!sec)return;
-    const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-homolog'))return;
-    const el=d.createElement('div');el.className='nx-homolog nx-live';
-    const naoBug=c.melhorias+c.ajustes;
-    el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(h.fonte)} · ${esc(dm(h.lidoEm))}</span></div>
-      <div class="nx-homolog-grid">
-        <div><b>${c.usTestaveis}</b><span>US testáveis</span></div>
-        <div><b class="ok">${c.aprovadas}</b><span>aprovadas</span></div>
-        <div><b class="warn">${c.reprovadas}</b><span>reprovadas</span></div>
-        <div><b>${c.naoIniciadas}</b><span>não iniciadas</span></div>
-        <div><b>${c.apontamentos}</b><span>apontamentos</span></div>
-        <div><b>${c.bugs}</b><span>bugs (${Math.round(c.bugs/c.apontamentos*100)}%)</span></div>
-        <div><b>${naoBug}</b><span>melhorias e ajustes (${Math.round(naoBug/c.apontamentos*100)}%)</span></div>
-      </div><p class="nx-homolog-nota">${esc(c.nota||'')}</p>`;
-    fs.appendChild(el);
+    if(!h||!h.frentes)return;const d=w.document;
+    Object.keys(h.frentes).forEach(chave=>{
+      const f=h.frentes[chave],sec=d.getElementById(chave);
+      if(!f||!sec||!Array.isArray(f.quadros)||!f.quadros.length)return;
+      const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-homolog'))return;
+      const quadros=f.quadros.map(q=>{
+        const cor=q.cor==='ok'?' class="ok"':q.cor==='warn'?' class="warn"':'';
+        return `<div><b${cor}>${esc(String(q.n))}</b><span>${esc(q.rotulo||'')}</span></div>`;
+      }).join('');
+      const el=d.createElement('div');el.className='nx-homolog nx-live';
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
+        <div class="nx-homolog-grid">${quadros}</div><p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
+      fs.appendChild(el);
+    });
   }
 
   function legendasAvanco(w){
