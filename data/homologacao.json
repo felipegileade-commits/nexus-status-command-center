@@ -5,29 +5,75 @@
    "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV)",
    "lidoEm": "2026-09-25",
    "quadros": [
-    { "n": 47, "rotulo": "US testáveis" },
-    { "n": 16, "rotulo": "aprovadas", "cor": "ok" },
-    { "n": 25, "rotulo": "reprovadas", "cor": "warn" },
-    { "n": 3, "rotulo": "não iniciadas" },
-    { "n": 151, "rotulo": "apontamentos" },
-    { "n": 32, "rotulo": "bugs (21%)" },
-    { "n": 119, "rotulo": "melhorias e ajustes (79%)" }
+    {
+     "n": 47,
+     "rotulo": "US testáveis"
+    },
+    {
+     "n": 16,
+     "rotulo": "aprovadas",
+     "cor": "ok"
+    },
+    {
+     "n": 25,
+     "rotulo": "reprovadas",
+     "cor": "warn"
+    },
+    {
+     "n": 3,
+     "rotulo": "não iniciadas"
+    },
+    {
+     "n": 151,
+     "rotulo": "apontamentos"
+    },
+    {
+     "n": 32,
+     "rotulo": "bugs (21%)"
+    },
+    {
+     "n": 119,
+     "rotulo": "melhorias e ajustes (79%)"
+    }
    ],
    "nota": "Posição da planilha da MV em 25/09: 16 aprovadas, 25 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção — 47 no total. Dos 151 apontamentos, 119 (79%) são melhorias ou ajustes e 32 (21%) são bugs. A planilha calcula 34% de sucesso sobre as 47 US testáveis."
   },
   "revenue": {
-   "fonte": "Dashboard de homologação de Revenue, Sprints 2 a 9 (planilha da MV)",
-   "lidoEm": "2026-09-17",
+   "fonte": "Dashboard de homologação de Revenue · 2ª onda · Sprints 10 a 16 (planilha da MV)",
+   "lidoEm": "2026-09-30",
    "quadros": [
-    { "n": 37, "rotulo": "US testáveis" },
-    { "n": 16, "rotulo": "aprovadas", "cor": "ok" },
-    { "n": 14, "rotulo": "reprovadas", "cor": "warn" },
-    { "n": 0, "rotulo": "não iniciadas" },
-    { "n": 144, "rotulo": "apontamentos" },
-    { "n": 11, "rotulo": "bugs (8%)" },
-    { "n": 132, "rotulo": "melhorias e ajustes (92%)" }
+    {
+     "n": 101,
+     "rotulo": "US testáveis"
+    },
+    {
+     "n": 0,
+     "rotulo": "aprovadas",
+     "cor": "ok"
+    },
+    {
+     "n": 0,
+     "rotulo": "reprovadas",
+     "cor": "warn"
+    },
+    {
+     "n": 101,
+     "rotulo": "não iniciadas"
+    },
+    {
+     "n": 71,
+     "rotulo": "apontamentos"
+    },
+    {
+     "n": 8,
+     "rotulo": "bugs (11%)"
+    },
+    {
+     "n": 57,
+     "rotulo": "melhorias e ajustes (80%)"
+    }
    ],
-   "nota": "Posição da planilha da MV em 17/09, cobrindo as Sprints 2 a 9: 16 aprovadas, 14 reprovadas e 7 em andamento — 37 no total. Dos 144 apontamentos, 132 (92%) são melhorias ou ajustes e 11 (8%) são bugs — a planilha declara 144 no total e sua própria abertura soma 143, com um apontamento sem classificação. A homologação presencial em Recife, iniciada em 28/09, ainda não está refletida nestes números."
+   "nota": "Posição da planilha da MV em 30/09, cobrindo a 2ª onda — Sprints 10 a 16, 101 US divididas entre Sala A (38) e Sala B (63). Nenhuma US teve o resultado registrado até agora: as 101 seguem como \"Não Iniciado\" na planilha, embora já existam 71 apontamentos lançados. Dos 71, 57 (80%) são ajustes e 8 (11%) são bugs; 6 ainda não têm classificação."
   }
  }
 }
