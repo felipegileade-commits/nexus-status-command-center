@@ -27,7 +27,7 @@
     { "n": 11, "rotulo": "bugs (8%)" },
     { "n": 132, "rotulo": "melhorias e ajustes (92%)" }
    ],
-   "nota": "Posição da planilha da MV em 17/09, cobrindo as Sprints 2 a 9: 16 aprovadas, 14 reprovadas e 7 em andamento — 37 no total. Dos 144 apontamentos, 132 (92%) são melhorias ou ajustes e 11 (8%) são bugs. A homologação presencial em Recife, iniciada em 28/09, ainda não está refletida nestes números."
+   "nota": "Posição da planilha da MV em 17/09, cobrindo as Sprints 2 a 9: 16 aprovadas, 14 reprovadas e 7 em andamento — 37 no total. Dos 144 apontamentos, 132 (92%) são melhorias ou ajustes e 11 (8%) são bugs — a planilha declara 144 no total e sua própria abertura soma 143, com um apontamento sem classificação. A homologação presencial em Recife, iniciada em 28/09, ainda não está refletida nestes números."
   }
  }
 }
