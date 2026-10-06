@@ -169,6 +169,20 @@
     /* eslint-enable no-unreachable */
   }
 
+  // Rodape de cada aba repetindo a data e a semana do topo. A fonte e o proprio painel
+  // (o que o time digitou na barra de cima), nunca o jira.json -- foi por carimbar data
+  // de fora que o cabecalho() acima precisou ser desligado.
+  function rodapes(w){
+    const meta=w.document.querySelectorAll('.topbar .meta small');
+    const data=meta[0]&&meta[0].textContent.trim(),semana=meta[1]&&meta[1].textContent.trim();
+    if(!/^\d{2}\/\d{2}\/\d{4}$/.test(data||''))return;
+    w.document.querySelectorAll('.footer span').forEach(x=>{
+      let t=x.textContent.replace(/\d{2}\/\d{2}\/\d{4}/,data);
+      if(semana)t=t.replace(/Semana\s+\d+/,'Semana '+semana);
+      if(t!==x.textContent)x.textContent=t;
+    });
+  }
+
   // Bloco "Homologação em números" na frente Central, lido de /data/homologacao.json (planilha da MV).
   let homolog=null,carregandoH=null;
   function carregarHomolog(){
@@ -363,11 +377,12 @@
     legendasAvanco(w);
     proximoMarco(w);
     reordena(w);
+    rodapes(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w);reordena(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w);reordena(w);rodapes(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
