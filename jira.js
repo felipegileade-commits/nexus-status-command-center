@@ -269,6 +269,29 @@
             pAcao=root.querySelector('.risk-col.action p');
       if(pRisco&&!pRisco.textContent.trim()&&f.risco){pRisco.textContent=f.risco;mudou=true}
       if(pAcao&&!pAcao.textContent.trim()&&f.acao){pAcao.textContent=f.acao;mudou=true}
+      // Troca travada por conteudo: so reescreve o card se o texto atual for exatamente o
+      // que este arquivo publicou da ultima vez. Se alguem editou, a troca nao acontece.
+      (f.substitui||[]).forEach(t=>{
+        const cards=Array.prototype.slice.call(root.querySelectorAll(".risk-card"));
+        const alvo=cards.filter(x=>{const p=x.querySelector(".risk-col:not(.action) p");return p&&p.textContent.trim()===t.deRisco})[0];
+        if(!alvo)return;
+        alvo.querySelector(".risk-col:not(.action) p").textContent=t.risco;
+        const pa=alvo.querySelector(".risk-col.action p");if(pa)pa.textContent=t.acao;
+        mudou=true;
+      });
+      // Cards extras entram como nx-live: sao redesenhados a cada carga e removidos antes
+      // de salvar, entao nunca duplicam nem entram no estado gravado no Supabase.
+      const wrap=root.querySelector(".risk-wrap");
+      const modelo=wrap&&wrap.querySelector(".risk-card:not(.nx-live)");
+      if(wrap&&modelo)(f.extras||[]).forEach(x=>{
+        if(!x.id||wrap.querySelector("[data-nx-risco=\""+x.id+"\"]"))return;
+        const n=modelo.cloneNode(true);
+        n.className=modelo.className+" nx-live";
+        n.setAttribute("data-nx-risco",x.id);
+        const pr=n.querySelector(".risk-col:not(.action) p");if(pr)pr.textContent=x.risco;
+        const pa=n.querySelector(".risk-col.action p");if(pa)pa.textContent=x.acao;
+        wrap.appendChild(n);mudou=true;
+      });
     });
     // A secao de riscos e o selo "1 risco"/"Sem riscos" sao derivados desse texto,
     // entao precisam ser recalculados depois de preencher.
