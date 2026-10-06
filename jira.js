@@ -70,7 +70,7 @@
       /* Onde o trabalho esta parado: volume por esteira e de quem depende cada etapa. */
       .nx-est{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
       .nx-est-linhas{display:grid;gap:8px}
-      .nx-est-l{display:grid;grid-template-columns:76px 1fr 190px;gap:14px;align-items:center;
+      .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 190px;gap:14px;align-items:center;
         padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
       .nx-est-l.sottelli{border-left-color:var(--teal)}
       .nx-est-l.mv{border-left-color:var(--orange)}
@@ -78,6 +78,9 @@
       .nx-est-l.grupo{border-left-color:#45b36b;background:rgba(69,179,107,.07)}
       .nx-est-n{font-size:26px;font-weight:900;color:var(--text);line-height:1;text-align:center}
       .nx-est-n small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+      .nx-est-p{text-align:center;border-left:1px solid var(--line,#18364f);padding-left:14px}
+      .nx-est-p>span{display:block;font-size:17px;font-weight:800;color:var(--muted);line-height:1}
+      .nx-est-p small{display:block;font-size:8.5px;font-weight:600;color:var(--muted);margin-top:5px;letter-spacing:.06em;text-transform:uppercase}
       .nx-est-txt b{display:block;font-size:13px;color:var(--text);font-weight:700}
       .nx-est-txt span{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
       .nx-est-dono{text-align:right}
@@ -96,7 +99,7 @@
       .nx-est-passo i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:999px}
       .nx-est-passo.mv i{color:var(--orange);border:1px solid var(--orange)}
       .nx-est-passo.sottelli i{color:var(--teal);border:1px solid var(--teal)}
-      @media(max-width:900px){.nx-est-l{grid-template-columns:60px 1fr}.nx-est-dono{grid-column:1/-1;text-align:left}}
+      @media(max-width:900px){.nx-est-l{grid-template-columns:60px 56px 1fr}.nx-est-dono{grid-column:1/-1;text-align:left}}
       .metric-block .nx-desvio-nota{display:block;margin-top:5px;color:#8faec5;font-size:10px;line-height:1.35;font-weight:500}
       .pr-kpi .nx-desvio-nota{display:block;margin-top:1.5mm;font-size:6.5px;color:#677987;line-height:1.3}
       .timeline-panel .panel-actions button[onclick*="scrollTl"]{display:none!important}
@@ -413,9 +416,15 @@
       const abertas=f.esteiras.filter(e=>!e.concluido);
       // sh=1 desconta os habilitadores declarados na linha: e o que o botao mostra.
       const soma=(d2,sh)=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
-      const chamada=sh=>soma(null,sh)+' US represadas — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' apenas da Sottelli.';
+      const chamada=sh=>soma(null,sh)+' US em andamento — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' estão com a Sottelli.';
+      // Percentual de cada linha sobre o total do quadro, a linha concluida inclusive.
+      // Sem casa decimal, regra da Andressa: de 0,5 para cima sobe.
+      const base=sh=>f.esteiras.reduce((t,e)=>t+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
+      const pct=(e,sh)=>{const b=base(sh);const v=Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0));
+        return (!b||!Number.isFinite(Number(e.n)))?'—':Math.round(v/b*100+1e-9)+'%'};
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
+        <div class="nx-est-p"><span ${dual(pct(e,0),pct(e,1))}>${esc(pct(e,0))}</span><small>do total</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
         <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');

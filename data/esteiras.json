@@ -8,12 +8,12 @@
     {
      "nome": "Refinamento · UpStream",
      "n": 52,
+     "hab": 1,
      "detalhe": "48 aguardando escrita de US · 4 em refino",
+     "detalheSem": "48 aguardando escrita de US · 3 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
-     "donoTexto": "MV e Sottelli",
-     "hab": 1,
-     "detalheSem": "48 aguardando escrita de US · 3 em refino"
+     "donoTexto": "MV e Sottelli"
     },
     {
      "nome": "Aprovação de US · UpStream",
@@ -24,26 +24,12 @@
      "donoTexto": "MV"
     },
     {
-     "nome": "Backlog técnico · UpStream",
-     "n": 5,
-     "detalhe": "já refinadas",
-     "espera": "Aprovação técnica interna",
-     "dono": "sottelli",
-     "donoTexto": "Sottelli"
-    },
-    {
-     "nome": "Desenvolvimento · DownStream",
-     "n": "—",
-     "detalhe": "sprint encerra amanhã, sem represamento",
-     "espera": "nada — esteira em execução",
-     "dono": "sottelli",
-     "donoTexto": "Sottelli"
-    },
-    {
-     "nome": "Testes · QAStream",
-     "n": 6,
-     "detalhe": "3 em teste de QA · 2 aguardando review · 1 em correção",
-     "espera": "Execução do QA e envio para a UAT",
+     "nome": "Desenvolvimento e QA · DownStream e QAStream",
+     "n": 33,
+     "hab": 9,
+     "detalhe": "7 backlog técnico · 4 em desenvolvimento · 19 em code review · 1 em correção de bug · 2 aguardando review",
+     "detalheSem": "7 backlog técnico · 1 em desenvolvimento · 13 em code review · 1 em correção de bug · 2 aguardando review",
+     "espera": "Fechamento da sprint, que encerra amanhã",
      "dono": "sottelli",
      "donoTexto": "Sottelli"
     },
@@ -58,13 +44,13 @@
     {
      "nome": "Aprovado em UAT",
      "n": 57,
+     "hab": 18,
      "detalhe": "40 da 1ª homologação (22 testáveis · 18 habilitadoras) · 17 da 2ª",
+     "detalheSem": "22 testáveis da 1ª homologação · 17 da 2ª",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo",
-     "concluido": true,
-     "hab": 18,
-     "detalheSem": "22 testáveis da 1ª homologação · 17 da 2ª"
+     "concluido": true
     }
    ],
    "etapas": [
@@ -89,7 +75,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Desenvolvimento, QA e backlog técnico são integralmente da Sottelli, e não há represamento neles: a sprint encerra amanhã e não existe fila de desenvolvimento, porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US, e depois dele, na homologação. As 57 US aprovadas em UAT não entram nessa conta: já passaram pela homologação e foram percorridas pelas duas partes."
+   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Duas coisas ficam fora deste quadro e precisam ser ditas: 13 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção, e 37 US estão paradas em \"Realizando Deploy em QA\" fora da sprint atual, além das 19 que aparecem aqui. As 57 aprovadas em UAT não entram na conta de represamento: já passaram pela homologação e foram percorridas pelas duas partes."
   }
  }
 }
