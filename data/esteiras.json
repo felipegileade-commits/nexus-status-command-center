@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco 'Onde o trabalho está parado'. Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. 'dono' aceita sottelli, mv ou compartilhada. 'n' pode ser um número ou um traço, quando a esteira não tem represamento. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto.",
+ "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto.",
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
@@ -52,16 +52,40 @@
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV"
+    },
+    {
+     "nome": "Homologação concluída",
+     "n": 40,
+     "detalhe": "22 testáveis · 18 habilitadoras · coluna Validado do board de Homologação",
+     "espera": "nada — entregue e aprovado",
+     "dono": "grupo",
+     "donoTexto": "Trabalho concluído em grupo",
+     "concluido": true
     }
    ],
    "etapas": [
-    { "quem": "mv", "texto": "Fornecer os insumos e definir quem participa das agendas" },
-    { "quem": "sottelli", "texto": "Enviar as agendas de refino" },
-    { "quem": "mv", "texto": "Participar e refinar" },
-    { "quem": "sottelli", "texto": "Escrever a US" },
-    { "quem": "mv", "texto": "Aprovar a US" }
+    {
+     "quem": "mv",
+     "texto": "Fornecer os insumos e definir quem participa das agendas"
+    },
+    {
+     "quem": "sottelli",
+     "texto": "Enviar as agendas de refino"
+    },
+    {
+     "quem": "mv",
+     "texto": "Participar e refinar"
+    },
+    {
+     "quem": "sottelli",
+     "texto": "Escrever a US"
+    },
+    {
+     "quem": "mv",
+     "texto": "Aprovar a US"
+    }
    ],
-   "nota": "O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Desenvolvimento, QA e backlog técnico são integralmente da Sottelli, e não há represamento neles: a sprint encerra amanhã e não existe fila de desenvolvimento, porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US, e depois dele, na homologação."
+   "nota": "O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Desenvolvimento, QA e backlog técnico são integralmente da Sottelli, e não há represamento neles: a sprint encerra amanhã e não existe fila de desenvolvimento, porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US, e depois dele, na homologação. As 40 US já validadas não entram nessa conta: estão concluídas, e foram percorridas pelas duas partes."
   }
  }
 }

@@ -64,6 +64,7 @@
       .nx-est-l.sottelli{border-left-color:var(--teal)}
       .nx-est-l.mv{border-left-color:var(--orange)}
       .nx-est-l.compartilhada{border-left-color:#8a7bd8}
+      .nx-est-l.grupo{border-left-color:#45b36b;background:rgba(69,179,107,.07)}
       .nx-est-n{font-size:26px;font-weight:900;color:var(--text);line-height:1;text-align:center}
       .nx-est-n small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
       .nx-est-txt b{display:block;font-size:13px;color:var(--text);font-weight:700}
@@ -74,6 +75,7 @@
       .nx-est-l.sottelli .nx-est-dono b{color:var(--teal);border-color:var(--teal)}
       .nx-est-l.mv .nx-est-dono b{color:var(--orange);border-color:var(--orange)}
       .nx-est-l.compartilhada .nx-est-dono b{color:#8a7bd8;border-color:#8a7bd8}
+      .nx-est-l.grupo .nx-est-dono b{color:#45b36b;border-color:#45b36b}
       .nx-est-dono span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
       .nx-est-fluxo{margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03))}
       .nx-est-fluxo .label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
@@ -292,7 +294,9 @@
       if(!f||!sec||!Array.isArray(f.esteiras)||!f.esteiras.length)return;
       const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-est'))return;
       // Uma esteira sem represamento entra com traco no lugar do numero e nao soma.
-      const soma=d2=>f.esteiras.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+(Number(e.n)||0),0);
+      // Linha marcada como concluida e trabalho entregue: aparece no quadro, mas nao soma represamento.
+      const abertas=f.esteiras.filter(e=>!e.concluido);
+      const soma=d2=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+(Number(e.n)||0),0);
       const total=soma(),soSottelli=soma('sottelli'),soMv=soma('mv'),compart=soma('compartilhada');
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n">${esc(String(e.n))}<small>US</small></div>
@@ -301,11 +305,28 @@
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
-      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está parado</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         <div class="nx-est-linhas">${linhas}</div>
         ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
         <p class="nx-homolog-nota"><b>${total} US represadas — ${compart} em etapa compartilhada, ${soMv} dependem apenas da MV e ${soSottelli} apenas da Sottelli.</b> ${esc(f.nota||'')}</p>`;
       fs.appendChild(el);
+    });
+  }
+
+  // Riscos e proximos passos sobem para logo abaixo do resumo da frente, onde ficam os quadros
+  // de homologacao e de esteiras: o risco fala dos numeros que acabaram de aparecer na tela.
+  // O <main> vem do Supabase, entao a ordem e ajustada aqui e nao no HTML do repositorio.
+  function reordena(w){
+    const d=w.document;
+    ["central","revenue"].forEach(id=>{
+      const sec=d.getElementById(id);if(!sec)return;
+      const resumo=sec.querySelector(".front-summary");if(!resumo)return;
+      const secoes=Array.prototype.slice.call(sec.children).filter(x=>x.classList&&x.classList.contains("section"));
+      const acha=rot=>secoes.filter(x=>{const e=x.querySelector(".section-title .eyebrow");return e&&e.textContent.trim()===rot})[0];
+      const alvos=[acha("GESTÃO ATIVA"),acha("EXECUÇÃO")].filter(Boolean);
+      if(alvos.length!==2)return;
+      let ref=resumo;
+      alvos.forEach(x=>{if(ref.nextElementSibling!==x)ref.parentNode.insertBefore(x,ref.nextElementSibling);ref=x});
     });
   }
 
@@ -318,11 +339,12 @@
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     proximoMarco(w);
+    reordena(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w);reordena(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

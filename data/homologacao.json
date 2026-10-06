@@ -2,20 +2,20 @@
  "_leiame": "Bloco 'Homologação em números' de cada frente. Os rótulos são os MESMOS nas duas frentes de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita cor 'ok' (verde) ou 'warn' (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
  "frentes": {
   "central": {
-   "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV)",
-   "lidoEm": "2026-09-25",
+   "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV) + coluna Validado do board de Homologação (Jira MVPMO)",
+   "lidoEm": "2026-10-06",
    "quadros": [
     {
      "n": 47,
      "rotulo": "US testáveis"
     },
     {
-     "n": 16,
+     "n": 17,
      "rotulo": "aprovadas",
      "cor": "ok"
     },
     {
-     "n": 25,
+     "n": 24,
      "rotulo": "reprovadas",
      "cor": "warn"
     },
@@ -24,19 +24,29 @@
      "rotulo": "não iniciadas"
     },
     {
-     "n": 151,
+     "n": 153,
      "rotulo": "apontamentos"
     },
     {
-     "n": 32,
-     "rotulo": "bugs (21%)"
+     "n": 34,
+     "rotulo": "bugs (22%)"
     },
     {
      "n": 119,
-     "rotulo": "melhorias e ajustes (79%)"
+     "rotulo": "melhorias e ajustes (78%)"
+    },
+    {
+     "n": 22,
+     "rotulo": "testáveis aprovadas antes",
+     "cor": "ok"
+    },
+    {
+     "n": 18,
+     "rotulo": "habilitadoras aprovadas antes",
+     "cor": "ok"
     }
    ],
-   "nota": "Posição da planilha da MV em 25/09: 16 aprovadas, 25 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção — 47 no total. Dos 151 apontamentos, 119 (79%) são melhorias ou ajustes e 32 (21%) são bugs. A planilha calcula 34% de sucesso sobre as 47 US testáveis."
+   "nota": "Rodada em andamento, posição da planilha da MV em 06/10: 17 aprovadas, 24 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção — 47 no total. Dos 153 apontamentos, 119 (78%) são melhorias ou ajustes e 34 (22%) são bugs; a planilha calcula 36% de sucesso sobre as 47 US testáveis. Os dois últimos quadros são as homologações anteriores: 40 US já aprovadas e validadas no Jira — 22 testáveis e 18 habilitadoras. Os dois blocos não se somam em um total único porque medem rodadas diferentes."
   },
   "revenue": {
    "fonte": "Dashboard de homologação de Revenue · 2ª onda · Sprints 10 a 16 (planilha da MV)",
