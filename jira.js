@@ -54,8 +54,12 @@
       .nx-homolog-grid b{display:block;font-size:20px;font-weight:800;color:var(--text)}
       .nx-homolog-grid b.ok{color:var(--green)}.nx-homolog-grid b.warn{color:var(--orange)}
       .nx-homolog-grid span{display:block;font-size:9.5px;color:var(--muted);margin-top:3px;line-height:1.3}
+      .nx-homolog-grupo{margin-top:12px}
+      .nx-homolog-grupo>.t{display:block;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:6px}
+      .nx-homolog-grupo.destaque>.t{color:var(--teal)}
+      .nx-homolog-grupo.destaque .nx-homolog-grid div{box-shadow:inset 0 0 0 1px var(--line,#18364f)}
       .nx-homolog-nota{margin:10px 0 0;font-size:11px;color:var(--muted)}
-      @media(max-width:900px){.nx-homolog-grid{grid-template-columns:repeat(4,1fr)}}
+      @media(max-width:900px){.nx-homolog-grid{grid-template-columns:repeat(4,1fr)!important}}
       /* Onde o trabalho esta parado: volume por esteira e de quem depende cada etapa. */
       .nx-est{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
       .nx-est-linhas{display:grid;gap:8px}
@@ -75,7 +79,7 @@
       .nx-est-l.sottelli .nx-est-dono b{color:var(--teal);border-color:var(--teal)}
       .nx-est-l.mv .nx-est-dono b{color:var(--orange);border-color:var(--orange)}
       .nx-est-l.compartilhada .nx-est-dono b{color:#8a7bd8;border-color:#8a7bd8}
-      .nx-est-l.grupo .nx-est-dono b{color:#45b36b;border-color:#45b36b}
+      .nx-est-l.grupo .nx-est-dono b{color:#45b36b;border-color:#45b36b;white-space:nowrap}
       .nx-est-dono span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
       .nx-est-fluxo{margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03))}
       .nx-est-fluxo .label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
@@ -195,17 +199,33 @@
   // da planilha da MV e Revenue vem do Jira com a lista revisada pela Transformacao Digital.
   function blocoHomolog(w,h){
     if(!h||!h.frentes)return;const d=w.document;
-    Object.keys(h.frentes).forEach(chave=>{
-      const f=h.frentes[chave],sec=d.getElementById(chave);
-      if(!f||!sec||!Array.isArray(f.quadros)||!f.quadros.length)return;
-      const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-homolog'))return;
-      const quadros=f.quadros.map(q=>{
+    // Uma grade por grupo. O numero de colunas segue a quantidade de quadros, para a
+    // frente que tem uma grade so (Revenue) continuar igual e as rodadas da Central
+    // ficarem alinhadas coluna a coluna, que e o que permite comparar uma com a outra.
+    const grade=qs=>{
+      const n=Math.max(4,Math.min(8,qs.length));
+      const quadros=qs.map(q=>{
         const cor=q.cor==='ok'?' class="ok"':q.cor==='warn'?' class="warn"':'';
         return `<div><b${cor}>${esc(String(q.n))}</b><span>${esc(q.rotulo||'')}</span></div>`;
       }).join('');
+      return `<div class="nx-homolog-grid" style="grid-template-columns:repeat(${n},1fr)">${quadros}</div>`;
+    };
+    Object.keys(h.frentes).forEach(chave=>{
+      const f=h.frentes[chave],sec=d.getElementById(chave);if(!f||!sec)return;
+      const grupos=Array.isArray(f.grupos)&&f.grupos.length?f.grupos
+                 :(Array.isArray(f.quadros)&&f.quadros.length?[{quadros:f.quadros}]:null);
+      if(!grupos)return;
+      const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-homolog'))return;
+      const corpo=grupos.map(g=>{
+        const qs=Array.isArray(g.quadros)?g.quadros:[];
+        if(!qs.length)return '';
+        return g.titulo
+          ? `<div class="nx-homolog-grupo${g.destaque?' destaque':''}"><span class="t">${esc(g.titulo)}</span>${grade(qs)}</div>`
+          : grade(qs);
+      }).join('');
       const el=d.createElement('div');el.className='nx-homolog nx-live';
       el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
-        <div class="nx-homolog-grid">${quadros}</div><p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
+        ${corpo}<p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
       fs.appendChild(el);
     });
   }
@@ -338,7 +358,7 @@
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n">${esc(String(e.n))}<small>US</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
-        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b><span>${e.concluido?'entrega concluída':'responsabilidade'}</span></div>
+        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';

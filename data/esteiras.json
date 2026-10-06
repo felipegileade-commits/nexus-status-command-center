@@ -54,12 +54,12 @@
      "donoTexto": "MV"
     },
     {
-     "nome": "Homologação concluída",
-     "n": 40,
-     "detalhe": "22 testáveis · 18 habilitadoras · coluna Validado do board de Homologação",
-     "espera": "nada — entregue e aprovado",
+     "nome": "Aprovado em UAT",
+     "n": 57,
+     "detalhe": "40 da 1ª homologação (22 testáveis · 18 habilitadoras) · 17 da 2ª",
+     "espera": "",
      "dono": "grupo",
-     "donoTexto": "Trabalho concluído em grupo",
+     "donoTexto": "Concluído em grupo",
      "concluido": true
     }
    ],
@@ -85,7 +85,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Desenvolvimento, QA e backlog técnico são integralmente da Sottelli, e não há represamento neles: a sprint encerra amanhã e não existe fila de desenvolvimento, porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US, e depois dele, na homologação. As 40 US já validadas não entram nessa conta: estão concluídas, e foram percorridas pelas duas partes."
+   "nota": "O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Desenvolvimento, QA e backlog técnico são integralmente da Sottelli, e não há represamento neles: a sprint encerra amanhã e não existe fila de desenvolvimento, porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US, e depois dele, na homologação. As 57 US aprovadas em UAT não entram nessa conta: já passaram pela homologação e foram percorridas pelas duas partes."
   }
  }
 }

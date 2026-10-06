@@ -1,52 +1,130 @@
 {
- "_leiame": "Bloco 'Homologação em números' de cada frente. Os rótulos são os MESMOS nas duas frentes de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita cor 'ok' (verde) ou 'warn' (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
+ "_leiame": "Bloco \"Homologação em números\" de cada frente. Uma frente pode vir como \"quadros\" (uma grade só) ou como \"grupos\" (uma grade por rodada, com titulo e destaque opcional). Os rótulos são os MESMOS entre frentes e entre rodadas de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita cor \"ok\" (verde) ou \"warn\" (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
  "frentes": {
   "central": {
-   "fonte": "Dashboard de homologação da Central de Projetos (planilha da MV) + coluna Validado do board de Homologação (Jira MVPMO)",
+   "fonte": "Planilhas de homologação da MV (1ª e 2ª rodadas) + coluna Validado do board de Homologação (Jira MVPMO)",
    "lidoEm": "2026-10-06",
-   "quadros": [
+   "grupos": [
     {
-     "n": 47,
-     "rotulo": "US testáveis"
+     "titulo": "Geral · as duas homologações",
+     "destaque": true,
+     "quadros": [
+      {
+       "n": 87,
+       "rotulo": "US homologadas"
+      },
+      {
+       "n": 69,
+       "rotulo": "US testáveis"
+      },
+      {
+       "n": 18,
+       "rotulo": "habilitadoras"
+      },
+      {
+       "n": 57,
+       "rotulo": "aprovadas",
+       "cor": "ok"
+      },
+      {
+       "n": 24,
+       "rotulo": "reprovadas",
+       "cor": "warn"
+      },
+      {
+       "n": 3,
+       "rotulo": "não iniciadas"
+      },
+      {
+       "n": 280,
+       "rotulo": "apontamentos"
+      },
+      {
+       "n": 47,
+       "rotulo": "bugs (17%)"
+      }
+     ]
     },
     {
-     "n": 17,
-     "rotulo": "aprovadas",
-     "cor": "ok"
+     "titulo": "1ª homologação · planilha Feedback_Homologacao_Nexus · 48 cenários",
+     "quadros": [
+      {
+       "n": 40,
+       "rotulo": "US homologadas"
+      },
+      {
+       "n": 22,
+       "rotulo": "US testáveis"
+      },
+      {
+       "n": 18,
+       "rotulo": "habilitadoras"
+      },
+      {
+       "n": 40,
+       "rotulo": "aprovadas",
+       "cor": "ok"
+      },
+      {
+       "n": 0,
+       "rotulo": "reprovadas",
+       "cor": "warn"
+      },
+      {
+       "n": 0,
+       "rotulo": "não iniciadas"
+      },
+      {
+       "n": 127,
+       "rotulo": "apontamentos"
+      },
+      {
+       "n": 13,
+       "rotulo": "bugs (10%)"
+      }
+     ]
     },
     {
-     "n": 24,
-     "rotulo": "reprovadas",
-     "cor": "warn"
-    },
-    {
-     "n": 3,
-     "rotulo": "não iniciadas"
-    },
-    {
-     "n": 153,
-     "rotulo": "apontamentos"
-    },
-    {
-     "n": 34,
-     "rotulo": "bugs (22%)"
-    },
-    {
-     "n": 119,
-     "rotulo": "melhorias e ajustes (78%)"
-    },
-    {
-     "n": 22,
-     "rotulo": "testáveis aprovadas antes",
-     "cor": "ok"
-    },
-    {
-     "n": 18,
-     "rotulo": "habilitadoras aprovadas antes",
-     "cor": "ok"
+     "titulo": "2ª homologação · planilha Central_de_Projetos_Homologacao_APONTAMENTOS · em andamento",
+     "quadros": [
+      {
+       "n": 47,
+       "rotulo": "US homologadas"
+      },
+      {
+       "n": 47,
+       "rotulo": "US testáveis"
+      },
+      {
+       "n": 0,
+       "rotulo": "habilitadoras"
+      },
+      {
+       "n": 17,
+       "rotulo": "aprovadas",
+       "cor": "ok"
+      },
+      {
+       "n": 24,
+       "rotulo": "reprovadas",
+       "cor": "warn"
+      },
+      {
+       "n": 3,
+       "rotulo": "não iniciadas"
+      },
+      {
+       "n": 153,
+       "rotulo": "apontamentos"
+      },
+      {
+       "n": 34,
+       "rotulo": "bugs (22%)"
+      }
+     ]
     }
    ],
-   "nota": "Rodada em andamento, posição da planilha da MV em 06/10: 17 aprovadas, 24 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção — 47 no total. Dos 153 apontamentos, 119 (78%) são melhorias ou ajustes e 34 (22%) são bugs; a planilha calcula 36% de sucesso sobre as 47 US testáveis. Os dois últimos quadros são as homologações anteriores: 40 US já aprovadas e validadas no Jira — 22 testáveis e 18 habilitadoras. Os dois blocos não se somam em um total único porque medem rodadas diferentes."
+   "nota": "Geral: 87 US já passaram por homologação — 69 testáveis e 18 habilitadoras. Dessas, 57 estão aprovadas, 24 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção (57+24+3+2+1 = 87). 1ª homologação: 48 cenários sobre as 15 US que tinham roteiro funcional, 127 apontamentos e 13 classificados como bug; nenhuma US ficou reprovada — as 40 estão hoje em Validado no Jira, ou seja, todo apontamento foi corrigido e aceito. 2ª homologação, posição da planilha da MV em 06/10: 17 aprovadas de 47, 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As duas contagens de apontamento não têm a mesma unidade: na 1ª vale cada observação registrada por um participante no cenário; na 2ª vale a linha da aba de apontamentos."
   },
   "revenue": {
    "fonte": "Dashboard de homologação de Revenue · 2ª onda · Sprints 10 a 16 (planilha da MV)",
