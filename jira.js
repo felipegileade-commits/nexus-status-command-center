@@ -300,8 +300,8 @@
       const total=soma(),soSottelli=soma('sottelli'),soMv=soma('mv'),compart=soma('compartilhada');
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n">${esc(String(e.n))}<small>US</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span>${esc(e.detalhe||'')} · aguarda ${esc(e.espera||'')}</span></div>
-        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b><span>responsabilidade</span></div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
+        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b><span>${e.concluido?'entrega concluída':'responsabilidade'}</span></div>
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
