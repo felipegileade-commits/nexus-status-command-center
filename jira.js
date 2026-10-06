@@ -56,6 +56,34 @@
       .nx-homolog-grid span{display:block;font-size:9.5px;color:var(--muted);margin-top:3px;line-height:1.3}
       .nx-homolog-nota{margin:10px 0 0;font-size:11px;color:var(--muted)}
       @media(max-width:900px){.nx-homolog-grid{grid-template-columns:repeat(4,1fr)}}
+      /* Onde o trabalho esta parado: volume por esteira e de quem depende cada etapa. */
+      .nx-est{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
+      .nx-est-linhas{display:grid;gap:8px}
+      .nx-est-l{display:grid;grid-template-columns:76px 1fr 190px;gap:14px;align-items:center;
+        padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
+      .nx-est-l.sottelli{border-left-color:var(--teal)}
+      .nx-est-l.mv{border-left-color:var(--orange)}
+      .nx-est-l.compartilhada{border-left-color:#8a7bd8}
+      .nx-est-n{font-size:26px;font-weight:900;color:var(--text);line-height:1;text-align:center}
+      .nx-est-n small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+      .nx-est-txt b{display:block;font-size:13px;color:var(--text);font-weight:700}
+      .nx-est-txt span{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
+      .nx-est-dono{text-align:right}
+      .nx-est-dono b{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+        padding:3px 10px;border-radius:999px;border:1px solid var(--line,#18364f);color:var(--muted)}
+      .nx-est-l.sottelli .nx-est-dono b{color:var(--teal);border-color:var(--teal)}
+      .nx-est-l.mv .nx-est-dono b{color:var(--orange);border-color:var(--orange)}
+      .nx-est-l.compartilhada .nx-est-dono b{color:#8a7bd8;border-color:#8a7bd8}
+      .nx-est-dono span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+      .nx-est-fluxo{margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03))}
+      .nx-est-fluxo .label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
+      .nx-est-passos{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+      .nx-est-passo{display:flex;align-items:center;gap:7px;font-size:10.5px;color:var(--text);
+        padding:5px 10px;border-radius:999px;border:1px solid var(--line,#18364f)}
+      .nx-est-passo i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:999px}
+      .nx-est-passo.mv i{color:var(--orange);border:1px solid var(--orange)}
+      .nx-est-passo.sottelli i{color:var(--teal);border:1px solid var(--teal)}
+      @media(max-width:900px){.nx-est-l{grid-template-columns:60px 1fr}.nx-est-dono{grid-column:1/-1;text-align:left}}
       .metric-block .nx-desvio-nota{display:block;margin-top:5px;color:#8faec5;font-size:10px;line-height:1.35;font-weight:500}
       .pr-kpi .nx-desvio-nota{display:block;margin-top:1.5mm;font-size:6.5px;color:#677987;line-height:1.3}
       .timeline-panel .panel-actions button[onclick*="scrollTl"]{display:none!important}
@@ -246,11 +274,46 @@
               try{w.syncPrintReport&&w.syncPrintReport()}catch(e){}}
   }
 
+  // "Onde o trabalho esta parado": volume represado por esteira, com o dono de cada etapa.
+  // Serve para separar o que a Sottelli resolve sozinha do que nao resolve -- a leitura
+  // que o status precisava para a discussao de responsabilidade com a MV.
+  let esteiras=null,carregandoE=null;
+  function carregarEsteiras(){
+    if(esteiras)return Promise.resolve(esteiras);
+    if(carregandoE)return carregandoE;
+    carregandoE=fetch('/data/esteiras.json?v='+Date.now(),{cache:'no-store'})
+      .then(r=>r.ok?r.json():null).then(j=>(esteiras=j)).catch(()=>null);
+    return carregandoE;
+  }
+  function blocoEsteiras(w,h){
+    if(!h||!h.frentes)return;const d=w.document;
+    Object.keys(h.frentes).forEach(chave=>{
+      const f=h.frentes[chave],sec=d.getElementById(chave);
+      if(!f||!sec||!Array.isArray(f.esteiras)||!f.esteiras.length)return;
+      const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-est'))return;
+      const total=f.esteiras.reduce((s,e)=>s+(Number(e.n)||0),0);
+      const soSottelli=f.esteiras.filter(e=>e.dono==='sottelli').reduce((s,e)=>s+(Number(e.n)||0),0);
+      const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
+        <div class="nx-est-n">${esc(String(e.n))}<small>US</small></div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span>${esc(e.detalhe||'')} · aguarda ${esc(e.espera||'')}</span></div>
+        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b><span>responsabilidade</span></div>
+      </div>`).join('');
+      const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
+      const el=d.createElement('div');el.className='nx-est nx-live';
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está parado</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
+        <div class="nx-est-linhas">${linhas}</div>
+        ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
+        <p class="nx-homolog-nota"><b>${total} US represadas; ${soSottelli} dependem apenas da Sottelli.</b> ${esc(f.nota||'')}</p>`;
+      fs.appendChild(el);
+    });
+  }
+
   function install(){
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r)blocoRiscos(w,r)});
+      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     proximoMarco(w);
@@ -258,7 +321,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

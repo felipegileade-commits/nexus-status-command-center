@@ -1,0 +1,43 @@
+{
+ "_leiame": "Bloco 'Onde o trabalho está parado'. Mostra o volume represado por esteira e de quem depende cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. 'dono' aceita sottelli, mv ou compartilhada. Atualize os números pelo quadro do Jira, contando os itens de cada coluna.",
+ "frentes": {
+  "central": {
+   "fonte": "Quadro UpStream do Jira (MVPMO)",
+   "lidoEm": "2026-10-06",
+   "esteiras": [
+    {
+     "nome": "Refinamento",
+     "n": 52,
+     "detalhe": "48 aguardando escrita de US · 4 em refino",
+     "espera": "Agenda de refino com a MV",
+     "dono": "compartilhada",
+     "donoTexto": "MV e Sottelli"
+    },
+    {
+     "nome": "Backlog técnico",
+     "n": 5,
+     "detalhe": "já refinadas",
+     "espera": "Aprovação técnica interna",
+     "dono": "sottelli",
+     "donoTexto": "Sottelli"
+    },
+    {
+     "nome": "Aprovação do cliente",
+     "n": 13,
+     "detalhe": "US escritas",
+     "espera": "Agenda de aprovação de US",
+     "dono": "mv",
+     "donoTexto": "MV"
+    }
+   ],
+   "etapas": [
+    { "quem": "mv", "texto": "Fornecer os insumos e definir quem participa das agendas" },
+    { "quem": "sottelli", "texto": "Enviar as agendas de refino" },
+    { "quem": "mv", "texto": "Participar e refinar" },
+    { "quem": "sottelli", "texto": "Escrever a US" },
+    { "quem": "mv", "texto": "Aprovar a US" }
+   ],
+   "nota": "A esteira de refinamento tem cinco etapas e nenhuma das duas partes a percorre sozinha: três dependem da MV e duas da Sottelli. Por isso o seu peso é compartilhado. Hoje não existe fila de desenvolvimento na Central de Projetos — não porque o time esteja ocioso, mas porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US."
+  }
+ }
+}
