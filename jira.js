@@ -312,6 +312,17 @@
     });
   }
 
+  // "concluido" virou "desenvolvido": o percentual mede desenvolvimento, nao entrega.
+  // O <main> vem do Supabase, entao a troca precisa acontecer aqui tambem.
+  function legendaDesenvolvido(w){
+    w.document.querySelectorAll('#central .front-progress small,#revenue .front-progress small').forEach(x=>{
+      if(/conclu/i.test(x.textContent))x.textContent='desenvolvido';
+    });
+    w.document.querySelectorAll('#prCentral .pr-kpi span,#prRevenue .pr-kpi span').forEach(x=>{
+      if(/^conclu/i.test(x.textContent.trim()))x.textContent='DESENVOLVIDO';
+    });
+  }
+
   function legendasAvanco(w){
     const cards=w.document.querySelectorAll('#overview .kpis .card');if(cards.length<3)return;
     const p1=cards[0].querySelector('p');if(p1)p1.textContent='US desenvolvidas · média das duas frentes';
@@ -495,6 +506,7 @@
       carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
+    legendaDesenvolvido(w);
     proximoMarco(w);
     reordena(w);
     rodapes(w);
@@ -503,7 +515,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
