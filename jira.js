@@ -49,6 +49,7 @@
       .nx-homolog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
       .nx-homolog-head .label{margin:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
       .nx-homolog-src{font-size:10px;color:var(--muted)}
+      .front-head .nx-tog{margin-left:auto;margin-right:12px}
       .nx-tog{margin-left:10px;font:inherit;font-size:9.5px;font-weight:700;letter-spacing:.04em;cursor:pointer;
         padding:3px 10px;border-radius:999px;border:1px solid var(--line,#18364f);background:transparent;color:var(--muted)}
       .nx-tog:hover{color:var(--text);border-color:var(--teal)}
@@ -223,7 +224,19 @@
       b.classList.toggle('on',on);
     });
   }
-  function botaoHab(){return '<button type="button" class="nx-tog" aria-pressed="false">Ocultar habilitadores</button>'}
+  // O botao fica no topo da pagina de cada frente, ao lado do selo de risco, e nao
+  // dentro dos blocos: e um interruptor da aba inteira, nao de um quadro so.
+  function botaoHab(w){
+    ['central','revenue'].forEach(id=>{
+      const sec=w.document.getElementById(id);if(!sec)return;
+      const head=sec.querySelector('.front-head');if(!head||head.querySelector('.nx-tog'))return;
+      const b=w.document.createElement('button');
+      b.type='button';b.className='nx-tog nx-live';b.setAttribute('aria-pressed','false');
+      b.textContent='Ocultar habilitadores';
+      const pill=head.querySelector('.status-pill');
+      if(pill)head.insertBefore(b,pill);else head.appendChild(b);
+    });
+  }
   function ligaHab(w){
     if(w.__nxHab)return;w.__nxHab=true;
     w.document.addEventListener('click',ev=>{
@@ -260,11 +273,10 @@
           ? `<div class="nx-homolog-grupo${g.destaque?' destaque':''}"><span class="t">${esc(g.titulo)}</span>${grade(qs)}</div>`
           : grade(qs);
       }).join('');
-      const temHab=grupos.some(g=>(g.quadros||[]).some(q=>q.nSem!==undefined&&q.nSem!==q.n));
       const el=d.createElement('div');el.className='nx-homolog nx-live';
-      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span>${temHab?botaoHab():''}</div>
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         ${corpo}<p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
-      fs.appendChild(el);ligaHab(w);aplicaHab(w);
+      fs.appendChild(el);ligaHab(w);botaoHab(w);aplicaHab(w);
     });
   }
 
@@ -394,7 +406,6 @@
       // sh=1 desconta os habilitadores declarados na linha: e o que o botao mostra.
       const soma=(d2,sh)=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
       const chamada=sh=>soma(null,sh)+' US represadas — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' apenas da Sottelli.';
-      const temHab=f.esteiras.some(e=>Number(e.hab)>0);
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
@@ -402,11 +413,11 @@
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
-      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span>${temHab?botaoHab():''}</div>
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         <div class="nx-est-linhas">${linhas}</div>
         ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
         <p class="nx-homolog-nota"><b ${dual(chamada(0),chamada(1))}>${esc(chamada(0))}</b> ${esc(f.nota||'')}</p>`;
-      fs.appendChild(el);ligaHab(w);aplicaHab(w);
+      fs.appendChild(el);ligaHab(w);botaoHab(w);aplicaHab(w);
     });
   }
 
@@ -438,11 +449,12 @@
     proximoMarco(w);
     reordena(w);
     rodapes(w);
+    ligaHab(w);botaoHab(w);aplicaHab(w);
     if(!w.__nxJiraObserver){
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w);reordena(w);rodapes(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

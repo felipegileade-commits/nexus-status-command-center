@@ -45,14 +45,6 @@
       {
        "n": 1,
        "rotulo": "pendente de correção"
-      },
-      {
-       "n": 280,
-       "rotulo": "apontamentos"
-      },
-      {
-       "n": 47,
-       "rotulo": "bugs (17%)"
       }
      ]
     },
@@ -95,14 +87,6 @@
       {
        "n": 0,
        "rotulo": "pendente de correção"
-      },
-      {
-       "n": 127,
-       "rotulo": "apontamentos"
-      },
-      {
-       "n": 13,
-       "rotulo": "bugs (10%)"
       }
      ]
     },
@@ -142,19 +126,11 @@
       {
        "n": 1,
        "rotulo": "pendente de correção"
-      },
-      {
-       "n": 153,
-       "rotulo": "apontamentos"
-      },
-      {
-       "n": 34,
-       "rotulo": "bugs (22%)"
       }
      ]
     }
    ],
-   "nota": "Cada linha fecha: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. No Jira, as 57 aprovadas são 40 na coluna Validado (22 testáveis e 18 habilitadoras, todas da 1ª homologação) e 17 em Aprovado em UAT (2ª homologação). As 30 restantes da 2ª rodada estão em BUG (13), BUG EM TESTES (10), Pós Review (3), EM HOMOLOGAÇÃO (2) e Aguardando Review (2) — mesmo total que a planilha da MV declara como não aprovadas. As duas rodadas não repetem nenhuma US: conferido chave a chave no Jira em 06/10. 1ª homologação: 48 cenários sobre as 15 US que tinham roteiro funcional, 127 apontamentos e 13 classificados como bug; nenhuma ficou reprovada. 2ª homologação, posição da planilha da MV em 06/10: 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As duas contagens de apontamento não têm a mesma unidade: na 1ª vale cada observação registrada por um participante no cenário; na 2ª vale a linha da aba de apontamentos. Com os habilitadores fora da conta, o escopo cai para 69 e as aprovadas para 39 — os apontamentos não mudam, porque nenhum habilitador tinha roteiro de teste."
+   "nota": "A grade conta SÓ homologação. Cada linha fecha nos dois sentidos: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. Atenção à leitura: os 18 habilitadores nunca foram homologados pelo cliente — eles foram aprovados tecnicamente e estão no Jira em Validado. Por isso o botão: com os habilitadores fora, a conta vira a de homologação pura — 69 US testáveis entraram nas duas rodadas e 39 estão aprovadas (22 da 1ª e 17 da 2ª). Com eles dentro, bate com as 57 do Jira (40 em Validado e 17 em Aprovado em UAT). 1ª homologação: das 22 testáveis, 15 tiveram cenário de teste executado na planilha; 127 apontamentos, 13 classificados como bug, nenhuma US ficou reprovada. 2ª homologação, posição da planilha da MV em 06/10: das 47 testáveis, 44 tiveram resultado registrado; 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As 30 ainda não aprovadas estão no Jira em BUG (13), BUG EM TESTES (10), Pós Review (3), EM HOMOLOGAÇÃO (2) e Aguardando Review (2). As duas rodadas não repetem nenhuma US: conferido chave a chave em 06/10."
   },
   "revenue": {
    "fonte": "Dashboard de homologação de Revenue · 2ª onda · Sprints 10 a 16 (planilha da MV)",
@@ -191,7 +167,7 @@
      "rotulo": "melhorias e ajustes (80%)"
     }
    ],
-   "nota": "Posição da planilha da MV em 30/09, cobrindo a 2ª onda — Sprints 10 a 16, 101 US divididas entre Sala A (38) e Sala B (63). Nenhuma US teve o resultado registrado até agora: as 101 seguem como \"Não Iniciado\" na planilha, embora já existam 71 apontamentos lançados. Dos 71, 57 (80%) são ajustes e 8 (11%) são bugs; 6 ainda não têm classificação."
+   "nota": "Posição da planilha da MV em 30/09, cobrindo a 2ª onda — Sprints 10 a 16, 101 US divididas entre Sala A (38) e Sala B (63). Nenhuma US teve o resultado registrado até agora: as 101 seguem como \"Não Iniciado\" na planilha, embora já existam 71 apontamentos lançados. Dos 71, 57 (80%) são ajustes e 8 (11%) são bugs; 6 ainda não têm classificação. Os números de Revenue já são só de US testável, então o botão de habilitadores não altera esta grade; no Jira, MVREV tem 60 habilitadores, 26 deles aprovados."
   }
  }
 }
