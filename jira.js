@@ -49,10 +49,10 @@
       .nx-homolog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
       .nx-homolog-head .label{margin:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
       .nx-homolog-src{font-size:10px;color:var(--muted)}
-      .front-head .nx-tog{margin-left:auto;margin-right:12px}
-      .nx-tog{margin-left:10px;font:inherit;font-size:9.5px;font-weight:700;letter-spacing:.04em;cursor:pointer;
-        padding:3px 10px;border-radius:999px;border:1px solid var(--line,#18364f);background:transparent;color:var(--muted)}
-      .nx-tog:hover{color:var(--text);border-color:var(--teal)}
+      .front-head .nx-tog{margin-left:auto;margin-right:12px;align-self:center;font-size:11px;padding:7px 16px}
+      .nx-tog{margin-left:10px;font:inherit;font-size:9.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;white-space:nowrap;
+        padding:3px 10px;border-radius:999px;border:1px solid var(--teal);background:transparent;color:var(--teal)}
+      .nx-tog:hover{background:rgba(47,212,191,.12)}
       .nx-tog.on{color:var(--teal);border-color:var(--teal);background:rgba(47,212,191,.08)}
       @media print{.nx-tog{display:none}}
       .nx-homolog-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
