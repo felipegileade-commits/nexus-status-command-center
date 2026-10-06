@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto.",
+ "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta.",
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
@@ -11,7 +11,9 @@
      "detalhe": "48 aguardando escrita de US · 4 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
-     "donoTexto": "MV e Sottelli"
+     "donoTexto": "MV e Sottelli",
+     "hab": 1,
+     "detalheSem": "48 aguardando escrita de US · 3 em refino"
     },
     {
      "nome": "Aprovação de US · UpStream",
@@ -60,7 +62,9 @@
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo",
-     "concluido": true
+     "concluido": true,
+     "hab": 18,
+     "detalheSem": "22 testáveis da 1ª homologação · 17 da 2ª"
     }
    ],
    "etapas": [

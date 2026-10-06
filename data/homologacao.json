@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco \"Homologação em números\" de cada frente. Uma frente pode vir como \"quadros\" (uma grade só) ou como \"grupos\" (uma grade por rodada, com titulo e destaque opcional). Os rótulos são os MESMOS entre frentes e entre rodadas de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita cor \"ok\" (verde) ou \"warn\" (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
+ "_leiame": "Bloco \"Homologação em números\" de cada frente. Uma frente pode vir como \"quadros\" (uma grade só) ou como \"grupos\" (uma grade por rodada, com titulo e destaque opcional). Os rótulos são os MESMOS entre frentes e entre rodadas de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita nSem, que é o valor quando o botão \"Ocultar habilitadores\" está ligado, e aceita cor \"ok\" (verde) ou \"warn\" (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
  "frentes": {
   "central": {
    "fonte": "Planilhas de homologação da MV (1ª e 2ª rodadas) + coluna Validado do board de Homologação (Jira MVPMO)",
@@ -11,7 +11,8 @@
      "quadros": [
       {
        "n": 87,
-       "rotulo": "US no escopo"
+       "rotulo": "US no escopo",
+       "nSem": 69
       },
       {
        "n": 69,
@@ -19,11 +20,13 @@
       },
       {
        "n": 18,
-       "rotulo": "habilitadoras"
+       "rotulo": "habilitadoras",
+       "nSem": 0
       },
       {
        "n": 57,
        "rotulo": "aprovadas",
+       "nSem": 39,
        "cor": "ok"
       },
       {
@@ -34,6 +37,14 @@
       {
        "n": 3,
        "rotulo": "não iniciadas"
+      },
+      {
+       "n": 2,
+       "rotulo": "em andamento"
+      },
+      {
+       "n": 1,
+       "rotulo": "pendente de correção"
       },
       {
        "n": 280,
@@ -50,7 +61,8 @@
      "quadros": [
       {
        "n": 40,
-       "rotulo": "US no escopo"
+       "rotulo": "US no escopo",
+       "nSem": 22
       },
       {
        "n": 22,
@@ -58,11 +70,13 @@
       },
       {
        "n": 18,
-       "rotulo": "habilitadoras"
+       "rotulo": "habilitadoras",
+       "nSem": 0
       },
       {
        "n": 40,
        "rotulo": "aprovadas",
+       "nSem": 22,
        "cor": "ok"
       },
       {
@@ -73,6 +87,14 @@
       {
        "n": 0,
        "rotulo": "não iniciadas"
+      },
+      {
+       "n": 0,
+       "rotulo": "em andamento"
+      },
+      {
+       "n": 0,
+       "rotulo": "pendente de correção"
       },
       {
        "n": 127,
@@ -114,6 +136,14 @@
        "rotulo": "não iniciadas"
       },
       {
+       "n": 2,
+       "rotulo": "em andamento"
+      },
+      {
+       "n": 1,
+       "rotulo": "pendente de correção"
+      },
+      {
        "n": 153,
        "rotulo": "apontamentos"
       },
@@ -124,7 +154,7 @@
      ]
     }
    ],
-   "nota": "No Jira, 57 US estão aprovadas — 40 na coluna Validado (22 testáveis e 18 habilitadoras, todas da 1ª homologação) e 17 em Aprovado em UAT (2ª homologação). As outras 30 da 2ª rodada ainda estão na esteira: 13 em BUG, 10 em BUG EM TESTES, 3 em Pós Review, 2 em EM HOMOLOGAÇÃO e 2 em Aguardando Review. O escopo total é 87 porque 57 aprovadas + 24 reprovadas + 3 não iniciadas + 2 em andamento + 1 pendente de correção = 87, e as duas rodadas não repetem nenhuma US (conferido chave a chave no Jira em 06/10). 1ª homologação: 48 cenários sobre as 15 US que tinham roteiro funcional, 127 apontamentos e 13 classificados como bug; nenhuma ficou reprovada — todas foram corrigidas e aceitas. 2ª homologação, posição da planilha da MV em 06/10: 17 aprovadas de 47, 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As duas contagens de apontamento não têm a mesma unidade: na 1ª vale cada observação registrada por um participante no cenário; na 2ª vale a linha da aba de apontamentos."
+   "nota": "Cada linha fecha: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. No Jira, as 57 aprovadas são 40 na coluna Validado (22 testáveis e 18 habilitadoras, todas da 1ª homologação) e 17 em Aprovado em UAT (2ª homologação). As 30 restantes da 2ª rodada estão em BUG (13), BUG EM TESTES (10), Pós Review (3), EM HOMOLOGAÇÃO (2) e Aguardando Review (2) — mesmo total que a planilha da MV declara como não aprovadas. As duas rodadas não repetem nenhuma US: conferido chave a chave no Jira em 06/10. 1ª homologação: 48 cenários sobre as 15 US que tinham roteiro funcional, 127 apontamentos e 13 classificados como bug; nenhuma ficou reprovada. 2ª homologação, posição da planilha da MV em 06/10: 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As duas contagens de apontamento não têm a mesma unidade: na 1ª vale cada observação registrada por um participante no cenário; na 2ª vale a linha da aba de apontamentos. Com os habilitadores fora da conta, o escopo cai para 69 e as aprovadas para 39 — os apontamentos não mudam, porque nenhum habilitador tinha roteiro de teste."
   },
   "revenue": {
    "fonte": "Dashboard de homologação de Revenue · 2ª onda · Sprints 10 a 16 (planilha da MV)",

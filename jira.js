@@ -49,6 +49,11 @@
       .nx-homolog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
       .nx-homolog-head .label{margin:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
       .nx-homolog-src{font-size:10px;color:var(--muted)}
+      .nx-tog{margin-left:10px;font:inherit;font-size:9.5px;font-weight:700;letter-spacing:.04em;cursor:pointer;
+        padding:3px 10px;border-radius:999px;border:1px solid var(--line,#18364f);background:transparent;color:var(--muted)}
+      .nx-tog:hover{color:var(--text);border-color:var(--teal)}
+      .nx-tog.on{color:var(--teal);border-color:var(--teal);background:rgba(47,212,191,.08)}
+      @media print{.nx-tog{display:none}}
       .nx-homolog-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
       .nx-homolog-grid div{text-align:center;padding:8px 4px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03))}
       .nx-homolog-grid b{display:block;font-size:20px;font-weight:800;color:var(--text)}
@@ -197,16 +202,48 @@
   // Bloco "Homologação em números", uma vez por frente declarada em data/homologacao.json.
   // Cada frente tem a sua propria fonte e data, porque nao saem do mesmo lugar: a Central vem
   // da planilha da MV e Revenue vem do Jira com a lista revisada pela Transformacao Digital.
+  // "Ocultar habilitadores": habilitador nao e US testavel, e na discussao com a MV a
+  // conta precisa poder ser lida das duas formas. Em vez de refazer os blocos, cada
+  // numero carrega os dois valores em data-com/data-sem e o botao so troca o texto.
+  const HAB_KEY='nexus_sem_habilitadores';
+  function semHab(w){try{return w.localStorage.getItem(HAB_KEY)==='1'}catch(e){return false}}
+  function dual(com,sem){
+    const s=(sem===undefined||sem===null)?String(com):String(sem);
+    return 'data-com="'+esc(String(com))+'" data-sem="'+esc(s)+'"';
+  }
+  function aplicaHab(w){
+    const on=semHab(w),d=w.document;
+    d.querySelectorAll('[data-com][data-sem]').forEach(el=>{
+      const v=el.getAttribute(on?'data-sem':'data-com');
+      if(v!==null&&el.textContent!==v)el.textContent=v;
+    });
+    d.querySelectorAll('.nx-tog').forEach(b=>{
+      b.textContent=on?'Mostrar habilitadores':'Ocultar habilitadores';
+      b.setAttribute('aria-pressed',on?'true':'false');
+      b.classList.toggle('on',on);
+    });
+  }
+  function botaoHab(){return '<button type="button" class="nx-tog" aria-pressed="false">Ocultar habilitadores</button>'}
+  function ligaHab(w){
+    if(w.__nxHab)return;w.__nxHab=true;
+    w.document.addEventListener('click',ev=>{
+      const b=ev.target&&ev.target.closest&&ev.target.closest('.nx-tog');if(!b)return;
+      ev.preventDefault();
+      try{w.localStorage.setItem(HAB_KEY,semHab(w)?'0':'1')}catch(e){}
+      aplicaHab(w);
+    });
+  }
+
   function blocoHomolog(w,h){
     if(!h||!h.frentes)return;const d=w.document;
     // Uma grade por grupo. O numero de colunas segue a quantidade de quadros, para a
     // frente que tem uma grade so (Revenue) continuar igual e as rodadas da Central
     // ficarem alinhadas coluna a coluna, que e o que permite comparar uma com a outra.
     const grade=qs=>{
-      const n=Math.max(4,Math.min(8,qs.length));
+      const n=Math.max(4,Math.min(10,qs.length));
       const quadros=qs.map(q=>{
         const cor=q.cor==='ok'?' class="ok"':q.cor==='warn'?' class="warn"':'';
-        return `<div><b${cor}>${esc(String(q.n))}</b><span>${esc(q.rotulo||'')}</span></div>`;
+        return `<div><b${cor} ${dual(q.n,q.nSem)}>${esc(String(q.n))}</b><span>${esc(q.rotulo||'')}</span></div>`;
       }).join('');
       return `<div class="nx-homolog-grid" style="grid-template-columns:repeat(${n},1fr)">${quadros}</div>`;
     };
@@ -223,10 +260,11 @@
           ? `<div class="nx-homolog-grupo${g.destaque?' destaque':''}"><span class="t">${esc(g.titulo)}</span>${grade(qs)}</div>`
           : grade(qs);
       }).join('');
+      const temHab=grupos.some(g=>(g.quadros||[]).some(q=>q.nSem!==undefined&&q.nSem!==q.n));
       const el=d.createElement('div');el.className='nx-homolog nx-live';
-      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span>${temHab?botaoHab():''}</div>
         ${corpo}<p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
-      fs.appendChild(el);
+      fs.appendChild(el);ligaHab(w);aplicaHab(w);
     });
   }
 
@@ -353,20 +391,22 @@
       // Uma esteira sem represamento entra com traco no lugar do numero e nao soma.
       // Linha marcada como concluida e trabalho entregue: aparece no quadro, mas nao soma represamento.
       const abertas=f.esteiras.filter(e=>!e.concluido);
-      const soma=d2=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+(Number(e.n)||0),0);
-      const total=soma(),soSottelli=soma('sottelli'),soMv=soma('mv'),compart=soma('compartilhada');
+      // sh=1 desconta os habilitadores declarados na linha: e o que o botao mostra.
+      const soma=(d2,sh)=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
+      const chamada=sh=>soma(null,sh)+' US represadas — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' apenas da Sottelli.';
+      const temHab=f.esteiras.some(e=>Number(e.hab)>0);
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
-        <div class="nx-est-n">${esc(String(e.n))}<small>US</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
+        <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
         <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
-      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span>${temHab?botaoHab():''}</div>
         <div class="nx-est-linhas">${linhas}</div>
         ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
-        <p class="nx-homolog-nota"><b>${total} US represadas — ${compart} em etapa compartilhada, ${soMv} dependem apenas da MV e ${soSottelli} apenas da Sottelli.</b> ${esc(f.nota||'')}</p>`;
-      fs.appendChild(el);
+        <p class="nx-homolog-nota"><b ${dual(chamada(0),chamada(1))}>${esc(chamada(0))}</b> ${esc(f.nota||'')}</p>`;
+      fs.appendChild(el);ligaHab(w);aplicaHab(w);
     });
   }
 
