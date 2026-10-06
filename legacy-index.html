@@ -1167,7 +1167,9 @@ function syncFrontSignals(){
     const wrap=q('.risk-wrap',root),secao=wrap?wrap.closest('.section'):null;
     if(secao)secao.style.display=temRisco?'':'none';
     const pill=q('.status-pill',root);
-    if(pill){pill.textContent=temRisco?'1 risco':'Sem riscos';pill.style.opacity=temRisco?'':'.6'}
+    // O selo conta os cards de risco preenchidos: a frente pode ter mais de um.
+    const nRiscos=qa('.risk-card',root).filter(c=>txt(q('.risk-col:not(.action) p',c))||txt(q('.risk-col.action p',c))).length;
+    if(pill){pill.textContent=nRiscos?(nRiscos+' risco'+(nRiscos>1?'s':'')):'Sem riscos';pill.style.opacity=temRisco?'':'.6'}
     const desvio=qa('.metric-block strong',root)[2];
     if(desvio){
       const n=parseFloat(txt(desvio).replace('%','').replace(',','.'));
