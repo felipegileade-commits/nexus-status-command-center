@@ -276,7 +276,11 @@
       const el=d.createElement('div');el.className='nx-homolog nx-live';
       el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         ${corpo}<p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
-      fs.appendChild(el);ligaHab(w);botaoHab(w);aplicaHab(w);
+      // Homologacao em numeros vem sempre antes de "Onde o trabalho esta": os dois sao
+      // carregados em paralelo e, sem isso, a ordem na tela mudava a cada carga.
+      const est=fs.querySelector('.nx-est');
+      if(est)fs.insertBefore(el,est);else fs.appendChild(el);
+      ligaHab(w);botaoHab(w);aplicaHab(w);
     });
   }
 
