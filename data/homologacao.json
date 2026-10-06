@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco \"Homologação em números\" de cada frente. Uma frente pode vir como \"quadros\" (uma grade só) ou como \"grupos\" (uma grade por rodada, com titulo e destaque opcional). Os rótulos são os MESMOS entre frentes e entre rodadas de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita nSem, que é o valor quando o botão \"Ocultar habilitadores\" está ligado, e aceita cor \"ok\" (verde) ou \"warn\" (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir.",
+ "_leiame": "Bloco \"Homologação em números\" de cada frente. Uma frente pode vir como \"quadros\" (uma grade só) ou como \"grupos\" (uma grade por rodada, com titulo e destaque opcional). Os rótulos são os MESMOS entre frentes e entre rodadas de propósito: o cliente compara lado a lado, e rótulo diferente para a mesma coisa quebra a leitura. Cada quadro é {n, rotulo} e aceita nSem, que é o valor quando o botão \"Ocultar habilitadores\" está ligado, e aceita cor \"ok\" (verde) ou \"warn\" (âmbar). A fonte e a data aparecem no cabeçalho — mantenha-as verdadeiras, é o que permite conferir. Um quadro {sep:true} nao e numero: e o fio que separa a conta por tipo de US da conta por situacao.",
  "frentes": {
   "central": {
    "fonte": "Planilhas de homologação da MV (1ª e 2ª rodadas) + coluna Validado do board de Homologação (Jira MVPMO)",
@@ -22,6 +22,9 @@
        "n": 18,
        "rotulo": "habilitadoras",
        "nSem": 0
+      },
+      {
+       "sep": true
       },
       {
        "n": 57,

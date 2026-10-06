@@ -60,6 +60,7 @@
       .nx-homolog-grid b{display:block;font-size:20px;font-weight:800;color:var(--text)}
       .nx-homolog-grid b.ok{color:var(--green)}.nx-homolog-grid b.warn{color:var(--orange)}
       .nx-homolog-grid span{display:block;font-size:9.5px;color:var(--muted);margin-top:3px;line-height:1.3}
+      .nx-homolog-grid .nx-homolog-sep{background:none;padding:0;border-left:1px solid var(--line,#18364f);margin:4px auto;width:1px}
       .nx-homolog-grupo{margin-top:12px}
       .nx-homolog-grupo>.t{display:block;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:6px}
       .nx-homolog-grupo.destaque>.t{color:var(--teal)}
@@ -253,12 +254,15 @@
     // frente que tem uma grade so (Revenue) continuar igual e as rodadas da Central
     // ficarem alinhadas coluna a coluna, que e o que permite comparar uma com a outra.
     const grade=qs=>{
-      const n=Math.max(4,Math.min(10,qs.length));
+      // {sep:true} marca a virada de uma conta para outra: por tipo de US de um lado,
+      // por situacao do outro. Sem isso os numeros se leem como uma sequencia so.
+      const cols=qs.map(q=>q.sep?'13px':'1fr').join(' ');
       const quadros=qs.map(q=>{
+        if(q.sep)return '<div class="nx-homolog-sep" aria-hidden="true"></div>';
         const cor=q.cor==='ok'?' class="ok"':q.cor==='warn'?' class="warn"':'';
         return `<div><b${cor} ${dual(q.n,q.nSem)}>${esc(String(q.n))}</b><span>${esc(q.rotulo||'')}</span></div>`;
       }).join('');
-      return `<div class="nx-homolog-grid" style="grid-template-columns:repeat(${n},1fr)">${quadros}</div>`;
+      return `<div class="nx-homolog-grid" style="grid-template-columns:${cols}">${quadros}</div>`;
     };
     Object.keys(h.frentes).forEach(chave=>{
       const f=h.frentes[chave],sec=d.getElementById(chave);if(!f||!sec)return;
