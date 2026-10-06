@@ -291,8 +291,9 @@
       const f=h.frentes[chave],sec=d.getElementById(chave);
       if(!f||!sec||!Array.isArray(f.esteiras)||!f.esteiras.length)return;
       const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-est'))return;
-      const total=f.esteiras.reduce((s,e)=>s+(Number(e.n)||0),0);
-      const soSottelli=f.esteiras.filter(e=>e.dono==='sottelli').reduce((s,e)=>s+(Number(e.n)||0),0);
+      // Uma esteira sem represamento entra com traco no lugar do numero e nao soma.
+      const soma=d2=>f.esteiras.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+(Number(e.n)||0),0);
+      const total=soma(),soSottelli=soma('sottelli'),soMv=soma('mv'),compart=soma('compartilhada');
       const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n">${esc(String(e.n))}<small>US</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span>${esc(e.detalhe||'')} · aguarda ${esc(e.espera||'')}</span></div>
@@ -303,7 +304,7 @@
       el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está parado</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         <div class="nx-est-linhas">${linhas}</div>
         ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
-        <p class="nx-homolog-nota"><b>${total} US represadas; ${soSottelli} dependem apenas da Sottelli.</b> ${esc(f.nota||'')}</p>`;
+        <p class="nx-homolog-nota"><b>${total} US represadas — ${compart} em etapa compartilhada, ${soMv} dependem apenas da MV e ${soSottelli} apenas da Sottelli.</b> ${esc(f.nota||'')}</p>`;
       fs.appendChild(el);
     });
   }

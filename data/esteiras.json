@@ -1,12 +1,12 @@
 {
- "_leiame": "Bloco 'Onde o trabalho está parado'. Mostra o volume represado por esteira e de quem depende cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. 'dono' aceita sottelli, mv ou compartilhada. Atualize os números pelo quadro do Jira, contando os itens de cada coluna.",
+ "_leiame": "Bloco 'Onde o trabalho está parado'. Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. 'dono' aceita sottelli, mv ou compartilhada. 'n' pode ser um número ou um traço, quando a esteira não tem represamento. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto.",
  "frentes": {
   "central": {
-   "fonte": "Quadro UpStream do Jira (MVPMO)",
+   "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
    "lidoEm": "2026-10-06",
    "esteiras": [
     {
-     "nome": "Refinamento",
+     "nome": "Refinamento · UpStream",
      "n": 52,
      "detalhe": "48 aguardando escrita de US · 4 em refino",
      "espera": "Agenda de refino com a MV",
@@ -14,7 +14,15 @@
      "donoTexto": "MV e Sottelli"
     },
     {
-     "nome": "Backlog técnico",
+     "nome": "Aprovação de US · UpStream",
+     "n": 13,
+     "detalhe": "US escritas",
+     "espera": "Agenda de aprovação de US",
+     "dono": "mv",
+     "donoTexto": "MV"
+    },
+    {
+     "nome": "Backlog técnico · UpStream",
      "n": 5,
      "detalhe": "já refinadas",
      "espera": "Aprovação técnica interna",
@@ -22,10 +30,26 @@
      "donoTexto": "Sottelli"
     },
     {
-     "nome": "Aprovação do cliente",
-     "n": 13,
-     "detalhe": "US escritas",
-     "espera": "Agenda de aprovação de US",
+     "nome": "Desenvolvimento · DownStream",
+     "n": "—",
+     "detalhe": "sprint encerra amanhã, sem represamento",
+     "espera": "nada — esteira em execução",
+     "dono": "sottelli",
+     "donoTexto": "Sottelli"
+    },
+    {
+     "nome": "Testes · QAStream",
+     "n": 6,
+     "detalhe": "3 em teste de QA · 2 aguardando review · 1 em correção",
+     "espera": "Execução do QA e envio para a UAT",
+     "dono": "sottelli",
+     "donoTexto": "Sottelli"
+    },
+    {
+     "nome": "Homologação",
+     "n": 28,
+     "detalhe": "16 liberadas · 2 iniciadas · 10 em reteste",
+     "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV"
     }
@@ -37,7 +61,7 @@
     { "quem": "sottelli", "texto": "Escrever a US" },
     { "quem": "mv", "texto": "Aprovar a US" }
    ],
-   "nota": "A esteira de refinamento tem cinco etapas e nenhuma das duas partes a percorre sozinha: três dependem da MV e duas da Sottelli. Por isso o seu peso é compartilhado. Hoje não existe fila de desenvolvimento na Central de Projetos — não porque o time esteja ocioso, mas porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US."
+   "nota": "O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Desenvolvimento, QA e backlog técnico são integralmente da Sottelli, e não há represamento neles: a sprint encerra amanhã e não existe fila de desenvolvimento, porque não há US escrita para desenvolver. O gargalo do projeto está antes do desenvolvimento, na escrita e na aprovação de US, e depois dele, na homologação."
   }
  }
 }
