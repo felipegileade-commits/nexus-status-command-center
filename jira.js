@@ -66,6 +66,18 @@
       .nx-homolog-grupo.destaque>.t{color:var(--teal)}
       .nx-homolog-grupo.destaque .nx-homolog-grid div{box-shadow:inset 0 0 0 1px var(--line,#18364f)}
       .nx-homolog-nota{margin:10px 0 0;font-size:11px;color:var(--muted)}
+      .nx-dica{position:relative;display:inline-flex;align-items:center;gap:6px;cursor:help;outline:none;
+        font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+      .nx-dica i{font-style:normal;font-weight:900;font-size:8.5px;width:14px;height:14px;border-radius:999px;
+        border:1px solid currentColor;display:inline-flex;align-items:center;justify-content:center;flex:none}
+      .nx-dica:hover,.nx-dica:focus{color:var(--teal)}
+      .nx-dica-cx{display:none;position:absolute;left:0;top:calc(100% + 8px);z-index:60;width:620px;max-width:86vw;
+        padding:13px 15px;border-radius:10px;border:1px solid var(--line,#18364f);background:var(--panel,#0d2236);
+        color:var(--text);font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;line-height:1.55;
+        box-shadow:0 14px 36px rgba(0,0,0,.28)}
+      .nx-dica:hover .nx-dica-cx,.nx-dica:focus .nx-dica-cx,.nx-dica:focus-within .nx-dica-cx{display:block}
+      @media print{.nx-dica i{display:none}.nx-dica{text-transform:none;font-weight:400;font-size:11px;display:block}
+        .nx-dica-cx{display:block;position:static;width:auto;max-width:none;padding:0;border:0;box-shadow:none;background:none}}
       @media(max-width:900px){.nx-homolog-grid{grid-template-columns:repeat(4,1fr)!important}}
       /* Onde o trabalho esta parado: volume por esteira e de quem depende cada etapa. */
       .nx-est{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
@@ -216,6 +228,15 @@
     const s=(sem===undefined||sem===null)?String(com):String(sem);
     return 'data-com="'+esc(String(com))+'" data-sem="'+esc(s)+'"';
   }
+  // Nota comprida vira caixa de dica: o bloco fica limpo e o texto continua a um
+  // passo do mouse. Focavel pelo teclado e aberta por inteiro no impresso.
+  function dica(texto,rotulo){
+    if(!texto)return '';
+    const t=esc(rotulo||'Como esta conta é feita');
+    return '<span class="nx-dica" tabindex="0" role="note" aria-label="'+t+'"><i>i</i>'+t+
+           '<span class="nx-dica-cx">'+esc(texto)+'</span></span>';
+  }
+
   function aplicaHab(w){
     const on=semHab(w),d=w.document;
     d.querySelectorAll('[data-com][data-sem]').forEach(el=>{
@@ -282,7 +303,7 @@
       }).join('');
       const el=d.createElement('div');el.className='nx-homolog nx-live';
       el.innerHTML=`<div class="nx-homolog-head"><span class="label">Homologação em números</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
-        ${corpo}<p class="nx-homolog-nota">${esc(f.nota||'')}</p>`;
+        ${corpo}<p class="nx-homolog-nota">${dica(f.nota)}</p>`;
       // Homologacao em numeros vem sempre antes de "Onde o trabalho esta": os dois sao
       // carregados em paralelo e, sem isso, a ordem na tela mudava a cada carga.
       const est=fs.querySelector('.nx-est');
@@ -419,12 +440,23 @@
       const chamada=sh=>soma(null,sh)+' US em andamento — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' estão com a Sottelli.';
       // Percentual de cada linha sobre o total do quadro, a linha concluida inclusive.
       // Sem casa decimal, regra da Andressa: de 0,5 para cima sobe.
-      const base=sh=>f.esteiras.reduce((t,e)=>t+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
-      const pct=(e,sh)=>{const b=base(sh);const v=Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0));
-        return (!b||!Number.isFinite(Number(e.n)))?'—':Math.round(v/b*100+1e-9)+'%'};
-      const linhas=f.esteiras.map(e=>`<div class="nx-est-l ${esc(e.dono||'')}">
+      // Arredondar linha a linha fazia a coluna somar 99. Aqui o inteiro sai pelo maior
+      // resto: cada linha fica no piso e as sobras vao para quem tem a maior fracao,
+      // entao a coluna fecha em 100 sem casa decimal.
+      const pcts=sh=>{
+        const vals=f.esteiras.map(e=>Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)));
+        const b=vals.reduce((t,v)=>t+v,0);
+        if(!b)return f.esteiras.map(()=>'—');
+        const exatos=vals.map(v=>v/b*100),piso=exatos.map(v=>Math.floor(v));
+        let falta=100-piso.reduce((t,v)=>t+v,0);
+        const ordem=exatos.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0]);
+        for(let k=0;k<ordem.length&&falta>0;k++){piso[ordem[k][1]]++;falta--}
+        return piso.map((v,i)=>Number.isFinite(Number(f.esteiras[i].n))?v+'%':'—');
+      };
+      const pc=pcts(0),ps=pcts(1);
+      const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
-        <div class="nx-est-p"><span ${dual(pct(e,0),pct(e,1))}>${esc(pct(e,0))}</span><small>do total</small></div>
+        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>do total</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
         <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');
@@ -433,7 +465,7 @@
       el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         <div class="nx-est-linhas">${linhas}</div>
         ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
-        <p class="nx-homolog-nota"><b ${dual(chamada(0),chamada(1))}>${esc(chamada(0))}</b> ${esc(f.nota||'')}</p>`;
+        <p class="nx-homolog-nota"><b ${dual(chamada(0),chamada(1))}>${esc(chamada(0))}</b> ${dica(f.nota,'Como este quadro é montado')}</p>`;
       fs.appendChild(el);ligaHab(w);botaoHab(w);aplicaHab(w);
     });
   }
