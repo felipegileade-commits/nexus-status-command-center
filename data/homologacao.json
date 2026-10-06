@@ -11,7 +11,7 @@
      "quadros": [
       {
        "n": 87,
-       "rotulo": "US homologadas"
+       "rotulo": "US no escopo"
       },
       {
        "n": 69,
@@ -50,7 +50,7 @@
      "quadros": [
       {
        "n": 40,
-       "rotulo": "US homologadas"
+       "rotulo": "US no escopo"
       },
       {
        "n": 22,
@@ -89,7 +89,7 @@
      "quadros": [
       {
        "n": 47,
-       "rotulo": "US homologadas"
+       "rotulo": "US no escopo"
       },
       {
        "n": 47,
@@ -124,7 +124,7 @@
      ]
     }
    ],
-   "nota": "Geral: 87 US já passaram por homologação — 69 testáveis e 18 habilitadoras. Dessas, 57 estão aprovadas, 24 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção (57+24+3+2+1 = 87). 1ª homologação: 48 cenários sobre as 15 US que tinham roteiro funcional, 127 apontamentos e 13 classificados como bug; nenhuma US ficou reprovada — as 40 estão hoje em Validado no Jira, ou seja, todo apontamento foi corrigido e aceito. 2ª homologação, posição da planilha da MV em 06/10: 17 aprovadas de 47, 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As duas contagens de apontamento não têm a mesma unidade: na 1ª vale cada observação registrada por um participante no cenário; na 2ª vale a linha da aba de apontamentos."
+   "nota": "No Jira, 57 US estão aprovadas — 40 na coluna Validado (22 testáveis e 18 habilitadoras, todas da 1ª homologação) e 17 em Aprovado em UAT (2ª homologação). As outras 30 da 2ª rodada ainda estão na esteira: 13 em BUG, 10 em BUG EM TESTES, 3 em Pós Review, 2 em EM HOMOLOGAÇÃO e 2 em Aguardando Review. O escopo total é 87 porque 57 aprovadas + 24 reprovadas + 3 não iniciadas + 2 em andamento + 1 pendente de correção = 87, e as duas rodadas não repetem nenhuma US (conferido chave a chave no Jira em 06/10). 1ª homologação: 48 cenários sobre as 15 US que tinham roteiro funcional, 127 apontamentos e 13 classificados como bug; nenhuma ficou reprovada — todas foram corrigidas e aceitas. 2ª homologação, posição da planilha da MV em 06/10: 17 aprovadas de 47, 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%); a planilha calcula 36% de sucesso. As duas contagens de apontamento não têm a mesma unidade: na 1ª vale cada observação registrada por um participante no cenário; na 2ª vale a linha da aba de apontamentos."
   },
   "revenue": {
    "fonte": "Dashboard de homologação de Revenue · 2ª onda · Sprints 10 a 16 (planilha da MV)",
