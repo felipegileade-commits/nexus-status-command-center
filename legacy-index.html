@@ -1212,7 +1212,9 @@ function saveFront(front){
   const concluded=val(front+'_concluded');
   q('.front-progress',root).childNodes[0].nodeValue=concluded+' ';
   q('.front-summary > .progress span',root).style.width=pctNumber(concluded)+'%';
-  metrics[0].textContent=val(front+'_uat');metrics[1].textContent=val(front+'_homolog');metrics[2].textContent=val(front+'_deviation');
+  metrics[0].textContent=val(front+'_uat');metrics[1].textContent=val(front+'_homolog');
+  // O quadro de desvio saiu da tela em 28/09; sem a guarda, salvar a frente quebrava aqui.
+  if(metrics[2])metrics[2].textContent=val(front+'_deviation');
   q('.front-foot span:first-child',root).textContent=val(front+'_sprint');q('.front-foot span:last-child',root).textContent=val(front+'_status');
   setBullets(groups[0],val(front+'_activities').split('\n').map(x=>x.trim()));
   setBullets(groups[1],val(front+'_attention').split('\n').map(x=>x.trim()));

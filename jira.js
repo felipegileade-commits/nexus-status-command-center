@@ -45,6 +45,20 @@
       .nx-jira-front .pct{display:block;margin-top:6px;font-size:18px;font-weight:900;color:#46dda8;line-height:1}
       .nx-jira-front .pct small{display:block;font-size:9px;color:#8faec5;font-weight:600;margin-top:3px}
       .nx-kpi-note{margin:6px 0 0;color:#8faec5;font-size:10px}
+      .nx-duo{margin:22px 0 0}
+      .front-summary:has(.nx-duo)>.front-progress,.front-summary:has(.nx-duo)>.progress,
+      .front-summary:has(.nx-duo)>.metrics-row{display:none}
+      .nx-duo-nums{display:flex;align-items:baseline;gap:38px;flex-wrap:wrap;margin-bottom:14px}
+      .nx-duo-nums>div{display:flex;align-items:baseline;gap:11px}
+      .nx-duo-nums strong{font-size:52px;font-weight:850;line-height:1;color:var(--text)}
+      .nx-duo-nums .hom strong{color:var(--orange)}
+      .nx-duo-nums small{font-size:12px;font-weight:400;color:var(--muted)}
+      .nx-duo-bar{display:flex;height:7px;border-radius:999px;overflow:hidden;background:#29445d}
+      html.nx-claro .nx-duo-bar{background:#e3eaf1}
+      .nx-duo-bar span{display:block;height:100%}
+      .nx-duo-bar span.hom{background:var(--orange)}
+      .nx-duo-bar span.dev{background:var(--teal)}
+      @media(max-width:700px){.nx-duo-nums{gap:22px}.nx-duo-nums strong{font-size:38px}}
       .nx-homolog{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
       .nx-homolog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
       .nx-homolog-head .label{margin:0;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
@@ -230,6 +244,8 @@
   }
   // Nota comprida vira caixa de dica: o bloco fica limpo e o texto continua a um
   // passo do mouse. Focavel pelo teclado e aberta por inteiro no impresso.
+  const fmt=v=>Math.round(Number(v)+1e-9)+'%';
+
   function dica(texto,rotulo){
     if(!texto)return '';
     const t=esc(rotulo||'Como esta conta é feita');
@@ -314,6 +330,35 @@
 
   // "concluido" virou "desenvolvido": o percentual mede desenvolvimento, nao entrega.
   // O <main> vem do Supabase, entao a troca precisa acontecer aqui tambem.
+  // Layout que a Andressa montou: os dois percentuais lado a lado em tamanho grande e
+  // uma barra so, laranja ate o homologado e verde ate o desenvolvido. O bloco e nx-live
+  // e os elementos originais continuam no DOM, apenas escondidos por CSS: o editor, a
+  // visao geral e o impresso continuam lendo deles.
+  function barraDupla(w){
+    const d=w.document;
+    const num=t=>{const m=String(t||'').match(/-?\d+(?:[,.]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN};
+    ['central','revenue'].forEach(id=>{
+      const sec=d.getElementById(id);if(!sec)return;
+      const resumo=sec.querySelector('.front-summary');if(!resumo)return;
+      const fp=resumo.querySelector('.front-progress'),foot=resumo.querySelector('.front-foot');
+      const met=resumo.querySelectorAll('.metrics-row .metric-block strong');
+      if(!fp||!foot||met.length<2)return;
+      const dev=num(fp.textContent),hom=num(met[1].textContent);
+      if(isNaN(dev)||isNaN(hom))return;
+      const rotDev=(fp.querySelector('small')||{}).textContent||'desenvolvido';
+      const larguraHom=Math.max(0,Math.min(100,hom));
+      const larguraDev=Math.max(0,Math.min(100-larguraHom,dev-hom));
+      const html='<div class="nx-duo-nums">'
+        +'<div><strong>'+esc(fmt(dev))+'</strong><small>'+esc(rotDev)+'</small></div>'
+        +'<div class="hom"><strong>'+esc(fmt(hom))+'</strong><small>homologado (aceito)</small></div></div>'
+        +'<div class="nx-duo-bar"><span class="hom" style="width:'+larguraHom+'%"></span>'
+        +'<span class="dev" style="width:'+larguraDev+'%"></span></div>';
+      let el=resumo.querySelector('.nx-duo');
+      if(!el){el=d.createElement('div');el.className='nx-duo nx-live';resumo.insertBefore(el,foot)}
+      if(el.innerHTML!==html)el.innerHTML=html;
+    });
+  }
+
   function legendaDesenvolvido(w){
     w.document.querySelectorAll('#central .front-progress small,#revenue .front-progress small').forEach(x=>{
       if(/conclu/i.test(x.textContent))x.textContent='desenvolvido';
@@ -507,6 +552,7 @@
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     legendaDesenvolvido(w);
+    barraDupla(w);
     proximoMarco(w);
     reordena(w);
     rodapes(w);
@@ -515,7 +561,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
