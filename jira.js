@@ -616,7 +616,7 @@
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(rotPct)}</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo?'':' · aguarda '+esc(e.espera||'')}</span></div>
-        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido||e.foraEscopo?'':'<span>responsabilidade</span>'}</div>
+        <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';

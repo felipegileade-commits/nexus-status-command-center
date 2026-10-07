@@ -55,12 +55,12 @@
      "concluido": true
     },
     {
-     "nome": "Backlog de melhorias · não serão entregues",
+     "nome": "Backlog de melhorias · não serão feitas nem entregues",
      "n": 33,
-     "detalhe": "Melhorias levantadas durante as homologações, fora do escopo contratado ou sem tempo de projeto que as comporte",
+     "detalhe": "Melhorias pedidas ao longo das homologações. A cada melhoria acatada, outra coisa saiu do escopo — não há como ampliar sem retirar. Estas ficaram para fora da entrega.",
      "espera": "",
      "dono": "fora",
-     "donoTexto": "Fora do escopo",
+     "donoTexto": "",
      "foraEscopo": true
     }
    ],
