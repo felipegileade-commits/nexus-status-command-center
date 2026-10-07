@@ -8,22 +8,22 @@
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [
     {
-     "deRisco": "Falta de US aprovadas para iniciar a próxima sprint, somada ao gargalo da esteira de upstream: 53 histórias aguardam refinamento e 17 aguardam aprovação do cliente, enquanto restam apenas 5 US aprovadas disponíveis.",
-     "risco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "acao": "Priorizar a marcação das agendas de refino dessas 38 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
-     "origem": "Posição do Jira em 07/10, board UpStream."
+     "deRisco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "risco": "35 US estão represadas no refinamento da esteira de UpStream — 31 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 35 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 07/10, board UpStream, depois da repriorização."
     },
     {
      "deRisco": "52 US estão represadas no refinamento da esteira de UpStream — 48 aguardam a escrita da US e 4 estão em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "risco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "acao": "Priorizar a marcação das agendas de refino dessas 38 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
-     "origem": "Posição do Jira em 07/10, board UpStream."
+     "risco": "35 US estão represadas no refinamento da esteira de UpStream — 31 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 35 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 07/10, board UpStream, depois da repriorização."
     }
    ],
    "extras": [
     {
      "id": "aprovacao-us",
-     "risco": "11 US já escritas aguardam aprovação do cliente. A aprovação é etapa da MV e, enquanto não ocorre, a história não entra na sprint.",
+     "risco": "12 US já escritas aguardam aprovação do cliente. A aprovação é etapa da MV e, enquanto não ocorre, a história não entra na sprint.",
      "acao": "Ampliar as agendas de aprovação de US com o PMO da MV. Hoje há mais agenda de homologação do que de aprovação, e é a aprovação que abastece o desenvolvimento."
     },
     {
@@ -43,14 +43,14 @@
     "resumo": "Velocidade das aprovações de US nas homologações (Central)"
    },
    {
-    "contem": "38 US estão represadas no refinamento",
+    "contem": "35 US estão represadas no refinamento",
     "nivel": "Alto",
-    "resumo": "38 US represadas no refinamento da esteira de UpStream (Central)"
+    "resumo": "35 US represadas no refinamento da esteira de UpStream (Central)"
    },
    {
-    "contem": "11 US já escritas aguardam aprovação",
+    "contem": "12 US já escritas aguardam aprovação",
     "nivel": "Alto",
-    "resumo": "11 US escritas aguardam aprovação do cliente (Central)"
+    "resumo": "12 US escritas aguardam aprovação do cliente (Central)"
    },
    {
     "contem": "Restam apenas 5 US aprovadas no backlog",

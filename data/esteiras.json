@@ -7,10 +7,10 @@
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
-     "n": 38,
+     "n": 35,
      "hab": 2,
-     "detalhe": "34 aguardando escrita de US · 3 em refino · 1 em análise técnica",
-     "detalheSem": "34 aguardando escrita de US · 2 em refino",
+     "detalhe": "31 aguardando escrita de US · 3 em refino · 1 em análise técnica",
+     "detalheSem": "31 aguardando escrita de US · 2 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
      "donoTexto": "MV e Sottelli",
@@ -19,7 +19,7 @@
     },
     {
      "nome": "Aprovação de US · UpStream",
-     "n": 11,
+     "n": 12,
      "detalhe": "US escritas",
      "espera": "Agenda de aprovação de US",
      "dono": "mv",
@@ -29,10 +29,10 @@
     },
     {
      "nome": "Desenvolvimento e QA · DownStream e QAStream",
-     "n": 45,
-     "hab": 14,
-     "detalhe": "13 backlog técnico · 5 prontas para dev · 4 em desenvolvimento · 21 em code review · 2 aguardando review",
-     "detalheSem": "9 backlog técnico · 4 prontas para dev · 2 em desenvolvimento · 14 em code review · 2 aguardando review",
+     "n": 21,
+     "hab": 7,
+     "detalhe": "12 backlog técnico · 5 prontas para dev · 4 em desenvolvimento",
+     "detalheSem": "8 backlog técnico · 4 prontas para dev · 2 em desenvolvimento",
      "espera": "Fechamento da sprint, que encerra amanhã",
      "dono": "sottelli",
      "donoTexto": "Sottelli",
@@ -41,20 +41,22 @@
     },
     {
      "nome": "Homologação",
-     "n": 26,
-     "detalhe": "14 liberadas · 2 iniciadas · 10 em reteste",
+     "n": 67,
+     "detalhe": "54 liberadas · 3 iniciadas · 10 em reteste",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV",
      "peso": 10.55,
-     "pesoSem": 12.74
+     "pesoSem": 12.74,
+     "detalheSem": "47 liberadas · 3 iniciadas · 10 em reteste",
+     "hab": 7
     },
     {
      "nome": "Aprovado em UAT",
-     "n": 57,
+     "n": 40,
      "hab": 18,
-     "detalhe": "40 da 1ª homologação (22 testáveis · 18 habilitadoras) · 17 da 2ª",
-     "detalheSem": "22 testáveis da 1ª homologação · 17 da 2ª",
+     "detalhe": "22 testáveis · 18 habilitadoras — coluna Validado do board de Homologação",
+     "detalheSem": "22 testáveis",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo",
@@ -85,7 +87,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Três coisas ficam fora deste quadro e precisam ser ditas: 13 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção; 37 US estão paradas em \"Realizando Deploy em QA\" fora da sprint atual, além das 21 que aparecem aqui; e 28 melhorias levantadas nas homologações entraram no Jira em BACKLOG (coluna melhoria do board de Homologação) e também ainda não entraram em sprint. As 57 aprovadas em UAT não entram na conta de represamento: já passaram pela homologação e foram percorridas pelas duas partes. O percentual de cada linha é a fatia dela sobre as 177 US deste quadro — contagem de card no Jira, lida em 07/10, e não esforço. Por isso ele não subtrai do percentual de desenvolvido do topo: aquele é esforço planejado em sprint, na planilha de cronograma, e este é volume de US. São duas medidas diferentes do mesmo projeto e não se somam.",
+   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Leitura de 07/10, depois da repriorização: a sprint foi empurrada para a UAT e sobraram 4 US em desenvolvimento, por isso a linha de homologação é hoje a maior do quadro. Três coisas ficam fora deste quadro e precisam ser ditas: 12 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção; 37 US seguem paradas em \"Realizando Deploy em QA\" fora da sprint, e essas NÃO foram para a UAT; e 33 melhorias levantadas nas homologações entraram no Jira em BACKLOG e também ainda não entraram em sprint. O percentual de cada linha é a fatia dela sobre as 175 US deste quadro — contagem de card no Jira, não esforço. Por isso ele não subtrai do percentual de desenvolvido do topo: aquele é esforço planejado em sprint, na planilha de cronograma, e este é volume de US. São duas medidas diferentes do mesmo projeto e não se somam.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sao a divisao de esforco lida em 06/10 na planilha Gestao do Cronograma. Ficam aqui como historico: o percentual da tela e por contagem de US, nao por esforco."
   }
  }
