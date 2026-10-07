@@ -8,7 +8,11 @@
     "hom": 20,
     "base": "Por peso de épico, planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% até a Sprint 16 + 4,66% da Sprint 17 = 86,10%. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira. Disponível em UAT: as 96 US que chegaram à UAT somam 33,75% do esforço, que sobre os 91,6% dá 36,9%.",
     "uat": 37,
-    "semHabNota": "Por peso de épico não dá para separar habilitador: o esforço está lançado no épico inteiro, não por US. O botão de habilitadores vale na régua por unidade de US."
+    "semHab": {
+     "hom": 16,
+     "uat": 36,
+     "base": "Por peso de épico, só US testável. O peso do épico não muda ao tirar habilitador — o que muda é o divisor dentro dele: cada testável passa a valer peso do épico ÷ US testáveis ativas. Central: 193 testáveis ativas, 39 aprovadas (14,46% do esforço) e 78 em UAT (33,04%), sobre os 90,9% do cronograma que têm testável ativa. O desenvolvido continua 86% porque vem da alocação de esforço por sprint, que é lançada no épico inteiro e não por US."
+    }
    },
    "unidade": {
     "dev": 65,
@@ -29,7 +33,11 @@
     "hom": 22,
     "base": "Por peso de épico, planilha Gestão do Cronograma (aba Revenue). Desenvolvido: 92,37%, soma do esforço alocado até a Sprint 15 — a Sprint Final, que vale 8,26%, ainda não está contada. Homologado: as 56 US aprovadas somam 22,85% do esforço, que sobre os 104,6% do cronograma dá 21,8%. Disponível em UAT: as 88 US que chegaram à UAT somam 41,0% do esforço, que sobre os 104,6% dá 39,2%.",
     "uat": 39,
-    "semHabNota": "Por peso de épico não dá para separar habilitador: o esforço está lançado no épico inteiro, não por US. O botão de habilitadores vale na régua por unidade de US."
+    "semHab": {
+     "hom": 17,
+     "uat": 40,
+     "base": "Por peso de épico, só US testável. Revenue: 166 testáveis ativas, 30 aprovadas (16,86% do esforço) e 62 em UAT (39,56%), sobre os 98,8% do cronograma que têm testável ativa — o épico Plataforma de Planilhas de Cálculos sai da conta porque suas duas US ativas são habilitadores. O desenvolvido continua 92% porque vem da alocação de esforço por sprint, lançada no épico inteiro."
+    }
    },
    "unidade": {
     "dev": 93,

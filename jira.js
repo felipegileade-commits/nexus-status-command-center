@@ -74,8 +74,7 @@
       .front-head .nx-tog{margin-left:auto;margin-right:12px;align-self:center;font-size:11px;padding:7px 16px}
       .nx-tog{margin-left:10px;font:inherit;font-size:9.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;white-space:nowrap;
         padding:3px 10px;border-radius:999px;border:1px solid var(--teal);background:transparent;color:var(--teal)}
-      .nx-tog:hover:not([disabled]){background:rgba(47,212,191,.12)}
-      .nx-tog[disabled]{opacity:.38;cursor:not-allowed;border-color:var(--line,#18364f);color:var(--muted)}
+      .nx-tog:hover{background:rgba(47,212,191,.12)}
       .nx-tog.on{color:var(--teal);border-color:var(--teal);background:rgba(47,212,191,.08)}
       @media print{.nx-tog{display:none}}
       .nx-homolog-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
@@ -268,10 +267,7 @@
       const v=el.getAttribute(on?'data-sem':'data-com');
       if(v!==null&&el.textContent!==v)el.textContent=v;
     });
-    const porPeso=medidaAtual(w)==='peso';
     d.querySelectorAll('.nx-tog').forEach(b=>{
-      b.disabled=porPeso;
-      b.title=porPeso?'Por peso de épico não dá para separar habilitador: o esforço está lançado no épico inteiro. Troque para "Por unidade de US".':'';
       b.textContent=on?'Mostrar habilitadores':'Ocultar habilitadores';
       b.setAttribute('aria-pressed',on?'true':'false');
       b.classList.toggle('on',on);
@@ -369,7 +365,7 @@
       const m=medidas&&medidas.frentes&&medidas.frentes[id];
       let r=m&&m[modo];
       // Os dois botoes se combinam: sem habilitadores so existe na regua por unidade.
-      if(r&&modo==='unidade'&&semHab(w)&&r.semHab)r=Object.assign({},r,r.semHab);
+      if(r&&semHab(w)&&r.semHab)r=Object.assign({},r,r.semHab);
       // Com o arquivo, os dois numeros vem dele; sem o arquivo, continua lendo a tela.
       const dev=r?Number(r.dev):num(fp.textContent);
       const hom=r?Number(r.hom):num(met[1].textContent);
