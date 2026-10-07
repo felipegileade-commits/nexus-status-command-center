@@ -35,10 +35,10 @@
     },
     {
      "nome": "Homologação",
-     "n": 66,
+     "n": 50,
      "hab": 7,
-     "detalhe": "Liberadas para a UAT, em reteste ou já iniciadas",
-     "detalheSem": "Liberadas para a UAT, em reteste ou já iniciadas",
+     "detalhe": "37 liberadas para a UAT · 10 em reteste · 3 já iniciadas",
+     "detalheSem": "30 liberadas para a UAT · 10 em reteste · 3 já iniciadas",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV"
@@ -47,7 +47,7 @@
      "nome": "Aprovado em UAT",
      "n": 57,
      "hab": 18,
-     "detalhe": "39 testáveis · 18 habilitadoras",
+     "detalhe": "39 testáveis · 18 habilitadoras — colunas Validado e Aprovado em UAT",
      "detalheSem": "39 testáveis",
      "espera": "",
      "dono": "grupo",
@@ -86,7 +86,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual de cada linha sobre o total de US do quadro — contagem de card no Jira, não esforço. Por isso ele não subtrai do percentual de desenvolvido do topo, que é esforço planejado em sprint na planilha de cronograma: são duas medidas diferentes do mesmo projeto e não se somam. Sobre o backlog de melhorias: não são bugs. São 33 melhorias levantadas pela MV ao longo das homologações e que NÃO serão desenvolvidas nem entregues, por estarem fora do escopo contratado ou por o tempo restante de projeto não as comportar. Durante o projeto surgiram muitas melhorias e parte delas foi acatada; cada melhoria acatada consumiu esforço que estava alocado a outra coisa, porque não há como ampliar o escopo sem retirar algo dele. Este quadro é o resultado dessa priorização. Duas coisas ficam fora do quadro: 38 US seguem em \"Realizando Deploy em QA\" fora da sprint, aguardando janela de deploy, e 11 estão em espera ou bloqueadas. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado.",
+   "nota": "Percentual de cada linha sobre o total de US do quadro — contagem de card no Jira, não esforço. Por isso ele não subtrai do percentual de desenvolvido do topo, que é esforço planejado em sprint na planilha de cronograma: são duas medidas diferentes do mesmo projeto e não se somam. Sobre o backlog de melhorias: não são bugs. São 33 melhorias levantadas pela MV ao longo das homologações e que NÃO serão desenvolvidas nem entregues, por estarem fora do escopo contratado ou por o tempo restante de projeto não as comportar. Durante o projeto surgiram muitas melhorias e parte delas foi acatada; cada melhoria acatada consumiu esforço que estava alocado a outra coisa, porque não há como ampliar o escopo sem retirar algo dele. Este quadro é o resultado dessa priorização. Três coisas ficam fora do quadro: 38 US seguem em \"Realizando Deploy em QA\" fora da sprint, aguardando janela de deploy; 3 estão em desenvolvimento, além das 5 já liberadas que abrem a sprint de amanhã; e 11 estão em espera ou bloqueadas. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco."
   }
  }
