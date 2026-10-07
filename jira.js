@@ -48,7 +48,15 @@
       .nx-duo{margin:22px 0 0}
       .front-summary:has(.nx-duo)>.front-progress,.front-summary:has(.nx-duo)>.progress,
       .front-summary:has(.nx-duo)>.metrics-row{display:none}
-      .nx-duo-nums{display:flex;align-items:baseline;gap:38px;flex-wrap:wrap;margin-bottom:14px}
+      .nx-duo-topo{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:14px}
+      .nx-duo-nums{display:flex;align-items:baseline;gap:38px;flex-wrap:wrap}
+      .nx-med{display:inline-flex;border:1px solid var(--line,#18364f);border-radius:999px;overflow:hidden;flex:none}
+      .nx-med button{font:inherit;font-size:10px;font-weight:800;letter-spacing:.05em;cursor:pointer;white-space:nowrap;
+        padding:7px 15px;border:0;background:transparent;color:var(--muted)}
+      .nx-med button:hover{color:var(--text)}
+      .nx-med button.on{background:var(--teal);color:#06131d}
+      .nx-duo-nota{margin:10px 0 0}
+      @media print{.nx-med{display:none}}
       .nx-duo-nums>div{display:flex;align-items:baseline;gap:11px}
       .nx-duo-nums strong{font-size:52px;font-weight:850;line-height:1;color:var(--text)}
       .nx-duo-nums .hom strong{color:var(--orange)}
@@ -330,32 +338,63 @@
 
   // "concluido" virou "desenvolvido": o percentual mede desenvolvimento, nao entrega.
   // O <main> vem do Supabase, entao a troca precisa acontecer aqui tambem.
-  // Layout que a Andressa montou: os dois percentuais lado a lado em tamanho grande e
-  // uma barra so, laranja ate o homologado e verde ate o desenvolvido. O bloco e nx-live
-  // e os elementos originais continuam no DOM, apenas escondidos por CSS: o editor, a
-  // visao geral e o impresso continuam lendo deles.
+  // Duas reguas para o mesmo par de numeros: por peso de epico (planilha de cronograma)
+  // e por unidade de US (contagem no Jira). O botao troca entre elas e a caixa de dica
+  // diz de onde cada uma vem -- sem isso o leitor nao sabe qual regua esta vendo.
+  const MED_KEY='nexus_medida';
+  let medidas=null,carregandoM=null;
+  function carregarMedidas(){
+    if(medidas)return Promise.resolve(medidas);
+    if(carregandoM)return carregandoM;
+    carregandoM=fetch('/data/medidas.json?v='+Date.now(),{cache:'no-store'})
+      .then(r=>r.ok?r.json():null).then(j=>(medidas=j)).catch(()=>null);
+    return carregandoM;
+  }
+  function medidaAtual(w){try{return w.localStorage.getItem(MED_KEY)==='unidade'?'unidade':'peso'}catch(e){return 'peso'}}
+
   function barraDupla(w){
     const d=w.document;
     const num=t=>{const m=String(t||'').match(/-?\d+(?:[,.]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN};
+    const modo=medidaAtual(w);
     ['central','revenue'].forEach(id=>{
       const sec=d.getElementById(id);if(!sec)return;
       const resumo=sec.querySelector('.front-summary');if(!resumo)return;
       const fp=resumo.querySelector('.front-progress'),foot=resumo.querySelector('.front-foot');
       const met=resumo.querySelectorAll('.metrics-row .metric-block strong');
       if(!fp||!foot||met.length<2)return;
-      const dev=num(fp.textContent),hom=num(met[1].textContent);
+      const m=medidas&&medidas.frentes&&medidas.frentes[id];
+      const r=m&&m[modo];
+      // Com o arquivo, os dois numeros vem dele; sem o arquivo, continua lendo a tela.
+      const dev=r?Number(r.dev):num(fp.textContent);
+      const hom=r?Number(r.hom):num(met[1].textContent);
       if(isNaN(dev)||isNaN(hom))return;
       const rotDev=(fp.querySelector('small')||{}).textContent||'desenvolvido';
       const larguraHom=Math.max(0,Math.min(100,hom));
       const larguraDev=Math.max(0,Math.min(100-larguraHom,dev-hom));
-      const html='<div class="nx-duo-nums">'
+      const chave=modo+'|'+dev+'|'+hom;
+      const botoes=m?('<div class="nx-med">'
+        +'<button type="button" data-med="peso"'+(modo==='peso'?' class="on"':'')+'>Por peso</button>'
+        +'<button type="button" data-med="unidade"'+(modo==='unidade'?' class="on"':'')+'>Por unidade de US</button>'
+        +'</div>'):'';
+      const html='<div class="nx-duo-topo"><div class="nx-duo-nums">'
         +'<div><strong>'+esc(fmt(dev))+'</strong><small>'+esc(rotDev)+'</small></div>'
         +'<div class="hom"><strong>'+esc(fmt(hom))+'</strong><small>homologado (aceito)</small></div></div>'
+        +botoes+'</div>'
         +'<div class="nx-duo-bar"><span class="hom" style="width:'+larguraHom+'%"></span>'
-        +'<span class="dev" style="width:'+larguraDev+'%"></span></div>';
+        +'<span class="dev" style="width:'+larguraDev+'%"></span></div>'
+        +(r&&r.base?('<p class="nx-duo-nota">'+dica(r.base,modo==='peso'?'Como esta régua é calculada':'Como esta contagem é feita')+'</p>'):'');
       let el=resumo.querySelector('.nx-duo');
       if(!el){el=d.createElement('div');el.className='nx-duo nx-live';resumo.insertBefore(el,foot)}
-      if(el.innerHTML!==html)el.innerHTML=html;
+      if(el.getAttribute('data-nx-chave')!==chave){el.innerHTML=html;el.setAttribute('data-nx-chave',chave)}
+    });
+  }
+  function ligaMedida(w){
+    if(w.__nxMed)return;w.__nxMed=true;
+    w.document.addEventListener('click',ev=>{
+      const b=ev.target&&ev.target.closest&&ev.target.closest('[data-med]');if(!b)return;
+      ev.preventDefault();
+      try{w.localStorage.setItem(MED_KEY,b.getAttribute('data-med'))}catch(e){}
+      barraDupla(w);
     });
   }
 
@@ -552,6 +591,8 @@
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     legendaDesenvolvido(w);
+    ligaMedida(w);
+    carregarMedidas().then(()=>barraDupla(w));
     barraDupla(w);
     proximoMarco(w);
     reordena(w);
@@ -561,7 +602,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

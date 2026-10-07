@@ -1,0 +1,30 @@
+{
+ "_leiame": "Os dois percentuais do topo de cada frente, nas duas reguas. 'peso' pondera pelo esforco de cada epico na planilha Gestao do Cronograma; 'unidade' conta card no Jira. O botao da tela troca entre as duas. Mantenha 'base' verdadeiro: e o texto da caixa de dica e e o que permite conferir.",
+ "atualizadoEm": "2026-10-06",
+ "frentes": {
+  "central": {
+   "peso": {
+    "dev": 86,
+    "hom": 20,
+    "base": "Por peso de épico, planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% até a Sprint 16 + 4,66% da Sprint 17 = 86,10%. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira."
+   },
+   "unidade": {
+    "dev": 65,
+    "hom": 24,
+    "base": "Por contagem de US no Jira MVPMO, base de 238 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 157 US já saíram do desenvolvimento. Homologado: 57 aprovadas — 40 em Validado e 17 em Aprovado em UAT."
+   }
+  },
+  "revenue": {
+   "peso": {
+    "dev": 92,
+    "hom": 22,
+    "base": "Por peso de épico, planilha Gestão do Cronograma (aba Revenue). Desenvolvido: 92,37%, soma do esforço alocado até a Sprint 15 — a Sprint Final, que vale 8,26%, ainda não está contada. Homologado: as 56 US aprovadas somam 22,85% do esforço, que sobre os 104,6% do cronograma dá 21,8%."
+   },
+   "unidade": {
+    "dev": 93,
+    "hom": 26,
+    "base": "Por contagem de US no Jira MVREV, base de 214 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 198 US já saíram do desenvolvimento. Homologado: 56 aprovadas em Validado e Aprovado em UAT."
+   }
+  }
+ }
+}
