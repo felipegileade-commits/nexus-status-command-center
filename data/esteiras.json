@@ -35,10 +35,10 @@
     },
     {
      "nome": "Homologação",
-     "n": 50,
+     "n": 66,
      "hab": 7,
-     "detalhe": "37 liberadas para a UAT · 10 em reteste · 3 já iniciadas",
-     "detalheSem": "30 liberadas para a UAT · 10 em reteste · 3 já iniciadas",
+     "detalhe": "Liberadas para a UAT, em reteste ou já iniciadas",
+     "detalheSem": "Liberadas para a UAT, em reteste ou já iniciadas",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV"
@@ -47,7 +47,7 @@
      "nome": "Aprovado em UAT",
      "n": 57,
      "hab": 18,
-     "detalhe": "39 testáveis · 18 habilitadoras — colunas Validado e Aprovado em UAT",
+     "detalhe": "39 testáveis · 18 habilitadoras",
      "detalheSem": "39 testáveis",
      "espera": "",
      "dono": "grupo",

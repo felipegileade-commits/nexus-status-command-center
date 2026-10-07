@@ -4,15 +4,15 @@
  "frentes": {
   "central": {
    "peso": {
-    "dev": 56,
-    "hom": 30,
-    "base": "Contagem de US no Jira MVPMO, posição de 07/10. Desenvolvido é o que já saiu da mão da Sottelli e está com a MV: as 50 US em homologação mais as 57 já aprovadas em UAT — 107 das 192 do quadro, 56%. É a régua que a MV aceita. Dentro desses 56%: 30% são as 57 aprovadas e 26% são as 50 que estão na UAT aguardando o aceite. As duas parcelas fecham o total, 26 + 30 = 56.",
-    "uat": 26,
+    "dev": 59,
+    "hom": 27,
+    "base": "Contagem de US no Jira MVPMO, posição de 07/10. Desenvolvido é o que já saiu da mão da Sottelli e está com a MV: as 66 US em homologação mais as 57 já aprovadas em UAT — 123 das 208 do quadro, 59%. É a régua que a MV aceita. Dentro desses 59%: 27% são as 57 aprovadas e 32% são as 66 que estão na UAT. As duas parcelas fecham o total, 27 + 32 = 59.",
+    "uat": 32,
     "semHab": {
-     "hom": 24,
-     "uat": 26,
-     "base": "Mesma régua, só US testável: 43 em homologação e 39 aprovadas em UAT, sobre as 164 testáveis do quadro — 82 de 164, 50%. Dentro disso, 24% aprovadas e 26% aguardando aceite na UAT.",
-     "dev": 50
+     "hom": 21,
+     "uat": 33,
+     "base": "Mesma régua, só US testável: 59 em homologação e 39 aprovadas em UAT, sobre as 180 testáveis do quadro — 98 de 180, 54%. Dentro disso, 39 aprovadas (21,7%) e 59 na UAT (32,8%); os inteiros da tela são ajustados para somar os 54.",
+     "dev": 54
     }
    },
    "_unidadeRetirada": {
