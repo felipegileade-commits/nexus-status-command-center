@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US.",
+ "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US. \"pesoSem\" e o mesmo peso contando so US testavel: peso do epico vezes testaveis da linha dividido por testaveis ativas do epico.",
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
@@ -14,7 +14,8 @@
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
      "donoTexto": "MV e Sottelli",
-     "peso": 29.27
+     "peso": 29.27,
+     "pesoSem": 31.79
     },
     {
      "nome": "Aprovação de US · UpStream",
@@ -23,7 +24,8 @@
      "espera": "Agenda de aprovação de US",
      "dono": "mv",
      "donoTexto": "MV",
-     "peso": 4.52
+     "peso": 4.52,
+     "pesoSem": 5.76
     },
     {
      "nome": "Desenvolvimento e QA · DownStream e QAStream",
@@ -34,7 +36,8 @@
      "espera": "Fechamento da sprint, que encerra amanhã",
      "dono": "sottelli",
      "donoTexto": "Sottelli",
-     "peso": 11.03
+     "peso": 11.03,
+     "pesoSem": 9.65
     },
     {
      "nome": "Homologação",
@@ -43,7 +46,8 @@
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV",
-     "peso": 10.55
+     "peso": 10.55,
+     "pesoSem": 12.74
     },
     {
      "nome": "Aprovado em UAT",
@@ -55,7 +59,8 @@
      "dono": "grupo",
      "donoTexto": "Concluído em grupo",
      "concluido": true,
-     "peso": 18.53
+     "peso": 18.53,
+     "pesoSem": 14.46
     }
    ],
    "etapas": [

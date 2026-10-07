@@ -581,7 +581,7 @@
       const porPeso=medidaAtual(w)==='peso'&&f.esteiras.some(e=>Number(e.peso)>0);
       const pcts=sh=>{
         const vals=f.esteiras.map(e=>porPeso
-          ? Number(e.peso)||0
+          ? Number(sh&&e.pesoSem!==undefined?e.pesoSem:e.peso)||0
           : Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)));
         const b=vals.reduce((t,v)=>t+v,0);
         if(!b)return f.esteiras.map(()=>'—');
