@@ -11,7 +11,8 @@
     "semHab": {
      "hom": 16,
      "uat": 36,
-     "base": "Por peso de épico, só US testável. O peso do épico não muda ao tirar habilitador — o que muda é o divisor dentro dele: cada testável passa a valer peso do épico ÷ US testáveis ativas. Central: 193 testáveis ativas, 39 aprovadas (14,46% do esforço) e 78 em UAT (33,04%), sobre os 90,9% do cronograma que têm testável ativa. O desenvolvido continua 86% porque vem da alocação de esforço por sprint, que é lançada no épico inteiro e não por US."
+     "base": "Por peso de épico, só US testável. O peso do épico não muda ao tirar habilitador — muda o divisor dentro dele: cada testável passa a valer peso do épico ÷ testáveis ativas. O universo testável pesa 86,34% do projeto. Desenvolvido: 72,45 pontos já alocados a sprints executadas (84%). UAT: 33,04 pontos (36%). Homologado: 14,46 pontos (16%). O esforço ainda não alocado a sprint é de 13,89% do projeto.",
+     "dev": 84
     }
    },
    "unidade": {
@@ -20,10 +21,10 @@
     "base": "Por contagem de US no Jira MVPMO, base de 238 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 157 US já saíram do desenvolvimento. Homologado: 57 aprovadas — 40 em Validado e 17 em Aprovado em UAT. Disponível em UAT: 96 de 238.",
     "uat": 40,
     "semHab": {
-     "dev": 61,
+     "dev": 60,
      "hom": 20,
      "uat": 40,
-     "base": "Por contagem de US no Jira MVPMO, só US testável: base de 193 (238 ativas menos 45 habilitadores). Desenvolvido 118, disponível em UAT 78, aprovadas 39."
+     "base": "Por contagem de US no Jira MVPMO, só US testável: base de 193 (238 ativas menos 45 habilitadores). Desenvolvidas 115, disponíveis em UAT 78, aprovadas 39."
     }
    }
   },
@@ -36,7 +37,8 @@
     "semHab": {
      "hom": 17,
      "uat": 40,
-     "base": "Por peso de épico, só US testável. Revenue: 166 testáveis ativas, 30 aprovadas (16,86% do esforço) e 62 em UAT (39,56%), sobre os 98,8% do cronograma que têm testável ativa — o épico Plataforma de Planilhas de Cálculos sai da conta porque suas duas US ativas são habilitadores. O desenvolvido continua 92% porque vem da alocação de esforço por sprint, lançada no épico inteiro."
+     "base": "Por peso de épico, só US testável. O universo testável de Revenue pesa 81,12 pontos dos 104,63 do cronograma. Desenvolvido: 73,38 pontos (90%) — fora ficam 7,73 pontos ainda na Sprint Final. UAT: 39,56 pontos (40%). Homologado: 16,86 pontos (17%). O épico Plataforma de Planilhas de Cálculos sai da conta porque as duas US ativas dele são habilitadores.",
+     "dev": 90
     }
    },
    "unidade": {
