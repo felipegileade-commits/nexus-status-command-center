@@ -1,21 +1,21 @@
 {
- "atualizadoEm": "2026-09-21",
- "fontes": "Jira, atas Gemini (aprovações e refinos), Google Calendar, Gmail (até 21/09), planilha de sprints, dashboard de homologação da MV, planilha 'Acompanhamento férias Andressa'",
+ "atualizadoEm": "2026-10-07",
+ "fontes": "Jira (MVPMO e MVREV), planilhas de homologação da MV (Central e Revenue), planilha Gestão do Cronograma, atas Gemini e Google Calendar",
  "riscos": [
   {
    "nivel": "Alto",
    "frente": "Central",
-   "titulo": "Homologação estendida de 08/09 para 13/11 sem contrapartida de capacidade",
-   "desc": "Prevista de 17/08 a 08/09 (3 semanas), a homologação passou a semanal até 13/11 (+9 semanas). A MV pediu duas agendas semanais de 3 h; a partir de 22/09 a sessão passa a ser às terças, 14h–17h, até 03/11. E-mail de 14/09 apresentou as opções 1 (priorizar homologação → 2 sprints adicionais) e 2 (priorizar a Sprint); resposta da MV pedida até 19/09.",
+   "titulo": "Homologação estendida de 08/09 em diante sem contrapartida de capacidade",
+   "desc": "Prevista de 17/08 a 08/09 (3 semanas), a homologação passou a semanal e segue sem data de término: a continuidade do cronograma está sendo negociada entre a MV e a Sottelli. A MV pediu duas agendas semanais de 3 h; a partir de 22/09 a sessão passa a ser às terças, 14h–17h, até 03/11. E-mail de 14/09 apresentou as opções 1 (priorizar homologação → 2 sprints adicionais) e 2 (priorizar a Sprint); resposta da MV pedida até 19/09.",
    "impacto": "Sprint 16 e cronograma até novembro",
    "acao": "Decisão formal da MV entre opção 1 e 2 até 19/09; agenda de homologação fechada com data de término."
   },
   {
    "nivel": "Alto",
    "frente": "Central",
-   "titulo": "40,5% do esforço da Central ainda em definição (72 histórias sem aprovação)",
-   "desc": "Reconhecimento de Receitas, Fluxo Financeiro, Indicadores, Task Board, One Page, Status Report, Portal de Clientes, Portal de Ofertas e parte de Apontamento de Horas e Alocação seguem em refino/aprovação. Só 4,2% está na fila de desenvolvimento; 93% do liberado já está desenvolvido.",
-   "impacto": "Entrega final 13/11",
+   "titulo": "89 histórias da Central ainda sem aprovação (48 sem US escrita, 28 em backlog, 13 em aprovação)",
+   "desc": "Reconhecimento de Receitas, Fluxo Financeiro, Indicadores, Task Board, One Page, Status Report, Portal de Clientes, Portal de Ofertas e parte de Apontamento de Horas e Alocação seguem em refino/aprovação. Posição do Jira em 07/10: 48 aguardam escrita de US, 28 estão em backlog e 13 aguardam aprovação do cliente. Pelo peso de épico, o refinamento sozinho responde por 40% do esforço represado no projeto.",
+   "impacto": "Data final do projeto, hoje em negociação entre as diretorias",
    "acao": "Aprovar, devolver ou retirar do escopo desta fase cada história, com data."
   },
   {
@@ -85,7 +85,7 @@
   {
    "item": "Homologação: 11 das 47 US testáveis ainda não iniciadas; 1 pendente de correção e 1 em andamento (lote = sprints 6 a 15)",
    "desde": "17/08",
-   "prazo": "13/11",
+   "prazo": "a definir na conversa entre as diretorias",
    "status": "Em andamento (semanal, terças 14h–17h, de 22/09 a 03/11)"
   },
   {
