@@ -74,7 +74,8 @@
       .front-head .nx-tog{margin-left:auto;margin-right:12px;align-self:center;font-size:11px;padding:7px 16px}
       .nx-tog{margin-left:10px;font:inherit;font-size:9.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;white-space:nowrap;
         padding:3px 10px;border-radius:999px;border:1px solid var(--teal);background:transparent;color:var(--teal)}
-      .nx-tog:hover{background:rgba(47,212,191,.12)}
+      .nx-tog:hover:not([disabled]){background:rgba(47,212,191,.12)}
+      .nx-tog[disabled]{opacity:.38;cursor:not-allowed;border-color:var(--line,#18364f);color:var(--muted)}
       .nx-tog.on{color:var(--teal);border-color:var(--teal);background:rgba(47,212,191,.08)}
       @media print{.nx-tog{display:none}}
       .nx-homolog-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
@@ -267,7 +268,10 @@
       const v=el.getAttribute(on?'data-sem':'data-com');
       if(v!==null&&el.textContent!==v)el.textContent=v;
     });
+    const porPeso=medidaAtual(w)==='peso';
     d.querySelectorAll('.nx-tog').forEach(b=>{
+      b.disabled=porPeso;
+      b.title=porPeso?'Por peso de épico não dá para separar habilitador: o esforço está lançado no épico inteiro. Troque para "Por unidade de US".':'';
       b.textContent=on?'Mostrar habilitadores':'Ocultar habilitadores';
       b.setAttribute('aria-pressed',on?'true':'false');
       b.classList.toggle('on',on);
@@ -355,7 +359,7 @@
   function barraDupla(w){
     const d=w.document;
     const num=t=>{const m=String(t||'').match(/-?\d+(?:[,.]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN};
-    const modo=medidaAtual(w),vistos={};
+    const modo=medidaAtual(w),vistos={};let mudouDom=false;
     ['central','revenue'].forEach(id=>{
       const sec=d.getElementById(id);if(!sec)return;
       const resumo=sec.querySelector('.front-summary');if(!resumo)return;
@@ -363,7 +367,9 @@
       const met=resumo.querySelectorAll('.metrics-row .metric-block strong');
       if(!fp||!foot||met.length<2)return;
       const m=medidas&&medidas.frentes&&medidas.frentes[id];
-      const r=m&&m[modo];
+      let r=m&&m[modo];
+      // Os dois botoes se combinam: sem habilitadores so existe na regua por unidade.
+      if(r&&modo==='unidade'&&semHab(w)&&r.semHab)r=Object.assign({},r,r.semHab);
       // Com o arquivo, os dois numeros vem dele; sem o arquivo, continua lendo a tela.
       const dev=r?Number(r.dev):num(fp.textContent);
       const hom=r?Number(r.hom):num(met[1].textContent);
@@ -397,13 +403,25 @@
         if(k[2]&&k[2].textContent!==fmt(hom))k[2].textContent=fmt(hom);
         if(k[1]&&r&&r.uat!==undefined&&k[1].textContent!==fmt(r.uat))k[1].textContent=fmt(r.uat);
       }
-      if(r&&r.uat!==undefined&&met[0]&&met[0].textContent!==fmt(r.uat))met[0].textContent=fmt(r.uat);
+      // O impresso e a visao geral sao reconstruidos a partir DESTES elementos (o botao
+      // Imprimir chama syncPrintReport, que le a tela). Por isso a regua escolhida precisa
+      // ser escrita aqui, e nao so no bloco visivel -- senao o papel sai com outro numero.
+      if(r){
+        const t0=fp.firstChild;
+        if(t0&&t0.nodeType===3&&t0.nodeValue!==fmt(dev)+' '){t0.nodeValue=fmt(dev)+' ';mudouDom=true}
+        const barra=resumo.querySelector(':scope > .progress span');
+        if(barra&&barra.style.width!==dev+'%'){barra.style.width=dev+'%';mudouDom=true}
+        if(r.uat!==undefined&&met[0]&&met[0].textContent!==fmt(r.uat)){met[0].textContent=fmt(r.uat);mudouDom=true}
+        if(met[1]&&met[1].textContent!==fmt(hom)){met[1].textContent=fmt(hom);mudouDom=true}
+      }
       vistos[id]=dev;
       let el=resumo.querySelector('.nx-duo');
       if(!el){el=d.createElement('div');el.className='nx-duo nx-live';resumo.insertBefore(el,foot)}
       if(el.getAttribute('data-nx-chave')!==chave){el.innerHTML=html;el.setAttribute('data-nx-chave',chave)}
     });
     // O primeiro card da visao geral e a media das duas frentes.
+    if(mudouDom){try{w.syncOverviewFromFronts&&w.syncOverviewFromFronts()}catch(e){}
+                try{w.syncPrintReport&&w.syncPrintReport()}catch(e){}}
     if(vistos.central!==undefined&&vistos.revenue!==undefined){
       const c1=d.querySelector('#overview .kpis .card:nth-child(1)');
       if(c1){const media=(vistos.central+vistos.revenue)/2;
@@ -418,6 +436,7 @@
       ev.preventDefault();
       try{w.localStorage.setItem(MED_KEY,b.getAttribute('data-med'))}catch(e){}
       barraDupla(w);
+      aplicaHab(w);
       // O quadro de esteiras tambem muda de regua: refaz o bloco.
       const est=w.document.querySelector('#central .nx-est');if(est)est.remove();
       if(esteiras)blocoEsteiras(w,esteiras);
