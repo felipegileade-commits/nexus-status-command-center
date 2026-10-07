@@ -395,7 +395,9 @@
         const k=pr.querySelectorAll('.pr-kpi b');
         if(k[0]&&k[0].textContent!==fmt(dev))k[0].textContent=fmt(dev);
         if(k[2]&&k[2].textContent!==fmt(hom))k[2].textContent=fmt(hom);
+        if(k[1]&&r&&r.uat!==undefined&&k[1].textContent!==fmt(r.uat))k[1].textContent=fmt(r.uat);
       }
+      if(r&&r.uat!==undefined&&met[0]&&met[0].textContent!==fmt(r.uat))met[0].textContent=fmt(r.uat);
       vistos[id]=dev;
       let el=resumo.querySelector('.nx-duo');
       if(!el){el=d.createElement('div');el.className='nx-duo nx-live';resumo.insertBefore(el,foot)}
@@ -416,6 +418,9 @@
       ev.preventDefault();
       try{w.localStorage.setItem(MED_KEY,b.getAttribute('data-med'))}catch(e){}
       barraDupla(w);
+      // O quadro de esteiras tambem muda de regua: refaz o bloco.
+      const est=w.document.querySelector('#central .nx-est');if(est)est.remove();
+      if(esteiras)blocoEsteiras(w,esteiras);
     });
   }
 
@@ -556,23 +561,26 @@
       const chamada=sh=>soma(null,sh)+' US em andamento — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' estão com a Sottelli.';
       // Percentual de cada linha sobre o total do quadro, a linha concluida inclusive.
       // Sem casa decimal, regra da Andressa: de 0,5 para cima sobe.
-      // Arredondar linha a linha fazia a coluna somar 99. Aqui o inteiro sai pelo maior
-      // resto: cada linha fica no piso e as sobras vao para quem tem a maior fracao,
-      // entao a coluna fecha em 100 sem casa decimal.
+      // Duas reguas tambem aqui: o numero de US nao muda, mas o percentual muda --
+      // por unidade e sobre o total de US do quadro, por peso e sobre o esforco.
+      const porPeso=medidaAtual(w)==='peso'&&f.esteiras.some(e=>Number(e.peso)>0);
       const pcts=sh=>{
-        const vals=f.esteiras.map(e=>Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)));
+        const vals=f.esteiras.map(e=>porPeso
+          ? Number(e.peso)||0
+          : Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)));
         const b=vals.reduce((t,v)=>t+v,0);
         if(!b)return f.esteiras.map(()=>'—');
         const exatos=vals.map(v=>v/b*100),piso=exatos.map(v=>Math.floor(v));
         let falta=100-piso.reduce((t,v)=>t+v,0);
         const ordem=exatos.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0]);
         for(let k=0;k<ordem.length&&falta>0;k++){piso[ordem[k][1]]++;falta--}
-        return piso.map((v,i)=>Number.isFinite(Number(f.esteiras[i].n))?v+'%':'—');
+        return piso.map((v,i)=>(porPeso||Number.isFinite(Number(f.esteiras[i].n)))?v+'%':'—');
       };
       const pc=pcts(0),ps=pcts(1);
+      const rotPct=porPeso?'do esforço':'do total';
       const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
-        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>do total</small></div>
+        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(rotPct)}</small></div>
         <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
         <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');

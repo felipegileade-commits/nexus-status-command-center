@@ -1,5 +1,5 @@
 {
- "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta.",
+ "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US.",
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
@@ -13,7 +13,8 @@
      "detalheSem": "48 aguardando escrita de US · 3 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
-     "donoTexto": "MV e Sottelli"
+     "donoTexto": "MV e Sottelli",
+     "peso": 29.27
     },
     {
      "nome": "Aprovação de US · UpStream",
@@ -21,7 +22,8 @@
      "detalhe": "US escritas",
      "espera": "Agenda de aprovação de US",
      "dono": "mv",
-     "donoTexto": "MV"
+     "donoTexto": "MV",
+     "peso": 4.52
     },
     {
      "nome": "Desenvolvimento e QA · DownStream e QAStream",
@@ -31,7 +33,8 @@
      "detalheSem": "7 backlog técnico · 1 em desenvolvimento · 13 em code review · 1 em correção de bug · 2 aguardando review",
      "espera": "Fechamento da sprint, que encerra amanhã",
      "dono": "sottelli",
-     "donoTexto": "Sottelli"
+     "donoTexto": "Sottelli",
+     "peso": 11.03
     },
     {
      "nome": "Homologação",
@@ -39,7 +42,8 @@
      "detalhe": "16 liberadas · 2 iniciadas · 10 em reteste",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV"
+     "donoTexto": "MV",
+     "peso": 10.55
     },
     {
      "nome": "Aprovado em UAT",
@@ -50,7 +54,8 @@
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo",
-     "concluido": true
+     "concluido": true,
+     "peso": 18.53
     }
    ],
    "etapas": [
@@ -75,7 +80,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Duas coisas ficam fora deste quadro e precisam ser ditas: 13 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção, e 37 US estão paradas em \"Realizando Deploy em QA\" fora da sprint atual, além das 19 que aparecem aqui. As 57 aprovadas em UAT não entram na conta de represamento: já passaram pela homologação e foram percorridas pelas duas partes."
+   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Duas coisas ficam fora deste quadro e precisam ser ditas: 13 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção, e 37 US estão paradas em \"Realizando Deploy em QA\" fora da sprint atual, além das 19 que aparecem aqui. As 57 aprovadas em UAT não entram na conta de represamento: já passaram pela homologação e foram percorridas pelas duas partes. O percentual tem duas réguas, acompanhando o botão do topo: por unidade de US, sobre as 183 do quadro; por peso de épico, sobre os 73,9% do esforço que essas US representam."
   }
  }
 }

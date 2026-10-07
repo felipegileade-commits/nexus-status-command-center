@@ -6,24 +6,28 @@
    "peso": {
     "dev": 86,
     "hom": 20,
-    "base": "Por peso de épico, planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% até a Sprint 16 + 4,66% da Sprint 17 = 86,10%. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira."
+    "base": "Por peso de épico, planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% até a Sprint 16 + 4,66% da Sprint 17 = 86,10%. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira. Disponível em UAT: as 96 US que chegaram à UAT somam 33,75% do esforço, que sobre os 91,6% dá 36,9%.",
+    "uat": 37
    },
    "unidade": {
     "dev": 65,
     "hom": 24,
-    "base": "Por contagem de US no Jira MVPMO, base de 238 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 157 US já saíram do desenvolvimento. Homologado: 57 aprovadas — 40 em Validado e 17 em Aprovado em UAT."
+    "base": "Por contagem de US no Jira MVPMO, base de 238 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 157 US já saíram do desenvolvimento. Homologado: 57 aprovadas — 40 em Validado e 17 em Aprovado em UAT. Disponível em UAT: 96 de 238.",
+    "uat": 40
    }
   },
   "revenue": {
    "peso": {
     "dev": 92,
     "hom": 22,
-    "base": "Por peso de épico, planilha Gestão do Cronograma (aba Revenue). Desenvolvido: 92,37%, soma do esforço alocado até a Sprint 15 — a Sprint Final, que vale 8,26%, ainda não está contada. Homologado: as 56 US aprovadas somam 22,85% do esforço, que sobre os 104,6% do cronograma dá 21,8%."
+    "base": "Por peso de épico, planilha Gestão do Cronograma (aba Revenue). Desenvolvido: 92,37%, soma do esforço alocado até a Sprint 15 — a Sprint Final, que vale 8,26%, ainda não está contada. Homologado: as 56 US aprovadas somam 22,85% do esforço, que sobre os 104,6% do cronograma dá 21,8%. Disponível em UAT: as 88 US que chegaram à UAT somam 41,0% do esforço, que sobre os 104,6% dá 39,2%.",
+    "uat": 39
    },
    "unidade": {
     "dev": 93,
     "hom": 26,
-    "base": "Por contagem de US no Jira MVREV, base de 214 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 198 US já saíram do desenvolvimento. Homologado: 56 aprovadas em Validado e Aprovado em UAT."
+    "base": "Por contagem de US no Jira MVREV, base de 214 US ativas (História e Habilitador, sem backlog, bloqueadas e canceladas). Desenvolvido: 198 US já saíram do desenvolvimento. Homologado: 56 aprovadas em Validado e Aprovado em UAT. Disponível em UAT: 88 de 214.",
+    "uat": 41
    }
   }
  }
