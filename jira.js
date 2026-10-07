@@ -110,6 +110,8 @@
       .nx-est-l.mv{border-left-color:var(--orange)}
       .nx-est-l.compartilhada{border-left-color:#8a7bd8}
       .nx-est-l.grupo{border-left-color:#45b36b;background:rgba(69,179,107,.07)}
+      .nx-est-l.fora{border-left-color:#7b8b9a;background:rgba(123,139,154,.08)}
+      .nx-est-l.fora .nx-est-n,.nx-est-l.fora .nx-est-p>span{color:#7b8b9a}
       .nx-est-n{font-size:26px;font-weight:900;color:var(--text);line-height:1;text-align:center}
       .nx-est-n small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
       .nx-est-p{text-align:center;border-left:1px solid var(--line,#18364f);padding-left:14px}
@@ -124,6 +126,7 @@
       .nx-est-l.mv .nx-est-dono b{color:var(--orange);border-color:var(--orange)}
       .nx-est-l.compartilhada .nx-est-dono b{color:#8a7bd8;border-color:#8a7bd8}
       .nx-est-l.grupo .nx-est-dono b{color:#45b36b;border-color:#45b36b;white-space:nowrap}
+      .nx-est-l.fora .nx-est-dono b{color:#7b8b9a;border-color:#7b8b9a;white-space:nowrap}
       .nx-est-dono span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
       .nx-est-fluxo{margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03))}
       .nx-est-fluxo .label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:900}
@@ -584,7 +587,7 @@
       const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-est'))return;
       // Uma esteira sem represamento entra com traco no lugar do numero e nao soma.
       // Linha marcada como concluida e trabalho entregue: aparece no quadro, mas nao soma represamento.
-      const abertas=f.esteiras.filter(e=>!e.concluido);
+      const abertas=f.esteiras.filter(e=>!e.concluido&&!e.foraEscopo);
       // sh=1 desconta os habilitadores declarados na linha: e o que o botao mostra.
       const soma=(d2,sh)=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
       const chamada=sh=>soma(null,sh)+' US em andamento — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' estão com a Sottelli.';
@@ -609,11 +612,11 @@
       };
       const pc=pcts(0),ps=pcts(1);
       const rotPct='do total de US';
-      const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}">
+      const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(rotPct)}</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido?'':' · aguarda '+esc(e.espera||'')}</span></div>
-        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido?'':'<span>responsabilidade</span>'}</div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo?'':' · aguarda '+esc(e.espera||'')}</span></div>
+        <div class="nx-est-dono"><b>${esc(e.donoTexto||'')}</b>${e.concluido||e.foraEscopo?'':'<span>responsabilidade</span>'}</div>
       </div>`).join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';

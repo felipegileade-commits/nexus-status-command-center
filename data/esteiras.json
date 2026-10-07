@@ -2,54 +2,55 @@
  "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. O percentual da linha e sempre por esforco (\"peso\"/\"pesoSem\"); a leitura por unidade de US saiu do painel. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US. \"pesoSem\" e o mesmo peso contando so US testavel: peso do epico vezes testaveis da linha dividido por testaveis ativas do epico.",
  "frentes": {
   "central": {
-   "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
+   "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO) · todas as 268 US da frente",
    "lidoEm": "2026-10-07",
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
-     "n": 35,
-     "hab": 2,
-     "detalhe": "31 aguardando escrita de US · 3 em refino · 1 em análise técnica",
-     "detalheSem": "31 aguardando escrita de US · 2 em refino",
+     "n": 47,
+     "hab": 6,
+     "detalhe": "31 aguardando escrita de US · 12 no backlog técnico · 3 em refino · 1 em análise técnica",
+     "detalheSem": "31 aguardando escrita de US · 8 no backlog técnico · 2 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
-     "donoTexto": "MV e Sottelli",
-     "peso": 29.27,
-     "pesoSem": 31.79
+     "donoTexto": "MV e Sottelli"
     },
     {
      "nome": "Aprovação de US · UpStream",
      "n": 12,
-     "detalhe": "US escritas",
+     "detalhe": "US escritas, aguardando o aceite do cliente",
      "espera": "Agenda de aprovação de US",
      "dono": "mv",
-     "donoTexto": "MV",
-     "peso": 4.52,
-     "pesoSem": 5.76
+     "donoTexto": "MV"
     },
     {
-     "nome": "Desenvolvimento e QA · DownStream e QAStream",
-     "n": 21,
-     "hab": 7,
-     "detalhe": "12 backlog técnico · 5 prontas para dev · 4 em desenvolvimento",
-     "detalheSem": "8 backlog técnico · 4 prontas para dev · 2 em desenvolvimento",
-     "espera": "Fechamento da sprint, que encerra amanhã",
+     "nome": "Desenvolvimento · DownStream",
+     "n": 8,
+     "hab": 2,
+     "detalhe": "5 prontas para entrar na sprint de amanhã · 3 em desenvolvimento",
+     "detalheSem": "4 prontas para entrar na sprint de amanhã · 2 em desenvolvimento",
+     "espera": "Abertura da próxima sprint",
      "dono": "sottelli",
-     "donoTexto": "Sottelli",
-     "peso": 11.03,
-     "pesoSem": 9.65
+     "donoTexto": "Sottelli"
+    },
+    {
+     "nome": "Code review e deploy em QA",
+     "n": 38,
+     "hab": 16,
+     "detalhe": "Fora da sprint atual — code review concluído, aguardando janela de deploy",
+     "espera": "Janela de deploy em QA",
+     "dono": "sottelli",
+     "donoTexto": "Sottelli"
     },
     {
      "nome": "Homologação",
-     "n": 67,
-     "detalhe": "54 liberadas · 3 iniciadas · 10 em reteste",
+     "n": 79,
+     "hab": 7,
+     "detalhe": "54 liberadas · 12 reprovadas aguardando correção · 10 em reteste · 3 iniciadas",
+     "detalheSem": "47 liberadas · 12 reprovadas aguardando correção · 10 em reteste · 3 iniciadas",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV",
-     "peso": 10.55,
-     "pesoSem": 12.74,
-     "detalheSem": "47 liberadas · 3 iniciadas · 10 em reteste",
-     "hab": 7
+     "donoTexto": "MV"
     },
     {
      "nome": "Aprovado em UAT",
@@ -60,9 +61,26 @@
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo",
-     "concluido": true,
-     "peso": 18.53,
-     "pesoSem": 14.46
+     "concluido": true
+    },
+    {
+     "nome": "Backlog de melhorias · não serão entregues",
+     "n": 33,
+     "detalhe": "Melhorias levantadas durante as homologações, fora do escopo contratado ou sem tempo de projeto que as comporte",
+     "espera": "",
+     "dono": "fora",
+     "donoTexto": "Fora do escopo",
+     "foraEscopo": true
+    },
+    {
+     "nome": "Em espera e bloqueadas",
+     "n": 11,
+     "hab": 3,
+     "detalhe": "Paradas por dependência externa ou decisão pendente",
+     "detalheSem": "Paradas por dependência externa ou decisão pendente",
+     "espera": "Destravamento da dependência",
+     "dono": "compartilhada",
+     "donoTexto": "MV e Sottelli"
     }
    ],
    "etapas": [
@@ -87,8 +105,8 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Leitura de 07/10, depois da repriorização: a sprint foi empurrada para a UAT e sobraram 4 US em desenvolvimento, por isso a linha de homologação é hoje a maior do quadro. Três coisas ficam fora deste quadro e precisam ser ditas: 12 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção; 37 US seguem paradas em \"Realizando Deploy em QA\" fora da sprint, e essas NÃO foram para a UAT; e 33 melhorias levantadas nas homologações entraram no Jira em BACKLOG e também ainda não entraram em sprint. O percentual de cada linha é a fatia dela sobre as 175 US deste quadro — contagem de card no Jira, não esforço. Por isso ele não subtrai do percentual de desenvolvido do topo: aquele é esforço planejado em sprint, na planilha de cronograma, e este é volume de US. São duas medidas diferentes do mesmo projeto e não se somam.",
-   "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sao a divisao de esforco lida em 06/10 na planilha Gestao do Cronograma. Ficam aqui como historico: o percentual da tela e por contagem de US, nao por esforco."
+   "nota": "O percentual de cada linha é sobre o TOTAL de US da Central no Jira — 268 US entre História e Habilitador, descontada 1 cancelada. Toda US da frente aparece em uma, e só uma, destas oito linhas: é por isso que as linhas somam 100%. A contagem é de card no Jira em 07/10, não de esforço, e por isso ela não subtrai do percentual de desenvolvido do topo, que é esforço planejado em sprint na planilha de cronograma — são duas medidas diferentes do mesmo projeto e não se somam. Sobre o backlog de melhorias: não são bugs. São 33 melhorias levantadas pela MV ao longo das homologações e que NÃO serão desenvolvidas nem entregues, por estarem fora do escopo contratado ou por o tempo restante de projeto não as comportar. Durante o projeto surgiram muitas melhorias e parte delas foi acatada; cada melhoria acatada consumiu esforço que estava alocado a outra coisa, porque não há como ampliar o escopo sem retirar algo dele. Este quadro é o resultado dessa priorização. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado.",
+   "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco."
   }
  }
 }
