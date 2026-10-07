@@ -352,6 +352,61 @@
   }
   function medidaAtual(w){try{return w.localStorage.getItem(MED_KEY)==='unidade'?'unidade':'peso'}catch(e){return 'peso'}}
 
+  // A aba "US Aprovadas" e uma tabela dentro do <main>, entao o arquivo sozinho nao a
+  // alterava. Aqui a tabela e conciliada com data/us-aprovadas.json: linha que saiu da
+  // lista e removida, linha que entrou e clonada do modelo, e os KPIs sao recontados.
+  function tabelaAprovadas(w,j){
+    if(!j||!j.frentes)return;
+    const d=w.document,sec=d.getElementById('aprovadas');if(!sec)return;
+    const corpo=sec.querySelector('.ua-table tbody')||sec.querySelector('.ua-table');if(!corpo)return;
+    const linhas=Array.prototype.slice.call(corpo.querySelectorAll('tr')).filter(tr=>tr.querySelector('.ua-key'));
+    if(!linhas.length)return;
+    const nomeFrente={central:'Central de Projetos',revenue:'Revenue Cloud'};
+    let mudou=false;
+    Object.keys(j.frentes).forEach(chave=>{
+      const f=j.frentes[chave];if(!f||!Array.isArray(f.aprovadas))return;
+      const querem={};f.aprovadas.forEach(a=>{querem[a.key]=a});
+      const temos={};
+      linhas.forEach(tr=>{
+        const k=(tr.querySelector('.ua-key')||{}).textContent;
+        const fr=((tr.querySelector('.ua-frente')||{}).textContent||'').trim();
+        if(fr!==nomeFrente[chave])return;
+        temos[String(k||'').trim()]=tr;
+      });
+      // o que saiu da lista sai da tabela
+      Object.keys(temos).forEach(k=>{if(!querem[k]){temos[k].remove();mudou=true}});
+      // o que entrou e clonado de uma linha da mesma frente
+      const modelo=Object.values(temos)[0];
+      if(modelo)Object.keys(querem).forEach(k=>{
+        if(temos[k])return;
+        const a=querem[k],tr=modelo.cloneNode(true);
+        const set=(sel,v)=>{const el=tr.querySelector(sel);if(el)el.textContent=v};
+        set('.ua-key',a.key);set('.ua-titulo',a.titulo||'');set('.ua-frente',nomeFrente[chave]);
+        set('.ua-sprint',a.sprint||'—');
+        const base=tr.querySelector('.ua-base');
+        if(base)base.innerHTML='<span class="ua-tag ua-mv">'+esc((j.formas&&j.formas[a.forma])||'Aprovada pela MV na homologação')+'</span><small>'+esc(a.base||'')+'</small>';
+        const tds=tr.querySelectorAll('td');if(tds[3])tds[3].textContent=a.tipo||'História';
+        corpo.appendChild(tr);mudou=true;
+      });
+    });
+    if(!mudou)return;
+    // renumera e reconta
+    const atuais=Array.prototype.slice.call(corpo.querySelectorAll('tr')).filter(tr=>tr.querySelector('.ua-key'));
+    atuais.forEach((tr,i)=>{const n=tr.querySelector('.ua-n');if(n)n.textContent=String(i+1)});
+    const porFrente=n=>atuais.filter(tr=>((tr.querySelector('.ua-frente')||{}).textContent||'').trim()===n).length;
+    const kpis=sec.querySelectorAll('.ua-kpi');
+    const escrever=(el,valor,texto)=>{if(!el)return;const b=el.querySelector('b')||el.firstElementChild;
+      if(b)b.textContent=valor;const p=el.querySelector('span,small,p');if(p&&texto)p.textContent=texto};
+    const cen=j.frentes.central||{},rev=j.frentes.revenue||{};
+    const nCen=porFrente('Central de Projetos'),nRev=porFrente('Revenue Cloud');
+    escrever(kpis[0],String(atuais.length));
+    if(kpis[1])escrever(kpis[1],fmt(rev.escopo?nRev/rev.escopo*100:0),'Revenue Cloud · '+nRev+' de '+(rev.escopo||'?')+' US');
+    if(kpis[2])escrever(kpis[2],fmt(cen.escopo?nCen/cen.escopo*100:0),'Central de Projetos · '+nCen+' de '+(cen.escopo||'?')+' US');
+    const porTag=t=>atuais.filter(tr=>(tr.querySelector('.ua-base')||{innerHTML:''}).innerHTML.indexOf(t)>=0).length;
+    if(kpis[3])escrever(kpis[3],String(porTag('Aprovada pela MV')+porTag('Aprovada na 1')));
+    if(kpis[4])escrever(kpis[4],String(porTag('Habilitador')+porTag('Configuração')+porTag('Pronto para deploy')));
+  }
+
   function barraDupla(w){
     const d=w.document;
     const num=t=>{const m=String(t||'').match(/-?\d+(?:[,.]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN};
@@ -632,7 +687,7 @@
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r)blocoRiscos(w,r)});
       carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});
-      carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
+      carregarAprovadas().then(a=>{if(a){tabelaAprovadas(w,a);if(dados)painel(w,dados)}});});
     legendasAvanco(w);
     legendaDesenvolvido(w);
     ligaMedida(w);
@@ -646,7 +701,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);if(aprov)tabelaAprovadas(w,aprov);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
