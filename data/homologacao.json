@@ -55,7 +55,7 @@
    "nota": "A linha fecha nos dois sentidos: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. Atenção à leitura: os 18 habilitadores nunca foram homologados pelo cliente — foram aprovados tecnicamente e estão no Jira em Validado. É para isso o botão: com eles fora, a conta vira a de homologação pura — 69 US testáveis entraram nas duas rodadas e 39 estão aprovadas. Com eles dentro, bate com as 57 do Jira (40 em Validado e 17 em Aprovado em UAT). Abertura por rodada: a 1ª trouxe 22 testáveis e 18 habilitadoras, todas aprovadas, com 127 apontamentos e 13 bugs (das 22, 15 tiveram cenário de teste executado); a 2ª trouxe 47 testáveis, das quais 17 aprovadas, 24 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção, com 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%) — a planilha calcula 36% de sucesso. As 30 ainda não aprovadas estão no Jira em BUG (13), BUG EM TESTES (10), Pós Review (3), EM HOMOLOGAÇÃO (2) e Aguardando Review (2). As duas rodadas não repetem nenhuma US: conferido chave a chave em 06/10."
   },
   "revenue": {
-   "fonte": "Planilhas de homologação de Revenue da MV — 1ª onda (Sprints 2 a 9) e 2ª onda (Sprints 10 a 16)",
+   "fonte": "Planilhas de homologação de Revenue da MV (1ª e 2ª ondas) + coluna Validado do Jira MVREV",
    "lidoEm": "2026-10-06",
    "grupos": [
     {
@@ -63,20 +63,23 @@
      "destaque": true,
      "quadros": [
       {
-       "n": 138,
-       "rotulo": "US no escopo"
+       "n": 164,
+       "rotulo": "US no escopo",
+       "nSem": 138
       },
       {
        "n": 138,
        "rotulo": "US testáveis"
       },
       {
-       "n": 0,
-       "rotulo": "habilitadoras"
+       "n": 26,
+       "rotulo": "habilitadoras",
+       "nSem": 0
       },
       {
-       "n": 15,
+       "n": 41,
        "rotulo": "aprovadas",
+       "nSem": 15,
        "cor": "ok"
       },
       {
@@ -99,7 +102,7 @@
      ]
     }
    ],
-   "nota": "A linha fecha nos dois sentidos: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. Revenue teve duas ondas. 1ª onda, Sprints 2 a 9, 37 US (planilha lida em 06/10): 15 aprovadas, 15 reprovadas e 7 em andamento — 50% de aprovação entre as que tiveram resultado; 144 apontamentos, 11 bugs, 37 melhorias e 95 ajustes, com 1 apontamento sem classificação. 2ª onda, Sprints 10 a 16, 101 US divididas em Sala A (38) e Sala B (63), lida em 30/09: ainda não começou, as 101 seguem como Não Iniciado, embora já existam 71 apontamentos lançados, 8 bugs e 57 ajustes, com 6 sem classificação. Somando as duas ondas: 215 apontamentos e 19 bugs (9%). Duas leituras diferentes convivem nesta tela: a grade conta a planilha da MV (138 US que entraram em onda de homologação) e o percentual do topo conta o Jira (214 US ativas, 56 aprovadas, incluindo habilitador e US fora das ondas). Habilitador não entra em homologação em Revenue — por isso o quadro marca 0 e o botão de habilitadores não altera esta grade, só os percentuais do topo."
+   "nota": "A linha fecha nos dois sentidos: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. As 138 testáveis vêm das planilhas da MV e as 26 habilitadoras vêm do Jira (MVREV, coluna Validado) — mesma construção da Central, e é o que o botão de habilitadores tira da conta: sem elas o escopo cai para 138 e as aprovadas para 15. 1ª onda, Sprints 2 a 9, 37 US (planilha lida em 06/10): 15 aprovadas, 15 reprovadas e 7 em andamento — 50% de aprovação entre as que tiveram resultado; 144 apontamentos, 11 bugs, 37 melhorias e 95 ajustes, com 1 sem classificação. 2ª onda, Sprints 10 a 16, 101 US em Sala A (38) e Sala B (63), lida em 30/09: ainda não começou, as 101 seguem como Não Iniciado, embora já existam 71 apontamentos, 8 bugs e 57 ajustes, com 6 sem classificação. Somando as ondas: 215 apontamentos e 19 bugs (9%). Habilitador não entra em onda de homologação em Revenue: as 26 são aprovação técnica, igual às 18 da Central."
   }
  }
 }
