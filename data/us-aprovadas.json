@@ -1,5 +1,5 @@
 {
- "posicao": "21/09/2026",
+ "posicao": "07/10/2026",
  "formas": {
   "mv": "Aprovada pela MV na homologação",
   "mv1": "Aprovada na 1ª homologação",
@@ -496,10 +496,10 @@
   "central": {
    "nome": "Central de Projetos",
    "projeto": "MVPMO",
-   "escopo": 226,
+   "escopo": 238,
    "controlaIndicador": false,
-   "rodada": "Homologação em andamento · posição de 20/09/2026",
-   "fonte": "Planilha executiva das histórias homologadas da Central (Jira MVPMO + atas das sessões de homologação com o PMO da MV), 20/09/2026",
+   "rodada": "Posição do Jira em 07/10/2026 · colunas Validado e Aprovado em UAT",
+   "fonte": "Jira MVPMO: 40 em Validado (PRONTO PARA DEPLOY EM PROD / Deploy em Prod. realizado) e 17 em Aprovado em UAT (Liberado para deploy), conferidas chave a chave em 07/10/2026",
    "aprovadas": [
     {
      "key": "MVPMO-1",
@@ -726,6 +726,14 @@
      "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
     },
     {
+     "key": "MVPMO-153",
+     "titulo": "Criação de nova Versão do Projeto",
+     "tipo": "História",
+     "sprint": "",
+     "forma": "mv",
+     "base": "Aprovada em UAT (Jira: Liberado para deploy), posição de 07/10/2026"
+    },
+    {
      "key": "MVPMO-154",
      "titulo": "Exclusão de Versão com status de Inválida ou Rascunho",
      "tipo": "História",
@@ -782,6 +790,14 @@
      "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
     },
     {
+     "key": "MVPMO-201",
+     "titulo": "Alçada de Aprovação para Alocação de Recursos",
+     "tipo": "História",
+     "sprint": "",
+     "forma": "mv",
+     "base": "Aprovada em UAT (Jira: Liberado para deploy), posição de 07/10/2026"
+    },
+    {
      "key": "MVPMO-203",
      "titulo": "Habilitador - Ajustes do objeto \"Alocações do Projeto\"",
      "tipo": "Habilitador",
@@ -790,12 +806,12 @@
      "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
     },
     {
-     "key": "MVPMO-225",
-     "titulo": "Interface do Calendar (Bryntum) para Atividades",
+     "key": "MVPMO-224",
+     "titulo": "Interface do Calendar (Bryntum) para Recursos",
      "tipo": "História",
-     "sprint": "Sprint 15",
+     "sprint": "",
      "forma": "mv",
-     "base": "Aprovada em 11/09/2026 — [MV Central de Projetos] - Homologação - PMO (Calendário). Planilha da MV: \"Aprovado porém com ajuste proposto na linha 127\"."
+     "base": "Aprovada em UAT (Jira: Liberado para deploy), posição de 07/10/2026"
     },
     {
      "key": "MVPMO-228",
@@ -844,6 +860,14 @@
      "sprint": "Sprint 13",
      "forma": "hab",
      "base": "Item técnico de configuração; validado pelo QA Sottelli, não passa pela homologação do cliente"
+    },
+    {
+     "key": "MVPMO-266",
+     "titulo": "Melhoria - Regra de duplicidade para Habilidades",
+     "tipo": "História",
+     "sprint": "",
+     "forma": "mv",
+     "base": "Aprovada em UAT (Jira: Liberado para deploy), posição de 07/10/2026"
     },
     {
      "key": "MVPMO-267",
