@@ -352,6 +352,33 @@
   }
   function medidaAtual(w){try{return w.localStorage.getItem(MED_KEY)==='unidade'?'unidade':'peso'}catch(e){return 'peso'}}
 
+  // "Riscos e atencoes" da Visao Geral deixa de ser lista digitada a mao: ela e montada
+  // a partir dos cards de risco das frentes, na ordem em que aparecem. Resumo e nivel
+  // vem de data/riscos.json (overview.niveis), casados por um trecho do texto do card;
+  // sem casamento, cai no resumo automatico e no nivel padrao.
+  function riscosVisaoGeral(w,j){
+    if(!j)return;const d=w.document;
+    const cards=Array.prototype.slice.call(d.querySelectorAll('#overview .bottom .card'));
+    const alvo=cards.filter(c=>{const l=c.querySelector('.label');return l&&/RISCOS/i.test(l.textContent)})[0];
+    const lista=alvo&&alvo.querySelector('.list');if(!lista)return;
+    const cfg=j.overview||{};const regras=cfg.niveis||[];
+    const cls=n=>/alto/i.test(n)?'high':/baixo/i.test(n)?'low':'med';
+    const curto=t=>{const s=String(t||'').split(/(?<=\.)\s/)[0];return s.length>96?s.slice(0,93)+'…':s};
+    const itens=[];
+    ['central','revenue'].forEach(id=>{
+      d.querySelectorAll('#'+id+' .risk-card').forEach(c=>{
+        const p=c.querySelector('.risk-col:not(.action) p');
+        const txt=p?p.textContent.trim():'';if(!txt)return;
+        const r=regras.filter(x=>x.contem&&txt.indexOf(x.contem)>=0)[0];
+        itens.push({t:(r&&r.resumo)||curto(txt),n:(r&&r.nivel)||cfg.nivelPadrao||'Alto'});
+      });
+    });
+    (cfg.extras||[]).forEach(e=>itens.push({t:e.resumo,n:e.nivel||'Médio'}));
+    if(!itens.length)return;
+    const html=itens.map(i=>'<div class="risk"><span>'+esc(i.t)+'</span><strong class="'+cls(i.n)+'">'+esc(i.n)+'</strong></div>').join('');
+    if(lista.innerHTML!==html)lista.innerHTML=html;
+  }
+
   function barraDupla(w){
     const d=w.document;
     const num=t=>{const m=String(t||'').match(/-?\d+(?:[,.]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN};
@@ -630,7 +657,7 @@
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
-      carregarRiscos().then(r=>{if(r)blocoRiscos(w,r)});
+      carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
       carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
@@ -646,7 +673,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos)blocoRiscos(w,riscos);if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

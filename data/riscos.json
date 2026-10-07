@@ -1,5 +1,5 @@
 {
- "_leiame": "Risco e plano de acao por frente. Tres mecanismos, todos conservadores: (1) risco/acao preenchem o card SO quando o campo esta VAZIO no painel; (2) substitui[] troca o texto de um card existente SO quando o texto atual e identico a deRisco -- se alguem editou, a troca nao acontece e o texto da pessoa fica; (3) extras[] sao cards novos, marcados como nx-live, redesenhados a cada carga e removidos antes de salvar, entao nunca duplicam no estado gravado. Para desligar um item, apague a entrada.",
+ "_leiame": "Risco e plano de acao por frente. Tres mecanismos, todos conservadores: (1) risco/acao preenchem o card SO quando o campo esta VAZIO no painel; (2) substitui[] troca o texto de um card existente SO quando o texto atual e identico a deRisco -- se alguem editou, a troca nao acontece e o texto da pessoa fica; (3) extras[] sao cards novos, marcados como nx-live, redesenhados a cada carga e removidos antes de salvar, entao nunca duplicam no estado gravado. Para desligar um item, apague a entrada. O bloco \"overview\" monta a lista de Riscos e atencoes da Visao Geral a partir dos cards das frentes: \"niveis\" casa um trecho do texto do card com um resumo e um nivel, e \"extras\" sao itens que nao vem de card nenhum.",
  "atualizadoEm": "2026-10-06",
  "frentes": {
   "central": {
@@ -27,5 +27,41 @@
     }
    ]
   }
+ },
+ "overview": {
+  "nivelPadrao": "Alto",
+  "niveis": [
+   {
+    "contem": "velocidade reduzida na dinâmica",
+    "nivel": "Médio",
+    "resumo": "Velocidade das aprovações de US nas homologações (Central)"
+   },
+   {
+    "contem": "52 US estão represadas no refinamento",
+    "nivel": "Alto",
+    "resumo": "52 US represadas no refinamento — 40% do esforço (Central)"
+   },
+   {
+    "contem": "13 US já escritas aguardam aprovação",
+    "nivel": "Alto",
+    "resumo": "13 US escritas aguardam aprovação do cliente (Central)"
+   },
+   {
+    "contem": "Restam apenas 5 US aprovadas no backlog",
+    "nivel": "Médio",
+    "resumo": "Só 5 US aprovadas no backlog técnico para a sprint (Central)"
+   },
+   {
+    "contem": "Continuidade do cronograma em negociação",
+    "nivel": "Alto",
+    "resumo": "Cronograma em negociação e integração com a Benner a desenvolver (Revenue)"
+   }
+  ],
+  "extras": [
+   {
+    "resumo": "Volume de deploys do período — risco reconhecido por MV e Sottelli",
+    "nivel": "Médio"
+   }
+  ]
  }
 }
