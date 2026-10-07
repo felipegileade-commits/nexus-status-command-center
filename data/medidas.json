@@ -4,14 +4,14 @@
  "frentes": {
   "central": {
    "peso": {
-    "dev": 86,
+    "dev": 81,
     "hom": 20,
-    "base": "Por esforço (peso de épico), planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% até a Sprint 16 + 4,66% da Sprint 17 = 86,10%. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira. Disponível em UAT: as 96 US que chegaram à UAT somam 33,75% do esforço, que sobre os 91,6% dá 36,9%.",
+    "base": "Por esforço (peso de épico), planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% — o esforço alocado às sprints já executadas, até a Sprint 16. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira. Disponível em UAT: as 96 US que chegaram à UAT somam 33,75% do esforço, que sobre os 91,6% dá 36,9%. Atenção à leitura: este 81,44% é esforço planejado em sprint, não peso de US entregue — as duas contas não fecham entre si enquanto entrar US nova em épico cuja sprint já rodou.",
     "uat": 37,
     "semHab": {
      "hom": 16,
      "uat": 36,
-     "base": "Por esforço (peso de épico), só US testável. O peso do épico não muda ao tirar habilitador — muda o divisor dentro dele: cada testável passa a valer peso do épico ÷ testáveis ativas. O universo testável pesa 86,34% do projeto. Desenvolvido: 72,45 pontos já alocados a sprints executadas (84%). UAT: 33,04 pontos (36%). Homologado: 14,46 pontos (16%). O esforço ainda não alocado a sprint é de 13,89% do projeto.",
+     "base": "Por esforço (peso de épico), só US testável, até a Sprint 16 — a mesma base do número cheio. O peso do épico não muda ao tirar habilitador: muda o divisor dentro dele, cada testável passa a valer peso do épico ÷ testáveis ativas. O universo testável pesa 86,34% do projeto. Desenvolvido: 72,45 pontos alocados a sprints executadas (84%). UAT: 33,04 pontos (36%). Homologado: 14,46 pontos (16%). O esforço ainda não alocado a sprint é de 13,89% do projeto.",
      "dev": 84
     }
    },

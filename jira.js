@@ -606,7 +606,7 @@
         return piso.map((v,i)=>(porPeso||Number.isFinite(Number(f.esteiras[i].n)))?v+'%':'—');
       };
       const pc=pcts(0),ps=pcts(1);
-      const rotPct=porPeso?'do esforço':'do total';
+      const rotPct='do esforço nas esteiras';
       const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(rotPct)}</small></div>
