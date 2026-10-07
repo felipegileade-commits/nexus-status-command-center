@@ -355,7 +355,7 @@
   function barraDupla(w){
     const d=w.document;
     const num=t=>{const m=String(t||'').match(/-?\d+(?:[,.]\d+)?/);return m?parseFloat(m[0].replace(',','.')):NaN};
-    const modo=medidaAtual(w);
+    const modo=medidaAtual(w),vistos={};
     ['central','revenue'].forEach(id=>{
       const sec=d.getElementById(id);if(!sec)return;
       const resumo=sec.querySelector('.front-summary');if(!resumo)return;
@@ -383,10 +383,31 @@
         +'<div class="nx-duo-bar"><span class="hom" style="width:'+larguraHom+'%"></span>'
         +'<span class="dev" style="width:'+larguraDev+'%"></span></div>'
         +(r&&r.base?('<p class="nx-duo-nota">'+dica(r.base,modo==='peso'?'Como esta régua é calculada':'Como esta contagem é feita')+'</p>'):'');
+      // A visao geral e o impresso leem da tela. Sem isto, o topo da frente diria 86%
+      // e o card da visao geral continuaria em 81% -- duas verdades na mesma pagina.
+      const card=d.querySelector('#overview .kpis .card:nth-child('+(id==='central'?3:2)+')');
+      if(card){
+        const big=card.querySelector('.big');if(big&&big.textContent!==fmt(dev))big.textContent=fmt(dev);
+        const sp=card.querySelector('.progress span');if(sp&&sp.style.width!==dev+'%')sp.style.width=dev+'%';
+      }
+      const pr=d.getElementById(id==='central'?'prCentral':'prRevenue');
+      if(pr){
+        const k=pr.querySelectorAll('.pr-kpi b');
+        if(k[0]&&k[0].textContent!==fmt(dev))k[0].textContent=fmt(dev);
+        if(k[2]&&k[2].textContent!==fmt(hom))k[2].textContent=fmt(hom);
+      }
+      vistos[id]=dev;
       let el=resumo.querySelector('.nx-duo');
       if(!el){el=d.createElement('div');el.className='nx-duo nx-live';resumo.insertBefore(el,foot)}
       if(el.getAttribute('data-nx-chave')!==chave){el.innerHTML=html;el.setAttribute('data-nx-chave',chave)}
     });
+    // O primeiro card da visao geral e a media das duas frentes.
+    if(vistos.central!==undefined&&vistos.revenue!==undefined){
+      const c1=d.querySelector('#overview .kpis .card:nth-child(1)');
+      if(c1){const media=(vistos.central+vistos.revenue)/2;
+        const b=c1.querySelector('.big');if(b&&b.textContent!==fmt(media))b.textContent=fmt(media);
+        const sp=c1.querySelector('.progress span');if(sp&&sp.style.width!==media+'%')sp.style.width=media+'%';}
+    }
   }
   function ligaMedida(w){
     if(w.__nxMed)return;w.__nxMed=true;
