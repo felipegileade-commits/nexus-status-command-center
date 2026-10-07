@@ -64,6 +64,10 @@
     },
     {
      "n": 0,
+     "rotulo": "habilitadoras"
+    },
+    {
+     "n": 0,
      "rotulo": "aprovadas",
      "cor": "ok"
     },
@@ -89,7 +93,7 @@
      "rotulo": "melhorias e ajustes (80%)"
     }
    ],
-   "nota": "Posição da planilha da MV em 30/09, cobrindo a 2ª onda — Sprints 10 a 16, 101 US divididas entre Sala A (38) e Sala B (63). Nenhuma US teve o resultado registrado até agora: as 101 seguem como \"Não Iniciado\" na planilha, embora já existam 71 apontamentos lançados. Dos 71, 57 (80%) são ajustes e 8 (11%) são bugs; 6 ainda não têm classificação. Os números de Revenue já são só de US testável, então o botão de habilitadores não altera esta grade; no Jira, MVREV tem 60 habilitadores, 26 deles aprovados."
+   "nota": "Posição da planilha da MV em 30/09, cobrindo a 2ª onda — Sprints 10 a 16, 101 US divididas entre Sala A (38) e Sala B (63). Nenhuma US teve o resultado registrado até agora: as 101 seguem como \"Não Iniciado\" na planilha, embora já existam 71 apontamentos lançados. Dos 71, 57 (80%) são ajustes e 8 (11%) são bugs; 6 ainda não têm classificação. As 101 são todas US testáveis: a homologação de Revenue não recebe habilitador, e por isso o quadro marca 0 e o botão de habilitadores não altera nada aqui. No Jira, o MVREV tem 48 habilitadores ativos, 26 deles já aprovados — eles aparecem nos percentuais do topo, que o botão altera."
   }
  }
 }
