@@ -13,7 +13,7 @@
   {
    "nivel": "Alto",
    "frente": "Central",
-   "titulo": "89 histórias da Central ainda sem aprovação (48 sem US escrita, 28 em backlog, 13 em aprovação)",
+   "titulo": "73 histórias da Central ainda sem aprovação (34 sem US escrita, 28 em backlog, 11 em aprovação)",
    "desc": "Reconhecimento de Receitas, Fluxo Financeiro, Indicadores, Task Board, One Page, Status Report, Portal de Clientes, Portal de Ofertas e parte de Apontamento de Horas e Alocação seguem em refino/aprovação. Posição do Jira em 07/10: 48 aguardam escrita de US, 28 estão em backlog e 13 aguardam aprovação do cliente. Pelo peso de épico, o refinamento sozinho responde por 40% do esforço represado no projeto.",
    "impacto": "Data final do projeto, hoje em negociação entre as diretorias",
    "acao": "Aprovar, devolver ou retirar do escopo desta fase cada história, com data."

@@ -1,6 +1,6 @@
 {
  "_leiame": "Risco e plano de acao por frente. Tres mecanismos, todos conservadores: (1) risco/acao preenchem o card SO quando o campo esta VAZIO no painel; (2) substitui[] troca o texto de um card existente SO quando o texto atual e identico a deRisco -- se alguem editou, a troca nao acontece e o texto da pessoa fica; (3) extras[] sao cards novos, marcados como nx-live, redesenhados a cada carga e removidos antes de salvar, entao nunca duplicam no estado gravado. Para desligar um item, apague a entrada. O bloco \"overview\" monta a lista de Riscos e atencoes da Visao Geral a partir dos cards das frentes: \"niveis\" casa um trecho do texto do card com um resumo e um nivel, e \"extras\" sao itens que nao vem de card nenhum.",
- "atualizadoEm": "2026-10-06",
+ "atualizadoEm": "2026-10-07",
  "frentes": {
   "central": {
    "risco": "Há uma velocidade reduzida na dinâmica de aprovações das US durante as homologações, resultando em uma quantidade reduzida de US repassadas nas dinâmicas.",
@@ -9,15 +9,21 @@
    "substitui": [
     {
      "deRisco": "Falta de US aprovadas para iniciar a próxima sprint, somada ao gargalo da esteira de upstream: 53 histórias aguardam refinamento e 17 aguardam aprovação do cliente, enquanto restam apenas 5 US aprovadas disponíveis.",
-     "risco": "52 US estão represadas no refinamento da esteira de UpStream — 48 aguardam a escrita da US e 4 estão em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "acao": "Priorizar a marcação das agendas de refino dessas 52 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
-     "origem": "Posição do Jira em 06/10, board UpStream."
+     "risco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 38 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 07/10, board UpStream."
+    },
+    {
+     "deRisco": "52 US estão represadas no refinamento da esteira de UpStream — 48 aguardam a escrita da US e 4 estão em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "risco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 38 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 07/10, board UpStream."
     }
    ],
    "extras": [
     {
      "id": "aprovacao-us",
-     "risco": "13 US já escritas aguardam aprovação do cliente. A aprovação é etapa da MV e, enquanto não ocorre, a história não entra na sprint.",
+     "risco": "11 US já escritas aguardam aprovação do cliente. A aprovação é etapa da MV e, enquanto não ocorre, a história não entra na sprint.",
      "acao": "Ampliar as agendas de aprovação de US com o PMO da MV. Hoje há mais agenda de homologação do que de aprovação, e é a aprovação que abastece o desenvolvimento."
     },
     {
@@ -37,14 +43,14 @@
     "resumo": "Velocidade das aprovações de US nas homologações (Central)"
    },
    {
-    "contem": "52 US estão represadas no refinamento",
+    "contem": "38 US estão represadas no refinamento",
     "nivel": "Alto",
-    "resumo": "52 US represadas no refinamento — 40% do esforço (Central)"
+    "resumo": "38 US represadas no refinamento da esteira de UpStream (Central)"
    },
    {
-    "contem": "13 US já escritas aguardam aprovação",
+    "contem": "11 US já escritas aguardam aprovação",
     "nivel": "Alto",
-    "resumo": "13 US escritas aguardam aprovação do cliente (Central)"
+    "resumo": "11 US escritas aguardam aprovação do cliente (Central)"
    },
    {
     "contem": "Restam apenas 5 US aprovadas no backlog",

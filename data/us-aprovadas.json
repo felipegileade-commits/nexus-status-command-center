@@ -496,10 +496,10 @@
   "central": {
    "nome": "Central de Projetos",
    "projeto": "MVPMO",
-   "escopo": 238,
+   "escopo": 227,
    "controlaIndicador": false,
    "rodada": "Posição do Jira em 07/10/2026 · colunas Validado e Aprovado em UAT",
-   "fonte": "Jira MVPMO: 40 em Validado (PRONTO PARA DEPLOY EM PROD / Deploy em Prod. realizado) e 17 em Aprovado em UAT (Liberado para deploy), conferidas chave a chave em 07/10/2026",
+   "fonte": "Jira MVPMO: 40 na coluna Validado (PRONTO PARA DEPLOY EM PROD / Deploy em Prod. realizado) e 17 em Aprovado em UAT (Liberado para deploy), conferidas chave a chave em 07/10/2026 — as mesmas 57 da leitura anterior.",
    "aprovadas": [
     {
      "key": "MVPMO-1",

@@ -1,16 +1,16 @@
 {
- "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US. \"pesoSem\" e o mesmo peso contando so US testavel: peso do epico vezes testaveis da linha dividido por testaveis ativas do epico.",
+ "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. O percentual da linha e sempre por esforco (\"peso\"/\"pesoSem\"); a leitura por unidade de US saiu do painel. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US. \"pesoSem\" e o mesmo peso contando so US testavel: peso do epico vezes testaveis da linha dividido por testaveis ativas do epico.",
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
-   "lidoEm": "2026-10-06",
+   "lidoEm": "2026-10-07",
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
-     "n": 52,
-     "hab": 1,
-     "detalhe": "48 aguardando escrita de US · 4 em refino",
-     "detalheSem": "48 aguardando escrita de US · 3 em refino",
+     "n": 38,
+     "hab": 2,
+     "detalhe": "34 aguardando escrita de US · 3 em refino · 1 em análise técnica",
+     "detalheSem": "34 aguardando escrita de US · 2 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
      "donoTexto": "MV e Sottelli",
@@ -19,7 +19,7 @@
     },
     {
      "nome": "Aprovação de US · UpStream",
-     "n": 13,
+     "n": 11,
      "detalhe": "US escritas",
      "espera": "Agenda de aprovação de US",
      "dono": "mv",
@@ -29,10 +29,10 @@
     },
     {
      "nome": "Desenvolvimento e QA · DownStream e QAStream",
-     "n": 33,
-     "hab": 9,
-     "detalhe": "7 backlog técnico · 4 em desenvolvimento · 19 em code review · 1 em correção de bug · 2 aguardando review",
-     "detalheSem": "7 backlog técnico · 1 em desenvolvimento · 13 em code review · 1 em correção de bug · 2 aguardando review",
+     "n": 45,
+     "hab": 14,
+     "detalhe": "13 backlog técnico · 5 prontas para dev · 4 em desenvolvimento · 21 em code review · 2 aguardando review",
+     "detalheSem": "9 backlog técnico · 4 prontas para dev · 2 em desenvolvimento · 14 em code review · 2 aguardando review",
      "espera": "Fechamento da sprint, que encerra amanhã",
      "dono": "sottelli",
      "donoTexto": "Sottelli",
@@ -41,8 +41,8 @@
     },
     {
      "nome": "Homologação",
-     "n": 28,
-     "detalhe": "16 liberadas · 2 iniciadas · 10 em reteste",
+     "n": 26,
+     "detalhe": "14 liberadas · 2 iniciadas · 10 em reteste",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV",
@@ -85,7 +85,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Duas coisas ficam fora deste quadro e precisam ser ditas: 13 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção, e 37 US estão paradas em \"Realizando Deploy em QA\" fora da sprint atual, além das 19 que aparecem aqui. As 57 aprovadas em UAT não entram na conta de represamento: já passaram pela homologação e foram percorridas pelas duas partes. O percentual tem duas réguas, acompanhando o botão do topo: por unidade de US, sobre as 183 do quadro; por peso de épico, sobre os 73,9% do esforço que essas US representam."
+   "nota": "Percentual sobre o total de US do quadro. A esteira da Sottelli vem do board DownStream (sprint em curso), do Backlog Técnico do UpStream e do QAStream, contada por status para nenhuma US entrar duas vezes. O refinamento tem cinco etapas e nenhuma das duas partes o percorre sozinha: três dependem da MV e duas da Sottelli — por isso o seu peso é compartilhado. Três coisas ficam fora deste quadro e precisam ser ditas: 13 US reprovadas na homologação estão no status BUG e ainda não entraram em sprint para correção; 37 US estão paradas em \"Realizando Deploy em QA\" fora da sprint atual, além das 21 que aparecem aqui; e 28 melhorias levantadas nas homologações entraram no Jira em BACKLOG (coluna melhoria do board de Homologação) e também ainda não entraram em sprint. As 57 aprovadas em UAT não entram na conta de represamento: já passaram pela homologação e foram percorridas pelas duas partes. O percentual de cada linha é o esforço que ela representa, ponderado pelo peso do épico na planilha Gestão do Cronograma — não é contagem de cards. A divisão do esforço entre as linhas é a da leitura de 06/10 da planilha; a contagem de US de cada linha é do Jira em 07/10."
   }
  }
 }

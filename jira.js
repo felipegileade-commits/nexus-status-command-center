@@ -338,9 +338,9 @@
 
   // "concluido" virou "desenvolvido": o percentual mede desenvolvimento, nao entrega.
   // O <main> vem do Supabase, entao a troca precisa acontecer aqui tambem.
-  // Duas reguas para o mesmo par de numeros: por peso de epico (planilha de cronograma)
-  // e por unidade de US (contagem no Jira). O botao troca entre elas e a caixa de dica
-  // diz de onde cada uma vem -- sem isso o leitor nao sabe qual regua esta vendo.
+  // Uma regua so: por esforco (peso de epico da planilha de cronograma). A leitura por
+  // unidade de US foi retirada por decisao do cliente, e com ela o botao que trocava as
+  // duas. A chave 'peso' continua no medidas.json porque e a estrutura do arquivo.
   const MED_KEY='nexus_medida';
   let medidas=null,carregandoM=null;
   function carregarMedidas(){
@@ -350,7 +350,7 @@
       .then(r=>r.ok?r.json():null).then(j=>(medidas=j)).catch(()=>null);
     return carregandoM;
   }
-  function medidaAtual(w){try{return w.localStorage.getItem(MED_KEY)==='unidade'?'unidade':'peso'}catch(e){return 'peso'}}
+  function medidaAtual(){return 'peso'}
 
   // "Riscos e atencoes" da Visao Geral deixa de ser lista digitada a mao: ela e montada
   // a partir dos cards de risco das frentes, na ordem em que aparecem. Resumo e nivel
@@ -391,7 +391,7 @@
       if(!fp||!foot||met.length<2)return;
       const m=medidas&&medidas.frentes&&medidas.frentes[id];
       let r=m&&m[modo];
-      // Os dois botoes se combinam: sem habilitadores so existe na regua por unidade.
+      // O botao de habilitadores continua: medidas.json traz o esforco so de testavel.
       if(r&&semHab(w)&&r.semHab)r=Object.assign({},r,r.semHab);
       // Com o arquivo, os dois numeros vem dele; sem o arquivo, continua lendo a tela.
       const dev=r?Number(r.dev):num(fp.textContent);
@@ -401,17 +401,14 @@
       const larguraHom=Math.max(0,Math.min(100,hom));
       const larguraDev=Math.max(0,Math.min(100-larguraHom,dev-hom));
       const chave=modo+'|'+dev+'|'+hom;
-      const botoes=m?('<div class="nx-med">'
-        +'<button type="button" data-med="peso"'+(modo==='peso'?' class="on"':'')+'>Por peso</button>'
-        +'<button type="button" data-med="unidade"'+(modo==='unidade'?' class="on"':'')+'>Por unidade de US</button>'
-        +'</div>'):'';
+      const botoes='';
       const html='<div class="nx-duo-topo"><div class="nx-duo-nums">'
         +'<div><strong>'+esc(fmt(dev))+'</strong><small>'+esc(rotDev)+'</small></div>'
         +'<div class="hom"><strong>'+esc(fmt(hom))+'</strong><small>homologado (aceito)</small></div></div>'
         +botoes+'</div>'
         +'<div class="nx-duo-bar"><span class="hom" style="width:'+larguraHom+'%"></span>'
         +'<span class="dev" style="width:'+larguraDev+'%"></span></div>'
-        +(r&&r.base?('<p class="nx-duo-nota">'+dica(r.base,modo==='peso'?'Como esta régua é calculada':'Como esta contagem é feita')+'</p>'):'');
+        +(r&&r.base?('<p class="nx-duo-nota">'+dica(r.base,'Como o esforço é calculado')+'</p>'):'');
       // A visao geral e o impresso leem da tela. Sem isto, o topo da frente diria 86%
       // e o card da visao geral continuaria em 81% -- duas verdades na mesma pagina.
       const card=d.querySelector('#overview .kpis .card:nth-child('+(id==='central'?3:2)+')');
@@ -452,19 +449,9 @@
         const sp=c1.querySelector('.progress span');if(sp&&sp.style.width!==media+'%')sp.style.width=media+'%';}
     }
   }
-  function ligaMedida(w){
-    if(w.__nxMed)return;w.__nxMed=true;
-    w.document.addEventListener('click',ev=>{
-      const b=ev.target&&ev.target.closest&&ev.target.closest('[data-med]');if(!b)return;
-      ev.preventDefault();
-      try{w.localStorage.setItem(MED_KEY,b.getAttribute('data-med'))}catch(e){}
-      barraDupla(w);
-      aplicaHab(w);
-      // O quadro de esteiras tambem muda de regua: refaz o bloco.
-      const est=w.document.querySelector('#central .nx-est');if(est)est.remove();
-      if(esteiras)blocoEsteiras(w,esteiras);
-    });
-  }
+  // Sem botao de regua nao ha o que ligar. Fica a limpeza da escolha antiga, para quem
+  // deixou 'unidade' gravado no navegador nao arrastar nada.
+  function ligaMedida(w){try{w.localStorage.removeItem(MED_KEY)}catch(e){}}
 
   function legendaDesenvolvido(w){
     w.document.querySelectorAll('#central .front-progress small,#revenue .front-progress small').forEach(x=>{
@@ -604,8 +591,8 @@
       // Percentual de cada linha sobre o total do quadro, a linha concluida inclusive.
       // Sem casa decimal, regra da Andressa: de 0,5 para cima sobe.
       // Duas reguas tambem aqui: o numero de US nao muda, mas o percentual muda --
-      // por unidade e sobre o total de US do quadro, por peso e sobre o esforco.
-      const porPeso=medidaAtual(w)==='peso'&&f.esteiras.some(e=>Number(e.peso)>0);
+      // o percentual da linha e sempre sobre o esforco, nunca sobre a contagem de cards.
+      const porPeso=f.esteiras.some(e=>Number(e.peso)>0);
       const pcts=sh=>{
         const vals=f.esteiras.map(e=>porPeso
           ? Number(sh&&e.pesoSem!==undefined?e.pesoSem:e.peso)||0

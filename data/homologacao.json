@@ -3,7 +3,7 @@
  "frentes": {
   "central": {
    "fonte": "Planilhas de homologação da MV (1ª e 2ª rodadas) + coluna Validado do board de Homologação (Jira MVPMO)",
-   "lidoEm": "2026-10-06",
+   "lidoEm": "2026-10-07",
    "grupos": [
     {
      "titulo": "Geral · as duas homologações",
@@ -56,7 +56,7 @@
   },
   "revenue": {
    "fonte": "Planilhas de homologação de Revenue da MV (1ª e 2ª ondas) + coluna Validado do Jira MVREV",
-   "lidoEm": "2026-10-06",
+   "lidoEm": "2026-10-07",
    "grupos": [
     {
      "titulo": "Geral · as duas ondas",
