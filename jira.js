@@ -591,8 +591,10 @@
       // Percentual de cada linha sobre o total do quadro, a linha concluida inclusive.
       // Sem casa decimal, regra da Andressa: de 0,5 para cima sobe.
       // Duas reguas tambem aqui: o numero de US nao muda, mas o percentual muda --
-      // o percentual da linha e sempre sobre o esforco, nunca sobre a contagem de cards.
-      const porPeso=f.esteiras.some(e=>Number(e.peso)>0);
+      // O percentual da linha e sobre o total de US do quadro, nao sobre esforco: a
+      // contagem vem do Jira do dia, enquanto o peso do epico depende da planilha de
+      // cronograma e envelhece sozinho. 'peso'/'pesoSem' ficam no arquivo como historico.
+      const porPeso=false;
       const pcts=sh=>{
         const vals=f.esteiras.map(e=>porPeso
           ? Number(sh&&e.pesoSem!==undefined?e.pesoSem:e.peso)||0
@@ -606,7 +608,7 @@
         return piso.map((v,i)=>(porPeso||Number.isFinite(Number(f.esteiras[i].n)))?v+'%':'—');
       };
       const pc=pcts(0),ps=pcts(1);
-      const rotPct='do esforço nas esteiras';
+      const rotPct='do total de US';
       const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(rotPct)}</small></div>
