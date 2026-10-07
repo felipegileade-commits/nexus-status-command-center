@@ -4,15 +4,15 @@
  "frentes": {
   "central": {
    "peso": {
-    "dev": 81,
-    "hom": 20,
-    "base": "Por esforço (peso de épico), planilha Gestão do Cronograma (aba Central). Desenvolvido: 81,44% — o esforço alocado às sprints já executadas, até a Sprint 16. Homologado: as 57 US aprovadas somam 18,53% do esforço contratado; sobre os 91,6% do cronograma que já têm US no Jira, dá 20,2%. Cinco épicos do cronograma (8,4% do esforço) ainda não têm nenhuma US no Jira. Disponível em UAT: as 96 US que chegaram à UAT somam 33,75% do esforço, que sobre os 91,6% dá 36,9%. Atenção à leitura: este 81,44% é esforço planejado em sprint, não peso de US entregue — as duas contas não fecham entre si enquanto entrar US nova em épico cuja sprint já rodou.",
-    "uat": 37,
+    "dev": 56,
+    "hom": 30,
+    "base": "Contagem de US no Jira MVPMO, posição de 07/10. Desenvolvido é o que já saiu da mão da Sottelli e está com a MV: as 50 US em homologação mais as 57 já aprovadas em UAT — 107 das 192 do quadro, 56%. É a régua que a MV aceita. Dentro desses 56%: 30% são as 57 aprovadas e 26% são as 50 que estão na UAT aguardando o aceite. As duas parcelas fecham o total, 26 + 30 = 56.",
+    "uat": 26,
     "semHab": {
-     "hom": 16,
-     "uat": 36,
-     "base": "Por esforço (peso de épico), só US testável, até a Sprint 16 — a mesma base do número cheio. O peso do épico não muda ao tirar habilitador: muda o divisor dentro dele, cada testável passa a valer peso do épico ÷ testáveis ativas. O universo testável pesa 86,34% do projeto. Desenvolvido: 72,45 pontos alocados a sprints executadas (84%). UAT: 33,04 pontos (36%). Homologado: 14,46 pontos (16%). O esforço ainda não alocado a sprint é de 13,89% do projeto.",
-     "dev": 84
+     "hom": 24,
+     "uat": 26,
+     "base": "Mesma régua, só US testável: 43 em homologação e 39 aprovadas em UAT, sobre as 164 testáveis do quadro — 82 de 164, 50%. Dentro disso, 24% aprovadas e 26% aguardando aceite na UAT.",
+     "dev": 50
     }
    },
    "_unidadeRetirada": {
