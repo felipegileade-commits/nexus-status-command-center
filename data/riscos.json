@@ -1,6 +1,6 @@
 {
  "_leiame": "Risco e plano de acao por frente. Tres mecanismos, todos conservadores: (1) risco/acao preenchem o card SO quando o campo esta VAZIO no painel; (2) substitui[] troca o texto de um card existente SO quando o texto atual e identico a deRisco -- se alguem editou, a troca nao acontece e o texto da pessoa fica; (3) extras[] sao cards novos, marcados como nx-live, redesenhados a cada carga e removidos antes de salvar, entao nunca duplicam no estado gravado. Para desligar um item, apague a entrada. O bloco \"overview\" monta a lista de Riscos e atencoes da Visao Geral a partir dos cards das frentes: \"niveis\" casa um trecho do texto do card com um resumo e um nivel, e \"extras\" sao itens que nao vem de card nenhum.",
- "atualizadoEm": "2026-10-07",
+ "atualizadoEm": "2026-10-13",
  "frentes": {
   "central": {
    "risco": "Há uma velocidade reduzida na dinâmica de aprovações das US durante as homologações, resultando em uma quantidade reduzida de US repassadas nas dinâmicas.",
@@ -36,6 +36,45 @@
      "id": "backlog-tecnico",
      "risco": "Restam apenas 5 US aprovadas no backlog técnico. É volume baixo para abastecer a sprint e deixa a equipe de desenvolvimento sem fila.",
      "acao": "Aumentar o número de US aprovadas já na agenda de aprovação desta semana, para incorporá-las à sprint em andamento."
+    },
+    {
+     "id": "arquivos-mv",
+     "risco": "Arquivos enviados pela MV para o desenvolvimento ainda precisam ser verificados pela Sottelli. Exemplo: o documento Glossário, que apresenta divergências.",
+     "acao": "E-mail enviado com os pontos divergentes, endereçado ao Matheus e ao Felipe (Sottelli)."
+    },
+    {
+     "id": "priorizacao-refinamento",
+     "risco": "Priorização do refinamento: os próximos refinos precisam ser reanalisados, porque o foco passa a ser as US do escopo de itens adicionais que ainda não foram refinadas.",
+     "acao": "Reanálise da agenda dos próximos refinos. Responsável: MV (TD + PMO)."
+    }
+   ]
+  },
+  "revenue": {
+   "atencao": [
+    {
+     "id": "permissionamento-apps",
+     "texto": "Permissionamento dos apps."
+    },
+    {
+     "id": "licencas",
+     "texto": "Licenças: nova análise da quantidade necessária × disponível."
+    }
+   ],
+   "passos": [
+    {
+     "id": "start-legado",
+     "texto": "Start do legado na próxima semana.",
+     "status": "Previsto"
+    }
+   ],
+   "passosStatus": [
+    {
+     "contem": "Força-tarefa de homologação com a MV",
+     "status": "Concluído"
+    },
+    {
+     "contem": "Homologação de Revenue com a MV",
+     "status": "Concluído"
     }
    ]
   }
@@ -67,6 +106,26 @@
     "contem": "Continuidade do cronograma em negociação",
     "nivel": "Alto",
     "resumo": "Cronograma em negociação e integração com a Benner a desenvolver (Revenue)"
+   },
+   {
+    "contem": "Arquivos enviados pela MV para o desenvolvimento",
+    "nivel": "Médio",
+    "resumo": "Arquivos enviados pela MV a verificar pela Sottelli, ex.: Glossário (Central)"
+   },
+   {
+    "contem": "Priorização do refinamento",
+    "nivel": "Alto",
+    "resumo": "Priorização do refinamento a reanalisar, foco nos itens adicionais (Central)"
+   },
+   {
+    "contem": "Prazo de entrega da integração com a Benner",
+    "nivel": "Alto",
+    "resumo": "Prazo de entrega da integração com a Benner sem estimativa (Revenue)"
+   },
+   {
+    "contem": "Prazo de entrega da integração com o iDocs",
+    "nivel": "Alto",
+    "resumo": "Prazo de entrega da integração com o iDocs em aberto (Revenue)"
    }
   ],
   "extras": [
