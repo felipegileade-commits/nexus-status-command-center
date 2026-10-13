@@ -9,21 +9,27 @@
    "substitui": [
     {
      "deRisco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "risco": "35 US estão represadas no refinamento da esteira de UpStream — 31 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "acao": "Priorizar a marcação das agendas de refino dessas 35 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
-     "origem": "Posição do Jira em 07/10, board UpStream, depois da repriorização."
+     "risco": "28 US estão represadas no refinamento da esteira de UpStream — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 28 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 13/10, board UpStream."
     },
     {
      "deRisco": "52 US estão represadas no refinamento da esteira de UpStream — 48 aguardam a escrita da US e 4 estão em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "risco": "35 US estão represadas no refinamento da esteira de UpStream — 31 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "acao": "Priorizar a marcação das agendas de refino dessas 35 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
-     "origem": "Posição do Jira em 07/10, board UpStream, depois da repriorização."
+     "risco": "28 US estão represadas no refinamento da esteira de UpStream — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 28 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 13/10, board UpStream."
     },
     {
      "deRisco": "Falta de US aprovadas para iniciar a próxima sprint, somada ao gargalo da esteira de upstream: 53 histórias aguardam refinamento e 17 aguardam aprovação do cliente, enquanto restam apenas 5 US aprovadas disponíveis.",
-     "risco": "35 US estão represadas no refinamento da esteira de UpStream — 31 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
-     "acao": "Priorizar a marcação das agendas de refino dessas 35 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
-     "origem": "Posição do Jira em 07/10, board UpStream, depois da repriorização."
+     "risco": "28 US estão represadas no refinamento da esteira de UpStream — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 28 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 13/10, board UpStream."
+    },
+    {
+     "deRisco": "35 US estão represadas no refinamento da esteira de UpStream — 31 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "risco": "28 US estão represadas no refinamento da esteira de UpStream — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "acao": "Priorizar a marcação das agendas de refino dessas 28 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
+     "origem": "Posição do Jira em 13/10, board UpStream."
     }
    ],
    "extras": [
@@ -34,7 +40,7 @@
     },
     {
      "id": "backlog-tecnico",
-     "risco": "Restam apenas 5 US aprovadas no backlog técnico. É volume baixo para abastecer a sprint e deixa a equipe de desenvolvimento sem fila.",
+     "risco": "Restam 9 US liberadas para desenvolvimento. É volume baixo para abastecer a sprint e deixa a equipe sem fila depois dela.",
      "acao": "Aumentar o número de US aprovadas já na agenda de aprovação desta semana, para incorporá-las à sprint em andamento."
     },
     {
@@ -88,9 +94,9 @@
     "resumo": "Velocidade das aprovações de US nas homologações (Central)"
    },
    {
-    "contem": "35 US estão represadas no refinamento",
+    "contem": "28 US estão represadas no refinamento",
     "nivel": "Alto",
-    "resumo": "35 US represadas no refinamento da esteira de UpStream (Central)"
+    "resumo": "28 US represadas no refinamento da esteira de UpStream (Central)"
    },
    {
     "contem": "12 US já escritas aguardam aprovação",
@@ -98,9 +104,9 @@
     "resumo": "12 US escritas aguardam aprovação do cliente (Central)"
    },
    {
-    "contem": "Restam apenas 5 US aprovadas no backlog",
+    "contem": "Restam 9 US liberadas para desenvolvimento",
     "nivel": "Médio",
-    "resumo": "Só 5 US aprovadas no backlog técnico para a sprint (Central)"
+    "resumo": "Só 9 US liberadas para desenvolvimento (Central)"
    },
    {
     "contem": "Continuidade do cronograma em negociação",
