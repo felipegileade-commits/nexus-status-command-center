@@ -716,9 +716,14 @@
   // Felipe em 13/10, ate segunda ordem. No editavel ela continua: a aba so some quando
   // a pagina e a somente-leitura. O impresso precisa de style inline, porque o PDF e
   // montado a partir do innerHTML de #print-report e nao leva a folha de estilo da tela.
-  function ocultaVisaoGeral(w){
-    if(!window.NEXUS_READONLY)return;
+  function ajustaImpresso(w){
     const d=w.document;if(!d.body)return;
+    // O cronograma executivo sai do relatorio impresso nas duas versoes, a pedido do
+    // Felipe em 13/10. Na tela ele continua.
+    const tl=d.getElementById('prTimeline');
+    if(tl&&tl.style.display!=='none')tl.style.display='none';
+    // Daqui para baixo e so a Visao Geral, que some apenas na versao do cliente.
+    if(!window.NEXUS_READONLY)return;
     if(!d.getElementById("nx-sem-overview")){
       const s=d.createElement("style");s.id="nx-sem-overview";
       s.textContent='[data-front="overview"],#overview{display:none!important}';
@@ -840,7 +845,7 @@
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
-      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);ocultaVisaoGeral(w);
+      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);ajustaImpresso(w);
       carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
@@ -856,7 +861,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ocultaVisaoGeral(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
