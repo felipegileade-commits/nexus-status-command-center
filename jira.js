@@ -122,7 +122,7 @@
       /* Onde o trabalho esta parado: volume por esteira e de quem depende cada etapa. */
       .nx-est{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
       .nx-est-linhas{display:grid;gap:8px}
-      .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 190px;gap:14px;align-items:center;
+      .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 218px;gap:14px;align-items:center;
         padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
       .nx-est-l.sottelli{border-left-color:var(--teal)}
       .nx-est-l.mv{border-left-color:var(--orange)}
@@ -162,7 +162,7 @@
       .nx-est-txt b{display:block;font-size:13px;color:var(--text);font-weight:700}
       .nx-est-txt span{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
       .nx-est-dono{text-align:right}
-      .nx-est-dono b{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+      .nx-est-dono b{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;
         padding:3px 10px;border-radius:999px;border:1px solid var(--line,#18364f);color:var(--muted)}
       .nx-est-l.sottelli .nx-est-dono b{color:var(--teal);border-color:var(--teal)}
       .nx-est-l.mv .nx-est-dono b{color:var(--orange);border-color:var(--orange)}
