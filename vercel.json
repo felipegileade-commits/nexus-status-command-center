@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/v", "destination": "/view.html" },
+    { "source": "/status", "destination": "/view.html" }
+  ]
+}

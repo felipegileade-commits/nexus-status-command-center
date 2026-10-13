@@ -57,15 +57,41 @@
   "revenue": {
    "peso": {
     "dev": 92,
-    "hom": 22,
-    "base": "Por esforço (peso de épico), planilha Gestão do Cronograma (aba Revenue). Desenvolvido: 92,37%, soma do esforço alocado até a Sprint 15 — a Sprint Final, que vale 8,26%, ainda não está contada. Homologado: as 56 US aprovadas somam 22,85% do esforço, que sobre os 104,6% do cronograma dá 21,8%. Disponível em UAT: as 88 US que chegaram à UAT somam 41,0% do esforço, que sobre os 104,6% dá 39,2%.",
-    "uat": 39,
+    "hom": 26,
+    "base": "Contagem de US no Jira MVREV, posição de 13/10. Base: as 214 US do quadro. Desenvolvido é o que está em UAT: as 142 em homologação mais as 56 já aprovadas — 198 de 214, 92%. Fora dos 92%: 4% em desenvolvimento (8 US) e 4% bloqueado (8 no refinamento). Homologado geral: as 56 aprovadas sobre as 214 — 26%. Homologado desenvolvido: 56 de 198 — 28%. A régua antiga, por esforço do cronograma, dava 92,37% de desenvolvido até a Sprint 15; a leitura por US chega ao mesmo lugar por outro caminho.",
+    "uat": 66,
     "semHab": {
-     "hom": 17,
-     "uat": 40,
-     "base": "Por esforço (peso de épico), só US testável. O universo testável de Revenue pesa 81,12 pontos dos 104,63 do cronograma. Desenvolvido: 73,38 pontos (90%) — fora ficam 7,73 pontos ainda na Sprint Final. UAT: 39,56 pontos (40%). Homologado: 16,86 pontos (17%). O épico Plataforma de Planilhas de Cálculos sai da conta porque as duas US ativas dele são habilitadores.",
-     "dev": 90
-    }
+     "dev": 91,
+     "uat": 73,
+     "hom": 18,
+     "homDev": 20,
+     "segmentos": [
+      {
+       "rotulo": "em desenvolvimento",
+       "pct": 4,
+       "cor": "emdev"
+      },
+      {
+       "rotulo": "bloqueado",
+       "pct": 5,
+       "cor": "bloq"
+      }
+     ],
+     "base": "Mesma régua, só US testável: base de 166. Desenvolvido 151 (121 em homologação e 30 aprovadas), 91%. Em desenvolvimento 7 (4%) e bloqueado 8 (5%). Homologado geral 30 de 166, 18%. Homologado desenvolvido 30 de 151, 20%."
+    },
+    "homDev": 28,
+    "segmentos": [
+     {
+      "rotulo": "em desenvolvimento",
+      "pct": 4,
+      "cor": "emdev"
+     },
+     {
+      "rotulo": "bloqueado",
+      "pct": 4,
+      "cor": "bloq"
+     }
+    ]
    },
    "_unidadeRetirada": {
     "dev": 93,
