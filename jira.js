@@ -699,7 +699,9 @@
     let pend=false;const agenda=()=>{if(pend)return;pend=true;w.requestAnimationFrame(()=>{pend=false;try{atualiza()}catch(e){}})};
     w.addEventListener('scroll',agenda,{passive:true});w.addEventListener('resize',agenda);
     d.addEventListener('click',()=>[60,300,700].forEach(t=>w.setTimeout(agenda,t)));
-    w.setInterval(agenda,400);agenda();
+    // O laco de fundo chama direto: se um requestAnimationFrame for engolido, 'pend'
+    // ficaria preso em true e a faixa nunca mais se atualizaria.
+    w.setInterval(()=>{try{atualiza()}catch(e){}},400);try{atualiza()}catch(e){}
   }
   function blocoEsteiras(w,h){
     if(!h||!h.frentes)return;const d=w.document;
