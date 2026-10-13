@@ -45,7 +45,7 @@
      "detalheSem": "45 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV"
+     "donoTexto": "MV + Acompanhamento Sottelli"
     },
     {
      "nome": "Aprovado em UAT",
@@ -124,7 +124,7 @@
      "detalheSem": "Liberadas para a UAT",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV"
+     "donoTexto": "MV + Acompanhamento Sottelli"
     },
     {
      "nome": "Aprovado em UAT",
