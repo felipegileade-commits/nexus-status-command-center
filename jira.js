@@ -66,6 +66,24 @@
       .nx-duo-bar span{display:block;height:100%}
       .nx-duo-bar span.hom{background:var(--orange)}
       .nx-duo-bar span.dev{background:var(--teal)}
+      /* Topo segmentado: alem de desenvolvido e homologado, as etapas que faltam.
+         Azul desenvolvido, ambar em desenvolvimento, vermelho bloqueado, verde homologado. */
+      .nx-duo-bar.seg{height:5px}
+      .nx-duo-bar.so,html.nx-claro .nx-duo-bar.so{background:rgba(123,139,154,.28)}
+      .nx-duo-bars{display:grid;gap:7px}
+      .nx-duo-hom{margin:12px 0 0}
+      .nx-duo-nums.seg{gap:30px}
+      .nx-duo-nums.seg strong{font-size:36px}
+      .nx-duo:has(.nx-duo-nums.seg) .nx-duo-topo{margin-bottom:9px}
+      .nx-duo-nums.seg .dev strong{color:var(--blue,#4aa3df)}
+      .nx-duo-nums.seg .emdev strong{color:#c49400}
+      .nx-duo-nums.seg .bloq strong{color:var(--red,#e5484d)}
+      .nx-duo-nums.seg .hom strong{color:#1e8e4e}
+      .nx-duo-nums.seg .hom2 strong{color:#5cbf7d}
+      .nx-duo-bar.seg span.dev{background:var(--blue,#4aa3df)}
+      .nx-duo-bar.seg span.emdev{background:#c49400}
+      .nx-duo-bar.seg span.hom{background:#1e8e4e}
+      .nx-duo-bar.seg span.hom2{background:#5cbf7d}
       @media(max-width:700px){.nx-duo-nums{gap:22px}.nx-duo-nums strong{font-size:38px}}
       .nx-homolog{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
       .nx-homolog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
@@ -112,6 +130,30 @@
       .nx-est-l.grupo{border-left-color:#45b36b;background:rgba(69,179,107,.07)}
       .nx-est-l.fora{border-left-color:#7b8b9a;background:rgba(123,139,154,.08)}
       .nx-est-l.fora .nx-est-n,.nx-est-l.fora .nx-est-p>span{color:#7b8b9a}
+      .nx-est-l.bloq{border-left-color:var(--red,#e5484d);background:rgba(229,72,77,.07)}
+      .nx-est-l.bloq .nx-est-n{color:var(--red,#e5484d)}
+      .nx-est-txt b .nx-bloq{display:inline-block;margin-left:10px;vertical-align:1px;font-size:9.5px;font-weight:800;
+        letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:#fff;background:var(--red,#e5484d)}
+      .nx-est-l.total{border-left-color:transparent;background:transparent}
+      .nx-est-l.total .nx-est-txt b{text-transform:uppercase;letter-spacing:.06em;font-size:12px}
+      .nx-est-l.total+.nx-est-l.fora,.nx-est-l.grupo+.nx-est-l.fora{margin-top:26px}
+      /* Faixa congelada: repete titulo, percentuais e o botao de habilitadores quando o
+         cabecalho da frente sai da tela. E espelho do que esta na pagina, nao guarda numero. */
+      .frente-switch{position:sticky;top:var(--nx-topo,109px);z-index:39}
+      .nx-fixo{position:sticky;top:var(--nx-topo2,167px);height:0;z-index:38}
+      .nx-fixo-in{display:none;position:absolute;top:0;left:-4vw;right:-4vw;padding:9px 4vw;align-items:center;gap:20px;
+        border-bottom:1px solid var(--line,#18364f);box-shadow:0 6px 14px rgba(0,0,0,.10)}
+      .nx-fixo.on .nx-fixo-in{display:flex}
+      .nx-fixo-t{font-size:15px;font-weight:700;color:var(--text);white-space:nowrap}
+      .nx-fixo .nx-duo-nums,.nx-fixo .nx-duo-nums.seg{gap:18px;flex-wrap:nowrap}
+      .nx-fixo .nx-duo-nums>div{gap:7px}
+      .nx-fixo .nx-duo-nums strong,.nx-fixo .nx-duo-nums.seg strong{font-size:22px}
+      .nx-fixo .nx-duo-nums small{font-size:11px;white-space:nowrap}
+      .nx-fixo .nx-duo-bar.seg{height:4px}
+      .nx-fixo .nx-duo-bars{flex:1;min-width:80px;gap:3px}
+      .nx-fixo .nx-tog{margin:0;font-size:11px;padding:6px 14px}
+      @media(max-width:900px){.nx-fixo .nx-duo-bars{display:none}.nx-fixo-in{gap:14px;flex-wrap:wrap}}
+      @media print{.frente-switch{position:static}.nx-fixo{display:none}}
       .nx-est-n{font-size:26px;font-weight:900;color:var(--text);line-height:1;text-align:center}
       .nx-est-n small{display:block;font-size:9px;font-weight:600;color:var(--muted);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
       .nx-est-p{text-align:center;border-left:1px solid var(--line,#18364f);padding-left:14px}
@@ -403,14 +445,27 @@
       const rotDev=(fp.querySelector('small')||{}).textContent||'desenvolvido';
       const larguraHom=Math.max(0,Math.min(100,hom));
       const larguraDev=Math.max(0,Math.min(100-larguraHom,dev-hom));
-      const chave=modo+'|'+dev+'|'+hom;
+      const segs=r&&Array.isArray(r.segmentos)?r.segmentos:null;
+      const homDev=(r&&r.homDev!==undefined&&!isNaN(Number(r.homDev)))?Number(r.homDev):null;
+      const chave=modo+'|'+dev+'|'+hom+'|'+homDev+(segs?'|'+JSON.stringify(segs):'');
       const botoes='';
-      const html='<div class="nx-duo-topo"><div class="nx-duo-nums">'
-        +'<div><strong>'+esc(fmt(dev))+'</strong><small>'+esc(rotDev)+'</small></div>'
-        +'<div class="hom"><strong>'+esc(fmt(hom))+'</strong><small>homologado (aceito)</small></div></div>'
-        +botoes+'</div>'
-        +'<div class="nx-duo-bar"><span class="hom" style="width:'+larguraHom+'%"></span>'
-        +'<span class="dev" style="width:'+larguraDev+'%"></span></div>'
+      // Sem segmentos, o par de sempre. Com segmentos, o topo abre em desenvolvido +
+      // as etapas que faltam (somando 100) e o homologado desce para barras proprias,
+      // porque ele e uma PARTE do desenvolvido e nao caberia na mesma barra sem mentir.
+      const faixa=(cls,pct)=>'<span class="'+esc(cls)+'" style="width:'+Math.max(0,Math.min(100,Number(pct)||0))+'%"></span>';
+      const numero=(cls,pct,rot)=>'<div class="'+esc(cls)+'"><strong>'+esc(fmt(pct))+'</strong><small>'+esc(rot)+'</small></div>';
+      const linhaHom=(cls,pct,rot)=>'<div class="nx-duo-nums seg nx-duo-hom">'+numero(cls,pct,rot)+'</div>'
+        +'<div class="nx-duo-bar seg so">'+faixa(cls,pct)+'</div>';
+      const html='<div class="nx-duo-topo"><div class="nx-duo-nums'+(segs?' seg':'')+'">'
+        +numero('dev',dev,rotDev)
+        +(segs?segs.map(g=>numero(g.cor||'',g.pct,g.rotulo||'')).join('')
+              :numero('hom',hom,'homologado (aceito)'))
+        +'</div>'+botoes+'</div>'
+        +'<div class="nx-duo-bars">'+(segs
+          ? '<div class="nx-duo-bar seg">'+faixa('dev',dev)+segs.map(g=>faixa(g.cor||'',g.pct)).join('')+'</div>'
+            +linhaHom('hom',hom,'homologado geral')
+            +(homDev!==null?linhaHom('hom2',homDev,'homologado desenvolvido'):'')
+          : '<div class="nx-duo-bar">'+faixa('hom',larguraHom)+faixa('dev',larguraDev)+'</div>')+'</div>'
         +(r&&r.base?('<p class="nx-duo-nota">'+dica(r.base,'Como o esforço é calculado')+'</p>'):'');
       // A visao geral e o impresso leem da tela. Sem isto, o topo da frente diria 86%
       // e o card da visao geral continuaria em 81% -- duas verdades na mesma pagina.
@@ -561,6 +616,36 @@
         const pa=n.querySelector(".risk-col.action p");if(pa)pa.textContent=x.acao;
         wrap.appendChild(n);mudou=true;
       });
+      // Pontos de atencao e proximos passos extras entram como nx-live, por cima do que
+      // veio do painel: aparecem na tela e sao removidos antes de gravar o estado.
+      const tituloAt=Array.prototype.slice.call(root.querySelectorAll('.week-card .box-title'))
+        .filter(x=>/PONTOS DE ATEN/i.test(x.textContent))[0];
+      const caixaAt=tituloAt&&tituloAt.parentNode;
+      if(caixaAt)(f.atencao||[]).forEach(x=>{
+        if(!x.id||caixaAt.querySelector('[data-nx-atencao="'+x.id+'"]'))return;
+        const n=w.document.createElement('div');
+        n.className='bullet nx-live';n.setAttribute('data-nx-atencao',x.id);
+        n.textContent=x.texto;caixaAt.appendChild(n);mudou=true;
+      });
+      const grade=root.querySelector('.next-grid');
+      // Troca a situacao de um passo que veio do painel, casando por um trecho do texto.
+      if(grade)(f.passosStatus||[]).forEach(x=>{
+        if(!x.contem||!x.status)return;
+        Array.prototype.slice.call(grade.querySelectorAll('.next-card:not(.nx-live)')).forEach(c=>{
+          const pp=c.querySelector('p'),st=c.querySelector('small');
+          if(pp&&st&&pp.textContent.indexOf(x.contem)>=0&&st.textContent.trim()!==x.status){st.textContent=x.status;mudou=true}
+        });
+      });
+      const modeloP=grade&&grade.querySelector('.next-card:not(.nx-live)');
+      if(grade&&modeloP)(f.passos||[]).forEach(x=>{
+        if(!x.id||grade.querySelector('[data-nx-passo="'+x.id+'"]'))return;
+        const n=modeloP.cloneNode(true);
+        n.className=modeloP.className+' nx-live';n.setAttribute('data-nx-passo',x.id);
+        const num=n.querySelector('.n');if(num)num.textContent=String(grade.querySelectorAll('.next-card').length+1).padStart(2,'0');
+        const pp=n.querySelector('p');if(pp)pp.textContent=x.texto;
+        const st=n.querySelector('small');if(st)st.textContent=x.status||'Previsto';
+        grade.appendChild(n);mudou=true;
+      });
     });
     // A secao de riscos e o selo "1 risco"/"Sem riscos" sao derivados desse texto,
     // entao precisam ser recalculados depois de preencher.
@@ -578,6 +663,43 @@
     carregandoE=fetch('/data/esteiras.json?v='+Date.now(),{cache:'no-store'})
       .then(r=>r.ok?r.json():null).then(j=>(esteiras=j)).catch(()=>null);
     return carregandoE;
+  }
+  // Faixa congelada abaixo da barra Frente: repete titulo, percentuais e botao de
+  // habilitadores quando o cabecalho da frente sai da tela. E espelho do que esta na
+  // pagina (nx-live) -- nao calcula nada, so copia, para nao existir um segundo numero.
+  function faixaFixa(w){
+    const d=w.document,tb=d.querySelector('.topbar'),sw=d.querySelector('.frente-switch');
+    if(!tb||w.__nxFixo)return;w.__nxFixo=true;
+    const mede=()=>{const h=tb.offsetHeight,h2=h+(sw&&sw.offsetParent?sw.offsetHeight:0);
+      d.documentElement.style.setProperty('--nx-topo',h+'px');
+      d.documentElement.style.setProperty('--nx-topo2',h2+'px');return h2};
+    const atualiza=()=>{
+      const topo=mede();
+      ['central','revenue'].forEach(id=>{
+        const sec=d.getElementById(id);if(!sec)return;
+        const fs=sec.querySelector('.front-summary'),head=fs&&fs.querySelector('.front-head'),duo=fs&&fs.querySelector('.nx-duo');
+        if(!head||!duo)return;
+        let fx=sec.querySelector(':scope>.nx-fixo');
+        if(!fx){fx=d.createElement('div');fx.className='nx-fixo nx-live';
+          fx.innerHTML='<div class="nx-fixo-in"><span class="nx-fixo-t"></span><div class="nx-duo-nums"></div><div class="nx-duo-bars"></div><button type="button" class="nx-tog"></button></div>';
+          sec.insertBefore(fx,fs)}
+        const set=(q,prop,v)=>{const e=fx.querySelector(q);if(e&&e[prop]!==v)e[prop]=v};
+        const h2=head.querySelector('h2'),nums=duo.querySelector('.nx-duo-nums'),tog=head.querySelector('.nx-tog');
+        set('.nx-fixo-t','textContent',h2?h2.textContent.trim():'');
+        set('.nx-duo-nums','innerHTML',Array.prototype.slice.call(duo.querySelectorAll('.nx-duo-nums')).map(n=>n.innerHTML).join(''));
+        set('.nx-duo-bars','innerHTML',Array.prototype.slice.call(duo.querySelectorAll('.nx-duo-bar')).map(b=>b.outerHTML).join(''));
+        set('.nx-duo-nums','className',nums?nums.className:'nx-duo-nums');
+        if(tog){set('.nx-tog','textContent',tog.textContent);fx.querySelector('.nx-tog').classList.toggle('on',tog.classList.contains('on'))}
+        const bg=w.getComputedStyle(fs).backgroundColor,inn=fx.querySelector('.nx-fixo-in');
+        if(inn.style.background!==bg)inn.style.background=bg;
+        const on=duo.getBoundingClientRect().bottom<topo+4;
+        if(fx.classList.contains('on')!==on)fx.classList.toggle('on',on);
+      });
+    };
+    let pend=false;const agenda=()=>{if(pend)return;pend=true;w.requestAnimationFrame(()=>{pend=false;try{atualiza()}catch(e){}})};
+    w.addEventListener('scroll',agenda,{passive:true});w.addEventListener('resize',agenda);
+    d.addEventListener('click',()=>[60,300,700].forEach(t=>w.setTimeout(agenda,t)));
+    w.setInterval(agenda,400);agenda();
   }
   function blocoEsteiras(w,h){
     if(!h||!h.frentes)return;const d=w.document;
@@ -599,25 +721,42 @@
       // cronograma e envelhece sozinho. 'peso'/'pesoSem' ficam no arquivo como historico.
       const porPeso=false;
       const pcts=sh=>{
-        const vals=f.esteiras.map(e=>porPeso
+        // Linha foraEscopo (backlog de melhorias) nao entra na base nem recebe percentual:
+        // ela nao e trabalho do escopo, entao diluir as outras com ela seria errado.
+        const vals=f.esteiras.map(e=>e.foraEscopo?0:(porPeso
           ? Number(sh&&e.pesoSem!==undefined?e.pesoSem:e.peso)||0
-          : Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)));
+          : Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0))));
         const b=vals.reduce((t,v)=>t+v,0);
         if(!b)return f.esteiras.map(()=>'—');
         const exatos=vals.map(v=>v/b*100),piso=exatos.map(v=>Math.floor(v));
         let falta=100-piso.reduce((t,v)=>t+v,0);
         const ordem=exatos.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0]);
         for(let k=0;k<ordem.length&&falta>0;k++){piso[ordem[k][1]]++;falta--}
-        return piso.map((v,i)=>(porPeso||Number.isFinite(Number(f.esteiras[i].n)))?v+'%':'—');
+        return piso.map((v,i)=>f.esteiras[i].foraEscopo?'—'
+          :((porPeso||Number.isFinite(Number(f.esteiras[i].n)))?v+'%':'—'));
       };
       const pc=pcts(0),ps=pcts(1);
       const rotPct='do total de US';
-      const linhas=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}">
+      const linhasArr=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}${e.bloqueado?' bloq':''}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
-        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(rotPct)}</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo?'':' · aguarda '+esc(e.espera||'')}</span></div>
+        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(e.foraEscopo?'fora do total':rotPct)}</small></div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}${e.bloqueado?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo?'':' · aguarda '+esc(e.espera||'')}</span></div>
         <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo?'':'<span>responsabilidade</span>'}</div>
-      </div>`).join('');
+      </div>`);
+      // Totalizador do quadro. As linhas foraEscopo nao entram no numero, e e isso que o
+      // texto da linha diz -- sem essa frase o leitor acha que o total esta errado.
+      const dentro=f.esteiras.filter(e=>!e.foraEscopo);
+      const tot=sh=>dentro.reduce((t,e)=>t+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
+      const nFora=f.esteiras.length-dentro.length;
+      const linhaTotal=`<div class="nx-est-l total">
+        <div class="nx-est-n"><span ${dual(tot(0),tot(1))}>${tot(0)}</span><small>US</small></div>
+        <div class="nx-est-p"></div>
+        <div class="nx-est-txt"><b>Total</b><span>Soma das ${dentro.length} linhas acima${nFora?' · o backlog de melhorias abaixo não entra neste número':''}</span></div>
+        <div class="nx-est-dono"></div>
+      </div>`;
+      const iFora=f.esteiras.findIndex(e=>e.foraEscopo);
+      linhasArr.splice(iFora<0?linhasArr.length:iFora,0,linhaTotal);
+      const linhas=linhasArr.join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
       el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
@@ -650,7 +789,7 @@
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
-      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});
+      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     legendaDesenvolvido(w);

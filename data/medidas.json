@@ -1,19 +1,45 @@
 {
- "_leiame": "Os dois percentuais do topo de cada frente. Uma régua só: esforço, ponderado pelo peso de cada épico na planilha Gestão do Cronograma. A leitura por unidade de US foi retirada do painel por decisão do cliente — a contagem fica guardada em \"_unidadeRetirada\" apenas como histórico e nada no painel a lê. \"semHab\" é a mesma conta só com US testável, e é o que o botão \"Ocultar habilitadores\" mostra. Mantenha \"base\" verdadeiro: é o texto da caixa de dica e é o que permite conferir.",
- "atualizadoEm": "2026-10-07",
+ "_leiame": "Percentuais do topo de cada frente, por contagem de US no Jira. \"segmentos\" abre o que falta ao lado do desenvolvido (em desenvolvimento, bloqueado) e os tres somam 100. \"hom\" e o homologado geral e \"homDev\" e o homologado sobre o que ja foi desenvolvido — os dois descem para barras proprias, porque sao PARTE do desenvolvido e nao caberiam na mesma barra sem mentir. \"semHab\" e a mesma conta so com US testavel, e e o que o botao \"Ocultar habilitadores\" mostra. Mantenha \"base\" verdadeiro: e o texto da caixa de dica e e o que permite conferir.",
+ "atualizadoEm": "2026-10-13",
  "frentes": {
   "central": {
    "peso": {
-    "dev": 59,
+    "dev": 70,
     "hom": 27,
-    "base": "Contagem de US no Jira MVPMO, posição de 07/10. Desenvolvido é o que já saiu da mão da Sottelli e está com a MV: as 66 US em homologação mais as 57 já aprovadas em UAT — 123 das 208 do quadro, 59%. É a régua que a MV aceita. Dentro desses 59%: 27% são as 57 aprovadas e 32% são as 66 que estão na UAT. As duas parcelas fecham o total, 27 + 32 = 59.",
-    "uat": 32,
+    "base": "Contagem de US no Jira MVPMO, posição de 13/10. Base: as 210 US do quadro, sem as 35 melhorias do backlog. Desenvolvido é o que está em UAT: as 90 em homologação mais as 57 já aprovadas — 147 de 210, 70%. Fora dos 70%: 11% em desenvolvimento (23 US, das quais 11 são os portais que ficaram fora do deploy) e 19% bloqueado (28 no refinamento e 12 na aprovação de US). Homologado geral: as 57 aprovadas sobre as 210 — 27%. Homologado desenvolvido: as 57 aprovadas sobre o que já foi desenvolvido, 57 de 147 — 39%. O deploy da Sprint 17 levou tudo o que estava desenvolvido menos os portais, por isso as 28 US que o Jira ainda mostra em deploy para QA contam como UAT.",
+    "uat": 43,
     "semHab": {
-     "hom": 21,
-     "uat": 33,
-     "base": "Mesma régua, só US testável: 59 em homologação e 39 aprovadas em UAT, sobre as 180 testáveis do quadro — 98 de 180, 54%. Dentro disso, 39 aprovadas (21,7%) e 59 na UAT (32,8%); os inteiros da tela são ajustados para somar os 54.",
-     "dev": 54
-    }
+     "dev": 69,
+     "uat": 44,
+     "hom": 25,
+     "homDev": 36,
+     "segmentos": [
+      {
+       "rotulo": "em desenvolvimento",
+       "pct": 8,
+       "cor": "emdev"
+      },
+      {
+       "rotulo": "bloqueado",
+       "pct": 23,
+       "cor": "bloq"
+      }
+     ],
+     "base": "Mesma régua, só US testável: base de 158. Desenvolvido 109 (70 em homologação e 39 aprovadas), 69%. Em desenvolvimento 13 (8%) e bloqueado 36 (23%). Homologado geral 39 de 158, 25%. Homologado desenvolvido 39 de 109, 36%."
+    },
+    "homDev": 39,
+    "segmentos": [
+     {
+      "rotulo": "em desenvolvimento",
+      "pct": 11,
+      "cor": "emdev"
+     },
+     {
+      "rotulo": "bloqueado",
+      "pct": 19,
+      "cor": "bloq"
+     }
+    ]
    },
    "_unidadeRetirada": {
     "dev": 69,
