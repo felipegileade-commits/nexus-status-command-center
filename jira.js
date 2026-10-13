@@ -633,7 +633,7 @@
       (f.bullets||[]).forEach(x=>{
         if(!x.deTexto||!x.texto)return;
         Array.prototype.slice.call(root.querySelectorAll('.week-card .bullet')).forEach(b=>{
-          if(b.textContent.replace(/s+/g,' ').trim()===x.deTexto){b.textContent=x.texto;mudou=true}
+          if(b.textContent.replace(/\s+/g,' ').trim()===x.deTexto){b.textContent=x.texto;mudou=true}
         });
       });
       const grade=root.querySelector('.next-grid');
