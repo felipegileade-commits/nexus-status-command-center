@@ -53,6 +53,18 @@
      "risco": "Priorização do refinamento: os próximos refinos precisam ser reanalisados, porque o foco passa a ser as US do escopo de itens adicionais que ainda não foram refinadas.",
      "acao": "Reanálise da agenda dos próximos refinos. Responsável: MV (TD + PMO)."
     }
+   ],
+   "passos": [
+    {
+     "id": "melhorias-refinamento",
+     "texto": "Definição dos próximos passos para as melhorias levantadas nos refinamentos.",
+     "status": "Previsto"
+    },
+    {
+     "id": "agenda-escopo-final",
+     "texto": "Marcar agenda para definir o escopo final.",
+     "status": "Previsto"
+    }
    ]
   },
   "revenue": {

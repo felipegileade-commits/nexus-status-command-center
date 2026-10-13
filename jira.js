@@ -703,6 +703,27 @@
     // ficaria preso em true e a faixa nunca mais se atualizaria.
     w.setInterval(()=>{try{atualiza()}catch(e){}},400);try{atualiza()}catch(e){}
   }
+  // A Visao Geral sai da versao que o cliente ve e do relatorio impresso, a pedido do
+  // Felipe em 13/10, ate segunda ordem. No editavel ela continua: a aba so some quando
+  // a pagina e a somente-leitura. O impresso precisa de style inline, porque o PDF e
+  // montado a partir do innerHTML de #print-report e nao leva a folha de estilo da tela.
+  function ocultaVisaoGeral(w){
+    if(!window.NEXUS_READONLY)return;
+    const d=w.document;if(!d.body)return;
+    if(!d.getElementById("nx-sem-overview")){
+      const s=d.createElement("style");s.id="nx-sem-overview";
+      s.textContent='[data-front="overview"],#overview{display:none!important}';
+      d.head.appendChild(s);
+    }
+    const pr=d.getElementById("prOverview");
+    if(pr&&pr.style.display!=="none")pr.style.display="none";
+    // Se a Visao Geral estava selecionada, cai para a Central em vez de ficar em branco.
+    const ov=d.getElementById("overview");
+    if(ov&&ov.classList.contains("active")){
+      const chip=d.querySelector('[data-front="central"]');
+      if(chip)chip.click();
+    }
+  }
   function blocoEsteiras(w,h){
     if(!h||!h.frentes)return;const d=w.document;
     Object.keys(h.frentes).forEach(chave=>{
@@ -791,7 +812,7 @@
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
-      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);
+      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);ocultaVisaoGeral(w);
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     legendaDesenvolvido(w);
@@ -806,7 +827,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ocultaVisaoGeral(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
