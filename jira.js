@@ -627,6 +627,15 @@
         n.className='bullet nx-live';n.setAttribute('data-nx-atencao',x.id);
         n.textContent=x.texto;caixaAt.appendChild(n);mudou=true;
       });
+      // Troca de texto dos marcadores do resumo da semana, pela mesma regra travada dos
+      // cards de risco: so reescreve se o texto atual for identico ao deTexto. Se alguem
+      // editou no painel, a edicao da pessoa fica.
+      (f.bullets||[]).forEach(x=>{
+        if(!x.deTexto||!x.texto)return;
+        Array.prototype.slice.call(root.querySelectorAll('.week-card .bullet')).forEach(b=>{
+          if(b.textContent.replace(/s+/g,' ').trim()===x.deTexto){b.textContent=x.texto;mudou=true}
+        });
+      });
       const grade=root.querySelector('.next-grid');
       // Troca a situacao de um passo que veio do painel, casando por um trecho do texto.
       if(grade)(f.passosStatus||[]).forEach(x=>{
@@ -724,6 +733,25 @@
       if(chip)chip.click();
     }
   }
+  // Data e semana do cabecalho. Fica fora do <main>, entao nao entra no estado gravado:
+  // escrever aqui nao sobrescreve edicao de ninguem. Os rodapes e o impresso leem do
+  // cabecalho, e rodapes() propaga em seguida.
+  let cfgPainel=null,carregandoP=null;
+  function carregarPainel(){
+    if(cfgPainel)return Promise.resolve(cfgPainel);
+    if(carregandoP)return carregandoP;
+    carregandoP=fetch('/data/painel.json?v='+Date.now(),{cache:'no-store'})
+      .then(r=>r.ok?r.json():null).then(j=>(cfgPainel=j)).catch(()=>null);
+    return carregandoP;
+  }
+  function cabecalhoData(w){
+    if(!cfgPainel)return;const d=w.document;
+    const metas=d.querySelectorAll('.topbar .meta');
+    if(metas[0]&&cfgPainel.atualizadoEm){const s=metas[0].querySelector('small');
+      if(s&&s.textContent!==cfgPainel.atualizadoEm)s.textContent=cfgPainel.atualizadoEm}
+    if(metas[1]&&cfgPainel.semana!==undefined){const s=metas[1].querySelector('small');
+      if(s&&s.textContent!==String(cfgPainel.semana))s.textContent=String(cfgPainel.semana)}
+  }
   function blocoEsteiras(w,h){
     if(!h||!h.frentes)return;const d=w.document;
     Object.keys(h.frentes).forEach(chave=>{
@@ -813,6 +841,7 @@
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
       carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);ocultaVisaoGeral(w);
+      carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     legendaDesenvolvido(w);
@@ -827,7 +856,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ocultaVisaoGeral(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ocultaVisaoGeral(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

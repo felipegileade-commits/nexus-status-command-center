@@ -65,6 +65,20 @@
      "texto": "Marcar agenda para definir o escopo final.",
      "status": "Previsto"
     }
+   ],
+   "bullets": [
+    {
+     "deTexto": "Fila de refinamento (upstream) sem vazão: 53 histórias aguardam refinamento de negócio ou a devolução de informações que ainda não temos — 48 itens pendentes e 5 em refino. As agendas de refino da Central já foram enviadas; o pedido é que sejam mantidas e priorizadas, porque é o refinamento que gera volume de US para o time de desenvolvimento. Sem esse volume, em algum momento não haverá história desenvolvida para homologar.",
+     "texto": "Fila de refinamento (upstream) sem vazão: 28 histórias aguardam refinamento de negócio ou a devolução de informações que ainda não temos — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. As agendas de refino da Central já foram enviadas; o pedido é que sejam mantidas e priorizadas, porque é o refinamento que gera volume de US para o time de desenvolvimento. Sem esse volume, em algum momento não haverá história desenvolvida para homologar."
+    },
+    {
+     "deTexto": "Aguardando aprovação do cliente: 17 histórias — 13 em aprovação e 4 já refinadas, pendentes apenas da aprovação técnica.",
+     "texto": "Aguardando aprovação do cliente: 12 histórias já escritas, pendentes do aceite da MV para entrarem em sprint."
+    },
+    {
+     "deTexto": "Volume insuficiente de US aprovadas para iniciar a próxima sprint, que começa na quinta-feira 08/10: há apenas 5 histórias aprovadas disponíveis. Iniciar a sprint sem escopo aprovado não é possível, e a ausência de agendas de refino e de aprovação mantém a fila represada.",
+     "texto": "Volume insuficiente de US aprovadas para abastecer a sprint em curso, aberta em 08/10: há apenas 9 histórias liberadas para desenvolvimento. A ausência de agendas de refino e de aprovação mantém a fila represada e, mantido o ritmo, a próxima sprint abre sem escopo aprovado."
+    }
    ]
   },
   "revenue": {
