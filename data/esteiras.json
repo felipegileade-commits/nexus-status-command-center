@@ -3,23 +3,22 @@
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
-   "lidoEm": "2026-10-13",
+   "lidoEm": "2026-10-15",
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
-     "n": 28,
-     "hab": 1,
+     "n": 3,
+     "hab": 2,
      "bloqueado": true,
-     "detalhe": "17 em análise técnica · 10 aguardando escrita de US · 1 em refino",
-     "detalheSem": "16 em análise técnica · 10 aguardando escrita de US · 1 em refino",
+     "detalhe": "3 em refino",
+     "detalheSem": "1 em refino",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
      "donoTexto": "MV e Sottelli"
     },
     {
      "nome": "Aprovação de US · UpStream",
-     "n": 12,
-     "hab": 3,
+     "n": 4,
      "bloqueado": true,
      "detalhe": "US escritas, aguardando o aceite do cliente",
      "detalheSem": "US escritas, aguardando o aceite do cliente",
@@ -29,38 +28,38 @@
     },
     {
      "nome": "Desenvolvimento · DownStream",
-     "n": 23,
-     "hab": 10,
-     "detalhe": "11 dos portais aguardando deploy · 9 liberadas para dev · 3 em desenvolvimento",
-     "detalheSem": "7 dos portais aguardando deploy · 3 liberadas para dev · 3 em desenvolvimento",
-     "espera": "Deploy dos portais e abertura da sprint",
+     "n": 56,
+     "hab": 28,
+     "detalhe": "40 em deploy para QA · 8 no backlog técnico · 5 em desenvolvimento · 3 prontas para dev",
+     "detalheSem": "22 em deploy para QA · 2 no backlog técnico · 2 em desenvolvimento · 2 prontas para dev",
+     "espera": "Janela de deploy e fechamento da sprint",
      "dono": "sottelli",
      "donoTexto": "Sottelli"
     },
     {
      "nome": "Homologação",
-     "n": 90,
-     "hab": 20,
-     "detalhe": "65 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
-     "detalheSem": "45 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
+     "n": 51,
+     "detalhe": "27 liberadas para a UAT · 11 reprovadas aguardando correção · 10 em reteste · 3 já iniciadas",
+     "detalheSem": "20 liberadas para a UAT · 11 reprovadas aguardando correção · 10 em reteste · 3 já iniciadas",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV + Acompanhamento Sottelli"
+     "donoTexto": "MV + Acompanhamento Sottelli",
+     "hab": 7
     },
     {
      "nome": "Aprovado em UAT",
-     "n": 57,
+     "n": 68,
      "hab": 18,
      "concluido": true,
-     "detalhe": "39 testáveis · 18 habilitadoras — colunas Validado e Aprovado em UAT",
-     "detalheSem": "39 testáveis",
+     "detalhe": "50 testáveis · 18 habilitadoras — colunas Validado e Aprovado em UAT",
+     "detalheSem": "50 testáveis",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo"
     },
     {
      "nome": "Backlog de melhorias · à planejar",
-     "n": 35,
+     "n": 88,
      "foraEscopo": true,
      "detalhe": "",
      "espera": "",
@@ -90,7 +89,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual de cada linha sobre o total do quadro, sem o backlog de melhorias (210 US; 158 sem habilitadores) — contagem de card no Jira em 13/10, não esforço. Desenvolvido passou a ser só o que está em UAT: a linha de homologação mais a de aprovado. O deploy da Sprint 17 saiu com tudo o que estava desenvolvido menos os portais, então as 28 US que o Jira ainda mostra em \"Realizando Deploy em QA\" e que não são de portal já estão na UAT e entram na linha de homologação — o Jira delas ainda precisa ser movido. Os 11 cards de portal seguem em desenvolvimento, porque ficaram fora do deploy. Homologação não é sinônimo de aceite: das 90, 11 estão reprovadas aguardando correção e 11 em reteste, e seguem assim até serem ajustadas. Fora do quadro ficam 16 US no backlog técnico (prototipagem), 8 em espera ou bloqueadas e 1 cancelada. Sobre o backlog de melhorias: não são bugs, são melhorias pedidas pela MV ao longo das homologações e ainda a planejar. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, porque não há como ampliar o escopo sem retirar algo dele.",
+   "nota": "Percentual de cada linha sobre o total do quadro, sem o backlog de melhorias (182 US; 127 sem habilitadores) — contagem de card no Jira em 15/10, não esforço. Desenvolvido é só o que está em UAT: a linha de homologação mais a de aprovado. As 40 US em \"Realizando Deploy em QA\" contam como desenvolvimento, e não como UAT, porque é isso que o Jira registra hoje — a definição do que entrou no deploy da Sprint 17 ainda não foi fechada. Mudança grande em relação a 13/10: a fila de refinamento foi para o BACKLOG, por isso o refinamento caiu de 28 para 3. Os 27 cards movidos hoje de Deploy para UAT para Homologação em UAT contam aqui como homologação, não como aprovados: o movimento foi indevido e está sendo desfeito no Jira. O backlog de melhorias tem 88 cards na coluna do board de Homologação, dos quais 86 são US e 2 são de outro tipo; são melhorias levantadas ao longo das homologações e ainda a planejar, e cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa. Fica fora do quadro apenas 1 US cancelada.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco."
   },
   "revenue": {
