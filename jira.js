@@ -138,7 +138,7 @@
       .nx-est-l.sub .nx-est-n{color:#4b9fd6}
       .nx-est-l.sub .nx-est-dono b{color:#4b9fd6;border-color:#4b9fd6;white-space:nowrap}
       .nx-est-mov{display:block;font-size:10px;font-style:normal;color:#4b9fd6;margin-top:4px;font-weight:600}
-      .nx-est-mov:before{content:"B3";margin-right:5px;opacity:.8}
+      .nx-est-mov:before{content:"↳";margin-right:5px;opacity:.8}
       .nx-est-l.total{border-left-color:transparent;background:transparent}
       .nx-est-l.total .nx-est-txt b{text-transform:uppercase;letter-spacing:.06em;font-size:12px}
       .nx-est-l.total+.nx-est-l.fora,.nx-est-l.grupo+.nx-est-l.fora{margin-top:26px}
