@@ -7,42 +7,59 @@
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
-     "n": 28,
+     "n": 11,
      "hab": 1,
      "bloqueado": true,
-     "detalhe": "17 em análise técnica · 10 aguardando escrita de US · 1 em refino",
-     "detalheSem": "16 em análise técnica · 10 aguardando escrita de US · 1 em refino",
+     "detalhe": "8 em análise técnica · 3 em refino com a MV",
+     "detalheSem": "7 em análise técnica · 3 em refino com a MV",
+     "movimento": "Eram 28 em 13/10 · as 17 que saíram foram para o Backlog de melhorias, não para a frente da esteira",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
      "donoTexto": "MV e Sottelli"
     },
     {
      "nome": "Aprovação de US · UpStream",
-     "n": 12,
-     "hab": 3,
+     "n": 4,
+     "hab": 1,
      "bloqueado": true,
      "detalhe": "US escritas, aguardando o aceite do cliente",
      "detalheSem": "US escritas, aguardando o aceite do cliente",
+     "movimento": "Eram 12 em 13/10 · as 8 que saíram foram para o Backlog de melhorias",
      "espera": "Agenda de aprovação de US",
      "dono": "mv",
      "donoTexto": "MV"
     },
     {
      "nome": "Desenvolvimento · DownStream",
-     "n": 23,
-     "hab": 10,
-     "detalhe": "11 dos portais aguardando deploy · 9 liberadas para dev · 3 em desenvolvimento",
-     "detalheSem": "7 dos portais aguardando deploy · 3 liberadas para dev · 3 em desenvolvimento",
+     "n": 19,
+     "hab": 8,
+     "detalhe": "11 dos portais aguardando deploy · 5 em desenvolvimento · 3 liberadas para dev",
+     "detalheSem": "7 dos portais aguardando deploy · 3 em desenvolvimento · 1 liberada para dev",
+     "movimento": "Eram 23 em 13/10 · 4 foram para o Backlog de melhorias · os 11 cards de portal seguem aqui porque ficaram fora do deploy da Sprint 17",
      "espera": "Deploy dos portais e abertura da sprint",
      "dono": "sottelli",
      "donoTexto": "Sottelli"
     },
     {
+     "nome": "Em UAT para homologar · deploy da Sprint 17",
+     "n": 28,
+     "hab": 6,
+     "sub": true,
+     "subTexto": "dentro das 90",
+     "detalhe": "Subiram para a UAT no deploy do Lucas — tudo o que estava desenvolvido na Central até a Sprint 17, menos os portais — e aguardam a MV iniciar a homologação",
+     "detalheSem": "Subiram para a UAT no deploy do Lucas e aguardam a MV iniciar a homologação",
+     "movimento": "Já estão contadas na linha de homologação abaixo · aparecem em separado para mostrar o que o deploy entregou",
+     "espera": "",
+     "dono": "mv",
+     "donoTexto": "Entregue em UAT"
+    },
+    {
      "nome": "Homologação",
      "n": 90,
      "hab": 20,
-     "detalhe": "65 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
-     "detalheSem": "45 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
+     "detalhe": "28 entregues no deploy da Sprint 17, ainda não iniciadas · 37 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
+     "detalheSem": "28 entregues no deploy da Sprint 17 · 17 liberadas para a UAT · 11 reprovadas aguardando correção · 11 em reteste · 3 já iniciadas",
+     "movimento": "As mesmas 90 de 13/10 · nenhuma saiu; a linha azul acima mostra quais delas vieram do deploy",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV + Acompanhamento Sottelli"
@@ -54,15 +71,17 @@
      "concluido": true,
      "detalhe": "39 testáveis · 18 habilitadoras — colunas Validado e Aprovado em UAT",
      "detalheSem": "39 testáveis",
+     "movimento": "As mesmas 57 de 13/10 · este número só sobe",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Concluído em grupo"
     },
     {
      "nome": "Backlog de melhorias · à planejar",
-     "n": 88,
+     "n": 92,
      "foraEscopo": true,
-     "detalhe": "",
+     "detalhe": "90 US e 2 cards de outro tipo na coluna BACKLOG do board de Homologação",
+     "movimento": "Eram 88 em 13/10 · 29 entraram vindas do refinamento, da aprovação e do desenvolvimento, e 4 são novas, criadas em 15/10 a partir de reprovações da homologação",
      "espera": "",
      "dono": "fora",
      "donoTexto": ""
@@ -90,7 +109,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Percentual de cada linha sobre o total do quadro, sem o backlog de melhorias (210 US; 158 sem habilitadores) — contagem de card no Jira, não esforço. Desenvolvido é só o que está em UAT: a linha de homologação mais a de aprovado. O deploy da Sprint 17 saiu com tudo o que estava desenvolvido menos os portais, então as 28 US que o Jira ainda mostra em \"Realizando Deploy em QA\" e que não são de portal já estão na UAT e entram na linha de homologação. Os 11 cards de portal seguem em desenvolvimento, porque ficaram fora do deploy. Homologação não é sinônimo de aceite: das 90, 11 estão reprovadas aguardando correção e 11 em reteste, e seguem assim até serem ajustadas. O backlog de melhorias tem 88 cards na coluna do board de Homologação, dos quais 86 são US e 2 são de outro tipo; são melhorias levantadas ao longo das homologações e ainda a planejar, e cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa. Fora do quadro ficam 8 US em espera ou bloqueadas e 1 cancelada.",
+   "nota": "Percentual de cada linha sobre o total do quadro, sem o backlog de melhorias (181 US; 133 sem habilitadores) — contagem de card no Jira MVPMO em 15/10, não esforço. Desenvolvido é só o que está em UAT: a linha de homologação mais a de aprovado. A linha azul \"Em UAT para homologar\" não soma: ela destaca, dentro das 90 em homologação, as 28 US não-portais que o deploy da Sprint 17 levou para a UAT e que a MV ainda não começou a testar — antes elas ficavam invisíveis dentro do número cheio. Os 11 cards de portal seguem em desenvolvimento porque ficaram fora do deploy. Homologação não é sinônimo de aceite: das 90, 11 estão reprovadas aguardando correção e 11 em reteste, e seguem assim até serem ajustadas. As linhas de cima encolheram porque 29 US saíram do refinamento, da aprovação e do desenvolvimento para o backlog de melhorias: nenhuma delas avançou na esteira. O backlog tem hoje 92 cards; cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa. Fora do quadro fica 1 US em espera, bloqueada ou cancelada.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco."
   },
   "revenue": {

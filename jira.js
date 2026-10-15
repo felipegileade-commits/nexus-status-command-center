@@ -134,6 +134,11 @@
       .nx-est-l.bloq .nx-est-n{color:var(--red,#e5484d)}
       .nx-est-txt b .nx-bloq{display:inline-block;margin-left:10px;vertical-align:1px;font-size:9.5px;font-weight:800;
         letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:#fff;background:var(--red,#e5484d)}
+      .nx-est-l.sub{border-left-color:#4b9fd6;background:rgba(75,159,214,.09)}
+      .nx-est-l.sub .nx-est-n{color:#4b9fd6}
+      .nx-est-l.sub .nx-est-dono b{color:#4b9fd6;border-color:#4b9fd6;white-space:nowrap}
+      .nx-est-mov{display:block;font-size:10px;font-style:normal;color:#4b9fd6;margin-top:4px;font-weight:600}
+      .nx-est-mov:before{content:"B3";margin-right:5px;opacity:.8}
       .nx-est-l.total{border-left-color:transparent;background:transparent}
       .nx-est-l.total .nx-est-txt b{text-transform:uppercase;letter-spacing:.06em;font-size:12px}
       .nx-est-l.total+.nx-est-l.fora,.nx-est-l.grupo+.nx-est-l.fora{margin-top:26px}
@@ -765,7 +770,7 @@
       const fs=sec.querySelector('.front-summary');if(!fs||fs.querySelector('.nx-est'))return;
       // Uma esteira sem represamento entra com traco no lugar do numero e nao soma.
       // Linha marcada como concluida e trabalho entregue: aparece no quadro, mas nao soma represamento.
-      const abertas=f.esteiras.filter(e=>!e.concluido&&!e.foraEscopo);
+      const abertas=f.esteiras.filter(e=>!e.concluido&&!e.foraEscopo&&!e.sub);
       // sh=1 desconta os habilitadores declarados na linha: e o que o botao mostra.
       const soma=(d2,sh)=>abertas.filter(e=>!d2||e.dono===d2).reduce((s,e)=>s+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
       const chamada=sh=>soma(null,sh)+' US em andamento — '+soma('compartilhada',sh)+' em etapa compartilhada, '+soma('mv',sh)+' dependem apenas da MV e '+soma('sottelli',sh)+' estão com a Sottelli.';
@@ -779,7 +784,7 @@
       const pcts=sh=>{
         // Linha foraEscopo (backlog de melhorias) nao entra na base nem recebe percentual:
         // ela nao e trabalho do escopo, entao diluir as outras com ela seria errado.
-        const vals=f.esteiras.map(e=>e.foraEscopo?0:(porPeso
+        const vals=f.esteiras.map(e=>(e.foraEscopo||e.sub)?0:(porPeso
           ? Number(sh&&e.pesoSem!==undefined?e.pesoSem:e.peso)||0
           : Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0))));
         const b=vals.reduce((t,v)=>t+v,0);
@@ -788,26 +793,27 @@
         let falta=100-piso.reduce((t,v)=>t+v,0);
         const ordem=exatos.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0]);
         for(let k=0;k<ordem.length&&falta>0;k++){piso[ordem[k][1]]++;falta--}
-        return piso.map((v,i)=>f.esteiras[i].foraEscopo?'—'
+        return piso.map((v,i)=>(f.esteiras[i].foraEscopo||f.esteiras[i].sub)?'—'
           :((porPeso||Number.isFinite(Number(f.esteiras[i].n)))?v+'%':'—'));
       };
       const pc=pcts(0),ps=pcts(1);
       const rotPct='do total de US';
-      const linhasArr=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}${e.bloqueado?' bloq':''}">
+      const linhasArr=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}${e.sub?' sub':''}${e.bloqueado?' bloq':''}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
-        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(e.foraEscopo?'fora do total':rotPct)}</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}${e.bloqueado?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo?'':' · aguarda '+esc(e.espera||'')}</span></div>
+        <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(e.foraEscopo?'fora do total':(e.sub?(e.subTexto||'já contado abaixo'):rotPct))}</small></div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}${e.bloqueado?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo||e.sub?'':' · aguarda '+esc(e.espera||'')}</span>${e.movimento?`<em class="nx-est-mov">${esc(e.movimento)}</em>`:''}</div>
         <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo?'':'<span>responsabilidade</span>'}</div>
       </div>`);
       // Totalizador do quadro. As linhas foraEscopo nao entram no numero, e e isso que o
       // texto da linha diz -- sem essa frase o leitor acha que o total esta errado.
-      const dentro=f.esteiras.filter(e=>!e.foraEscopo);
+      const dentro=f.esteiras.filter(e=>!e.foraEscopo&&!e.sub);
       const tot=sh=>dentro.reduce((t,e)=>t+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
-      const nFora=f.esteiras.length-dentro.length;
+      const nSub=f.esteiras.filter(e=>e.sub).length;
+      const nFora=f.esteiras.filter(e=>e.foraEscopo).length;
       const linhaTotal=`<div class="nx-est-l total">
         <div class="nx-est-n"><span ${dual(tot(0),tot(1))}>${tot(0)}</span><small>US</small></div>
         <div class="nx-est-p"></div>
-        <div class="nx-est-txt"><b>Total</b><span>Soma das ${dentro.length} linhas acima${nFora?' · o backlog de melhorias abaixo não entra neste número':''}</span></div>
+        <div class="nx-est-txt"><b>Total</b><span>Soma das ${dentro.length} linhas acima${nSub?' · a linha em azul já está contada dentro da homologação e não soma de novo':''}${nFora?' · o backlog de melhorias abaixo não entra neste número':''}</span></div>
         <div class="nx-est-dono"></div>
       </div>`;
       const iFora=f.esteiras.findIndex(e=>e.foraEscopo);
