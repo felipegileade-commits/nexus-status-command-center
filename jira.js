@@ -804,8 +804,8 @@
       const linhasArr=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}${e.sub?' sub':''}${e.bloqueado?' bloq':''}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(e.foraEscopo?'fora do total':(e.sub?(e.subTexto||'já contado abaixo'):rotPct))}</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}${e.bloqueado?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo||e.sub?'':' · aguarda '+esc(e.espera||'')}</span>${e.movimento?`<em class="nx-est-mov">${esc(e.movimento)}</em>`:''}</div>
-        <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo?'':'<span>responsabilidade</span>'}</div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}${e.bloqueado?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo||!e.espera?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo||!e.espera?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo||e.sub||!e.espera?'':' · aguarda '+esc(e.espera||'')}</span>${e.movimento?`<em class="nx-est-mov">${esc(e.movimento)}</em>`:''}</div>
+        <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo||!e.espera?'':'<span>responsabilidade</span>'}</div>
       </div>`);
       // Totalizador do quadro. As linhas foraEscopo nao entram no numero, e e isso que o
       // texto da linha diz -- sem essa frase o leitor acha que o total esta errado.
