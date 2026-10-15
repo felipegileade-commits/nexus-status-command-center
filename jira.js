@@ -140,6 +140,9 @@
       .nx-est-mov{display:block;font-size:10px;font-style:normal;color:#4b9fd6;margin-top:4px;font-weight:600}
       .nx-est-mov:before{content:"↳";margin-right:5px;opacity:.8}
       .nx-est-l.total{border-left-color:transparent;background:transparent}
+      .nx-est-l.total.geral{border-top:1px solid var(--line,#18364f);padding-top:14px;margin-top:4px}
+      .nx-est-l.total.geral .nx-est-n>span{font-size:26px}
+      .nx-est-l.total.geral .nx-est-txt b{color:var(--text)}
       .nx-est-l.total .nx-est-txt b{text-transform:uppercase;letter-spacing:.06em;font-size:12px}
       .nx-est-l.total+.nx-est-l.fora,.nx-est-l.grupo+.nx-est-l.fora{margin-top:26px}
       /* Faixa congelada: repete titulo, percentuais e o botao de habilitadores quando o
@@ -818,6 +821,17 @@
       </div>`;
       const iFora=f.esteiras.findIndex(e=>e.foraEscopo);
       linhasArr.splice(iFora<0?linhasArr.length:iFora,0,linhaTotal);
+      // Total geral: o escopo ativo MAIS o backlog de melhorias. E o numero que fecha
+      // com a contagem crua do Jira; sem ele o leitor nao acha onde foram parar as US.
+      if(nFora){
+        const ger=sh=>f.esteiras.reduce((t,e)=>t+Math.max(0,(Number(e.n)||0)-(sh?(Number(e.hab)||0):0)),0);
+        linhasArr.push(`<div class="nx-est-l total geral">
+          <div class="nx-est-n"><span ${dual(ger(0),ger(1))}>${ger(0)}</span><small>US</small></div>
+          <div class="nx-est-p"></div>
+          <div class="nx-est-txt"><b>Total geral</b><span>${tot(0)} do escopo ativo + ${ger(0)-tot(0)} no backlog de melhorias${f.totalNota?" · "+esc(f.totalNota):""}</span></div>
+          <div class="nx-est-dono"></div>
+        </div>`);
+      }
       const linhas=linhasArr.join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
