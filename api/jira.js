@@ -40,7 +40,9 @@ const COLUNAS = {
   bugAjuste:     'status in ("BUG","BUG EM CORREÇÃO")',
   reteste:       'status = "BUG EM TESTES"',
   aprovadoUat:   'status = "Liberado para deploy"',
-  validado:      'status in ("PRONTO PARA DEPLOY EM PROD","Deploy em Prod. realizado","CONCLUÍDO")',
+  // CONCLUIDO saiu da regua: nao e coluna de Validado no board, e um card que passe
+  // por la voltaria a divergir (a MVPMO-508 ja saiu de CONCLUIDO para Pos Review).
+  validado:      'status in ("PRONTO PARA DEPLOY EM PROD","Deploy em Prod. realizado")',
   // Fora do escopo
   backlog:       'status = "BACKLOG"',
   // Controle
