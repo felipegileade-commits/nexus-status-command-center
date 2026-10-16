@@ -686,6 +686,28 @@
         });
       }
 
+      // Resumo da semana: as quatro caixas (executadas, atenção, pendências, impedimentos).
+      // "remover" casa por trecho e esconde o bullet — nada e apagado do estado gravado;
+      // "incluir" entra como nx-live, redesenhado a cada carga.
+      if(f.resumo)Object.keys(f.resumo).forEach(cx=>{
+        const titulo=Array.prototype.slice.call(root.querySelectorAll('.week-card .box-title'))
+          .filter(x=>x.textContent.trim().toUpperCase()===cx.toUpperCase())[0];
+        const caixa=titulo&&titulo.parentNode;if(!caixa)return;
+        const cfg=f.resumo[cx]||{};
+        (cfg.remover||[]).forEach(trecho=>{
+          Array.prototype.slice.call(caixa.querySelectorAll('.bullet:not(.nx-live)')).forEach(b=>{
+            if(b.textContent.indexOf(trecho)>=0&&b.style.display!=='none'){b.style.display='none';mudou=true}
+          });
+        });
+        (cfg.incluir||[]).forEach((texto,i)=>{
+          const id=cx.slice(0,4).toLowerCase()+'-'+i;
+          if(caixa.querySelector('[data-nx-res="'+id+'"]'))return;
+          const n=w.document.createElement('div');
+          n.className='bullet nx-live';n.setAttribute('data-nx-res',id);
+          n.textContent=texto;caixa.appendChild(n);mudou=true;
+        });
+      });
+
       // Pontos de atencao e proximos passos extras entram como nx-live, por cima do que
       // veio do painel: aparecem na tela e sao removidos antes de gravar o estado.
       const tituloAt=Array.prototype.slice.call(root.querySelectorAll('.week-card .box-title'))

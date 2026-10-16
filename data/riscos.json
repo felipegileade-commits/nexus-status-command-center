@@ -139,7 +139,50 @@
     {
      "contem": "Marcar agenda para definir o escopo final"
     }
-   ]
+   ],
+   "resumo": {
+    "ATIVIDADES EXECUTADAS": {
+     "remover": [
+      "Revisão da Sprint 14",
+      "2ª etapa da Homologação Guiada",
+      "Aprovação de US",
+      "Portal de Apontamento do Consultor"
+     ],
+     "incluir": [
+      "Deploy de todas as US desenvolvidas até a Sprint 17 — todas disponíveis na UAT.",
+      "Reorganização do Jira: status alinhados à realidade das entregas, e o painel passou a ler o Jira a cada carga.",
+      "US acima da capacidade de esforço movidas para o backlog de melhorias.",
+      "Agendas de refino e agendas internas realizadas no período."
+     ]
+    },
+    "PONTOS DE ATENÇÃO": {
+     "remover": [
+      "Revisão semanal das abas de homologação"
+     ],
+     "incluir": [
+      "Restam as sprints 18 e 19 para desenvolvimento; a sprint 20 fica para ajustes e bugs, com entrega final em 13/11."
+     ]
+    },
+    "PENDÊNCIAS": {
+     "remover": [
+      "nomenclatura do campo de horas adicionais"
+     ],
+     "incluir": [
+      "Agenda de refino com a MV, para destravar as 3 US em refino e dar saída às 8 em análise técnica.",
+      "Agenda de aprovação de US com a MV: as 7 pendentes precisam de aceite até quarta-feira, para entrarem na pré-planning.",
+      "Agenda para definição do escopo final até 13/11."
+     ]
+    },
+    "IMPEDIMENTOS": {
+     "remover": [
+      "não há impedimentos identificados"
+     ],
+     "incluir": [
+      "As 7 US travadas em refino e aprovação impedem o fechamento do escopo da próxima sprint, que começa na sexta-feira.",
+      "82 US aguardando teste na homologação: 58 liberadas sem início, 13 reprovadas e 11 em reteste. Sem vazão, não há como concluir a entrega até 13/11."
+     ]
+    }
+   }
   },
   "revenue": {
    "atencao": [
@@ -204,7 +247,42 @@
     {
      "contem": "dicionário de dados Salesforce"
     }
-   ]
+   ],
+   "resumo": {
+    "ATIVIDADES EXECUTADAS": {
+     "remover": [
+      "Início da documentação de homologação"
+     ],
+     "incluir": [
+      "Deploy realizado no período.",
+      "Correção de bugs e aplicação dos ajustes apontados na homologação.",
+      "Desenvolvimento de novas US concluído no período.",
+      "Ajustes da jornada aplicados."
+     ]
+    },
+    "PONTOS DE ATENÇÃO": {
+     "remover": [
+      "Esforço adicional de 11%"
+     ],
+     "incluir": [
+      "Material do banner recebido neste mês; o desenvolvimento ainda não começou, porque a capacidade do time está em ajustes, bugs e agendas de homologação."
+     ]
+    },
+    "PENDÊNCIAS": {
+     "remover": [],
+     "incluir": [
+      "Documento de cutover (Plano de Virada): confirmar o status atual.",
+      "Dicionário de dados Salesforce para a integração com a Benner: confirmar se a pendência foi sanada."
+     ]
+    },
+    "IMPEDIMENTOS": {
+     "remover": [],
+     "incluir": [
+      "Integração com a Benner ainda em aberto — bloqueia parte do desenvolvimento.",
+      "125 US testáveis aguardando homologação na UAT. Todas precisam ser testadas e aprovadas para a frente fechar."
+     ]
+    }
+   }
   }
  },
  "overview": {
