@@ -49,11 +49,26 @@ async function contar(h, jql) {
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
 
+  // Diagnostico: diz o que o servidor esta enxergando, SEM devolver valor nenhum.
+  // So presenca e tamanho, para dar para distinguir "nao cadastrou" de "cadastrou
+  // no ambiente errado" ou "cadastrou mas nao redeployou".
+  const temEmail = !!process.env.JIRA_EMAIL, temToken = !!process.env.JIRA_API_TOKEN;
+  if (req.query?.diag) return res.status(200).json({
+    JIRA_EMAIL: temEmail ? 'presente (' + process.env.JIRA_EMAIL.length + ' caracteres)' : 'AUSENTE',
+    JIRA_API_TOKEN: temToken ? 'presente (' + process.env.JIRA_API_TOKEN.length + ' caracteres)' : 'AUSENTE',
+    ambiente: process.env.VERCEL_ENV || '(desconhecido)',
+    deployDe: process.env.VERCEL_GIT_COMMIT_SHA ? process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 7) : '(desconhecido)',
+    commitEm: process.env.VERCEL_GIT_COMMIT_MESSAGE?.slice(0, 60) || '(desconhecido)'
+  });
+
   const h = headers();
   if (!h) return res.status(503).json({
     erro: 'credencial_ausente',
-    mensagem: 'Faltam JIRA_EMAIL e JIRA_API_TOKEN nas variáveis de ambiente da Vercel. ' +
-              'Settings → Environment Variables, depois um novo deploy para valer.'
+    falta: [!temEmail && 'JIRA_EMAIL', !temToken && 'JIRA_API_TOKEN'].filter(Boolean),
+    mensagem: 'O servidor não está enxergando ' +
+      (!temEmail && !temToken ? 'nenhuma das duas variáveis' : 'a variável ' + (!temEmail ? 'JIRA_EMAIL' : 'JIRA_API_TOKEN')) +
+      '. Confira: (1) estão no projeto certo da Vercel; (2) com o ambiente Production marcado; ' +
+      '(3) houve um Redeploy DEPOIS de cadastrar — variável nova só entra no deploy seguinte.'
   });
 
   const frente = String(req.query?.frente || 'central').toLowerCase();
