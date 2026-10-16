@@ -64,16 +64,6 @@
      "donoTexto": "Aprovado pelo cliente"
     },
     {
-     "nome": "Em espera, bloqueada ou cancelada",
-     "n": 1,
-     "hab": 0,
-     "detalhe": "Fora de qualquer fila ativa",
-     "detalheSem": "Fora de qualquer fila ativa",
-     "espera": "",
-     "dono": "fora",
-     "donoTexto": ""
-    },
-    {
      "nome": "Backlog de melhorias · à planejar",
      "n": 90,
      "foraEscopo": true,
@@ -106,7 +96,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Contagem de card no Jira MVPMO em 16/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 275 US no total, 185 no escopo ativo e 90 no backlog de melhorias. Em 06/10 eram 237 US — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT: as linhas de homologação e de aprovado somam 157, contra 147 em 06/10. \"Aprovado em UAT\" junta o aceite do cliente (status Liberado para deploy) com o que está pronto para o deploy de produção — nenhuma US da Central subiu para produção até hoje, o status \"Pronto para deploy em prod\" quer dizer pronta para subir. A linha de desenvolvimento conta 12 e o board mostra 9: a diferença são 3 US em status de desenvolvimento sem sprint atribuída, que precisam entrar na Sprint 17 para aparecerem no quadro. As 37 que subiram no deploy são tudo o que estava desenvolvido na Central até a Sprint 17, portais inclusive, e a MV ainda não começou a testá-las. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
+   "nota": "Contagem de card no Jira MVPMO em 16/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 274 US no quadro, 184 no escopo ativo e 90 no backlog de melhorias; fora dele fica 1 US em espera ou cancelada. Em 06/10 eram 237 US no Jira — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT: as linhas de homologação e de aprovado somam 157, contra 147 em 06/10. \"Aprovado em UAT\" junta o aceite do cliente (status Liberado para deploy) com o que está pronto para o deploy de produção — nenhuma US da Central subiu para produção até hoje, o status \"Pronto para deploy em prod\" quer dizer pronta para subir. A linha de desenvolvimento conta 12 e o board mostra 9: a diferença são 3 US em status de desenvolvimento sem sprint atribuída, que precisam entrar na Sprint 17 para aparecerem no quadro. As 37 que subiram no deploy são tudo o que estava desenvolvido na Central até a Sprint 17, portais inclusive, e a MV ainda não começou a testá-las. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco.",
    "totalNota": "fecha com a contagem crua do Jira MVPMO"
   },
