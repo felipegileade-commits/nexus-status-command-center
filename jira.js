@@ -920,12 +920,54 @@
     f.lidoEm=isNaN(d)?f.lidoEm:d.toISOString().slice(0,10);
     f.totalNota='lido do Jira '+(j.projeto||'')+(j.foraDoQuadro?' · '+j.foraDoQuadro+' fora do quadro, em espera ou canceladas':'');
 
+    // As barras do topo saem das MESMAS linhas, para o topo e o quadro nunca se
+    // contradizerem — foi o que aconteceu enquanto medidas.json era escrito a mao.
+    // Base: o escopo a entregar, sem o backlog de melhorias.
+    atualizaTopo(frente,L,j.escopoAtivo);
+
     // Redesenha: blocoEsteiras nao reescreve por cima de si mesmo.
     const sec=w.document.getElementById(frente);
     const velho=sec&&sec.querySelector('.front-summary .nx-est');
     if(velho)velho.remove();
     blocoEsteiras(w,esteiras);
+    barraDupla(w);
     return null;
+  }
+
+  // Refaz as barras do topo a partir das linhas do quadro, para as duas leituras nunca
+  // divergirem. Semantica fechada com o Felipe em 16/10:
+  //   desenvolvido           = o que ja esta na UAT (homologacao + aprovado)
+  //   em desenvolvimento     = a esteira de DownStream
+  //   bloqueado              = refinamento + aprovacao de US (o que nao anda sem a MV)
+  //   homologado geral       = aprovado sobre a base
+  //   homologado desenvolvido= aprovado sobre o desenvolvido
+  // Base = escopo a entregar, SEM o backlog de melhorias.
+  // Os tres primeiros somam 100 pelo metodo do maior resto, para nao dar 99 nem 101.
+  function atualizaTopo(frente,L,base){
+    if(!medidas||!medidas.frentes||!medidas.frentes[frente])return;
+    const b=Number(base)||0;if(!b)return;
+    const desenvolvido=Number(L.homologacao)+Number(L.aprovado);
+    const cru=[desenvolvido,Number(L.desenvolvimento),Number(L.refinamento)+Number(L.aprovacaoUS)]
+      .map(v=>v/b*100);
+    const piso=cru.map(Math.floor);
+    let falta=100-piso.reduce((t,v)=>t+v,0);
+    cru.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0])
+       .forEach(o=>{if(falta>0){piso[o[1]]++;falta--}});
+    const r=medidas.frentes[frente].peso;if(!r)return;
+    r.dev=piso[0];r.uat=piso[0];
+    r.segmentos=[{rotulo:'em desenvolvimento',pct:piso[1],cor:'emdev'},
+                 {rotulo:'bloqueado',pct:piso[2],cor:'bloq'}];
+    r.hom=Math.round(Number(L.aprovado)/b*100);
+    r.homDev=desenvolvido?Math.round(Number(L.aprovado)/desenvolvido*100):0;
+    r.base='Contagem de card no Jira, lida agora. Base: as '+b+' US do escopo a entregar, '
+      +'sem o backlog de melhorias. Desenvolvido é o que já está na UAT: '+L.homologacao
+      +' em homologação mais '+L.aprovado+' aprovadas — '+desenvolvido+' de '+b+', '+piso[0]+'%. '
+      +'Fora disso: '+piso[1]+'% em desenvolvimento ('+L.desenvolvimento+' US) e '+piso[2]
+      +'% bloqueado ('+L.refinamento+' no refinamento e '+L.aprovacaoUS+' na aprovação de US). '
+      +'Homologado geral: '+L.aprovado+' de '+b+'. Homologado desenvolvido: '+L.aprovado+' de '+desenvolvido+'.';
+    // O botao de habilitadores nao tem recorte proprio na leitura ao vivo: a regua agora
+    // conta card por coluna, e o Jira nao separa testavel de habilitador por coluna.
+    delete r.semHab;
   }
 
   // Le as duas frentes assim que a pagina abre, sem esperar clique. Uma vez por carga:
