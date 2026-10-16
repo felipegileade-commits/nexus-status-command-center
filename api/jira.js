@@ -22,6 +22,8 @@ const CONSULTAS = {
   desenvolvimento: 'status in ("Pronto para DEV","EM DESENVOLVIMENTO","PRONTO PARA DEPLOY EM QA") OR (status = "Realizando Deploy em QA" AND sprint in openSprints())',
   naUAT:         'status in ("Realizando Deploy em QA","PRONTO PARA TESTES","EM TESTE QA","BUG EM TESTES","Aguardando Review","Pós Review","Liberado para deploy","EM HOMOLOGAÇÃO","BUG","BUG EM CORREÇÃO","PRONTO PARA DEPLOY EM PROD","CONCLUÍDO") AND NOT (status = "Realizando Deploy em QA" AND sprint in openSprints())',
   backlog:       'status = "BACKLOG"',
+  // So US no backlog: serve para a conta de controle fechar contra o total do projeto.
+  backlogUS:     'status = "BACKLOG"',
   total:         '',
   // Decomposicao da linha de homologacao, para o painel destrinchar sozinho.
   // "Pós Review" E UAT: e a coluna para onde o deploy do Lucas levou as US.
@@ -38,7 +40,7 @@ const CONSULTAS = {
 // 13/11 — melhoria e ajuste entram aqui, de qualquer tipo de card. Nas demais linhas
 // so entram Historia e Habilitador: ali melhoria e ajuste ja feitos nao se contam de
 // novo, porque sao a mesma entrega voltando, nao escopo a mais.
-const TODOS_OS_TIPOS = new Set(['backlog']);
+const TODOS_OS_TIPOS = new Set(['backlog']);   // backlogUS fica de fora de proposito
 
 const PROJETO = { central: 'MVPMO', revenue: 'MVREV' };
 
@@ -110,7 +112,8 @@ export default async function handler(req, res) {
   out.derivados = {
     escopoAtivo: c.refinamento + c.aprovacaoUS + c.desenvolvimento + c.naUAT,
     totalGeral: c.refinamento + c.aprovacaoUS + c.desenvolvimento + c.naUAT + c.backlog,
-    foraDoQuadro: c.total - (c.refinamento + c.aprovacaoUS + c.desenvolvimento + c.naUAT + c.backlog)
+    // Confere contra o total do projeto usando so US, que e a regua das demais linhas.
+    foraDoQuadro: c.total - (c.refinamento + c.aprovacaoUS + c.desenvolvimento + c.naUAT + c.backlogUS)
   };
   out.aviso = 'Aprovado em UAT não sai do Jira: vem do controle de homologação da MV. ' +
               'O número "naUAT" é o total em UAT; a divisão entre homologação e aprovado é decisão humana. ' +
