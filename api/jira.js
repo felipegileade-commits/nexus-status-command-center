@@ -34,6 +34,12 @@ const CONSULTAS = {
   validado:      'status in ("PRONTO PARA DEPLOY EM PROD","Deploy em Prod. realizado","CONCLUÍDO")'
 };
 
+// Regra do Felipe (16/10): o backlog de melhorias e tudo o que NAO sera entregue ate
+// 13/11 — melhoria e ajuste entram aqui, de qualquer tipo de card. Nas demais linhas
+// so entram Historia e Habilitador: ali melhoria e ajuste ja feitos nao se contam de
+// novo, porque sao a mesma entrega voltando, nao escopo a mais.
+const TODOS_OS_TIPOS = new Set(['backlog']);
+
 const PROJETO = { central: 'MVPMO', revenue: 'MVREV' };
 
 function headers() {
@@ -89,7 +95,8 @@ export default async function handler(req, res) {
 
   try {
     for (const [nome, cond] of Object.entries(CONSULTAS)) {
-      const jql = cond ? `${base} AND (${cond})` : base;
+      const raiz = TODOS_OS_TIPOS.has(nome) ? `project = ${projeto}` : base;
+      const jql = cond ? `${raiz} AND (${cond})` : raiz;
       out.jql[nome] = jql;
       out.contagens[nome] = await contar(h, jql);
     }
@@ -106,7 +113,8 @@ export default async function handler(req, res) {
     foraDoQuadro: c.total - (c.refinamento + c.aprovacaoUS + c.desenvolvimento + c.naUAT + c.backlog)
   };
   out.aviso = 'Aprovado em UAT não sai do Jira: vem do controle de homologação da MV. ' +
-              'O número "naUAT" é o total em UAT; a divisão entre homologação e aprovado é decisão humana.';
+              'O número "naUAT" é o total em UAT; a divisão entre homologação e aprovado é decisão humana. ' +
+              'O backlog conta todo tipo de card (melhoria e ajuste incluídos); as demais linhas contam só História e Habilitador.';
 
   return res.status(200).json(out);
 }
