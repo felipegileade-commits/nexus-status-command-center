@@ -804,6 +804,50 @@
   // Felipe em 13/10, ate segunda ordem. No editavel ela continua: a aba so some quando
   // a pagina e a somente-leitura. O impresso precisa de style inline, porque o PDF e
   // montado a partir do innerHTML de #print-report e nao leva a folha de estilo da tela.
+  // O impresso e montado a partir de #print-report, que e HTML estatico: os KPIs ja eram
+  // sincronizados, mas o quadro "Onde o trabalho esta" nunca chegava ao PDF. Como e esse
+  // quadro que o Felipe apresenta, o PDF saia dizendo menos que a tela.
+  // Estilo inline de proposito: buildPrintDocument usa folha propria e nao carrega a daqui.
+  function esteiraImpresso(w){
+    if(!esteiras||!esteiras.frentes)return;
+    const d=w.document;
+    [['central','prCentral'],['revenue','prRevenue']].forEach(([chave,idPag])=>{
+      const f=esteiras.frentes[chave],pag=d.getElementById(idPag);
+      if(!f||!pag||!Array.isArray(f.esteiras)||!f.esteiras.length)return;
+      const dentro=f.esteiras.filter(e=>!e.foraEscopo);
+      const base=dentro.reduce((t,e)=>t+(Number(e.n)||0),0);
+      if(!base)return;
+      const pct=n=>base?Math.round(Number(n)/base*100)+'%':'—';
+      const linha=e=>'<tr>'
+        +'<td style="padding:4px 8px 4px 0;font-weight:700;font-variant-numeric:tabular-nums;'
+          +'white-space:nowrap;width:1%">'+esc(String(e.n))+'</td>'
+        +'<td style="padding:4px 8px 4px 0;color:#667;white-space:nowrap;width:1%">'
+          +(e.foraEscopo?'—':esc(pct(e.n)))+'</td>'
+        +'<td style="padding:4px 0"><b>'+esc(e.nome||'')+'</b>'
+          +(e.detalhe?'<br><span style="color:#667">'+esc(e.detalhe)+'</span>':'')+'</td>'
+        +'</tr>';
+      const corpo=dentro.map(linha).join('')
+        +'<tr><td style="padding:6px 8px 2px 0;font-weight:800;border-top:1px solid #ccd">'+base+'</td>'
+        +'<td style="border-top:1px solid #ccd"></td>'
+        +'<td style="padding:6px 0 2px;font-weight:800;border-top:1px solid #ccd">Total do escopo ativo</td></tr>'
+        +f.esteiras.filter(e=>e.foraEscopo).map(linha).join('');
+      const html='<div class="pr-esteira" style="margin:10px 0 0">'
+        +'<div style="font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#889;'
+          +'font-weight:800;margin-bottom:5px">Onde o trabalho está'
+          +(f.vivo?' · Jira '+esc(f.vivo):'')+'</div>'
+        +'<table style="width:100%;border-collapse:collapse;font-size:9px;line-height:1.35">'
+          +'<tbody>'+corpo+'</tbody></table></div>';
+      let bloco=pag.querySelector('.pr-esteira');
+      if(!bloco){
+        bloco=d.createElement('div');
+        const pe=pag.querySelector('.pr-foot');
+        if(pe)pag.insertBefore(bloco,pe);else pag.appendChild(bloco);
+      }
+      // Guarda de igualdade: sem ela o MutationObserver reescreveria a cada ciclo.
+      if(bloco.outerHTML!==html)bloco.outerHTML=html;
+    });
+  }
+
   function ajustaImpresso(w){
     const d=w.document;if(!d.body)return;
     // O cronograma executivo sai do relatorio impresso nas duas versoes, a pedido do
@@ -1004,6 +1048,7 @@
     if(velho)velho.remove();
     blocoEsteiras(w,esteiras);
     barraDupla(w);
+    esteiraImpresso(w);
     return null;
   }
 
@@ -1114,7 +1159,7 @@
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
-      carregarEsteiras().then(e=>{if(e){blocoEsteiras(w,e);jiraAutomatico(w)}});faixaFixa(w);ajustaImpresso(w);
+      carregarEsteiras().then(e=>{if(e){blocoEsteiras(w,e);esteiraImpresso(w);jiraAutomatico(w)}});faixaFixa(w);ajustaImpresso(w);
       carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
@@ -1130,7 +1175,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras)blocoEsteiras(w,esteiras);legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras){blocoEsteiras(w,esteiras);esteiraImpresso(w)}legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
