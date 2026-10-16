@@ -865,50 +865,80 @@
   // controle de homologacao da MV e nao do status do card — 39 cards ja avancaram de
   // coluna sem aceite. Por isso a homologacao recebe o resto (total na UAT menos o
   // aprovado) e o aprovado fica intocado.
+  // Aplica no quadro a leitura do /api/jira. Cada linha soma as COLUNAS do board,
+  // na regua fechada com o Felipe e o Gabriel em 16/10: refinamento = refino + backlog
+  // tecnico; aprovacao de US = aguardando o cliente; desenvolvimento = a esteira de
+  // DownStream; homologacao = liberado + iniciado + bug/ajuste + reteste; aprovado em
+  // UAT = aprovado + validado; backlog de melhorias = a coluna de backlog.
+  //
+  // O backlog fica fora da base do percentual porque nao e escopo a entregar: quem
+  // cuida disso e a marca foraEscopo, lida por blocoEsteiras.
   function aplicaJira(w,frente,j){
     const f=esteiras&&esteiras.frentes&&esteiras.frentes[frente];
-    if(!f||!Array.isArray(f.esteiras)||!j||!j.contagens)return 'sem dados';
-    const c=j.contagens;
+    if(!f||!Array.isArray(f.esteiras)||!j||!j.colunas||!j.linhas)return 'resposta do Jira sem as contagens';
+    const c=j.colunas,L=j.linhas;
     const linha=pref=>f.esteiras.filter(e=>String(e.nome||'').indexOf(pref)===0)[0];
-    const poe=(pref,v)=>{const l=linha(pref);if(l&&v!==undefined&&!isNaN(Number(v)))l.n=Number(v)};
-    poe('Refinamento',c.refinamento);
-    poe('Aprovação de US',c.aprovacaoUS);
-    poe('Desenvolvimento',c.desenvolvimento);
-    poe('Backlog de melhorias',c.backlog);
-    const apr=linha('Aprovado em UAT'),hom=linha('Em homologação');
-    if(apr&&hom&&!isNaN(Number(c.naUAT))){
-      hom.n=Math.max(0,Number(c.naUAT)-Number(apr.n));
-      // Destrincha a linha: sem isso o numero cheio nao diz nada a quem le.
-      // A ordem e a da esteira — o que acabou de subir primeiro, o que trava por ultimo.
-      const etapas=[
-        [Number(c.posReview),'liberadas pelo deploy, aguardando a MV iniciar'],
-        [Number(c.iniciada),'com homologação iniciada'],
-        [Number(c.bugAjuste),'reprovadas aguardando correção'],
-        [Number(c.reteste),'em reteste']
-      ].filter(p=>p[0]>0);
-      if(etapas.length){
-        hom.detalhe=etapas.map(p=>p[0]+' '+p[1]).join(' · ');
-        hom.detalheSem=hom.detalhe;
-        const soma=etapas.reduce((t,p)=>t+p[0],0),sobra=soma-hom.n;
-        hom.movimento='Somam '+soma+' nos status de homologação do Jira'
-          +(sobra>0?' · '+sobra+' já tem aceite registrado pela MV e conta na linha de baixo':'')
-          +(sobra<0?' · a MV registrou '+(-sobra)+' aceite(s) que o Jira ainda não refletiu':'');
-      }
-    }
-    // A linha de aprovado nao muda de numero, mas ganha a composicao do Jira.
-    if(apr&&(Number(c.liberado)>0||Number(c.validado)>0)){
-      apr.movimento='No Jira: '+(c.liberado||0)+' liberadas para deploy e '+(c.validado||0)+' prontas para produção'
-        +' · o aceite formal continua vindo do controle da MV';
-    }
+    const poe=(pref,v,det,mov)=>{
+      const l=linha(pref);if(!l)return;
+      if(v!==undefined&&!isNaN(Number(v)))l.n=Number(v);
+      if(det){l.detalhe=det;l.detalheSem=det}
+      if(mov!==undefined)l.movimento=mov;
+    };
+    const parte=(n,rot)=>Number(n)>0?Number(n)+' '+rot:null;
+    const junta=(...ps)=>ps.filter(Boolean).join(' · ');
+
+    poe('Refinamento',L.refinamento,
+      junta(parte(c.backlogTecnico,'no backlog técnico'),parte(c.refino,'em refino com a MV')),
+      'Soma das colunas em refino e backlog técnico do UpStream');
+
+    poe('Aprovação de US',L.aprovacaoUS,
+      'US escritas, aguardando o aceite do cliente',
+      'Coluna aguardando aprovação do cliente, no UpStream');
+
+    poe('Desenvolvimento',L.desenvolvimento,
+      'US na esteira de DownStream',
+      'Esteira de DownStream inteira — inclui o que ainda não entrou na sprint e por isso não aparece no board');
+
+    poe('Em homologação na UAT',L.homologacao,
+      junta(parte(c.liberado,'liberadas pelo deploy, aguardando a MV iniciar'),
+            parte(c.iniciado,'com homologação iniciada'),
+            parte(c.bugAjuste,'reprovadas aguardando correção'),
+            parte(c.reteste,'em reteste')),
+      'Soma das colunas liberado, iniciado, bug/ajuste e reteste');
+
+    poe('Aprovado em UAT',L.aprovado,
+      junta(parte(c.aprovadoUat,'aprovadas em UAT'),parte(c.validado,'validadas')),
+      'Soma das colunas aprovado em UAT e validado');
+
+    poe('Backlog de melhorias',L.backlog,
+      'Melhorias e ajustes que não serão entregues até 13 de novembro',
+      'Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar');
+
+    f.fonte='Boards UpStream, DownStream, QAStream e Homologação (Jira '+(j.projeto||'')+')';
     const d=new Date(j.lidoEm);
     f.vivo=isNaN(d)?'':d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     f.lidoEm=isNaN(d)?f.lidoEm:d.toISOString().slice(0,10);
-    // Redesenha o quadro: blocoEsteiras nao reescreve por cima de si mesmo.
+    f.totalNota='lido do Jira '+(j.projeto||'')+(j.foraDoQuadro?' · '+j.foraDoQuadro+' fora do quadro, em espera ou canceladas':'');
+
+    // Redesenha: blocoEsteiras nao reescreve por cima de si mesmo.
     const sec=w.document.getElementById(frente);
     const velho=sec&&sec.querySelector('.front-summary .nx-est');
     if(velho)velho.remove();
     blocoEsteiras(w,esteiras);
     return null;
+  }
+
+  // Le as duas frentes assim que a pagina abre, sem esperar clique. Uma vez por carga:
+  // se o Jira nao responder, o quadro fica com o ultimo valor publicado, que e o certo
+  // a fazer — melhor um numero velho e rotulado do que um quadro vazio.
+  function jiraAutomatico(w){
+    if(w.__nxJiraAuto)return;w.__nxJiraAuto=true;
+    ['central','revenue'].forEach(frente=>{
+      fetch('/api/jira?frente='+encodeURIComponent(frente),{cache:'no-store'})
+        .then(r=>r.ok?r.json():null)
+        .then(j=>{if(j&&j.linhas)try{aplicaJira(w,frente,j)}catch(e){}})
+        .catch(()=>{});
+    });
   }
 
   function ligaVivo(w,el){
@@ -956,7 +986,7 @@
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
-      carregarEsteiras().then(e=>{if(e)blocoEsteiras(w,e)});faixaFixa(w);ajustaImpresso(w);
+      carregarEsteiras().then(e=>{if(e){blocoEsteiras(w,e);jiraAutomatico(w)}});faixaFixa(w);ajustaImpresso(w);
       carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);

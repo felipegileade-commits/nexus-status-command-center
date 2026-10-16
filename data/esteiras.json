@@ -8,11 +8,11 @@
     {
      "nome": "Refinamento · UpStream",
      "n": 11,
-     "hab": 8,
+     "hab": 0,
      "bloqueado": true,
-     "detalhe": "8 em análise técnica · 3 em refino com a MV",
-     "detalheSem": "3 em refino com a MV",
-     "movimento": "Eram 28 em 06/10 · as 17 que saíram foram para o Backlog de melhorias; nenhuma avançou na esteira",
+     "detalhe": "Em refino e backlog técnico",
+     "detalheSem": "Em refino e backlog técnico",
+     "movimento": "Soma das colunas em refino e backlog técnico do UpStream",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
      "donoTexto": "MV e Sottelli"
@@ -24,29 +24,29 @@
      "bloqueado": true,
      "detalhe": "US escritas, aguardando o aceite do cliente",
      "detalheSem": "US escritas, aguardando o aceite do cliente",
-     "movimento": "Eram 12 em 06/10 · as 8 que saíram foram para o Backlog de melhorias",
+     "movimento": "Coluna aguardando aprovação do cliente, no UpStream",
      "espera": "Agenda de aprovação de US",
-     "dono": "sottelli",
+     "dono": "mv",
      "donoTexto": "MV"
     },
     {
      "nome": "Desenvolvimento · DownStream",
      "n": 12,
-     "hab": 7,
-     "detalhe": "6 em desenvolvimento · 3 em code review · 2 liberadas para dev · 1 pronta para deploy em QA",
-     "detalheSem": "4 em desenvolvimento · 1 liberada para dev",
-     "movimento": "O board mostra 9 porque filtra pela sprint aberta · as outras 3 estão em status de desenvolvimento sem sprint atribuída e precisam entrar na Sprint 17",
+     "hab": 0,
+     "detalhe": "US na esteira de DownStream",
+     "detalheSem": "US na esteira de DownStream",
+     "movimento": "Esteira de DownStream inteira",
      "espera": "Fechamento da sprint",
      "dono": "sottelli",
      "donoTexto": "Sottelli"
     },
     {
      "nome": "Em homologação na UAT",
-     "n": 100,
-     "hab": 22,
-     "detalhe": "37 subiram no deploy da Sprint 17 e a MV ainda não iniciou o teste · 39 avançaram de status no Jira sem o aceite formal da MV · 14 reprovadas ou em correção · 10 em teste e review",
-     "detalheSem": "29 subiram no deploy da Sprint 17 e a MV ainda não iniciou o teste · 30 avançaram de status no Jira sem o aceite formal · 11 reprovadas ou em correção · 8 em teste e review",
-     "movimento": "Eram 90 em 06/10 · subiu para 100 porque o deploy do Lucas levou para a UAT tudo o que estava desenvolvido na Central até a Sprint 17",
+     "n": 105,
+     "hab": 0,
+     "detalhe": "Liberado, iniciado, bug/ajuste e reteste",
+     "detalheSem": "Liberado, iniciado, bug/ajuste e reteste",
+     "movimento": "Soma das colunas liberado, iniciado, bug/ajuste e reteste",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV + Acompanhamento Sottelli"
@@ -54,21 +54,21 @@
     {
      "nome": "Aprovado em UAT",
      "n": 57,
-     "hab": 18,
+     "hab": 0,
      "concluido": true,
-     "detalhe": "39 testáveis · 18 habilitadoras — aceite registrado no controle de homologação da MV",
-     "detalheSem": "39 testáveis com aceite do cliente",
-     "movimento": "As mesmas 57 de 06/10 · a MV não registrou aprovação nova desde então, e este número só cresce",
+     "detalhe": "Aprovado em UAT e validado",
+     "detalheSem": "Aprovado em UAT e validado",
+     "movimento": "Soma das colunas aprovado em UAT e validado",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Aprovado pelo cliente"
     },
     {
      "nome": "Backlog de melhorias · à planejar",
-     "n": 90,
+     "n": 92,
      "foraEscopo": true,
-     "detalhe": "Coluna BACKLOG do board de Homologação · melhorias levantadas nas homologações e nos refinamentos, fora do escopo contratado",
-     "movimento": "Eram 31 US em 06/10 · entraram 51 vindas do refinamento, da aprovação e do desenvolvimento, e 8 nasceram aqui — nenhuma delas será feita nem entregue neste projeto",
+     "detalhe": "Melhorias e ajustes que não serão entregues até 13 de novembro",
+     "movimento": "Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar",
      "espera": "",
      "dono": "fora",
      "donoTexto": ""
@@ -96,71 +96,83 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Contagem de card no Jira MVPMO em 16/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 274 US, 184 no escopo ativo e 90 no backlog de melhorias; fora dele fica 1 US em espera ou cancelada. Em 06/10 eram 237 US no Jira — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT: são 157 US, 100 ainda em homologação e 57 com aceite do cliente, contra 147 em 06/10. O aceite vem do controle de homologação da MV, não do status do Jira: o Jira mostra 96 cards em colunas posteriores ao aceite, mas 39 deles avançaram de status sem a aprovação formal da MV, então continuam contados em homologação até que o aceite seja registrado. Nenhuma US da Central subiu para produção — o status \"Pronto para deploy em prod\" quer dizer pronta para subir. A linha de desenvolvimento conta 12 e o board mostra 9: a diferença são 3 US em status de desenvolvimento sem sprint atribuída, que precisam entrar na Sprint 17 para aparecerem no quadro. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
-   "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco.",
-   "totalNota": "fecha com a contagem crua do Jira MVPMO"
+   "nota": "Contagem de card no Jira MVPMO, tipos História, Habilitador e Melhoria — não esforço. Cada linha soma colunas do board: refinamento é em refino mais backlog técnico; aprovação de US é a coluna aguardando aprovação do cliente; desenvolvimento é a esteira de DownStream inteira; em homologação na UAT é liberado mais iniciado mais bug/ajuste mais reteste; aprovado em UAT é aprovado mais validado; e o backlog de melhorias é a coluna de backlog. O percentual de cada linha é sobre o escopo a entregar — o backlog de melhorias fica fora da base, porque são melhorias e ajustes que não serão entregues até 13 de novembro. Bug e Tarefa não entram em nenhuma linha: são a mesma entrega voltando, não escopo a mais. Os números são lidos do Jira quando a página abre e o selo ao lado do título diz a hora da leitura; o botão relê na hora.",
+   "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco."
   },
   "revenue": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVREV)",
-   "lidoEm": "2026-10-13",
+   "lidoEm": "2026-10-16",
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
-     "n": 8,
-     "detalhe": "Aguardando a escrita da US",
-     "detalheSem": "Aguardando a escrita da US",
+     "n": 0,
+     "hab": 0,
+     "bloqueado": true,
+     "detalhe": "Em refino e backlog técnico",
+     "detalheSem": "Em refino e backlog técnico",
+     "movimento": "Soma das colunas em refino e backlog técnico do UpStream",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
-     "donoTexto": "MV e Sottelli",
-     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
+     "donoTexto": "MV e Sottelli"
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 0,
+     "hab": 0,
+     "bloqueado": true,
+     "detalhe": "US escritas, aguardando o aceite do cliente",
+     "detalheSem": "US escritas, aguardando o aceite do cliente",
+     "movimento": "Coluna aguardando aprovação do cliente, no UpStream",
+     "espera": "Agenda de aprovação de US",
+     "dono": "mv",
+     "donoTexto": "MV"
     },
     {
      "nome": "Desenvolvimento · DownStream",
      "n": 8,
-     "hab": 1,
-     "detalhe": "Em desenvolvimento",
-     "detalheSem": "Em desenvolvimento",
+     "hab": 0,
+     "detalhe": "US na esteira de DownStream",
+     "detalheSem": "US na esteira de DownStream",
+     "movimento": "Esteira de DownStream inteira",
      "espera": "Fechamento da sprint",
      "dono": "sottelli",
-     "donoTexto": "Sottelli",
-     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
+     "donoTexto": "Sottelli"
     },
     {
      "nome": "Em homologação na UAT",
      "n": 142,
-     "hab": 21,
-     "detalhe": "Liberadas para a UAT",
-     "detalheSem": "Liberadas para a UAT",
+     "hab": 0,
+     "detalhe": "Liberado, iniciado, bug/ajuste e reteste",
+     "detalheSem": "Liberado, iniciado, bug/ajuste e reteste",
+     "movimento": "Soma das colunas liberado, iniciado, bug/ajuste e reteste",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV + Acompanhamento Sottelli",
-     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
+     "donoTexto": "MV + Acompanhamento Sottelli"
     },
     {
      "nome": "Aprovado em UAT",
      "n": 56,
-     "hab": 26,
+     "hab": 0,
      "concluido": true,
-     "detalhe": "30 testáveis · 26 habilitadoras — aceite registrado no controle de homologação da MV",
-     "detalheSem": "30 testáveis",
+     "detalhe": "Aprovado em UAT e validado",
+     "detalheSem": "Aprovado em UAT e validado",
+     "movimento": "Soma das colunas aprovado em UAT e validado",
      "espera": "",
      "dono": "grupo",
-     "donoTexto": "Aprovado pelo cliente",
-     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
+     "donoTexto": "Aprovado pelo cliente"
     },
     {
      "nome": "Backlog de melhorias · à planejar",
-     "n": 0,
+     "n": 73,
      "foraEscopo": true,
-     "detalhe": "Nenhuma US do MVREV está no status BACKLOG",
-     "movimento": "A frente não acumulou melhorias fora de escopo, ao contrário da Central",
+     "detalhe": "Melhorias e ajustes que não serão entregues até 13 de novembro",
+     "movimento": "Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar",
      "espera": "",
      "dono": "fora",
      "donoTexto": ""
     }
    ],
-   "nota": "Percentual de cada linha sobre o total do quadro (214 US; 166 sem habilitadores) — contagem de card no Jira MVREV em 13/10, não esforço. Mesma régua da Central: desenvolvido é o que está em UAT, ou seja a linha de homologação mais a de aprovado, e o aceite vem do controle de homologação da MV, não do status do card. Estes números ainda são a leitura de 13/10 e serão reconferidos contra o Jira; o formato do quadro já é o mesmo da Central. Ficam fora do quadro 34 US em espera ou bloqueadas e 11 canceladas. Revenue não tem backlog de melhorias: nenhuma US da frente está no status BACKLOG.",
-   "totalNota": "a conferir contra o Jira MVREV"
+   "nota": "Contagem de card no Jira MVREV, tipos História, Habilitador e Melhoria — não esforço. Cada linha soma colunas do board: refinamento é em refino mais backlog técnico; aprovação de US é a coluna aguardando aprovação do cliente; desenvolvimento é a esteira de DownStream inteira; em homologação na UAT é liberado mais iniciado mais bug/ajuste mais reteste; aprovado em UAT é aprovado mais validado; e o backlog de melhorias é a coluna de backlog. O percentual de cada linha é sobre o escopo a entregar — o backlog de melhorias fica fora da base, porque são melhorias e ajustes que não serão entregues até 13 de novembro. Bug e Tarefa não entram em nenhuma linha: são a mesma entrega voltando, não escopo a mais. Os números são lidos do Jira quando a página abre e o selo ao lado do título diz a hora da leitura; o botão relê na hora."
   }
  }
 }
