@@ -1,5 +1,5 @@
 {
- "_leiame": "Mapa de procedencia dos numeros do painel. Cada indicador diz de onde vem: jira (JQL conferivel), derivado (conta sobre outros indicadores) ou externo (planilha da MV, cronograma, julgamento gerencial). Lido por metodologia.js, que monta a aba so no editor. Para editar, mexa neste arquivo: a aba e nx-live e nao grava no Supabase. O prefixo comum dos JQL fica em 'prefixo' de cada frente.",
+ "_leiame": "Mapa de procedencia dos numeros do painel. Cada indicador diz de onde vem: jira (JQL conferivel), derivado (conta sobre outros indicadores) ou externo (planilha da MV, cronograma, julgamento gerencial). Lido por metodologia.js, que monta a aba so no editor. Para editar, mexa neste arquivo: a aba e nx-live e nao grava no Supabase. ATENCAO: os textos abaixo aparecem na tela, entao vao acentuados; so este comentario fica sem acento, no padrao dos demais _leiame do projeto.",
  "atualizadoEm": "16/10/2026",
  "instancia": "https://sottelli.atlassian.net",
  "prefixo": {
@@ -7,9 +7,9 @@
   "revenue": "project = MVREV AND issuetype in (10001,10005)"
  },
  "origens": {
-  "jira": { "rotulo": "Jira", "desc": "Conferivel por JQL. O numero sai do proprio Jira." },
+  "jira": { "rotulo": "Jira", "desc": "Conferível por JQL. O número sai do próprio Jira." },
   "derivado": { "rotulo": "Derivado", "desc": "Conta feita sobre outros indicadores desta mesma tabela." },
-  "externo": { "rotulo": "Fonte externa", "desc": "Nao sai do Jira: planilha da MV, cronograma ou julgamento gerencial." }
+  "externo": { "rotulo": "Fonte externa", "desc": "Não sai do Jira: planilha da MV, cronograma ou julgamento gerencial." }
  },
  "secoes": [
   {
@@ -21,61 +21,61 @@
     {
      "nome": "% desenvolvido",
      "origem": "derivado",
-     "desc": "Quanto do escopo ativo ja chegou na UAT. E a leitura de avanco que o cliente olha primeiro.",
-     "formula": "(Em homologacao + Aprovado em UAT) ÷ Total do escopo ativo × 100",
+     "desc": "Quanto do escopo ativo já chegou na UAT. É a leitura de avanço que o cliente olha primeiro.",
+     "formula": "(Em homologação + Aprovado em UAT) ÷ Total do escopo ativo × 100",
      "valor": "157 ÷ 184 = 85%",
      "campos": "status",
-     "obs": "Desenvolvido aqui quer dizer \"esta na UAT\", nao \"o dev terminou\". Card que o dev terminou mas nao subiu continua em desenvolvimento."
+     "obs": "Desenvolvido aqui quer dizer \"está na UAT\", não \"o dev terminou\". Card que o dev terminou mas não subiu continua contado em desenvolvimento."
     },
     {
      "nome": "% em desenvolvimento",
      "origem": "derivado",
      "formula": "Desenvolvimento ÷ Total do escopo ativo × 100",
      "valor": "12 ÷ 184 = 7%",
-     "desc": "O que esta na mao do time Sottelli agora.",
-     "obs": "Das 12, 9 estao na Sprint 17 e aparecem no board; 3 estao em status de desenvolvimento sem sprint atribuida e so aparecem por JQL."
+     "desc": "O que está na mão do time Sottelli agora.",
+     "obs": "Das 12, nove estão na Sprint 17 e aparecem no board; três estão em status de desenvolvimento sem sprint atribuída e só aparecem por JQL."
     },
     {
      "nome": "% bloqueado",
      "origem": "derivado",
-     "formula": "(Refinamento + Aprovacao de US) ÷ Total do escopo ativo × 100",
+     "formula": "(Refinamento + Aprovação de US) ÷ Total do escopo ativo × 100",
      "valor": "15 ÷ 184 = 8%",
-     "desc": "O que nao anda sem a MV: refino e aceite de US.",
-     "obs": "As tres barras do topo somam 100% pelo metodo do maior resto, para nao dar 99% nem 101%."
+     "desc": "O que não anda sem a MV: refino e aceite de US.",
+     "obs": "As três barras do topo somam 100% pelo método do maior resto, para não dar 99% nem 101%."
     },
     {
      "nome": "% homologado geral",
      "origem": "derivado",
      "formula": "Aprovado em UAT ÷ Total do escopo ativo × 100",
      "valor": "57 ÷ 184 = 31%",
-     "desc": "Quanto do projeto inteiro ja tem aceite do cliente."
+     "desc": "Quanto do projeto inteiro já tem aceite do cliente."
     },
     {
      "nome": "% homologado desenvolvido",
      "origem": "derivado",
      "formula": "Aprovado em UAT ÷ Desenvolvido × 100",
      "valor": "57 ÷ 157 = 36%",
-     "desc": "Do que ja esta na UAT, quanto a MV ja aprovou. Mede o ritmo da homologacao, nao o do desenvolvimento."
+     "desc": "Do que já está na UAT, quanto a MV já aprovou. Mede o ritmo da homologação, não o do desenvolvimento."
     }
    ]
   },
   {
    "id": "esteiras",
-   "nome": "Onde o trabalho esta · esteiras",
+   "nome": "Onde o trabalho está · esteiras",
    "arquivo": "data/esteiras.json",
-   "atualizacao": "Manual — leitura do Jira aplicada a mao",
+   "atualizacao": "Manual — leitura do Jira aplicada à mão",
    "indicadores": [
     {
      "nome": "Refinamento · UpStream",
      "origem": "jira",
      "valor": "11",
-     "desc": "US ainda sendo entendidas ou escritas. Nao da para desenvolver nada daqui.",
+     "desc": "US ainda sendo entendidas ou escritas. Não dá para desenvolver nada daqui.",
      "jql": "status in (\"EM REFINAMENTO | ESCRITA DE US\", \"Em refinamento\", \"EM ANÁLISE TÉCNICA\", \"Em prototipagem\")",
      "campos": "status, issuetype",
-     "obs": "Junta refino funcional e analise tecnica, que no board sao colunas separadas."
+     "obs": "Junta refino funcional e análise técnica, que no board são colunas separadas."
     },
     {
-     "nome": "Aprovacao de US · UpStream",
+     "nome": "Aprovação de US · UpStream",
      "origem": "jira",
      "valor": "4",
      "desc": "US escritas esperando o aceite do cliente para entrar na sprint.",
@@ -86,76 +86,75 @@
      "nome": "Desenvolvimento · DownStream",
      "origem": "jira",
      "valor": "12",
-     "desc": "O que o time esta construindo.",
+     "desc": "O que o time está construindo.",
      "jql": "status in (\"Pronto para DEV\", \"EM DESENVOLVIMENTO\", \"PRONTO PARA DEPLOY EM QA\") OR (status = \"Realizando Deploy em QA\" AND sprint in openSprints())",
      "campos": "status, issuetype, sprint",
-     "obs": "O board mostra 9 porque filtra a sprint aberta. A diferenca sao 3 US em status de desenvolvimento sem sprint atribuida — some do quadro ate alguem coloca-las na Sprint 17."
+     "obs": "O board mostra 9 porque filtra a sprint aberta. A diferença são três US em status de desenvolvimento sem sprint atribuída — somem do quadro até alguém colocá-las na Sprint 17."
     },
     {
-     "nome": "Em homologacao na UAT",
+     "nome": "Em homologação na UAT",
      "origem": "derivado",
      "valor": "100",
-     "desc": "Ja esta na UAT e ainda nao tem aceite formal da MV.",
+     "desc": "Já está na UAT e ainda não tem aceite formal da MV.",
      "formula": "Total na UAT (Jira) − Aprovado em UAT (MV) = 157 − 57",
      "jql": "status in (\"Realizando Deploy em QA\", \"PRONTO PARA TESTES\", \"EM TESTE QA\", \"BUG EM TESTES\", \"Aguardando Review\", \"Pós Review\", \"Liberado para deploy\", \"EM HOMOLOGAÇÃO\", \"BUG\", \"BUG EM CORREÇÃO\", \"PRONTO PARA DEPLOY EM PROD\", \"CONCLUÍDO\") AND NOT (status = \"Realizando Deploy em QA\" AND sprint in openSprints())",
      "campos": "status, issuetype, sprint",
-     "obs": "O JQL devolve o TOTAL na UAT (157). A divisao entre homologacao e aprovado nao sai do Jira: 39 cards avancaram de coluna sem aceite da MV e seguem contados aqui."
+     "obs": "O JQL devolve o TOTAL na UAT (157). A divisão entre homologação e aprovado não sai do Jira: 39 cards avançaram de coluna sem aceite da MV e seguem contados aqui."
     },
     {
      "nome": "Aprovado em UAT",
      "origem": "externo",
      "valor": "57",
-     "desc": "US com aceite formal do cliente. E o numero que vai para a apresentacao.",
+     "desc": "US com aceite formal do cliente. É o número que vai para a apresentação.",
      "campos": "—",
-     "obs": "NAO SAI DO JIRA. Vem do controle de homologacao da MV. O Jira mostra 96 cards em colunas posteriores ao aceite, mas so 57 foram aprovadas de fato. Regra fixada: este numero so cresce, nunca diminui."
+     "obs": "NÃO SAI DO JIRA. Vem do controle de homologação da MV. O Jira mostra 96 cards em colunas posteriores ao aceite, mas só 57 foram aprovadas de fato. Regra fixada: este número só cresce, nunca diminui."
     },
     {
      "nome": "Backlog de melhorias",
      "origem": "jira",
      "valor": "90",
-     "desc": "Melhorias levantadas durante o projeto, fora do escopo contratado. Nao serao feitas nem entregues nesta janela.",
+     "desc": "Melhorias levantadas durante o projeto, fora do escopo contratado. Não serão feitas nem entregues nesta janela.",
      "jql": "status = \"BACKLOG\"",
      "campos": "status, issuetype",
-     "obs": "O board mostra 92 cards porque conta tambem 2 de outro tipo (Tarefa/Bug). Nao entra no total do escopo ativo."
+     "obs": "O board mostra 92 cards porque conta também dois de outro tipo (Tarefa ou Bug). Não entra no total do escopo ativo."
     },
     {
-     "nome": "Total do escopo ativo / Total geral",
+     "nome": "Total do escopo ativo e Total geral",
      "origem": "derivado",
      "valor": "184 / 274",
      "formula": "Escopo = soma das linhas sem o backlog · Geral = escopo + backlog",
      "desc": "O total geral fecha com a contagem crua do Jira.",
-     "jql": "",
-     "obs": "O Jira tem 275 US; a que falta esta em espera ou cancelada e foi tirada do quadro a pedido."
+     "obs": "O Jira tem 275 US; a que falta está em espera ou cancelada e foi tirada do quadro a pedido."
     }
    ]
   },
   {
    "id": "visaogeral",
-   "nome": "Visao Geral · onde estao as entregas",
+   "nome": "Visão Geral · onde estão as entregas",
    "arquivo": "data/jira.json",
-   "atualizacao": "Automatico — workflow sync-jira.yml, segundas 07h",
+   "atualizacao": "Automático — workflow sync-jira.yml, segundas 07h",
    "indicadores": [
     {
-     "nome": "Distribuicao por etapa",
+     "nome": "Distribuição por etapa",
      "origem": "jira",
      "valor": "prod · uat · testado · qa · dev · upstream · fase2 · cancelado",
-     "desc": "Retrato do Jira por etapa, usado pelos quadros de epico.",
+     "desc": "Retrato do Jira por etapa, usado pelos quadros de épico.",
      "jql": "project in (MVPMO, MVREV) AND issuetype in (10001, 10002, 10004, 10005, 10212)",
      "campos": "status, issuetype, parent, sprint",
-     "obs": "ATENCAO: este mapa de etapas (scripts/retrato.mjs) e DIFERENTE da regua das esteiras. Aqui BACKLOG conta como upstream, ou seja o backlog de melhorias entra como se fosse escopo. Sao duas reguas no mesmo painel e isso precisa ser unificado."
+     "obs": "ATENÇÃO: este mapa de etapas (scripts/retrato.mjs) é DIFERENTE da régua das esteiras. Aqui o status BACKLOG conta como upstream, ou seja, o backlog de melhorias entra como se fosse escopo. São duas réguas no mesmo painel e isso precisa ser unificado."
     },
     {
      "nome": "Sprint atual",
      "origem": "jira",
-     "valor": "nome, numero e datas",
-     "desc": "Rodape de cada frente.",
+     "valor": "nome, número e datas",
+     "desc": "Rodapé de cada frente.",
      "campos": "sprint (API de board)",
-     "obs": "Lido pela API de sprint do board, nao por JQL."
+     "obs": "Lido pela API de board, não por JQL."
     },
     {
-     "nome": "Epicos x/y",
+     "nome": "Épicos x/y",
      "origem": "jira",
-     "desc": "Quantas entregas de cada epico ja passaram de etapa.",
+     "desc": "Quantas entregas de cada épico já passaram de etapa.",
      "jql": "project in (MVPMO, MVREV) AND issuetype = 10000",
      "campos": "issuetype, parent"
     }
@@ -164,36 +163,36 @@
   {
    "id": "externos",
    "nome": "Fora do Jira",
-   "arquivo": "varios",
+   "arquivo": "vários arquivos",
    "atualizacao": "Manual",
    "indicadores": [
     {
-     "nome": "Riscos e proximos passos",
+     "nome": "Riscos e próximos passos",
      "origem": "externo",
      "desc": "Julgamento gerencial do Scrum Master sobre o que pode comprometer a entrega.",
      "campos": "—",
-     "obs": "data/riscos.json. Nao ha fonte automatizavel: e analise, nao contagem."
+     "obs": "data/riscos.json. Não há fonte automatizável: é análise, não contagem."
     },
     {
      "nome": "Cronograma executivo",
      "origem": "externo",
      "desc": "Marcos e janelas de trabalho de setembro a novembro.",
      "campos": "—",
-     "obs": "Marcos guardados no conteudo editavel (Supabase), vindos da planilha de cronograma da Sottelli."
+     "obs": "Marcos guardados no conteúdo editável (Supabase), vindos da planilha de cronograma da Sottelli."
     },
     {
-     "nome": "US Aprovadas (aba propria)",
+     "nome": "US Aprovadas (aba própria)",
      "origem": "externo",
      "desc": "Lista nominal das US com aceite, por frente e sprint.",
      "campos": "—",
-     "obs": "data/us-aprovadas.json, alimentado pela planilha de homologacao da MV. E a mesma fonte do indicador \"Aprovado em UAT\"."
+     "obs": "data/us-aprovadas.json, alimentado pela planilha de homologação da MV. É a mesma fonte do indicador \"Aprovado em UAT\"."
     },
     {
      "nome": "Desvio de cronograma",
      "origem": "externo",
-     "desc": "Quanto o projeto esta adiantado ou atrasado em relacao ao previsto.",
+     "desc": "Quanto o projeto está adiantado ou atrasado em relação ao previsto.",
      "campos": "—",
-     "obs": "data/desvio.json, calculado a mao a partir da planilha de sprints. O sync nao le planilha."
+     "obs": "data/desvio.json, calculado à mão a partir da planilha de sprints. O sync não lê planilha."
     }
    ]
   }
