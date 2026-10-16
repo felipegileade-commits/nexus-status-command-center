@@ -939,7 +939,7 @@
     // As barras do topo saem das MESMAS linhas, para o topo e o quadro nunca se
     // contradizerem — foi o que aconteceu enquanto medidas.json era escrito a mao.
     // Base: o escopo a entregar, sem o backlog de melhorias.
-    atualizaTopo(frente,L,j.escopoAtivo);
+    atualizaTopo(frente,L,j.escopoAtivo,H);
 
     // Redesenha: blocoEsteiras nao reescreve por cima de si mesmo.
     const sec=w.document.getElementById(frente);
@@ -959,31 +959,44 @@
   //   homologado desenvolvido= aprovado sobre o desenvolvido
   // Base = escopo a entregar, SEM o backlog de melhorias.
   // Os tres primeiros somam 100 pelo metodo do maior resto, para nao dar 99 nem 101.
-  function atualizaTopo(frente,L,base){
+  function atualizaTopo(frente,L,base,H){
     if(!medidas||!medidas.frentes||!medidas.frentes[frente])return;
-    const b=Number(base)||0;if(!b)return;
-    const desenvolvido=Number(L.homologacao)+Number(L.aprovado);
-    const cru=[desenvolvido,Number(L.desenvolvimento),Number(L.refinamento)+Number(L.aprovacaoUS)]
-      .map(v=>v/b*100);
-    const piso=cru.map(Math.floor);
-    let falta=100-piso.reduce((t,v)=>t+v,0);
-    cru.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0])
-       .forEach(o=>{if(falta>0){piso[o[1]]++;falta--}});
     const r=medidas.frentes[frente].peso;if(!r)return;
-    r.dev=piso[0];r.uat=piso[0];
-    r.segmentos=[{rotulo:'em desenvolvimento',pct:piso[1],cor:'emdev'},
-                 {rotulo:'bloqueado',pct:piso[2],cor:'bloq'}];
-    r.hom=Math.round(Number(L.aprovado)/b*100);
-    r.homDev=desenvolvido?Math.round(Number(L.aprovado)/desenvolvido*100):0;
-    r.base='Contagem de card no Jira, lida agora. Base: as '+b+' US do escopo a entregar, '
-      +'sem o backlog de melhorias. Desenvolvido é o que já está na UAT: '+L.homologacao
-      +' em homologação mais '+L.aprovado+' aprovadas — '+desenvolvido+' de '+b+', '+piso[0]+'%. '
-      +'Fora disso: '+piso[1]+'% em desenvolvimento ('+L.desenvolvimento+' US) e '+piso[2]
-      +'% bloqueado ('+L.refinamento+' no refinamento e '+L.aprovacaoUS+' na aprovação de US). '
-      +'Homologado geral: '+L.aprovado+' de '+b+'. Homologado desenvolvido: '+L.aprovado+' de '+desenvolvido+'.';
-    // O botao de habilitadores nao tem recorte proprio na leitura ao vivo: a regua agora
-    // conta card por coluna, e o Jira nao separa testavel de habilitador por coluna.
-    delete r.semHab;
+    // Monta o conjunto de barras para um recorte: com tudo, ou so com US testavel.
+    const conta=(L,b,rotulo)=>{
+      b=Number(b)||0;if(!b)return null;
+      const desenvolvido=Number(L.homologacao)+Number(L.aprovado);
+      const cru=[desenvolvido,Number(L.desenvolvimento),Number(L.refinamento)+Number(L.aprovacaoUS)]
+        .map(v=>v/b*100);
+      const piso=cru.map(Math.floor);
+      let falta=100-piso.reduce((t,v)=>t+v,0);
+      cru.map((v,i)=>[v-Math.floor(v),i]).sort((x,y)=>y[0]-x[0])
+         .forEach(o=>{if(falta>0){piso[o[1]]++;falta--}});
+      return {
+        dev:piso[0],uat:piso[0],
+        segmentos:[{rotulo:'em desenvolvimento',pct:piso[1],cor:'emdev'},
+                   {rotulo:'bloqueado',pct:piso[2],cor:'bloq'}],
+        hom:Math.round(Number(L.aprovado)/b*100),
+        homDev:desenvolvido?Math.round(Number(L.aprovado)/desenvolvido*100):0,
+        base:rotulo+' Base: as '+b+' US do escopo a entregar, sem o backlog de melhorias. '
+          +'Desenvolvido é o que já está na UAT: '+L.homologacao+' em homologação mais '
+          +L.aprovado+' aprovadas — '+desenvolvido+' de '+b+', '+piso[0]+'%. Fora disso: '
+          +piso[1]+'% em desenvolvimento ('+L.desenvolvimento+' US) e '+piso[2]+'% bloqueado ('
+          +L.refinamento+' no refinamento e '+L.aprovacaoUS+' na aprovação de US). Homologado geral: '
+          +L.aprovado+' de '+b+'. Homologado desenvolvido: '+L.aprovado+' de '+desenvolvido+'.'
+      };
+    };
+    const cheio=conta(L,base,'Contagem de card no Jira, lida agora.');
+    if(!cheio)return;
+    Object.assign(r,cheio);
+    // Mesmo calculo so com US testavel, que e o que o botao "Ocultar habilitadores" mostra.
+    if(H){
+      const semH={},chaves=['refinamento','aprovacaoUS','desenvolvimento','homologacao','aprovado'];
+      let baseSem=0;
+      chaves.forEach(k=>{const v=Math.max(0,Number(L[k])-(Number(H[k])||0));semH[k]=v;baseSem+=v});
+      const magro=conta(semH,baseSem,'Mesma régua, só US testável (sem habilitadores).');
+      if(magro)r.semHab=magro;else delete r.semHab;
+    }
   }
 
   // Le as duas frentes assim que a pagina abre, sem esperar clique. Uma vez por carga:
