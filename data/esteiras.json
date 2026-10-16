@@ -42,23 +42,23 @@
     },
     {
      "nome": "Em homologação na UAT",
-     "n": 61,
-     "hab": 15,
-     "detalhe": "37 subiram no deploy e a MV ainda não iniciou o teste · 14 reprovadas ou em correção · 10 em teste e review",
-     "detalheSem": "28 subiram no deploy e a MV ainda não iniciou o teste · 11 reprovadas ou em correção · 7 em teste e review",
-     "movimento": "Fazia parte das 90 de 06/10 · as que saíram daqui foram aprovadas e estão na linha de baixo, não sumiram",
+     "n": 100,
+     "hab": 22,
+     "detalhe": "37 subiram no deploy da Sprint 17 e a MV ainda não iniciou o teste · 39 avançaram de status no Jira sem o aceite formal da MV · 14 reprovadas ou em correção · 10 em teste e review",
+     "detalheSem": "29 subiram no deploy da Sprint 17 e a MV ainda não iniciou o teste · 30 avançaram de status no Jira sem o aceite formal · 11 reprovadas ou em correção · 8 em teste e review",
+     "movimento": "Eram 90 em 06/10 · subiu para 100 porque o deploy do Lucas levou para a UAT tudo o que estava desenvolvido na Central até a Sprint 17",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV + Acompanhamento Sottelli"
     },
     {
      "nome": "Aprovado em UAT",
-     "n": 96,
-     "hab": 25,
+     "n": 57,
+     "hab": 18,
      "concluido": true,
-     "detalhe": "55 com aceite dado · 40 prontas para o deploy de produção · 1 concluída — nenhuma subiu para produção ainda",
-     "detalheSem": "40 com aceite dado · 30 prontas para o deploy de produção · 1 concluída",
-     "movimento": "Eram 90 em 06/10 · subiu para 96 com as aprovações da semana; este número só cresce",
+     "detalhe": "39 testáveis · 18 habilitadoras — aceite registrado no controle de homologação da MV",
+     "detalheSem": "39 testáveis com aceite do cliente",
+     "movimento": "As mesmas 57 de 06/10 · a MV não registrou aprovação nova desde então, e este número só cresce",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Aprovado pelo cliente"
@@ -96,7 +96,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Contagem de card no Jira MVPMO em 16/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 274 US no quadro, 184 no escopo ativo e 90 no backlog de melhorias; fora dele fica 1 US em espera ou cancelada. Em 06/10 eram 237 US no Jira — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT: as linhas de homologação e de aprovado somam 157, contra 147 em 06/10. \"Aprovado em UAT\" junta o aceite do cliente (status Liberado para deploy) com o que está pronto para o deploy de produção — nenhuma US da Central subiu para produção até hoje, o status \"Pronto para deploy em prod\" quer dizer pronta para subir. A linha de desenvolvimento conta 12 e o board mostra 9: a diferença são 3 US em status de desenvolvimento sem sprint atribuída, que precisam entrar na Sprint 17 para aparecerem no quadro. As 37 que subiram no deploy são tudo o que estava desenvolvido na Central até a Sprint 17, portais inclusive, e a MV ainda não começou a testá-las. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
+   "nota": "Contagem de card no Jira MVPMO em 16/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 274 US, 184 no escopo ativo e 90 no backlog de melhorias; fora dele fica 1 US em espera ou cancelada. Em 06/10 eram 237 US no Jira — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT: são 157 US, 100 ainda em homologação e 57 com aceite do cliente, contra 147 em 06/10. O aceite vem do controle de homologação da MV, não do status do Jira: o Jira mostra 96 cards em colunas posteriores ao aceite, mas 39 deles avançaram de status sem a aprovação formal da MV, então continuam contados em homologação até que o aceite seja registrado. Nenhuma US da Central subiu para produção — o status \"Pronto para deploy em prod\" quer dizer pronta para subir. A linha de desenvolvimento conta 12 e o board mostra 9: a diferença são 3 US em status de desenvolvimento sem sprint atribuída, que precisam entrar na Sprint 17 para aparecerem no quadro. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco.",
    "totalNota": "fecha com a contagem crua do Jira MVPMO"
   },
