@@ -1,42 +1,42 @@
 {
  "_leiame": "Percentuais do topo de cada frente, por contagem de US no Jira. \"segmentos\" abre o que falta ao lado do desenvolvido (em desenvolvimento, bloqueado) e os tres somam 100. \"hom\" e o homologado geral e \"homDev\" e o homologado sobre o que ja foi desenvolvido — os dois descem para barras proprias, porque sao PARTE do desenvolvido e nao caberiam na mesma barra sem mentir. \"semHab\" e a mesma conta so com US testavel, e e o que o botao \"Ocultar habilitadores\" mostra. Mantenha \"base\" verdadeiro: e o texto da caixa de dica e e o que permite conferir.",
- "atualizadoEm": "2026-10-15",
+ "atualizadoEm": "2026-10-16",
  "frentes": {
   "central": {
    "peso": {
-    "dev": 70,
-    "hom": 27,
-    "base": "Contagem de US no Jira MVPMO. Base: as 210 US do quadro, sem os 88 cards do backlog de melhorias. Desenvolvido é o que está em UAT: as 90 em homologação mais as 57 já aprovadas — 147 de 210, 70%. Fora dos 70%: 11% em desenvolvimento (23 US, das quais 11 são os portais que ficaram fora do deploy) e 19% bloqueado (28 no refinamento e 12 na aprovação de US). Homologado geral: as 57 aprovadas sobre as 210 — 27%. Homologado desenvolvido: as 57 aprovadas sobre o que já foi desenvolvido, 57 de 147 — 39%.",
-    "uat": 43,
+    "dev": 85,
+    "hom": 31,
+    "base": "Contagem de US no Jira MVPMO em 16/10. Base: as 184 US do escopo ativo, sem os 90 do backlog de melhorias. Desenvolvido é o que já está na UAT: as 100 em homologação mais as 57 aprovadas — 157 de 184, 85%. Fora dos 85%: 7% em desenvolvimento (12 US, das quais 9 estão na Sprint 17 e 3 seguem sem sprint atribuída) e 8% bloqueado (11 no refinamento e 4 na aprovação de US). Homologado geral: as 57 aprovadas sobre as 184 — 31%. Homologado desenvolvido: as 57 aprovadas sobre o que já foi desenvolvido, 57 de 157 — 36%.",
+    "uat": 85,
     "semHab": {
-     "dev": 69,
-     "uat": 44,
-     "hom": 25,
-     "homDev": 36,
+     "dev": 91,
+     "uat": 91,
+     "hom": 30,
+     "homDev": 33,
      "segmentos": [
       {
        "rotulo": "em desenvolvimento",
-       "pct": 8,
+       "pct": 4,
        "cor": "emdev"
       },
       {
        "rotulo": "bloqueado",
-       "pct": 23,
+       "pct": 5,
        "cor": "bloq"
       }
      ],
-     "base": "Mesma régua, só US testável: base de 158. Desenvolvido 109 (70 em homologação e 39 aprovadas), 69%. Em desenvolvimento 13 (8%) e bloqueado 36 (23%). Homologado geral 39 de 158, 25%. Homologado desenvolvido 39 de 109, 36%."
+     "base": "Mesma régua, só US testável: base de 129. Desenvolvido 117 (78 em homologação e 39 aprovadas), 91%. Em desenvolvimento 5 (4%) e bloqueado 7 (5%). Homologado geral 39 de 129, 30%. Homologado desenvolvido 39 de 117, 33%."
     },
-    "homDev": 39,
+    "homDev": 36,
     "segmentos": [
      {
       "rotulo": "em desenvolvimento",
-      "pct": 11,
+      "pct": 7,
       "cor": "emdev"
      },
      {
       "rotulo": "bloqueado",
-      "pct": 19,
+      "pct": 8,
       "cor": "bloq"
      }
     ]

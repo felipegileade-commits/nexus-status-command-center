@@ -111,7 +111,8 @@
      "detalheSem": "Aguardando a escrita da US",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
-     "donoTexto": "MV e Sottelli"
+     "donoTexto": "MV e Sottelli",
+     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
     },
     {
      "nome": "Desenvolvimento · DownStream",
@@ -121,31 +122,45 @@
      "detalheSem": "Em desenvolvimento",
      "espera": "Fechamento da sprint",
      "dono": "sottelli",
-     "donoTexto": "Sottelli"
+     "donoTexto": "Sottelli",
+     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
     },
     {
-     "nome": "Homologação",
+     "nome": "Em homologação na UAT",
      "n": 142,
      "hab": 21,
      "detalhe": "Liberadas para a UAT",
      "detalheSem": "Liberadas para a UAT",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
-     "donoTexto": "MV + Acompanhamento Sottelli"
+     "donoTexto": "MV + Acompanhamento Sottelli",
+     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
     },
     {
      "nome": "Aprovado em UAT",
      "n": 56,
      "hab": 26,
      "concluido": true,
-     "detalhe": "30 testáveis · 26 habilitadoras — coluna Validado do board de Homologação",
+     "detalhe": "30 testáveis · 26 habilitadoras — aceite registrado no controle de homologação da MV",
      "detalheSem": "30 testáveis",
      "espera": "",
      "dono": "grupo",
-     "donoTexto": "Concluído em grupo"
+     "donoTexto": "Aprovado pelo cliente",
+     "movimento": "Leitura de 13/10 · a ser reconferida no Jira MVREV"
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 0,
+     "foraEscopo": true,
+     "detalhe": "Nenhuma US do MVREV está no status BACKLOG",
+     "movimento": "A frente não acumulou melhorias fora de escopo, ao contrário da Central",
+     "espera": "",
+     "dono": "fora",
+     "donoTexto": ""
     }
    ],
-   "nota": "Percentual de cada linha sobre o total do quadro (214 US; 166 sem habilitadores) — contagem de card no Jira MVREV em 13/10, não esforço. Mesma régua da Central: desenvolvido é o que está em UAT, ou seja a linha de homologação mais a de aprovado. Ficam fora do quadro 34 US em espera ou bloqueadas e 11 canceladas. Revenue não tem backlog de melhorias no Jira: nenhuma US da frente está no status BACKLOG, por isso a linha que existe na Central não aparece aqui."
+   "nota": "Percentual de cada linha sobre o total do quadro (214 US; 166 sem habilitadores) — contagem de card no Jira MVREV em 13/10, não esforço. Mesma régua da Central: desenvolvido é o que está em UAT, ou seja a linha de homologação mais a de aprovado, e o aceite vem do controle de homologação da MV, não do status do card. Estes números ainda são a leitura de 13/10 e serão reconferidos contra o Jira; o formato do quadro já é o mesmo da Central. Ficam fora do quadro 34 US em espera ou bloqueadas e 11 canceladas. Revenue não tem backlog de melhorias: nenhuma US da frente está no status BACKLOG.",
+   "totalNota": "a conferir contra o Jira MVREV"
   }
  }
 }
