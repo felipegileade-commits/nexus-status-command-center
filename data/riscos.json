@@ -210,13 +210,8 @@
      "status": "Previsto"
     },
     {
-     "id": "banner-rev",
-     "texto": "Definir a janela de desenvolvimento do banner, agora que o material foi recebido.",
-     "status": "Previsto"
-    },
-    {
-     "id": "start-legado",
-     "texto": "Start do legado na próxima semana.",
+     "id": "agenda-banner",
+     "texto": "Agenda entre a gerência de projetos da MV e o time técnico para definir o banner e a janela de desenvolvimento, agora que o material foi recebido.",
      "status": "Previsto"
     }
    ],
@@ -246,6 +241,12 @@
     },
     {
      "contem": "dicionário de dados Salesforce"
+    },
+    {
+     "contem": "Start do legado"
+    },
+    {
+     "contem": "legado na próxima semana"
     }
    ],
    "resumo": {
