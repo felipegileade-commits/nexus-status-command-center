@@ -141,6 +141,10 @@
       .nx-est-l.fora{border-left-color:#7b8b9a;background:rgba(123,139,154,.08)}
       .nx-est-l.fora .nx-est-n,.nx-est-l.fora .nx-est-p>span{color:#7b8b9a}
       .nx-est-l.bloq{border-left-color:var(--red,#e5484d);background:rgba(229,72,77,.07)}
+      /* Linha zerada: etapa vencida, nao etapa travada. Verde, sem selo e sem "aguarda". */
+      .nx-est-l.zerada{border-left-color:#45b36b;background:rgba(69,179,107,.06)}
+      .nx-est-l.zerada .nx-est-n,.nx-est-l.zerada .nx-est-p>span{color:#45b36b}
+      .nx-est-l.zerada .nx-est-dono b{color:#45b36b;border-color:#45b36b}
       .nx-est-l.bloq .nx-est-n{color:var(--red,#e5484d)}
       .nx-est-txt b .nx-bloq{display:inline-block;margin-left:10px;vertical-align:1px;font-size:9.5px;font-weight:800;
         letter-spacing:.08em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:#fff;background:var(--red,#e5484d)}
@@ -341,15 +345,7 @@
   function botaoHab(w){
     ['central','revenue'].forEach(id=>{
       const sec=w.document.getElementById(id);if(!sec)return;
-      const head=sec.querySelector('.front-head');if(!head)return;
-      // Sem numero de habilitador declarado na frente, o botao nao tem o que ocultar:
-      // a regua por coluna nao separa testavel de habilitador. Botao que nao faz nada
-      // so gera pergunta, entao ele some — e some tambem se ja estava na tela.
-      const f=esteiras&&esteiras.frentes&&esteiras.frentes[id];
-      const temHab=f&&Array.isArray(f.esteiras)&&f.esteiras.some(e=>Number(e.hab)>0);
-      const velho=head.querySelector('.nx-tog');
-      if(!temHab){if(velho)velho.remove();return}
-      if(velho)return;
+      const head=sec.querySelector('.front-head');if(!head||head.querySelector('.nx-tog'))return;
       const b=w.document.createElement('button');
       b.type='button';b.className='nx-tog nx-live';b.setAttribute('aria-pressed','false');
       b.textContent='Ocultar habilitadores';
@@ -819,11 +815,14 @@
       };
       const pc=pcts(0),ps=pcts(1);
       const rotPct='do total de US';
-      const linhasArr=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}${e.sub?' sub':''}${e.bloqueado?' bloq':''}">
+      // Linha zerada nao esta bloqueada nem travando ninguem: perde o selo e o vermelho,
+      // e entra em verde, como etapa vencida. Na Revenue o refino e a aprovacao ja
+      // acabaram, e marca-los de vermelho dizia o contrario do que esta acontecendo.
+      const linhasArr=f.esteiras.map((e,i)=>`<div class="nx-est-l ${esc(e.dono||'')}${e.foraEscopo?' fora':''}${e.sub?' sub':''}${(e.bloqueado&&Number(e.n)>0)?' bloq':''}${(Number(e.n)===0&&!e.foraEscopo)?' zerada':''}">
         <div class="nx-est-n"><span ${dual(e.n,Number(e.hab)?(Number(e.n)||0)-Number(e.hab):undefined)}>${esc(String(e.n))}</span><small>US</small></div>
         <div class="nx-est-p"><span ${dual(pc[i],ps[i])}>${esc(pc[i])}</span><small>${esc(e.foraEscopo?'fora do total':(e.sub?(e.subTexto||'já contado abaixo'):rotPct))}</small></div>
-        <div class="nx-est-txt"><b>${esc(e.nome||'')}${e.bloqueado?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo||!e.espera?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo||!e.espera?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo||e.sub||!e.espera?'':' · aguarda '+esc(e.espera||'')}</span>${e.movimento?`<em class="nx-est-mov">${esc(e.movimento)}</em>`:''}</div>
-        <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo||!e.espera?'':'<span>responsabilidade</span>'}</div>
+        <div class="nx-est-txt"><b>${esc(e.nome||'')}${(e.bloqueado&&Number(e.n)>0)?'<i class="nx-bloq" style="font-style:normal">Bloqueado</i>':''}</b><span ${dual((e.detalhe||'')+(e.concluido||e.foraEscopo||!e.espera||Number(e.n)===0?'':' · aguarda '+(e.espera||'')),(e.detalheSem||e.detalhe||'')+(e.concluido||e.foraEscopo||!e.espera||Number(e.n)===0?'':' · aguarda '+(e.espera||'')))}>${esc(e.detalhe||'')}${e.concluido||e.foraEscopo||e.sub||!e.espera||Number(e.n)===0?'':' · aguarda '+esc(e.espera||'')}</span>${e.movimento?`<em class="nx-est-mov">${esc(e.movimento)}</em>`:''}</div>
+        <div class="nx-est-dono">${e.donoTexto?`<b>${esc(e.donoTexto)}</b>`:''}${e.concluido||e.foraEscopo||!e.espera||Number(e.n)===0?'':'<span>responsabilidade</span>'}</div>
       </div>`);
       // Totalizador do quadro. As linhas foraEscopo nao entram no numero, e e isso que o
       // texto da linha diz -- sem essa frase o leitor acha que o total esta errado.
@@ -884,11 +883,12 @@
   function aplicaJira(w,frente,j){
     const f=esteiras&&esteiras.frentes&&esteiras.frentes[frente];
     if(!f||!Array.isArray(f.esteiras)||!j||!j.colunas||!j.linhas)return 'resposta do Jira sem as contagens';
-    const c=j.colunas,L=j.linhas;
+    const c=j.colunas,L=j.linhas,H=j.linhasHab||{};
     const linha=pref=>f.esteiras.filter(e=>String(e.nome||'').indexOf(pref)===0)[0];
-    const poe=(pref,v,det,mov)=>{
+    const poe=(pref,v,det,mov,chaveHab)=>{
       const l=linha(pref);if(!l)return;
       if(v!==undefined&&!isNaN(Number(v)))l.n=Number(v);
+      if(chaveHab&&!isNaN(Number(H[chaveHab])))l.hab=Number(H[chaveHab]);
       if(det){l.detalhe=det;l.detalheSem=det}
       if(mov!==undefined)l.movimento=mov;
     };
@@ -896,31 +896,39 @@
     const junta=(...ps)=>ps.filter(Boolean).join(' · ');
 
     poe('Refinamento',L.refinamento,
-      junta(parte(c.backlogTecnico,'no backlog técnico'),parte(c.refino,'em refino com a MV')),
-      'Soma das colunas em refino e backlog técnico do UpStream');
+      junta(parte(c.backlogTecnico,'no backlog técnico'),parte(c.refino,'em refino com a MV'))
+        ||'Nada em refino nem no backlog técnico',
+      'Soma das colunas em refino e backlog técnico do UpStream','refinamento');
 
     poe('Aprovação de US',L.aprovacaoUS,
-      'US escritas, aguardando o aceite do cliente',
-      'Coluna aguardando aprovação do cliente, no UpStream');
+      Number(L.aprovacaoUS)>0?'US escritas, aguardando o aceite do cliente'
+                             :'Nada aguardando o aceite do cliente',
+      'Coluna aguardando aprovação do cliente, no UpStream','aprovacaoUS');
 
     poe('Desenvolvimento',L.desenvolvimento,
-      'US na esteira de DownStream',
-      'Esteira de DownStream inteira — inclui o que ainda não entrou na sprint e por isso não aparece no board');
+      Number(L.desenvolvimento)>0?'US na esteira de DownStream':'Nada em desenvolvimento',
+      'Esteira de DownStream inteira — inclui o que ainda não entrou na sprint e por isso não aparece no board',
+      'desenvolvimento');
 
     poe('Em homologação na UAT',L.homologacao,
       junta(parte(c.liberado,'liberadas pelo deploy, aguardando a MV iniciar'),
             parte(c.iniciado,'com homologação iniciada'),
             parte(c.bugAjuste,'reprovadas aguardando correção'),
-            parte(c.reteste,'em reteste')),
-      'Soma das colunas liberado, iniciado, bug/ajuste e reteste');
+            parte(c.reteste,'em reteste'))
+        ||'Nada em homologação',
+      'Soma das colunas liberado, iniciado, bug/ajuste e reteste','homologacao');
 
+    // Quando uma das duas colunas esta zerada, a linha diz isso em vez de omitir:
+    // na Revenue nao ha nada em "aprovado em UAT", tudo esta em "validado", e esconder
+    // isso faz o numero parecer errado.
     poe('Aprovado em UAT',L.aprovado,
-      junta(parte(c.aprovadoUat,'aprovadas em UAT'),parte(c.validado,'validadas')),
-      'Soma das colunas aprovado em UAT e validado');
+      [Number(c.aprovadoUat)+' em aprovado em UAT',Number(c.validado)+' em validado'].join(' · '),
+      'Soma das colunas aprovado em UAT e validado','aprovado');
 
     poe('Backlog de melhorias',L.backlog,
       'Melhorias e ajustes que não serão entregues até 13 de novembro',
-      'Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar');
+      'Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar',
+      'backlog');
 
     f.fonte='Boards UpStream, DownStream, QAStream e Homologação (Jira '+(j.projeto||'')+')';
     const d=new Date(j.lidoEm);

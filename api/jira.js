@@ -94,16 +94,20 @@ export default async function handler(req, res) {
   if (!projeto) return res.status(400).json({ erro: 'frente_invalida', mensagem: 'Use frente=central ou frente=revenue.' });
 
   const base = `project = ${projeto} AND issuetype in (${TIPOS})`;
-  const out = { frente, projeto, lidoEm: new Date().toISOString(), colunas: {}, jql: {} };
+  // Mesmo recorte so com habilitador, para o botao "Ocultar habilitadores" ter o que
+  // descontar: sem isso ele fica na tela sem efeito.
+  const baseHab = `project = ${projeto} AND issuetype = 10005`;
+  const out = { frente, projeto, lidoEm: new Date().toISOString(), colunas: {}, colunasHab: {}, jql: {} };
 
   try {
     const nomes = Object.keys(COLUNAS);
+    const monta = (raiz, n) => COLUNAS[n] ? `${raiz} AND (${COLUNAS[n]})` : raiz;
     const vals = await Promise.all(nomes.map(n => {
-      const jql = COLUNAS[n] ? `${base} AND (${COLUNAS[n]})` : base;
-      out.jql[n] = jql;
-      return contar(h, jql);
+      out.jql[n] = monta(base, n);
+      return contar(h, out.jql[n]);
     }));
-    nomes.forEach((n, i) => { out.colunas[n] = vals[i]; });
+    const habs = await Promise.all(nomes.map(n => contar(h, monta(baseHab, n))));
+    nomes.forEach((n, i) => { out.colunas[n] = vals[i]; out.colunasHab[n] = habs[i]; });
   } catch (e) {
     return res.status(502).json({ erro: 'jira_falhou', mensagem: String(e.message || e) });
   }
@@ -119,6 +123,16 @@ export default async function handler(req, res) {
     backlog:        c.backlog
   };
   out.linhas = linhas;
+  // Quantos de cada linha sao habilitador, para o botao de ocultar refazer a conta.
+  const ch = out.colunasHab;
+  out.linhasHab = {
+    refinamento:    ch.refino + ch.backlogTecnico,
+    aprovacaoUS:    ch.aprovacaoUS,
+    desenvolvimento: ch.desenvolvimento,
+    homologacao:    ch.liberado + ch.iniciado + ch.bugAjuste + ch.reteste,
+    aprovado:       ch.aprovadoUat + ch.validado,
+    backlog:        ch.backlog
+  };
   // Base do percentual: o escopo a entregar, SEM o backlog de melhorias.
   out.escopoAtivo = linhas.refinamento + linhas.aprovacaoUS + linhas.desenvolvimento
                   + linhas.homologacao + linhas.aprovado;
