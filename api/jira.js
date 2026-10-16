@@ -22,7 +22,16 @@ const CONSULTAS = {
   desenvolvimento: 'status in ("Pronto para DEV","EM DESENVOLVIMENTO","PRONTO PARA DEPLOY EM QA") OR (status = "Realizando Deploy em QA" AND sprint in openSprints())',
   naUAT:         'status in ("Realizando Deploy em QA","PRONTO PARA TESTES","EM TESTE QA","BUG EM TESTES","Aguardando Review","Pós Review","Liberado para deploy","EM HOMOLOGAÇÃO","BUG","BUG EM CORREÇÃO","PRONTO PARA DEPLOY EM PROD","CONCLUÍDO") AND NOT (status = "Realizando Deploy em QA" AND sprint in openSprints())',
   backlog:       'status = "BACKLOG"',
-  total:         ''
+  total:         '',
+  // Decomposicao da linha de homologacao, para o painel destrinchar sozinho.
+  // "Pós Review" E UAT: e a coluna para onde o deploy do Lucas levou as US.
+  // Nao e espera para subir — ja subiram, a MV e que ainda nao comecou a testar.
+  posReview:     'status = "Pós Review"',
+  iniciada:      'status = "EM HOMOLOGAÇÃO"',
+  bugAjuste:     'status in ("BUG","BUG EM CORREÇÃO")',
+  reteste:       'status = "BUG EM TESTES"',
+  liberado:      'status = "Liberado para deploy"',
+  validado:      'status in ("PRONTO PARA DEPLOY EM PROD","Deploy em Prod. realizado","CONCLUÍDO")'
 };
 
 const PROJETO = { central: 'MVPMO', revenue: 'MVREV' };

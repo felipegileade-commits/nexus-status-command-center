@@ -876,7 +876,30 @@
     poe('Desenvolvimento',c.desenvolvimento);
     poe('Backlog de melhorias',c.backlog);
     const apr=linha('Aprovado em UAT'),hom=linha('Em homologação');
-    if(apr&&hom&&!isNaN(Number(c.naUAT)))hom.n=Math.max(0,Number(c.naUAT)-Number(apr.n));
+    if(apr&&hom&&!isNaN(Number(c.naUAT))){
+      hom.n=Math.max(0,Number(c.naUAT)-Number(apr.n));
+      // Destrincha a linha: sem isso o numero cheio nao diz nada a quem le.
+      // A ordem e a da esteira — o que acabou de subir primeiro, o que trava por ultimo.
+      const etapas=[
+        [Number(c.posReview),'liberadas pelo deploy, aguardando a MV iniciar'],
+        [Number(c.iniciada),'com homologação iniciada'],
+        [Number(c.bugAjuste),'reprovadas aguardando correção'],
+        [Number(c.reteste),'em reteste']
+      ].filter(p=>p[0]>0);
+      if(etapas.length){
+        hom.detalhe=etapas.map(p=>p[0]+' '+p[1]).join(' · ');
+        hom.detalheSem=hom.detalhe;
+        const soma=etapas.reduce((t,p)=>t+p[0],0),sobra=soma-hom.n;
+        hom.movimento='Somam '+soma+' nos status de homologação do Jira'
+          +(sobra>0?' · '+sobra+' já tem aceite registrado pela MV e conta na linha de baixo':'')
+          +(sobra<0?' · a MV registrou '+(-sobra)+' aceite(s) que o Jira ainda não refletiu':'');
+      }
+    }
+    // A linha de aprovado nao muda de numero, mas ganha a composicao do Jira.
+    if(apr&&(Number(c.liberado)>0||Number(c.validado)>0)){
+      apr.movimento='No Jira: '+(c.liberado||0)+' liberadas para deploy e '+(c.validado||0)+' prontas para produção'
+        +' · o aceite formal continua vindo do controle da MV';
+    }
     const d=new Date(j.lidoEm);
     f.vivo=isNaN(d)?'':d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
     f.lidoEm=isNaN(d)?f.lidoEm:d.toISOString().slice(0,10);
