@@ -677,57 +677,7 @@
      "base": "Habilitador validado pelo QA Sottelli; não passa pela homologação do cliente. Status Validado (Pronto para deploy em Prod) no Jira MVREV."
     }
    ],
-   "reteste": [
-    {
-     "key": "MVREV-38",
-     "titulo": "Criação automática do Caso de Avaliação de Arquitetura",
-     "tipo": "História",
-     "sprint": "Sprint 2",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    },
-    {
-     "key": "MVREV-39",
-     "titulo": "SLA - Estruturação do Caso de Avaliação de Arquitetura",
-     "tipo": "História",
-     "sprint": "Sprint 2",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    },
-    {
-     "key": "MVREV-42",
-     "titulo": "Conclusão da Avaliação de Arquitetura com impacto na Cotação",
-     "tipo": "História",
-     "sprint": "Sprint 2",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    },
-    {
-     "key": "MVREV-82",
-     "titulo": "Criação do objeto Produto da Regra de Precificação de Projetos (Hospitalar)",
-     "tipo": "História",
-     "sprint": "Sprint 2",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    },
-    {
-     "key": "MVREV-151",
-     "titulo": "Soul MV | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
-     "tipo": "História",
-     "sprint": "Sprint 8",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    },
-    {
-     "key": "MVREV-194",
-     "titulo": "Plano de Saúde | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
-     "tipo": "História",
-     "sprint": "Sprint 8",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    },
-    {
-     "key": "MVREV-196",
-     "titulo": "Medicina Diagnostica | Etapa Inicial com Unidades da Cotação na Configuração do Produto",
-     "tipo": "História",
-     "sprint": "Sprint 7",
-     "situacao": "Ajustada pela Sottelli e disponível em UAT; aguarda reteste da MV"
-    }
-   ]
+   "reteste": []
   },
   "central": {
    "nome": "Central de Projetos",
