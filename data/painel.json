@@ -1,5 +1,5 @@
 {
  "_leiame": "Data e semana do cabecalho. Fica FORA do <main>, entao nao entra no estado gravado no Supabase. Rodapes e impresso leem daqui. Atualize sempre que os numeros do painel forem atualizados.",
- "atualizadoEm": "15/10/2026",
+ "atualizadoEm": "16/10/2026",
  "semana": 42
 }

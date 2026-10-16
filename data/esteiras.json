@@ -3,15 +3,15 @@
  "frentes": {
   "central": {
    "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
-   "lidoEm": "2026-10-15",
+   "lidoEm": "2026-10-16",
    "esteiras": [
     {
      "nome": "Refinamento · UpStream",
      "n": 11,
-     "hab": 1,
+     "hab": 8,
      "bloqueado": true,
      "detalhe": "8 em análise técnica · 3 em refino com a MV",
-     "detalheSem": "7 em análise técnica · 3 em refino com a MV",
+     "detalheSem": "3 em refino com a MV",
      "movimento": "Eram 28 em 06/10 · as 17 que saíram foram para o Backlog de melhorias; nenhuma avançou na esteira",
      "espera": "Agenda de refino com a MV",
      "dono": "compartilhada",
@@ -20,67 +20,55 @@
     {
      "nome": "Aprovação de US · UpStream",
      "n": 4,
-     "hab": 1,
+     "hab": 0,
      "bloqueado": true,
      "detalhe": "US escritas, aguardando o aceite do cliente",
      "detalheSem": "US escritas, aguardando o aceite do cliente",
      "movimento": "Eram 12 em 06/10 · as 8 que saíram foram para o Backlog de melhorias",
      "espera": "Agenda de aprovação de US",
-     "dono": "mv",
+     "dono": "sottelli",
      "donoTexto": "MV"
     },
     {
      "nome": "Desenvolvimento · DownStream",
-     "n": 20,
-     "hab": 8,
-     "detalhe": "11 dos portais aguardando deploy · 5 em desenvolvimento · 3 liberadas para dev · 1 pronta para deploy em QA",
-     "detalheSem": "7 dos portais aguardando deploy · 3 em desenvolvimento · 1 liberada para dev · 1 pronta para deploy em QA",
-     "movimento": "Eram 23 em 06/10 · 4 foram para o Backlog de melhorias · os 11 cards de portal seguem aqui porque ficaram fora do deploy da Sprint 17",
-     "espera": "Deploy dos portais e abertura da sprint",
+     "n": 12,
+     "hab": 7,
+     "detalhe": "6 em desenvolvimento · 3 em code review · 2 liberadas para dev · 1 pronta para deploy em QA",
+     "detalheSem": "4 em desenvolvimento · 1 liberada para dev",
+     "movimento": "O board mostra 9 porque filtra pela sprint aberta · as outras 3 estão em status de desenvolvimento sem sprint atribuída e precisam entrar na Sprint 17",
+     "espera": "Fechamento da sprint",
      "dono": "sottelli",
      "donoTexto": "Sottelli"
     },
     {
      "nome": "Em homologação na UAT",
-     "n": 53,
-     "hab": 12,
-     "detalhe": "29 subiram no deploy da Sprint 17 e a MV ainda não iniciou · 14 reprovadas ou em correção · 10 em teste e review",
-     "detalheSem": "20 subiram no deploy da Sprint 17 e a MV ainda não iniciou · 14 reprovadas ou em correção · 7 em teste e review",
-     "movimento": "Faz parte das 90 de 06/10 · desceu para 53 porque 37 foram aprovadas e subiram para a linha de baixo, não porque sumiram",
+     "n": 61,
+     "hab": 15,
+     "detalhe": "37 subiram no deploy e a MV ainda não iniciou o teste · 14 reprovadas ou em correção · 10 em teste e review",
+     "detalheSem": "28 subiram no deploy e a MV ainda não iniciou o teste · 11 reprovadas ou em correção · 7 em teste e review",
+     "movimento": "Fazia parte das 90 de 06/10 · as que saíram daqui foram aprovadas e estão na linha de baixo, não sumiram",
      "espera": "Teste e aprovação da MV na UAT",
      "dono": "mv",
      "donoTexto": "MV + Acompanhamento Sottelli"
     },
     {
      "nome": "Aprovado em UAT",
-     "n": 55,
-     "hab": 14,
+     "n": 96,
+     "hab": 25,
      "concluido": true,
-     "detalhe": "Aceite do cliente dado · status \"Liberado para deploy\" no board de Homologação",
-     "detalheSem": "41 testáveis com aceite do cliente",
-     "movimento": "Eram 49 dentro das 90 em 06/10 · subiu 6 com as aprovações da semana",
+     "detalhe": "55 com aceite dado · 40 prontas para o deploy de produção · 1 concluída — nenhuma subiu para produção ainda",
+     "detalheSem": "40 com aceite dado · 30 prontas para o deploy de produção · 1 concluída",
+     "movimento": "Eram 90 em 06/10 · subiu para 96 com as aprovações da semana; este número só cresce",
      "espera": "",
      "dono": "grupo",
      "donoTexto": "Aprovado pelo cliente"
     },
     {
-     "nome": "Validado · em produção",
-     "n": 41,
-     "hab": 12,
-     "concluido": true,
-     "detalhe": "Status \"Pronto para deploy em prod\", \"Deploy em prod. realizado\" e \"Concluído\"",
-     "detalheSem": "29 testáveis em produção",
-     "movimento": "É o número que você lê na coluna Validado do board · não mudou na semana",
-     "espera": "",
-     "dono": "grupo",
-     "donoTexto": "Concluído em grupo"
-    },
-    {
      "nome": "Em espera, bloqueada ou cancelada",
      "n": 1,
+     "hab": 0,
      "detalhe": "Fora de qualquer fila ativa",
      "detalheSem": "Fora de qualquer fila ativa",
-     "movimento": "",
      "espera": "",
      "dono": "fora",
      "donoTexto": ""
@@ -90,7 +78,7 @@
      "n": 90,
      "foraEscopo": true,
      "detalhe": "Coluna BACKLOG do board de Homologação · melhorias levantadas nas homologações e nos refinamentos, fora do escopo contratado",
-     "movimento": "Eram 31 US em 06/10 · entraram 51 vindas do refinamento, da aprovação e do desenvolvimento, e 8 nasceram aqui — nenhuma delas foi feita nem será entregue neste projeto",
+     "movimento": "Eram 31 US em 06/10 · entraram 51 vindas do refinamento, da aprovação e do desenvolvimento, e 8 nasceram aqui — nenhuma delas será feita nem entregue neste projeto",
      "espera": "",
      "dono": "fora",
      "donoTexto": ""
@@ -118,7 +106,7 @@
      "texto": "Aprovar a US"
     }
    ],
-   "nota": "Contagem de card no Jira MVPMO em 15/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 275 US no total, 185 no escopo ativo e 90 no backlog de melhorias. Em 06/10 eram 237 US — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT — as três linhas de homologação, aprovado e validado somam 149. A linha \"Em homologação na UAT\" caiu de 90 para 53 porque 37 US foram aprovadas e passaram para \"Aprovado em UAT\"; somadas, as três linhas de UAT subiram de 147 para 149. Dentro das 53, as 29 que subiram no deploy da Sprint 17 são tudo o que estava desenvolvido na Central menos os portais, e a MV ainda não começou a testá-las; as 14 reprovadas ou em correção seguem assim até serem ajustadas. Os 11 cards de portal continuam em desenvolvimento porque ficaram fora do deploy. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
+   "nota": "Contagem de card no Jira MVPMO em 16/10, tipos História e Habilitador, não esforço. O quadro fecha com o Jira: 275 US no total, 185 no escopo ativo e 90 no backlog de melhorias. Em 06/10 eram 237 US — 206 no escopo e 31 no backlog; desde então foram criadas 38 US novas e 51 saíram do escopo para o backlog, que é o motivo de as três primeiras linhas terem encolhido. Nenhuma US sumiu: ou avançou na esteira, ou foi para o backlog de melhorias. Desenvolvido é só o que está em UAT: as linhas de homologação e de aprovado somam 157, contra 147 em 06/10. \"Aprovado em UAT\" junta o aceite do cliente (status Liberado para deploy) com o que está pronto para o deploy de produção — nenhuma US da Central subiu para produção até hoje, o status \"Pronto para deploy em prod\" quer dizer pronta para subir. A linha de desenvolvimento conta 12 e o board mostra 9: a diferença são 3 US em status de desenvolvimento sem sprint atribuída, que precisam entrar na Sprint 17 para aparecerem no quadro. As 37 que subiram no deploy são tudo o que estava desenvolvido na Central até a Sprint 17, portais inclusive, e a MV ainda não começou a testá-las. Cada melhoria acatada no projeto consumiu esforço que estava alocado a outra coisa, e o backlog de melhorias não será feito nem entregue nesta janela de projeto.",
    "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco.",
    "totalNota": "fecha com a contagem crua do Jira MVPMO"
   },
