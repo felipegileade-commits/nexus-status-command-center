@@ -262,21 +262,26 @@
     },
     "PONTOS DE ATENÇÃO": {
      "remover": [
-      "Esforço adicional de 11%"
+      "Esforço adicional de 11%",
+      "Documento de cutover (Plano de Virada) com entrega prevista"
      ],
      "incluir": [
       "Material do banner recebido neste mês; o desenvolvimento ainda não começou, porque a capacidade do time está em ajustes, bugs e agendas de homologação."
      ]
     },
     "PENDÊNCIAS": {
-     "remover": [],
+     "remover": [
+      "Dicionário de dados Salesforce para apoio do time MV"
+     ],
      "incluir": [
       "Documento de cutover (Plano de Virada): confirmar o status atual.",
       "Dicionário de dados Salesforce para a integração com a Benner: confirmar se a pendência foi sanada."
      ]
     },
     "IMPEDIMENTOS": {
-     "remover": [],
+     "remover": [
+      "Integração com a Benner ainda em aberto"
+     ],
      "incluir": [
       "Integração com a Benner ainda em aberto — bloqueia parte do desenvolvimento.",
       "125 US testáveis aguardando homologação na UAT. Todas precisam ser testadas e aprovadas para a frente fechar."

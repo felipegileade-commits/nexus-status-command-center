@@ -694,6 +694,9 @@
           .filter(x=>x.textContent.trim().toUpperCase()===cx.toUpperCase())[0];
         const caixa=titulo&&titulo.parentNode;if(!caixa)return;
         const cfg=f.resumo[cx]||{};
+        Array.prototype.slice.call(caixa.querySelectorAll(".bullet:not(.nx-live)")).forEach(b=>{
+          if(!b.textContent.trim()&&b.style.display!=="none"){b.style.display="none";mudou=true}
+        });
         (cfg.remover||[]).forEach(trecho=>{
           Array.prototype.slice.call(caixa.querySelectorAll('.bullet:not(.nx-live)')).forEach(b=>{
             if(b.textContent.indexOf(trecho)>=0&&b.style.display!=='none'){b.style.display='none';mudou=true}
