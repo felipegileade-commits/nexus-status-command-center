@@ -341,7 +341,15 @@
   function botaoHab(w){
     ['central','revenue'].forEach(id=>{
       const sec=w.document.getElementById(id);if(!sec)return;
-      const head=sec.querySelector('.front-head');if(!head||head.querySelector('.nx-tog'))return;
+      const head=sec.querySelector('.front-head');if(!head)return;
+      // Sem numero de habilitador declarado na frente, o botao nao tem o que ocultar:
+      // a regua por coluna nao separa testavel de habilitador. Botao que nao faz nada
+      // so gera pergunta, entao ele some — e some tambem se ja estava na tela.
+      const f=esteiras&&esteiras.frentes&&esteiras.frentes[id];
+      const temHab=f&&Array.isArray(f.esteiras)&&f.esteiras.some(e=>Number(e.hab)>0);
+      const velho=head.querySelector('.nx-tog');
+      if(!temHab){if(velho)velho.remove();return}
+      if(velho)return;
       const b=w.document.createElement('button');
       b.type='button';b.className='nx-tog nx-live';b.setAttribute('aria-pressed','false');
       b.textContent='Ocultar habilitadores';
