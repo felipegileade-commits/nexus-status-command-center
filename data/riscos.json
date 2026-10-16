@@ -8,6 +8,16 @@
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [
     {
+     "deRisco": "A inclusão de novos itens recalculou o percentual geral do cronograma. O desvio permanece controlado em -1,63%.",
+     "risco": "A janela de desenvolvimento se fecha: restam as sprints 18 e 19. A sprint 20 está reservada a ajustes e bugs, e a entrega final é 13/11. Todo item que não estiver refinado e aprovado a tempo da sprint 18 fica fora do escopo entregue.",
+     "acao": "Fechar o escopo final nas próximas duas semanas e concentrar as sprints 18 e 19 no que já está refinado e aprovado, deixando a 20 livre para a correção do que vier da homologação."
+    },
+    {
+     "deRisco": "28 US estão represadas no refinamento da esteira de UpStream — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
+     "risco": "Velocidade reduzida na dinâmica de aprovações durante as homologações: 82 das 130 US testáveis do escopo estão paradas na homologação — 63%. São 58 liberadas aguardando a MV iniciar o teste, 13 reprovadas aguardando correção e 11 em reteste.",
+     "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 82 que determina se a entrega fecha em 13/11."
+    },
+    {
      "deRisco": "38 US estão represadas no refinamento da esteira de UpStream — 34 aguardam a escrita da US, 3 estão em refino e 1 em análise técnica. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
      "risco": "28 US estão represadas no refinamento da esteira de UpStream — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. Sem agenda de refino com a MV, nenhuma delas chega ao desenvolvimento.",
      "acao": "Priorizar a marcação das agendas de refino dessas 28 US com o PMO da MV, considerando o tempo restante de projeto. Das cinco etapas do refinamento, três dependem da MV e duas da Sottelli.",
@@ -35,7 +45,7 @@
    "extras": [
     {
      "id": "refinamento-sem-vazao",
-     "risco": "7 US travadas antes do desenvolvimento: 4 aguardando aprovação do cliente, 2 em análise técnica (backlog técnico) e 1 em refino com a MV. Restam apenas as sprints 18 e 19 para desenvolver — a sprint 20 é só ajustes e bugs, então o que não for refinado e aprovado a tempo da 18 fica fora da entrega de 13/11.",
+     "risco": "7 US travadas antes do desenvolvimento: 4 aguardando aprovação do cliente, 2 em análise técnica (backlog técnico) e 1 em refino com a MV. Nenhuma delas entra em sprint enquanto não for refinada e aprovada.",
      "acao": "Manter e priorizar as agendas de refino e de aprovação de US com a MV, de forma que as 7 estejam aprovadas até quarta-feira que vem, a tempo da pré-planning."
     },
     {
