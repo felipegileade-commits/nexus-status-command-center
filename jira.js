@@ -134,6 +134,11 @@
       /* Passo ja concluido: verde discreto, para separar do que ainda falta. */
       .next-card.nx-feito{border-left:3px solid #45b36b}
       .next-card.nx-feito small{color:#45b36b;font-weight:700}
+      /* Card informativo: uma coluna so, sem plano de acao, e tom neutro para nao ser
+         lido como risco. */
+      .risk-card.nx-info{border-left:3px solid var(--teal,#2ec4b6)}
+      .risk-card.nx-info .risk-label{color:var(--teal,#2ec4b6)}
+      .risk-card.nx-info p{max-width:none}
       .nx-est-linhas{display:grid;gap:8px}
       .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 218px;gap:14px;align-items:center;
         padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
@@ -609,6 +614,18 @@
   function blocoRiscos(w,j){
     if(!j||!j.frentes)return;
     let mudou=false;
+    // Titulo da secao de gestao ativa. Troca travada por conteudo, como os cards:
+    // so reescreve se o titulo na tela ainda for o que este arquivo publicou.
+    if(j.tituloGestao&&j.tituloGestao.de){
+      const t=j.tituloGestao;
+      Array.prototype.slice.call(w.document.querySelectorAll('.section-title h2')).forEach(h=>{
+        if(h.textContent.trim()!==t.de)return;
+        h.textContent=t.para;mudou=true;
+        const cab=h.parentNode&&h.parentNode.parentNode;
+        const sub=cab&&cab.querySelector('p');
+        if(sub&&t.sub)sub.textContent=t.sub;
+      });
+    }
     Object.keys(j.frentes).forEach(chave=>{
       const f=j.frentes[chave],root=w.document.getElementById(chave);if(!f||!root)return;
       const pRisco=root.querySelector('.risk-col:not(.action) p'),
@@ -638,6 +655,21 @@
         const pa=n.querySelector(".risk-col.action p");if(pa)pa.textContent=x.acao;
         wrap.appendChild(n);mudou=true;
       });
+      // Informacoes: nao sao risco, sao o contexto de como o escopo chegou ate aqui.
+      // Entram na mesma grade dos cards, com a coluna de acao substituida por um texto
+      // corrido — por isso nao clonam o modelo, que tem duas colunas.
+      if(wrap)(f.informacoes||[]).forEach(x=>{
+        if(!x.id||wrap.querySelector('[data-nx-info="'+x.id+'"]'))return;
+        const n=w.document.createElement('div');
+        n.className='risk-card nx-live nx-info';n.setAttribute('data-nx-info',x.id);
+        const col=w.document.createElement('div');col.className='risk-col';
+        const lab=w.document.createElement('div');lab.className='risk-label';
+        lab.textContent=x.titulo||'Informação';
+        const pp=w.document.createElement('p');pp.textContent=x.texto||'';
+        col.appendChild(lab);col.appendChild(pp);n.appendChild(col);
+        wrap.appendChild(n);mudou=true;
+      });
+
       // Pontos de atencao e proximos passos extras entram como nx-live, por cima do que
       // veio do painel: aparecem na tela e sao removidos antes de gravar o estado.
       const tituloAt=Array.prototype.slice.call(root.querySelectorAll('.week-card .box-title'))

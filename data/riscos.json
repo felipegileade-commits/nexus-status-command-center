@@ -108,6 +108,18 @@
     {
      "texto": "Agendas de refino e agendas internas realizadas no período."
     }
+   ],
+   "informacoes": [
+    {
+     "id": "capacidade-13-11",
+     "titulo": "Capacidade do time até 13/11",
+     "texto": "O time técnico da Central apresentou à Andressa, em reunião, o levantamento das US que cabem na capacidade de atuação do time até a data de término do projeto, 13 de novembro. São as US necessárias para que a Central de Projetos entregue o conjunto funcional previsto."
+    },
+    {
+     "id": "escopo-realocado",
+     "titulo": "Realocação de esforço entre épicos",
+     "texto": "Depois desse levantamento, foi apurado o que ficou fora do escopo e o que foi entregue além do previsto. O caso mais relevante são os três portais: no cronograma original o esforço previsto correspondia a portais de escopo básico, e o que foi construído tem porte bem maior. Esse esforço adicional saiu de outros épicos — por isso parte das US foi para o backlog de melhorias: a capacidade que as atenderia foi consumida em itens que cresceram ao longo das agendas de refino e de homologação."
+    }
    ]
   },
   "revenue": {
@@ -158,6 +170,13 @@
     },
     {
      "texto": "Material do banner recebido da MV."
+    }
+   ],
+   "informacoes": [
+    {
+     "id": "escopo-realocado-rev",
+     "titulo": "Realocação de esforço entre épicos",
+     "texto": "Assim como na Central, itens que cresceram ao longo das agendas de refino e de homologação consumiram capacidade prevista para outros épicos. O backlog de melhorias da frente reúne o que não cabe na janela restante até 13 de novembro."
     }
    ]
   }
@@ -217,5 +236,10 @@
     "nivel": "Médio"
    }
   ]
+ },
+ "tituloGestao": {
+  "de": "Riscos e planos de ação",
+  "para": "Riscos, planos de ações e informações",
+  "sub": "Impacto, resposta e contexto apresentados lado a lado."
  }
 }
