@@ -67,7 +67,7 @@
     },
     {
      "id": "vazao-homologacao",
-     "texto": "Dar vazão às 82 US paradas na homologação (63% do escopo testável): liberar o início dos testes, corrigir as 13 reprovadas e concluir os 11 retestes.",
+     "texto": "Dar vazão às 82 US paradas na homologação: liberar o início dos testes, corrigir as 13 reprovadas e concluir os 11 retestes.",
      "status": "Previsto"
     },
     {
@@ -76,13 +76,8 @@
      "status": "Previsto"
     },
     {
-     "id": "melhorias-refinamento",
-     "texto": "Definição dos próximos passos para as melhorias levantadas nos refinamentos.",
-     "status": "Previsto"
-    },
-    {
      "id": "agenda-escopo-final",
-     "texto": "Marcar agenda para definir o escopo final.",
+     "texto": "Marcar agenda com a MV para definir o escopo final até 13/11.",
      "status": "Previsto"
     }
    ],
@@ -92,33 +87,30 @@
      "texto": "Fila de refinamento (upstream) sem vazão: 7 US travadas antes do desenvolvimento — 4 aguardando aprovação do cliente, 2 em análise técnica e 1 em refino. Restam as sprints 18 e 19 para desenvolver; a sprint 20 é só ajustes e bugs. As agendas de refino e de aprovação precisam ser mantidas e priorizadas, porque é o que ainda cabe na entrega de 13/11."
     }
    ],
-   "executado": [
-    {
-     "texto": "Deploy de todas as US desenvolvidas até a Sprint 17, portais inclusive — todas estão em UAT."
-    },
-    {
-     "texto": "Reunião de homologação com a MV realizada."
-    },
-    {
-     "texto": "Sottelli reorganizou o Jira e alinhou os status à realidade das entregas; os números deste painel saem dessa base."
-    },
-    {
-     "texto": "US acima da capacidade de esforço movidas para o backlog de melhorias — 90 cards que não serão entregues até 13/11."
-    },
-    {
-     "texto": "Agendas de refino e agendas internas realizadas no período."
-    }
-   ],
    "informacoes": [
     {
      "id": "capacidade-13-11",
      "titulo": "Capacidade do time até 13/11",
-     "texto": "O time técnico da Central apresentou à Andressa, em reunião, o levantamento das US que cabem na capacidade de atuação do time até a data de término do projeto, 13 de novembro. São as US necessárias para que a Central de Projetos entregue o conjunto funcional previsto."
+     "texto": "O time técnico da Central apresentou esta semana, em reunião com a gerência de projetos da MV, o levantamento das US que cabem na capacidade de atuação do time até a data de término do projeto, 13 de novembro. É esse levantamento que define o conjunto de requisitos que a Central vai entregar — parte do que foi previsto ao longo do projeto não cabe nessa janela."
     },
     {
      "id": "escopo-realocado",
      "titulo": "Realocação de esforço entre épicos",
      "texto": "Depois desse levantamento, foi apurado o que ficou fora do escopo e o que foi entregue além do previsto. O caso mais relevante são os três portais: no cronograma original o esforço previsto correspondia a portais de escopo básico, e o que foi construído tem porte bem maior. Esse esforço adicional saiu de outros épicos — por isso parte das US foi para o backlog de melhorias: a capacidade que as atenderia foi consumida em itens que cresceram ao longo das agendas de refino e de homologação."
+    }
+   ],
+   "passosOcultar": [
+    {
+     "contem": "homologação guiada"
+    },
+    {
+     "contem": "Portal de Apontamento"
+    },
+    {
+     "contem": "nomenclatura do campo de horas"
+    },
+    {
+     "contem": "melhorias levantadas nos refinamentos"
     }
    ]
   },
@@ -143,6 +135,16 @@
    ],
    "passos": [
     {
+     "id": "vazao-homologacao-rev",
+     "texto": "Dar vazão às 125 US testáveis em homologação na UAT.",
+     "status": "Previsto"
+    },
+    {
+     "id": "banner-rev",
+     "texto": "Definir a janela de desenvolvimento do banner, agora que o material foi recebido.",
+     "status": "Previsto"
+    },
+    {
      "id": "start-legado",
      "texto": "Start do legado na próxima semana.",
      "status": "Previsto"
@@ -158,25 +160,22 @@
      "status": "Concluído"
     }
    ],
-   "executado": [
-    {
-     "texto": "Rodadas de homologação com a MV realizadas."
-    },
-    {
-     "texto": "Retestes executados e bugs corrigidos."
-    },
-    {
-     "texto": "Vários ajustes aplicados a partir das reprovações da homologação."
-    },
-    {
-     "texto": "Material do banner recebido da MV."
-    }
-   ],
    "informacoes": [
     {
      "id": "escopo-realocado-rev",
      "titulo": "Realocação de esforço entre épicos",
      "texto": "Assim como na Central, itens que cresceram ao longo das agendas de refino e de homologação consumiram capacidade prevista para outros épicos. O backlog de melhorias da frente reúne o que não cabe na janela restante até 13 de novembro."
+    }
+   ],
+   "passosOcultar": [
+    {
+     "contem": "100% do desenvolvimento até 04/09"
+    },
+    {
+     "contem": "documentação de homologação"
+    },
+    {
+     "contem": "dicionário de dados Salesforce"
     }
    ]
   }
@@ -236,10 +235,5 @@
     "nivel": "Médio"
    }
   ]
- },
- "tituloGestao": {
-  "de": "Riscos e planos de ação",
-  "para": "Riscos, planos de ações e informações",
-  "sub": "Impacto, resposta e contexto apresentados lado a lado."
  }
 }

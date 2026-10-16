@@ -134,11 +134,14 @@
       /* Passo ja concluido: verde discreto, para separar do que ainda falta. */
       .next-card.nx-feito{border-left:3px solid #45b36b}
       .next-card.nx-feito small{color:#45b36b;font-weight:700}
-      /* Card informativo: uma coluna so, sem plano de acao, e tom neutro para nao ser
-         lido como risco. */
-      .risk-card.nx-info{border-left:3px solid var(--teal,#2ec4b6)}
-      .risk-card.nx-info .risk-label{color:var(--teal,#2ec4b6)}
-      .risk-card.nx-info p{max-width:none}
+      /* Secao de informacoes: contexto, nao risco. Fica depois da de riscos, com visual
+         proprio para ninguem ler como pendencia. */
+      .nx-info-wrap{display:grid;gap:12px}
+      .nx-info-card{background:var(--panel,#0b1f33);border:1px solid var(--line,#18364f);
+        border-left:3px solid var(--teal,#2ec4b6);border-radius:12px;padding:15px 18px}
+      .nx-info-rot{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+        color:var(--teal,#2ec4b6);margin-bottom:6px}
+      .nx-info-card p{margin:0;font-size:12.5px;line-height:1.6;color:var(--text);max-width:none}
       .nx-est-linhas{display:grid;gap:8px}
       .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 218px;gap:14px;align-items:center;
         padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
@@ -655,20 +658,33 @@
         const pa=n.querySelector(".risk-col.action p");if(pa)pa.textContent=x.acao;
         wrap.appendChild(n);mudou=true;
       });
-      // Informacoes: nao sao risco, sao o contexto de como o escopo chegou ate aqui.
-      // Entram na mesma grade dos cards, com a coluna de acao substituida por um texto
-      // corrido — por isso nao clonam o modelo, que tem duas colunas.
-      if(wrap)(f.informacoes||[]).forEach(x=>{
-        if(!x.id||wrap.querySelector('[data-nx-info="'+x.id+'"]'))return;
-        const n=w.document.createElement('div');
-        n.className='risk-card nx-live nx-info';n.setAttribute('data-nx-info',x.id);
-        const col=w.document.createElement('div');col.className='risk-col';
-        const lab=w.document.createElement('div');lab.className='risk-label';
-        lab.textContent=x.titulo||'Informação';
-        const pp=w.document.createElement('p');pp.textContent=x.texto||'';
-        col.appendChild(lab);col.appendChild(pp);n.appendChild(col);
-        wrap.appendChild(n);mudou=true;
-      });
+      // Informacoes ganham SECAO PROPRIA, depois da de riscos: nao sao risco nem plano
+      // de acao, sao o contexto de como o escopo chegou ate aqui, e misturados na mesma
+      // grade confundiam a leitura.
+      const secRisco=wrap&&wrap.closest('.section');
+      if(secRisco&&(f.informacoes||[]).length){
+        let secInfo=root.querySelector('.nx-sec-info');
+        if(!secInfo){
+          secInfo=w.document.createElement('div');
+          secInfo.className='section nx-live nx-sec-info';
+          secInfo.innerHTML='<div class="section-title"><div>'
+            +'<div class="eyebrow">CONTEXTO</div><h2>Informações</h2></div>'
+            +'<p>O que explica os números, sem ser risco nem pendência.</p></div>'
+            +'<div class="nx-info-wrap"></div>';
+          secRisco.parentNode.insertBefore(secInfo,secRisco.nextSibling);
+          mudou=true;
+        }
+        const alvo=secInfo.querySelector('.nx-info-wrap');
+        (f.informacoes||[]).forEach(x=>{
+          if(!x.id||alvo.querySelector('[data-nx-info="'+x.id+'"]'))return;
+          const n=w.document.createElement('div');
+          n.className='nx-info-card';n.setAttribute('data-nx-info',x.id);
+          const lab=w.document.createElement('div');lab.className='nx-info-rot';
+          lab.textContent=x.titulo||'Informação';
+          const pp=w.document.createElement('p');pp.textContent=x.texto||'';
+          n.appendChild(lab);n.appendChild(pp);alvo.appendChild(n);mudou=true;
+        });
+      }
 
       // Pontos de atencao e proximos passos extras entram como nx-live, por cima do que
       // veio do painel: aparecem na tela e sao removidos antes de gravar o estado.
@@ -709,18 +725,24 @@
         const st=n.querySelector('small');if(st)st.textContent=x.status||'Previsto';
         grade.appendChild(n);mudou=true;
       });
-      // "O que avancou": mesma grade dos proximos passos, mas com a situacao Concluido.
-      // Entra depois dos previstos, para a leitura ir do que falta para o que ja foi.
-      if(grade&&modeloP)(f.executado||[]).forEach((x,i)=>{
-        const id='exec-'+i;
-        if(!x.texto||grade.querySelector('[data-nx-exec="'+id+'"]'))return;
-        const n=modeloP.cloneNode(true);
-        n.className=modeloP.className+' nx-live nx-feito';n.setAttribute('data-nx-exec',id);
-        const num=n.querySelector('.n');if(num)num.textContent=String(grade.querySelectorAll('.next-card').length+1).padStart(2,'0');
-        const pp=n.querySelector('p');if(pp)pp.textContent=x.texto;
-        const st=n.querySelector('small');if(st)st.textContent='Concluído';
-        grade.appendChild(n);mudou=true;
+      // Passos que vieram do conteudo editavel e ja nao valem somem da tela. Nao sao
+      // apagados do estado: so recebem display:none, entao nada se perde no Supabase.
+      if(grade)(f.passosOcultar||[]).forEach(x=>{
+        if(!x.contem)return;
+        Array.prototype.slice.call(grade.querySelectorAll('.next-card:not(.nx-live)')).forEach(cd=>{
+          const pp=cd.querySelector('p');
+          if(pp&&pp.textContent.indexOf(x.contem)>=0&&cd.style.display!=='none'){cd.style.display='none';mudou=true}
+        });
       });
+      // Renumera o que sobrou, para a lista nao pular numero.
+      if(grade){
+        let i=0;
+        Array.prototype.slice.call(grade.querySelectorAll('.next-card')).forEach(cd=>{
+          if(cd.style.display==='none')return;
+          const num=cd.querySelector('.n');if(num){const v=String(++i).padStart(2,'0');
+            if(num.textContent!==v){num.textContent=v;mudou=true}}
+        });
+      }
     });
     // A secao de riscos e o selo "1 risco"/"Sem riscos" sao derivados desse texto,
     // entao precisam ser recalculados depois de preencher.
