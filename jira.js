@@ -121,6 +121,16 @@
       @media(max-width:900px){.nx-homolog-grid{grid-template-columns:repeat(4,1fr)!important}}
       /* Onde o trabalho esta parado: volume por esteira e de quem depende cada etapa. */
       .nx-est{margin-top:18px;padding-top:14px;border-top:1px solid var(--line,#18364f)}
+      /* O cabecalho do bloco de esteiras ganhou botao e selo: alinha a esquerda e
+         joga a fonte para a direita, em vez do space-between de quatro itens. */
+      .nx-est .nx-homolog-head{justify-content:flex-start;align-items:center}
+      .nx-est .nx-homolog-src{margin-left:auto}
+      .nx-est-vivo{background:var(--teal,#2ec4b6);border:0;color:#04121f;border-radius:7px;padding:6px 12px;
+        font-size:10.5px;font-weight:800;cursor:pointer;font-family:inherit;letter-spacing:.03em;margin-left:14px}
+      .nx-est-vivo[disabled]{opacity:.55;cursor:default}
+      .nx-est-selo{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--teal,#2ec4b6);
+        border:1px solid var(--teal,#2ec4b6);border-radius:999px;padding:3px 9px;margin-left:10px;white-space:nowrap}
+      .nx-est-erro{font-size:11px;color:var(--orange,#f08c3a);margin:10px 0 0;line-height:1.5}
       .nx-est-linhas{display:grid;gap:8px}
       .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 218px;gap:14px;align-items:center;
         padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
@@ -835,12 +845,70 @@
       const linhas=linhasArr.join('');
       const passos=(f.etapas||[]).map((p,i)=>`<span class="nx-est-passo ${esc(p.quem||'')}"><i>${esc(p.quem==='mv'?'MV':'Sottelli')}</i>${i+1}. ${esc(p.texto||'')}</span>`).join('');
       const el=d.createElement('div');el.className='nx-est nx-live';
-      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span><span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
+      // Botao de leitura ao vivo do Jira. So no editor: no painel do cliente ele nao
+      // faz sentido e ainda abriria /api/jira para qualquer visitante do link.
+      const vivo=window.NEXUS_READONLY?'':`<button type="button" class="nx-est-vivo" data-frente="${esc(chave)}">Atualizar do Jira</button>`;
+      const selo=f.vivo?`<span class="nx-est-selo">Jira · ${esc(f.vivo)}</span>`:'';
+      el.innerHTML=`<div class="nx-homolog-head"><span class="label">Onde o trabalho está</span>${vivo}${selo}<span class="nx-homolog-src">${esc(f.fonte||'')} · ${esc(dm(f.lidoEm))}</span></div>
         <div class="nx-est-linhas">${linhas}</div>
         ${passos?`<div class="nx-est-fluxo"><span class="label">As cinco etapas do refinamento</span><div class="nx-est-passos">${passos}</div></div>`:''}
         <p class="nx-homolog-nota"><b ${dual(chamada(0),chamada(1))}>${esc(chamada(0))}</b> ${dica(f.nota,'Como este quadro é montado')}</p>`;
-      fs.appendChild(el);ligaHab(w);botaoHab(w);aplicaHab(w);
+      fs.appendChild(el);ligaHab(w);botaoHab(w);aplicaHab(w);ligaVivo(w,el);
     });
+  }
+
+  // Leitura ao vivo do Jira pelo /api/jira. O endpoint conta no servidor, com o token
+  // em variavel de ambiente — a credencial nunca chega ao navegador.
+  //
+  // O que o Jira PODE escrever: refinamento, aprovacao de US, desenvolvimento, backlog
+  // e o TOTAL que esta na UAT. O que ele NAO pode: "Aprovado em UAT", que sai do
+  // controle de homologacao da MV e nao do status do card — 39 cards ja avancaram de
+  // coluna sem aceite. Por isso a homologacao recebe o resto (total na UAT menos o
+  // aprovado) e o aprovado fica intocado.
+  function aplicaJira(w,frente,j){
+    const f=esteiras&&esteiras.frentes&&esteiras.frentes[frente];
+    if(!f||!Array.isArray(f.esteiras)||!j||!j.contagens)return 'sem dados';
+    const c=j.contagens;
+    const linha=pref=>f.esteiras.filter(e=>String(e.nome||'').indexOf(pref)===0)[0];
+    const poe=(pref,v)=>{const l=linha(pref);if(l&&v!==undefined&&!isNaN(Number(v)))l.n=Number(v)};
+    poe('Refinamento',c.refinamento);
+    poe('Aprovação de US',c.aprovacaoUS);
+    poe('Desenvolvimento',c.desenvolvimento);
+    poe('Backlog de melhorias',c.backlog);
+    const apr=linha('Aprovado em UAT'),hom=linha('Em homologação');
+    if(apr&&hom&&!isNaN(Number(c.naUAT)))hom.n=Math.max(0,Number(c.naUAT)-Number(apr.n));
+    const d=new Date(j.lidoEm);
+    f.vivo=isNaN(d)?'':d.toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+    f.lidoEm=isNaN(d)?f.lidoEm:d.toISOString().slice(0,10);
+    // Redesenha o quadro: blocoEsteiras nao reescreve por cima de si mesmo.
+    const sec=w.document.getElementById(frente);
+    const velho=sec&&sec.querySelector('.front-summary .nx-est');
+    if(velho)velho.remove();
+    blocoEsteiras(w,esteiras);
+    return null;
+  }
+
+  function ligaVivo(w,el){
+    const b=el.querySelector('.nx-est-vivo');if(!b||b.__nx)return;b.__nx=true;
+    b.addEventListener('click',()=>{
+      const frente=b.getAttribute('data-frente');
+      const antes=b.textContent;b.disabled=true;b.textContent='Lendo o Jira…';
+      fetch('/api/jira?frente='+encodeURIComponent(frente),{cache:'no-store'})
+        .then(r=>r.json().then(j=>({ok:r.ok,j})))
+        .then(({ok,j})=>{
+          if(!ok){b.disabled=false;b.textContent=antes;avisoVivo(w,el,j&&j.mensagem||'O Jira não respondeu.');return}
+          const erro=aplicaJira(w,frente,j);
+          if(erro){b.disabled=false;b.textContent=antes;avisoVivo(w,el,erro)}
+        })
+        .catch(e=>{b.disabled=false;b.textContent=antes;
+          avisoVivo(w,el,String(e&&e.message||e)+' — se foi 404, a função /api/jira ainda não subiu.')});
+    });
+  }
+
+  function avisoVivo(w,el,msg){
+    let p=el.querySelector('.nx-est-erro');
+    if(!p){p=w.document.createElement('p');p.className='nx-est-erro';el.appendChild(p)}
+    p.textContent=msg;
   }
 
   // Riscos e proximos passos sobem para logo abaixo do resumo da frente, onde ficam os quadros
