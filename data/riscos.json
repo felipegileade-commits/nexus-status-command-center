@@ -3,8 +3,8 @@
  "atualizadoEm": "2026-10-13",
  "frentes": {
   "central": {
-   "risco": "Há uma velocidade reduzida na dinâmica de aprovações das US durante as homologações, resultando em uma quantidade reduzida de US repassadas nas dinâmicas.",
-   "acao": "Em andamento. As gerências de PMO e Transformação Digital estão se alinhando semanalmente para ajustar as dinâmicas e a condução, a fim de otimizar o tempo.",
+   "risco": "Velocidade reduzida na dinâmica de aprovações das US durante as homologações. Hoje 82 das 130 US testáveis do escopo estão paradas na homologação — 63%: 58 liberadas aguardando a MV iniciar o teste, 13 reprovadas aguardando correção e 11 em reteste.",
+   "acao": "Em andamento. As gerências de PMO e Transformação Digital estão se alinhando semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 82 que determina se a entrega fecha em 13/11.",
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [
     {
@@ -34,27 +34,37 @@
    ],
    "extras": [
     {
-     "id": "aprovacao-us",
-     "risco": "12 US já escritas aguardam aprovação do cliente. A aprovação é etapa da MV e, enquanto não ocorre, a história não entra na sprint.",
-     "acao": "Ampliar as agendas de aprovação de US com o PMO da MV. Hoje há mais agenda de homologação do que de aprovação, e é a aprovação que abastece o desenvolvimento."
+     "id": "refinamento-sem-vazao",
+     "risco": "7 US travadas antes do desenvolvimento: 4 aguardando aprovação do cliente, 2 em análise técnica (backlog técnico) e 1 em refino com a MV. Restam apenas as sprints 18 e 19 para desenvolver — a sprint 20 é só ajustes e bugs, então o que não for refinado e aprovado a tempo da 18 fica fora da entrega de 13/11.",
+     "acao": "Manter e priorizar as agendas de refino e de aprovação de US com a MV, de forma que as 7 estejam aprovadas até quarta-feira que vem, a tempo da pré-planning."
     },
     {
-     "id": "backlog-tecnico",
-     "risco": "Restam 9 US liberadas para desenvolvimento. É volume baixo para abastecer a sprint e deixa a equipe sem fila depois dela.",
-     "acao": "Aumentar o número de US aprovadas já na agenda de aprovação desta semana, para incorporá-las à sprint em andamento."
+     "id": "tema-do-refino",
+     "risco": "Priorização do refinamento: com a janela reduzida a duas sprints de desenvolvimento, o tema dos próximos refinos pode não ser o que o projeto precisa refinar agora.",
+     "acao": "Rever em conjunto com a MV a pauta dos próximos refinos, priorizando o que ainda cabe nas sprints 18 e 19."
     },
     {
      "id": "arquivos-mv",
-     "risco": "Arquivos enviados pela MV para o desenvolvimento ainda precisam ser verificados pela Sottelli. Exemplo: o documento Glossário, que apresenta divergências.",
-     "acao": "E-mail enviado com os pontos divergentes, endereçado ao Matheus e ao Felipe (Sottelli)."
-    },
-    {
-     "id": "priorizacao-refinamento",
-     "risco": "Priorização do refinamento: os próximos refinos precisam ser reanalisados, porque o foco passa a ser as US do escopo de itens adicionais que ainda não foram refinadas.",
-     "acao": "Reanálise da agenda dos próximos refinos. Responsável: MV (TD + PMO)."
+     "risco": "Arquivos enviados pela MV para o desenvolvimento ainda precisam ser verificados pela Sottelli. Exemplo: o documento de glossário, que apresenta divergências.",
+     "acao": "E-mail com os pontos divergentes enviado a Matheus e Felipe Gouveia, aguardando retorno."
     }
    ],
    "passos": [
+    {
+     "id": "aprovar-7-us",
+     "texto": "Aprovar as 7 US pendentes até quarta-feira, para levá-las à pré-planning e o time pontuar antes da planning.",
+     "status": "Previsto"
+    },
+    {
+     "id": "vazao-homologacao",
+     "texto": "Dar vazão às 82 US paradas na homologação (63% do escopo testável): liberar o início dos testes, corrigir as 13 reprovadas e concluir os 11 retestes.",
+     "status": "Previsto"
+    },
+    {
+     "id": "tema-refino",
+     "texto": "Revisar com a MV a pauta dos próximos refinos, para refinar o que ainda cabe nas sprints 18 e 19.",
+     "status": "Previsto"
+    },
     {
      "id": "melhorias-refinamento",
      "texto": "Definição dos próximos passos para as melhorias levantadas nos refinamentos.",
@@ -68,28 +78,45 @@
    ],
    "bullets": [
     {
-     "deTexto": "Fila de refinamento (upstream) sem vazão: 53 histórias aguardam refinamento de negócio ou a devolução de informações que ainda não temos — 48 itens pendentes e 5 em refino. As agendas de refino da Central já foram enviadas; o pedido é que sejam mantidas e priorizadas, porque é o refinamento que gera volume de US para o time de desenvolvimento. Sem esse volume, em algum momento não haverá história desenvolvida para homologar.",
-     "texto": "Fila de refinamento (upstream) sem vazão: 28 histórias aguardam refinamento de negócio ou a devolução de informações que ainda não temos — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. As agendas de refino da Central já foram enviadas; o pedido é que sejam mantidas e priorizadas, porque é o refinamento que gera volume de US para o time de desenvolvimento. Sem esse volume, em algum momento não haverá história desenvolvida para homologar."
+     "deTexto": "Fila de refinamento (upstream) sem vazão: 28 histórias aguardam refinamento de negócio ou a devolução de informações que ainda não temos — 17 em análise técnica, 10 aguardando a escrita da US e 1 em refino. As agendas de refino da Central já foram enviadas; o pedido é que sejam mantidas e priorizadas, porque é o refinamento que gera volume de US para o time de desenvolvimento. Sem esse volume, em algum momento não haverá história desenvolvida para homologar.",
+     "texto": "Fila de refinamento (upstream) sem vazão: 7 US travadas antes do desenvolvimento — 4 aguardando aprovação do cliente, 2 em análise técnica e 1 em refino. Restam as sprints 18 e 19 para desenvolver; a sprint 20 é só ajustes e bugs. As agendas de refino e de aprovação precisam ser mantidas e priorizadas, porque é o que ainda cabe na entrega de 13/11."
+    }
+   ],
+   "executado": [
+    {
+     "texto": "Deploy de todas as US desenvolvidas até a Sprint 17, portais inclusive — todas estão em UAT."
     },
     {
-     "deTexto": "Aguardando aprovação do cliente: 17 histórias — 13 em aprovação e 4 já refinadas, pendentes apenas da aprovação técnica.",
-     "texto": "Aguardando aprovação do cliente: 12 histórias já escritas, pendentes do aceite da MV para entrarem em sprint."
+     "texto": "Reunião de homologação com a MV realizada."
     },
     {
-     "deTexto": "Volume insuficiente de US aprovadas para iniciar a próxima sprint, que começa na quinta-feira 08/10: há apenas 5 histórias aprovadas disponíveis. Iniciar a sprint sem escopo aprovado não é possível, e a ausência de agendas de refino e de aprovação mantém a fila represada.",
-     "texto": "Volume insuficiente de US aprovadas para abastecer a sprint em curso, aberta em 08/10: há apenas 9 histórias liberadas para desenvolvimento. A ausência de agendas de refino e de aprovação mantém a fila represada e, mantido o ritmo, a próxima sprint abre sem escopo aprovado."
+     "texto": "Sottelli reorganizou o Jira e alinhou os status à realidade das entregas; os números deste painel saem dessa base."
+    },
+    {
+     "texto": "US acima da capacidade de esforço movidas para o backlog de melhorias — 90 cards que não serão entregues até 13/11."
+    },
+    {
+     "texto": "Agendas de refino e agendas internas realizadas no período."
     }
    ]
   },
   "revenue": {
    "atencao": [
     {
+     "id": "vazao-homologacao-rev",
+     "risco": "Vazão da homologação: 125 US testáveis estão em homologação na UAT ao mesmo tempo, contra 40 já validadas. O ritmo de teste da MV é o que determina o fechamento da frente."
+    },
+    {
+     "id": "banner",
+     "risco": "O material do banner foi recebido pela Sottelli neste mês. O desenvolvimento ainda não começou: a capacidade do time, que está reduzido, está alocada em ajustes, correção de bugs e nas agendas de homologação. O prazo entre a solicitação e o recebimento do material consumiu a janela que havia para esse desenvolvimento."
+    },
+    {
      "id": "permissionamento-apps",
-     "texto": "Permissionamento dos apps."
+     "risco": "Permissionamento dos apps."
     },
     {
      "id": "licencas",
-     "texto": "Licenças: nova análise da quantidade necessária × disponível."
+     "risco": "Licenças: nova análise da quantidade necessária × disponível."
     }
    ],
    "passos": [
@@ -107,6 +134,20 @@
     {
      "contem": "Homologação de Revenue com a MV",
      "status": "Concluído"
+    }
+   ],
+   "executado": [
+    {
+     "texto": "Rodadas de homologação com a MV realizadas."
+    },
+    {
+     "texto": "Retestes executados e bugs corrigidos."
+    },
+    {
+     "texto": "Vários ajustes aplicados a partir das reprovações da homologação."
+    },
+    {
+     "texto": "Material do banner recebido da MV."
     }
    ]
   }

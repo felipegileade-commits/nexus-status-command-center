@@ -131,6 +131,9 @@
       .nx-est-selo{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--teal,#2ec4b6);
         border:1px solid var(--teal,#2ec4b6);border-radius:999px;padding:3px 9px;margin-left:10px;white-space:nowrap}
       .nx-est-erro{font-size:11px;color:var(--orange,#f08c3a);margin:10px 0 0;line-height:1.5}
+      /* Passo ja concluido: verde discreto, para separar do que ainda falta. */
+      .next-card.nx-feito{border-left:3px solid #45b36b}
+      .next-card.nx-feito small{color:#45b36b;font-weight:700}
       .nx-est-linhas{display:grid;gap:8px}
       .nx-est-l{display:grid;grid-template-columns:76px 62px 1fr 218px;gap:14px;align-items:center;
         padding:10px 14px;border-radius:8px;background:var(--panel2,rgba(255,255,255,.03));border-left:3px solid var(--line,#18364f)}
@@ -672,6 +675,18 @@
         const num=n.querySelector('.n');if(num)num.textContent=String(grade.querySelectorAll('.next-card').length+1).padStart(2,'0');
         const pp=n.querySelector('p');if(pp)pp.textContent=x.texto;
         const st=n.querySelector('small');if(st)st.textContent=x.status||'Previsto';
+        grade.appendChild(n);mudou=true;
+      });
+      // "O que avancou": mesma grade dos proximos passos, mas com a situacao Concluido.
+      // Entra depois dos previstos, para a leitura ir do que falta para o que ja foi.
+      if(grade&&modeloP)(f.executado||[]).forEach((x,i)=>{
+        const id='exec-'+i;
+        if(!x.texto||grade.querySelector('[data-nx-exec="'+id+'"]'))return;
+        const n=modeloP.cloneNode(true);
+        n.className=modeloP.className+' nx-live nx-feito';n.setAttribute('data-nx-exec',id);
+        const num=n.querySelector('.n');if(num)num.textContent=String(grade.querySelectorAll('.next-card').length+1).padStart(2,'0');
+        const pp=n.querySelector('p');if(pp)pp.textContent=x.texto;
+        const st=n.querySelector('small');if(st)st.textContent='Concluído';
         grade.appendChild(n);mudou=true;
       });
     });
