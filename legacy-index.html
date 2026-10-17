@@ -797,7 +797,14 @@ function txt(el){ return el ? el.textContent.trim() : ''; }
 function esc(v=''){ return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 function val(id){ const el=document.getElementById(id); return el?el.value:''; }
 function setText(sel,value,root=document){ const el=q(sel,root); if(el) el.textContent=value; }
-function linesFrom(group){ return qa(':scope > .bullet',group).map(x=>txt(x)); }
+// Bullet oculto na tela nao vai para o impresso nem para o estado derivado: era por
+// isso que o PDF continuava mostrando item que ja tinha saido do painel.
+function linesFrom(group){
+  return qa(':scope > .bullet',group)
+    .filter(x=>x.style.display!=='none')
+    .map(x=>txt(x))
+    .filter(t=>t&&t.trim());
+}
 function setBullets(group,items){
   qa(':scope > .bullet',group).forEach(x=>x.remove());
   items.filter(Boolean).forEach(item=>{

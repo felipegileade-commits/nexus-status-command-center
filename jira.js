@@ -776,7 +776,7 @@
     // DEPOIS do sync, sempre: syncPrintReport reconstroi os bullets do impresso a partir
     // do <main> e copia so o texto, entao qualquer ocultacao feita antes dele e desfeita.
     // Por isso o impresso continuava falando da Sprint 14 enquanto a tela ja estava certa.
-    try{resumoImpresso(w,j);esteiraImpresso(w)}catch(e){}
+    try{esteiraImpresso(w)}catch(e){}
   }
 
   // "Onde o trabalho esta parado": volume represado por esteira, com o dono de cada etapa.
@@ -876,48 +876,6 @@
     });
   }
 
-  // Espelha no impresso as trocas do resumo da semana. A estrutura la e plana:
-  // .pr-label marca a caixa e os .pr-bullet seguintes pertencem a ela, ate o proximo
-  // .pr-label — por isso o percurso e por irmaos, nao por filhos de um container.
-  function resumoImpresso(w,j){
-    if(!j||!j.frentes)return;
-    const d=w.document;
-    [['central','prCentral'],['revenue','prRevenue']].forEach(([chave,idPag])=>{
-      const f=j.frentes[chave],pag=d.getElementById(idPag);
-      if(!f||!f.resumo||!pag)return;
-      Object.keys(f.resumo).forEach(cx=>{
-        const cfg=f.resumo[cx]||{};
-        const rot=Array.prototype.slice.call(pag.querySelectorAll('.pr-label'))
-          .filter(x=>x.textContent.trim().toUpperCase()===cx.toUpperCase())[0];
-        if(!rot)return;
-        // Os bullets da caixa: irmaos seguintes ate o proximo rotulo.
-        const itens=[];
-        for(let n=rot.nextElementSibling;n&&!n.classList.contains('pr-label');n=n.nextElementSibling){
-          if(n.classList.contains('pr-bullet'))itens.push(n);
-        }
-        (cfg.remover||[]).forEach(trecho=>{
-          itens.forEach(b=>{
-            if(b.getAttribute('data-nx-pres'))return;
-            if(b.textContent.indexOf(trecho)>=0&&b.style.display!=='none'){b.style.display='none'}
-          });
-        });
-        itens.forEach(b=>{
-          if(!b.getAttribute('data-nx-pres')&&!b.textContent.trim())b.style.display='none';
-        });
-        // Insere os novos logo apos o ultimo bullet da caixa (ou apos o rotulo).
-        let ancora=itens.length?itens[itens.length-1]:rot;
-        (cfg.incluir||[]).forEach((texto,i)=>{
-          const id=chave+'-'+cx.slice(0,4).toLowerCase()+'-'+i;
-          if(pag.querySelector('[data-nx-pres="'+id+'"]'))return;
-          const n=d.createElement('div');
-          n.className='pr-bullet';n.setAttribute('data-nx-pres',id);
-          n.textContent=texto;
-          ancora.parentNode.insertBefore(n,ancora.nextSibling);
-          ancora=n;
-        });
-      });
-    });
-  }
 
   function ajustaImpresso(w){
     const d=w.document;if(!d.body)return;
@@ -1229,7 +1187,7 @@
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
-      carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r);resumoImpresso(w,r)}});
+      carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
       carregarEsteiras().then(e=>{if(e){blocoEsteiras(w,e);esteiraImpresso(w);jiraAutomatico(w)}});faixaFixa(w);ajustaImpresso(w);
       carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
@@ -1246,7 +1204,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos);resumoImpresso(w,riscos)}if(esteiras){blocoEsteiras(w,esteiras);esteiraImpresso(w)}legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras){blocoEsteiras(w,esteiras);esteiraImpresso(w)}legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;
