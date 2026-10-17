@@ -917,6 +917,13 @@
       if(s&&s.textContent!==cfgPainel.atualizadoEm)s.textContent=cfgPainel.atualizadoEm}
     if(metas[1]&&cfgPainel.semana!==undefined){const s=metas[1].querySelector('small');
       if(s&&s.textContent!==String(cfgPainel.semana))s.textContent=String(cfgPainel.semana)}
+    // Sprint do rodape de cada frente. Vinha do conteudo editavel e envelhecia sozinha:
+    // o painel dizia "Sprint 15/20" com o Jira ja na 18. Agora sai daqui, junto da data.
+    const sp=cfgPainel.sprint||{};
+    Object.keys(sp).forEach(chave=>{
+      const alvo=d.querySelector('#'+chave+' .front-foot span');
+      if(alvo&&sp[chave]&&alvo.textContent.trim()!==sp[chave])alvo.textContent=sp[chave];
+    });
   }
   function blocoEsteiras(w,h){
     if(!h||!h.frentes)return;const d=w.document;
@@ -1189,7 +1196,7 @@
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
       carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
       carregarEsteiras().then(e=>{if(e){blocoEsteiras(w,e);esteiraImpresso(w);jiraAutomatico(w)}});faixaFixa(w);ajustaImpresso(w);
-      carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
+      carregarPainel().then(()=>{cabecalhoData(w);rodapes(w);try{w.syncPrintReport&&w.syncPrintReport();esteiraImpresso(w)}catch(e){}});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
     legendasAvanco(w);
     legendaDesenvolvido(w);
