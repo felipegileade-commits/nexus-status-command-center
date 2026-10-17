@@ -773,6 +773,10 @@
     // entao precisam ser recalculados depois de preencher.
     if(mudou){try{w.syncOverviewFromFronts&&w.syncOverviewFromFronts()}catch(e){}
               try{w.syncPrintReport&&w.syncPrintReport()}catch(e){}}
+    // DEPOIS do sync, sempre: syncPrintReport reconstroi os bullets do impresso a partir
+    // do <main> e copia so o texto, entao qualquer ocultacao feita antes dele e desfeita.
+    // Por isso o impresso continuava falando da Sprint 14 enquanto a tela ja estava certa.
+    try{resumoImpresso(w,j);esteiraImpresso(w)}catch(e){}
   }
 
   // "Onde o trabalho esta parado": volume represado por esteira, com o dono de cada etapa.
