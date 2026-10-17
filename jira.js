@@ -833,43 +833,85 @@
   // sincronizados, mas o quadro "Onde o trabalho esta" nunca chegava ao PDF. Como e esse
   // quadro que o Felipe apresenta, o PDF saia dizendo menos que a tela.
   // Estilo inline de proposito: buildPrintDocument usa folha propria e nao carrega a daqui.
+  // O impresso (#print-report) e HTML proprio: o que entra no <main> NAO chega la.
+  // Este bloco espelha no PDF o quadro de esteiras e o resumo da semana, usando as
+  // classes nativas do impresso (pr-box, pr-brand, pr-label, pr-bullet) para nao
+  // destoar do resto da pagina.
   function esteiraImpresso(w){
     if(!esteiras||!esteiras.frentes)return;
     const d=w.document;
     [['central','prCentral'],['revenue','prRevenue']].forEach(([chave,idPag])=>{
       const f=esteiras.frentes[chave],pag=d.getElementById(idPag);
       if(!f||!pag||!Array.isArray(f.esteiras)||!f.esteiras.length)return;
+      const grade=pag.querySelector('.pr-grid');if(!grade)return;
       const dentro=f.esteiras.filter(e=>!e.foraEscopo);
       const base=dentro.reduce((t,e)=>t+(Number(e.n)||0),0);
       if(!base)return;
-      const pct=n=>base?Math.round(Number(n)/base*100)+'%':'—';
-      const linha=e=>'<tr>'
-        +'<td style="padding:4px 8px 4px 0;font-weight:700;font-variant-numeric:tabular-nums;'
-          +'white-space:nowrap;width:1%">'+esc(String(e.n))+'</td>'
-        +'<td style="padding:4px 8px 4px 0;color:#667;white-space:nowrap;width:1%">'
-          +(e.foraEscopo?'—':esc(pct(e.n)))+'</td>'
-        +'<td style="padding:4px 0"><b>'+esc(e.nome||'')+'</b>'
-          +(e.detalhe?'<br><span style="color:#667">'+esc(e.detalhe)+'</span>':'')+'</td>'
-        +'</tr>';
-      const corpo=dentro.map(linha).join('')
-        +'<tr><td style="padding:6px 8px 2px 0;font-weight:800;border-top:1px solid #ccd">'+base+'</td>'
-        +'<td style="border-top:1px solid #ccd"></td>'
-        +'<td style="padding:6px 0 2px;font-weight:800;border-top:1px solid #ccd">Total do escopo ativo</td></tr>'
-        +f.esteiras.filter(e=>e.foraEscopo).map(linha).join('');
-      const html='<div class="pr-esteira" style="margin:10px 0 0">'
-        +'<div style="font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#889;'
-          +'font-weight:800;margin-bottom:5px">Onde o trabalho está'
-          +(f.vivo?' · Jira '+esc(f.vivo):'')+'</div>'
-        +'<table style="width:100%;border-collapse:collapse;font-size:9px;line-height:1.35">'
-          +'<tbody>'+corpo+'</tbody></table></div>';
-      let bloco=pag.querySelector('.pr-esteira');
+      const pct=n=>base?Math.round(Number(n)/base*100)+'%':'';
+      const linha=e=>'<div class="pr-est-l'+(e.foraEscopo?' fora':'')+'">'
+        +'<b>'+esc(String(e.n))+'</b>'
+        +'<i>'+(e.foraEscopo?'':esc(pct(e.n)))+'</i>'
+        +'<span>'+esc(e.nome||'')+(e.detalhe?'<em>'+esc(e.detalhe)+'</em>':'')+'</span>'
+        +'</div>';
+      const html='<div class="pr-box pr-box-est">'
+        +'<div class="pr-brand">ONDE O TRABALHO ESTÁ</div>'
+        +'<h3>Volume por esteira'+(f.vivo?'<span style="float:right;font-size:7px;color:#6f7f8c">Jira '+esc(f.vivo)+'</span>':'')+'</h3>'
+        +dentro.map(linha).join('')
+        +'<div class="pr-est-l total"><b>'+base+'</b><i></i><span>Total do escopo ativo</span></div>'
+        +f.esteiras.filter(e=>e.foraEscopo).map(linha).join('')
+        +'</div>';
+      let bloco=grade.querySelector('.pr-box-est');
       if(!bloco){
         bloco=d.createElement('div');
-        const pe=pag.querySelector('.pr-foot');
-        if(pe)pag.insertBefore(bloco,pe);else pag.appendChild(bloco);
+        grade.appendChild(bloco);
       }
       // Guarda de igualdade: sem ela o MutationObserver reescreveria a cada ciclo.
       if(bloco.outerHTML!==html)bloco.outerHTML=html;
+      // Tira a versao antiga, que ficava solta fora da grade.
+      const velho=pag.querySelector('.pr-esteira');if(velho)velho.remove();
+    });
+  }
+
+  // Espelha no impresso as trocas do resumo da semana. A estrutura la e plana:
+  // .pr-label marca a caixa e os .pr-bullet seguintes pertencem a ela, ate o proximo
+  // .pr-label — por isso o percurso e por irmaos, nao por filhos de um container.
+  function resumoImpresso(w,j){
+    if(!j||!j.frentes)return;
+    const d=w.document;
+    [['central','prCentral'],['revenue','prRevenue']].forEach(([chave,idPag])=>{
+      const f=j.frentes[chave],pag=d.getElementById(idPag);
+      if(!f||!f.resumo||!pag)return;
+      Object.keys(f.resumo).forEach(cx=>{
+        const cfg=f.resumo[cx]||{};
+        const rot=Array.prototype.slice.call(pag.querySelectorAll('.pr-label'))
+          .filter(x=>x.textContent.trim().toUpperCase()===cx.toUpperCase())[0];
+        if(!rot)return;
+        // Os bullets da caixa: irmaos seguintes ate o proximo rotulo.
+        const itens=[];
+        for(let n=rot.nextElementSibling;n&&!n.classList.contains('pr-label');n=n.nextElementSibling){
+          if(n.classList.contains('pr-bullet'))itens.push(n);
+        }
+        (cfg.remover||[]).forEach(trecho=>{
+          itens.forEach(b=>{
+            if(b.getAttribute('data-nx-pres'))return;
+            if(b.textContent.indexOf(trecho)>=0&&b.style.display!=='none'){b.style.display='none'}
+          });
+        });
+        itens.forEach(b=>{
+          if(!b.getAttribute('data-nx-pres')&&!b.textContent.trim())b.style.display='none';
+        });
+        // Insere os novos logo apos o ultimo bullet da caixa (ou apos o rotulo).
+        let ancora=itens.length?itens[itens.length-1]:rot;
+        (cfg.incluir||[]).forEach((texto,i)=>{
+          const id=chave+'-'+cx.slice(0,4).toLowerCase()+'-'+i;
+          if(pag.querySelector('[data-nx-pres="'+id+'"]'))return;
+          const n=d.createElement('div');
+          n.className='pr-bullet';n.setAttribute('data-nx-pres',id);
+          n.textContent=texto;
+          ancora.parentNode.insertBefore(n,ancora.nextSibling);
+          ancora=n;
+        });
+      });
     });
   }
 
@@ -1183,7 +1225,7 @@
     const w=frame.contentWindow;if(!w||!w.document||!w.document.querySelector('#overview .kpis'))return false;
     carregar(w).then(j=>{if(j){painel(w,j);metricasFrentes(w,j);cabecalho(w,j)}
       carregarHomolog().then(h=>{if(h)blocoHomolog(w,h)});
-      carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r)}});
+      carregarRiscos().then(r=>{if(r){blocoRiscos(w,r);riscosVisaoGeral(w,r);resumoImpresso(w,r)}});
       carregarEsteiras().then(e=>{if(e){blocoEsteiras(w,e);esteiraImpresso(w);jiraAutomatico(w)}});faixaFixa(w);ajustaImpresso(w);
       carregarPainel().then(()=>{cabecalhoData(w);rodapes(w)});
       carregarAprovadas().then(a=>{if(a&&dados)painel(w,dados)});});
@@ -1200,7 +1242,7 @@
       w.__nxJiraObserver=true;
       const main=w.document.querySelector('main');
       let timer=null;
-      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos)}if(esteiras){blocoEsteiras(w,esteiras);esteiraImpresso(w)}legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
+      if(main)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(()=>{try{if(!w.document.querySelector('#overview .nx-jira')&&dados)painel(w,dados);if(dados){metricasFrentes(w,dados);cabecalho(w,dados)}if(homolog)blocoHomolog(w,homolog);if(riscos){blocoRiscos(w,riscos);riscosVisaoGeral(w,riscos);resumoImpresso(w,riscos)}if(esteiras){blocoEsteiras(w,esteiras);esteiraImpresso(w)}legendasAvanco(w);legendaDesenvolvido(w);ligaMedida(w);barraDupla(w);proximoMarco(w);reordena(w);rodapes(w);botaoHab(w);aplicaHab(w);ajustaImpresso(w);cabecalhoData(w)}catch(e){}},120)}).observe(main,{childList:true,subtree:true});
       frame.addEventListener('nexus-timeline',()=>{try{proximoMarco(w)}catch(e){}});
     }
     return true;

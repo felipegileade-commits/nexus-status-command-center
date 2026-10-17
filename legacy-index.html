@@ -1740,6 +1740,16 @@ function buildPrintDocument(){
   }
   .pr-bullet{font-size:6.5px;line-height:1.25;margin:.8mm 0;color:#435665}
   .pr-bullet:before{content:"•";color:#22b7a7;margin-right:4px;font-weight:bold}
+  /* Quadro de esteiras no impresso: ocupa a largura inteira abaixo das duas colunas. */
+  .pr-box-est{grid-column:1/-1;margin-top:0}
+  .pr-est-l{display:grid;grid-template-columns:9mm 9mm 1fr;gap:1.6mm;align-items:baseline;padding:.5mm 0}
+  .pr-est-l b{font-size:8.6px;font-weight:800;text-align:right;color:#172432}
+  .pr-est-l i{font-size:6.2px;font-style:normal;color:#6b7e8d;text-align:right}
+  .pr-est-l span{font-size:6.8px;line-height:1.25;color:#172432;font-weight:700}
+  .pr-est-l em{display:block;font-style:normal;font-size:6.2px;color:#6b7e8d;font-weight:400;line-height:1.22}
+  .pr-est-l.total{border-top:1px solid #dbe3e9;margin-top:1mm;padding-top:1.2mm}
+  .pr-est-l.fora{margin-top:1mm}
+  .pr-est-l.fora b,.pr-est-l.fora span{color:#6b7e8d}
   .pr-risk{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:2.7mm}
   .pr-risk>div{border-left:2px solid #ff9a3b;padding:2mm;background:#fff}
   .pr-risk h4{font-size:6.1px;margin:0 0 1mm;color:#b46a23}
