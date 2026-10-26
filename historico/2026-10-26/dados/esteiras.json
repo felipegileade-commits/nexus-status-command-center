@@ -1,0 +1,178 @@
+{
+ "_leiame": "Bloco \"Onde o trabalho está\". Volume represado por esteira, com o dono de cada etapa. A ideia não é atribuir culpa: é separar o que a Sottelli resolve sozinha do que não resolve. \"dono\" aceita sottelli, mv, compartilhada ou grupo. \"n\" pode ser um número ou um traço, quando a esteira não tem represamento. Uma linha com \"concluido\": true é trabalho entregue e NÃO entra na soma de represadas. Os números saem das colunas dos boards do Jira (UpStream, DownStream, QAStream e Homologação) — confira pelo quadro, não por status solto. Um item pode trazer \"hab\" (quantos dos n sao habilitadores) e \"detalheSem\": sao o que o botao \"Ocultar habilitadores\" usa para refazer a conta. O percentual da linha e sempre por esforco (\"peso\"/\"pesoSem\"); a leitura por unidade de US saiu do painel. \"peso\" e quanto do esforco do projeto aquela linha representa, somando peso do epico dividido por US ativas do epico, US a US. \"pesoSem\" e o mesmo peso contando so US testavel: peso do epico vezes testaveis da linha dividido por testaveis ativas do epico.",
+ "frentes": {
+  "central": {
+   "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVPMO)",
+   "lidoEm": "2026-10-16",
+   "esteiras": [
+    {
+     "nome": "Refinamento · UpStream",
+     "n": 11,
+     "hab": 0,
+     "bloqueado": true,
+     "detalhe": "Em refino e backlog técnico",
+     "detalheSem": "Em refino e backlog técnico",
+     "movimento": "Soma das colunas em refino e backlog técnico do UpStream",
+     "espera": "Agenda de refino com a MV",
+     "dono": "compartilhada",
+     "donoTexto": "MV e Sottelli"
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 4,
+     "hab": 0,
+     "bloqueado": true,
+     "detalhe": "US escritas, aguardando o aceite do cliente",
+     "detalheSem": "US escritas, aguardando o aceite do cliente",
+     "movimento": "Coluna aguardando aprovação do cliente, no UpStream",
+     "espera": "Agenda de aprovação de US",
+     "dono": "mv",
+     "donoTexto": "MV"
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "n": 12,
+     "hab": 0,
+     "detalhe": "US na esteira de DownStream",
+     "detalheSem": "US na esteira de DownStream",
+     "movimento": "Esteira de DownStream inteira",
+     "espera": "Fechamento da sprint",
+     "dono": "sottelli",
+     "donoTexto": "Sottelli"
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "n": 105,
+     "hab": 0,
+     "detalhe": "Liberado, iniciado, bug/ajuste e reteste",
+     "detalheSem": "Liberado, iniciado, bug/ajuste e reteste",
+     "movimento": "Soma das colunas liberado, iniciado, bug/ajuste e reteste",
+     "espera": "Teste e aprovação da MV na UAT",
+     "dono": "mv",
+     "donoTexto": "MV + Acompanhamento Sottelli"
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "n": 57,
+     "hab": 0,
+     "concluido": true,
+     "detalhe": "Aprovado em UAT e validado",
+     "detalheSem": "Aprovado em UAT e validado",
+     "movimento": "Soma das colunas aprovado em UAT e validado",
+     "espera": "",
+     "dono": "grupo",
+     "donoTexto": "Aprovado pelo cliente"
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 92,
+     "foraEscopo": true,
+     "detalhe": "Melhorias e ajustes que não serão entregues até 13 de novembro",
+     "movimento": "Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar",
+     "espera": "",
+     "dono": "fora",
+     "donoTexto": ""
+    }
+   ],
+   "etapas": [
+    {
+     "quem": "mv",
+     "texto": "Fornecer os insumos e definir quem participa das agendas"
+    },
+    {
+     "quem": "sottelli",
+     "texto": "Enviar as agendas de refino"
+    },
+    {
+     "quem": "mv",
+     "texto": "Participar e refinar"
+    },
+    {
+     "quem": "sottelli",
+     "texto": "Escrever a US"
+    },
+    {
+     "quem": "mv",
+     "texto": "Aprovar a US"
+    }
+   ],
+   "nota": "Contagem de card no Jira MVPMO, tipos História, Habilitador e Melhoria — não esforço. Cada linha soma colunas do board: refinamento é em refino mais backlog técnico; aprovação de US é a coluna aguardando aprovação do cliente; desenvolvimento é a esteira de DownStream inteira; em homologação na UAT é liberado mais iniciado mais bug/ajuste mais reteste; aprovado em UAT é aprovado mais validado; e o backlog de melhorias é a coluna de backlog. O percentual de cada linha é sobre o escopo a entregar — o backlog de melhorias fica fora da base, porque são melhorias e ajustes que não serão entregues até 13 de novembro. Bug e Tarefa não entram em nenhuma linha: são a mesma entrega voltando, não escopo a mais. Os números são lidos do Jira quando a página abre e o selo ao lado do título diz a hora da leitura; o botão relê na hora.",
+   "_leiame_peso": "Os campos \"peso\" e \"pesoSem\" sairam das linhas: o percentual da tela e por contagem de US sobre o total da frente, nao por esforco."
+  },
+  "revenue": {
+   "fonte": "Boards UpStream, DownStream, QAStream e Homologação (Jira MVREV)",
+   "lidoEm": "2026-10-16",
+   "esteiras": [
+    {
+     "nome": "Refinamento · UpStream",
+     "n": 0,
+     "hab": 0,
+     "bloqueado": true,
+     "detalhe": "Em refino e backlog técnico",
+     "detalheSem": "Em refino e backlog técnico",
+     "movimento": "Soma das colunas em refino e backlog técnico do UpStream",
+     "espera": "Agenda de refino com a MV",
+     "dono": "compartilhada",
+     "donoTexto": "MV e Sottelli"
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 0,
+     "hab": 0,
+     "bloqueado": true,
+     "detalhe": "US escritas, aguardando o aceite do cliente",
+     "detalheSem": "US escritas, aguardando o aceite do cliente",
+     "movimento": "Coluna aguardando aprovação do cliente, no UpStream",
+     "espera": "Agenda de aprovação de US",
+     "dono": "mv",
+     "donoTexto": "MV"
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "n": 8,
+     "hab": 0,
+     "detalhe": "US na esteira de DownStream",
+     "detalheSem": "US na esteira de DownStream",
+     "movimento": "Esteira de DownStream inteira",
+     "espera": "Fechamento da sprint",
+     "dono": "sottelli",
+     "donoTexto": "Sottelli"
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "n": 142,
+     "hab": 0,
+     "detalhe": "Liberado, iniciado, bug/ajuste e reteste",
+     "detalheSem": "Liberado, iniciado, bug/ajuste e reteste",
+     "movimento": "Soma das colunas liberado, iniciado, bug/ajuste e reteste",
+     "espera": "Teste e aprovação da MV na UAT",
+     "dono": "mv",
+     "donoTexto": "MV + Acompanhamento Sottelli"
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "n": 56,
+     "hab": 0,
+     "concluido": true,
+     "detalhe": "Aprovado em UAT e validado",
+     "detalheSem": "Aprovado em UAT e validado",
+     "movimento": "Soma das colunas aprovado em UAT e validado",
+     "espera": "",
+     "dono": "grupo",
+     "donoTexto": "Aprovado pelo cliente"
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 73,
+     "foraEscopo": true,
+     "detalhe": "Melhorias e ajustes que não serão entregues até 13 de novembro",
+     "movimento": "Coluna backlog de melhorias · fora da base do percentual, porque não é escopo a entregar",
+     "espera": "",
+     "dono": "fora",
+     "donoTexto": ""
+    }
+   ],
+   "nota": "Contagem de card no Jira MVREV, tipos História, Habilitador e Melhoria — não esforço. Cada linha soma colunas do board: refinamento é em refino mais backlog técnico; aprovação de US é a coluna aguardando aprovação do cliente; desenvolvimento é a esteira de DownStream inteira; em homologação na UAT é liberado mais iniciado mais bug/ajuste mais reteste; aprovado em UAT é aprovado mais validado; e o backlog de melhorias é a coluna de backlog. O percentual de cada linha é sobre o escopo a entregar — o backlog de melhorias fica fora da base, porque são melhorias e ajustes que não serão entregues até 13 de novembro. Bug e Tarefa não entram em nenhuma linha: são a mesma entrega voltando, não escopo a mais. Os números são lidos do Jira quando a página abre e o selo ao lado do título diz a hora da leitura; o botão relê na hora."
+  }
+ }
+}

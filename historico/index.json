@@ -1,0 +1,42 @@
+[
+ {
+  "pasta": "2026-10-26",
+  "rotulo": "Status 26/10/2026 (semana 44)",
+  "motivo": "apresentado",
+  "arquivadoEm": "2026-10-26T16:50:49.094Z",
+  "dataDaVersao": "2026-10-26",
+  "commit": "eb63a0e",
+  "fonteDosNumeros": "leitura ao vivo de https://nexus-status-command-center.vercel.app/api/jira",
+  "avisos": [],
+  "cabecalho": {
+   "atualizadoEm": "26/10/2026",
+   "semana": 44,
+   "sprint": {
+    "central": "Sprint 18/20",
+    "revenue": "Sprint 16 - Final"
+   }
+  },
+  "estadoSalvoEm": "2026-10-16T20:55:02.521+00:00"
+ },
+ {
+  "pasta": "2026-10-17",
+  "rotulo": "Status 17/10/2026 (semana 42)",
+  "motivo": "reconstruido",
+  "arquivadoEm": "2026-10-26T16:47:33.328Z",
+  "dataDaVersao": "2026-10-17",
+  "commit": "db4c7ed",
+  "fonteDosNumeros": "arquivos publicados no commit db4c7ed",
+  "avisos": [
+   "Numeros do quadro reconstruidos dos arquivos; o /api/jira nao tem leitura retroativa, entao o que a tela mostrava naquele dia pode ter diferido em alguns cards.",
+   "O <main> editavel desta data nao e recuperavel: o Supabase guarda uma linha so, sem versao."
+  ],
+  "cabecalho": {
+   "atualizadoEm": "17/10/2026",
+   "semana": 42,
+   "sprint": {
+    "central": "Sprint 18/20",
+    "revenue": "Sprint 16 - Final"
+   }
+  }
+ }
+]

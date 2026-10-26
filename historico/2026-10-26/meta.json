@@ -1,0 +1,18 @@
+{
+ "rotulo": "Status 26/10/2026 (semana 44)",
+ "motivo": "apresentado",
+ "arquivadoEm": "2026-10-26T16:50:49.094Z",
+ "dataDaVersao": "2026-10-26",
+ "commit": "eb63a0e",
+ "fonteDosNumeros": "leitura ao vivo de https://nexus-status-command-center.vercel.app/api/jira",
+ "avisos": [],
+ "cabecalho": {
+  "atualizadoEm": "26/10/2026",
+  "semana": 44,
+  "sprint": {
+   "central": "Sprint 18/20",
+   "revenue": "Sprint 16 - Final"
+  }
+ },
+ "estadoSalvoEm": "2026-10-16T20:55:02.521+00:00"
+}

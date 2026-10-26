@@ -1,0 +1,100 @@
+{
+ "capturadoEm": "2026-10-26T16:47:33.328Z",
+ "aoVivo": null,
+ "publicado": {
+  "central": {
+   "lidoEm": "2026-10-16",
+   "linhas": [
+    {
+     "nome": "Refinamento · UpStream",
+     "n": 11,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 4,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "n": 12,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "n": 105,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "n": 57,
+     "hab": 0,
+     "concluido": true,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 92,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": true
+    }
+   ]
+  },
+  "revenue": {
+   "lidoEm": "2026-10-16",
+   "linhas": [
+    {
+     "nome": "Refinamento · UpStream",
+     "n": 0,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 0,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "n": 8,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "n": 142,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "n": 56,
+     "hab": 0,
+     "concluido": true,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 73,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": true
+    }
+   ]
+  }
+ }
+}

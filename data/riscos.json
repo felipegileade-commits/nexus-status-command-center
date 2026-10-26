@@ -3,8 +3,8 @@
  "atualizadoEm": "2026-10-13",
  "frentes": {
   "central": {
-   "risco": "Velocidade reduzida na vazão da homologação: 98 das 184 US do escopo estão paradas na UAT — 53%. São 77 liberadas pelo deploy que a MV ainda não começou a testar, 10 reprovadas aguardando correção e 11 em reteste.",
-   "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 98 que determina se a entrega fecha em 13/11.",
+   "risco": "Velocidade reduzida na vazão da homologação: 99 das 184 US do escopo estão paradas na UAT — 54%. São 78 liberadas pelo deploy que a MV ainda não começou a testar, 10 reprovadas aguardando correção e 11 em reteste.",
+   "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 99 que determina se a entrega fecha em 13/11.",
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [
     {
@@ -14,8 +14,8 @@
     },
     {
      "deRisco": "Velocidade reduzida na dinâmica de aprovações durante as homologações: 82 das 130 US testáveis do escopo estão paradas na homologação — 63%. São 58 liberadas aguardando a MV iniciar o teste, 13 reprovadas aguardando correção e 11 em reteste.",
-     "risco": "Velocidade reduzida na vazão da homologação: 98 das 184 US do escopo estão paradas na UAT — 53%. São 77 liberadas pelo deploy que a MV ainda não começou a testar, 10 reprovadas aguardando correção e 11 em reteste.",
-     "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 98 que determina se a entrega fecha em 13/11."
+     "risco": "Velocidade reduzida na vazão da homologação: 99 das 184 US do escopo estão paradas na UAT — 54%. São 78 liberadas pelo deploy que a MV ainda não começou a testar, 10 reprovadas aguardando correção e 11 em reteste.",
+     "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 99 que determina se a entrega fecha em 13/11."
     },
     {
      "deRisco": "A inclusão de novos itens recalculou o percentual geral do cronograma. O desvio permanece controlado em -1,63%.",
@@ -72,7 +72,7 @@
    "passos": [
     {
      "id": "vazao-homologacao",
-     "texto": "Dar vazão às 98 US paradas na homologação: liberar o início dos testes das 77, corrigir as 10 reprovadas e concluir os 11 retestes.",
+     "texto": "Dar vazão às 99 US paradas na homologação: liberar o início dos testes das 78, corrigir as 10 reprovadas e concluir os 11 retestes.",
      "status": "Previsto"
     },
     {
@@ -176,7 +176,7 @@
      ],
      "incluir": [
       "A MV aprovou toda a fila de aprovação de US: a coluna zerou no período.",
-      "Aprovado em UAT subiu de 57 para 62 US.",
+      "Aprovado em UAT subiu de 57 para 61 US.",
       "Desenvolvimento dobrou de volume no período: de 9 para 18 US na esteira.",
       "Apoio aos testes da homologação, com acompanhamento das reprovações."
      ]
@@ -211,7 +211,7 @@
       "82 US aguardando teste na homologação"
      ],
      "incluir": [
-      "98 US aguardando a MV na homologação: 77 liberadas sem início de teste, 10 reprovadas e 11 em reteste. Sem vazão, não há como concluir a entrega até 13/11.",
+      "99 US aguardando a MV na homologação: 78 liberadas sem início de teste, 10 reprovadas e 11 em reteste. Sem vazão, não há como concluir a entrega até 13/11.",
       "A Sprint 18 em aberto além do previsto impede o planejamento firme da Sprint 19."
      ]
     }

@@ -1,0 +1,9 @@
+{
+ "_leiame": "Data, semana e sprint de cada frente. Fica FORA do <main>, entao nao entra no estado gravado no Supabase. Cabecalho, rodapes e impresso leem daqui. Atualize sempre que os numeros do painel forem atualizados.",
+ "atualizadoEm": "17/10/2026",
+ "semana": 42,
+ "sprint": {
+  "central": "Sprint 18/20",
+  "revenue": "Sprint 16 - Final"
+ }
+}

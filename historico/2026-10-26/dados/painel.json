@@ -1,0 +1,10 @@
+{
+ "_leiame": "Cabecalho e sprint das frentes. Fica FORA do <main>. atualizadoEm=\"auto\" faz o painel carimbar a data do dia e a semana ISO sozinho — era o que faltava: a data ficava parada no dia em que eu editava.",
+ "atualizadoEm": "26/10/2026",
+ "sprint": {
+  "central": "Sprint 18/20",
+  "revenue": "Sprint 16 - Final"
+ },
+ "semana": 44,
+ "_congelado": "atualizadoEm era \"auto\" no painel publicado; fixado em 26/10/2026 ao arquivar."
+}
