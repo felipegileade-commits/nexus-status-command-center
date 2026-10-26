@@ -3,10 +3,20 @@
  "atualizadoEm": "2026-10-13",
  "frentes": {
   "central": {
-   "risco": "Velocidade reduzida na dinâmica de aprovações das US durante as homologações. Hoje 82 das 130 US testáveis do escopo estão paradas na homologação — 63%: 58 liberadas aguardando a MV iniciar o teste, 13 reprovadas aguardando correção e 11 em reteste.",
-   "acao": "Em andamento. As gerências de PMO e Transformação Digital estão se alinhando semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 82 que determina se a entrega fecha em 13/11.",
+   "risco": "Velocidade reduzida na vazão da homologação: 98 das 184 US do escopo estão paradas na UAT — 53%. São 77 liberadas pelo deploy que a MV ainda não começou a testar, 10 reprovadas aguardando correção e 11 em reteste.",
+   "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 98 que determina se a entrega fecha em 13/11.",
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [
+    {
+     "deRisco": "A janela de desenvolvimento se fecha: restam as sprints 18 e 19. A sprint 20 está reservada a ajustes e bugs, e a entrega final é 13/11. Todo item que não estiver refinado e aprovado a tempo da sprint 19 fica fora do escopo entregue.",
+     "risco": "A Sprint 18 segue aberta além da data prevista: estava planejada para encerrar em 23/10 e continua ativa. Com a sprint 20 reservada a ajustes e bugs e a entrega final em 13/11, cada dia de prorrogação come a janela da Sprint 19.",
+     "acao": "Fechar a Sprint 18 e abrir a 19 com escopo já refinado e aprovado, deixando a 20 livre para a correção do que vier da homologação."
+    },
+    {
+     "deRisco": "Velocidade reduzida na dinâmica de aprovações durante as homologações: 82 das 130 US testáveis do escopo estão paradas na homologação — 63%. São 58 liberadas aguardando a MV iniciar o teste, 13 reprovadas aguardando correção e 11 em reteste.",
+     "risco": "Velocidade reduzida na vazão da homologação: 98 das 184 US do escopo estão paradas na UAT — 53%. São 77 liberadas pelo deploy que a MV ainda não começou a testar, 10 reprovadas aguardando correção e 11 em reteste.",
+     "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas 98 que determina se a entrega fecha em 13/11."
+    },
     {
      "deRisco": "A inclusão de novos itens recalculou o percentual geral do cronograma. O desvio permanece controlado em -1,63%.",
      "risco": "A janela de desenvolvimento se fecha: restam as sprints 18 e 19. A sprint 20 está reservada a ajustes e bugs, e a entrega final é 13/11. Todo item que não estiver refinado e aprovado a tempo da sprint 18 fica fora do escopo entregue.",
@@ -45,13 +55,13 @@
    "extras": [
     {
      "id": "refinamento-sem-vazao",
-     "risco": "7 US travadas antes do desenvolvimento: 4 aguardando aprovação do cliente, 2 em análise técnica (backlog técnico) e 1 em refino com a MV. Nenhuma delas entra em sprint enquanto não for refinada e aprovada.",
-     "acao": "Manter e priorizar as agendas de refino e de aprovação de US com a MV, de forma que as 7 estejam aprovadas até quarta-feira que vem, a tempo da pré-planning."
+     "risco": "6 US travadas antes do desenvolvimento: 5 em refino com a MV e 1 em análise técnica. A fila de aprovação de US zerou — tudo o que estava escrito recebeu aceite —, então o gargalo passou a ser o refino.",
+     "acao": "Concentrar as agendas no refino das 5 em aberto: é o que ainda pode virar US aprovada a tempo da Sprint 19."
     },
     {
      "id": "tema-do-refino",
-     "risco": "Priorização do refinamento: com a janela reduzida a duas sprints de desenvolvimento, o tema dos próximos refinos pode não ser o que o projeto precisa refinar agora.",
-     "acao": "Rever em conjunto com a MV a pauta dos próximos refinos, priorizando o que ainda cabe nas sprints 18 e 19."
+     "risco": "Priorização do refinamento: com a janela reduzida e a Sprint 18 prorrogada, o tema dos próximos refinos pode não ser o que o projeto precisa refinar agora.",
+     "acao": "Rever em conjunto com a MV a pauta dos próximos refinos, priorizando o que ainda cabe até 13/11."
     },
     {
      "id": "arquivos-mv",
@@ -61,18 +71,18 @@
    ],
    "passos": [
     {
-     "id": "aprovar-7-us",
-     "texto": "Aprovar as 7 US pendentes até quarta-feira, para levá-las à pré-planning e o time pontuar antes da planning.",
-     "status": "Previsto"
-    },
-    {
      "id": "vazao-homologacao",
-     "texto": "Dar vazão às 82 US paradas na homologação: liberar o início dos testes, corrigir as 13 reprovadas e concluir os 11 retestes.",
+     "texto": "Dar vazão às 98 US paradas na homologação: liberar o início dos testes das 77, corrigir as 10 reprovadas e concluir os 11 retestes.",
      "status": "Previsto"
     },
     {
-     "id": "tema-refino",
-     "texto": "Revisar com a MV a pauta dos próximos refinos, para refinar o que ainda cabe nas sprints 18 e 19.",
+     "id": "refino-5",
+     "texto": "Refinar com a MV as 5 US em aberto, para que entrem aprovadas na Sprint 19.",
+     "status": "Previsto"
+    },
+    {
+     "id": "fechar-sprint-18",
+     "texto": "Fechar a Sprint 18, que passou da data prevista de 23/10, e abrir a 19.",
      "status": "Previsto"
     },
     {
@@ -138,6 +148,18 @@
     },
     {
      "contem": "Marcar agenda para definir o escopo final"
+    },
+    {
+     "contem": "Aprovar as 7 US pendentes"
+    },
+    {
+     "contem": "Dar vazão às 82 US paradas"
+    },
+    {
+     "contem": "Revisar com a MV a pauta dos próximos refinos"
+    },
+    {
+     "contem": "Marcar agenda com a MV para definir o escopo final até 13/11"
     }
    ],
    "resumo": {
@@ -146,40 +168,51 @@
       "Revisão da Sprint 14",
       "2ª etapa da Homologação Guiada",
       "Aprovação de US",
-      "Portal de Apontamento do Consultor"
+      "Portal de Apontamento do Consultor",
+      "Deploy de todas as US desenvolvidas",
+      "Reorganização do Jira",
+      "US acima da capacidade de esforço",
+      "Agendas de refino e agendas internas"
      ],
      "incluir": [
-      "Deploy de todas as US desenvolvidas até a Sprint 17 — todas disponíveis na UAT.",
-      "Reorganização do Jira: status alinhados à realidade das entregas, e o painel passou a ler o Jira a cada carga.",
-      "US acima da capacidade de esforço movidas para o backlog de melhorias.",
-      "Agendas de refino e agendas internas realizadas no período."
+      "A MV aprovou toda a fila de aprovação de US: a coluna zerou no período.",
+      "Aprovado em UAT subiu de 57 para 62 US.",
+      "Desenvolvimento dobrou de volume no período: de 9 para 18 US na esteira.",
+      "Apoio aos testes da homologação, com acompanhamento das reprovações."
      ]
     },
     "PONTOS DE ATENÇÃO": {
      "remover": [
-      "Revisão semanal das abas de homologação"
+      "Revisão semanal das abas de homologação",
+      "Restam as sprints 18 e 19 para desenvolvimento"
      ],
      "incluir": [
-      "Restam as sprints 18 e 19 para desenvolvimento; a sprint 20 fica para ajustes e bugs, com entrega final em 13/11."
+      "A Sprint 18 passou da data prevista de encerramento (23/10) e segue aberta.",
+      "A sprint 20 está reservada a ajustes e bugs; a entrega final é 13/11."
      ]
     },
     "PENDÊNCIAS": {
      "remover": [
-      "nomenclatura do campo de horas adicionais"
+      "nomenclatura do campo de horas adicionais",
+      "Agenda de refino com a MV, para destravar as 3 US",
+      "Agenda de aprovação de US com a MV",
+      "Agenda para definição do escopo final até 13/11"
      ],
      "incluir": [
-      "Agenda de refino com a MV, para destravar as 3 US em refino e dar saída às 8 em análise técnica.",
-      "Agenda de aprovação de US com a MV: as 7 pendentes precisam de aceite até quarta-feira, para entrarem na pré-planning.",
-      "Agenda para definição do escopo final até 13/11."
+      "Agenda de refino com a MV para as 5 US em aberto.",
+      "Agenda para definição do escopo final até 13/11.",
+      "Retorno da MV sobre os pontos divergentes do documento de glossário."
      ]
     },
     "IMPEDIMENTOS": {
      "remover": [
-      "não há impedimentos identificados"
+      "não há impedimentos identificados",
+      "As 7 US travadas em refino e aprovação",
+      "82 US aguardando teste na homologação"
      ],
      "incluir": [
-      "As 7 US travadas em refino e aprovação impedem o fechamento do escopo da próxima sprint, que começa na sexta-feira.",
-      "82 US aguardando teste na homologação: 58 liberadas sem início, 13 reprovadas e 11 em reteste. Sem vazão, não há como concluir a entrega até 13/11."
+      "98 US aguardando a MV na homologação: 77 liberadas sem início de teste, 10 reprovadas e 11 em reteste. Sem vazão, não há como concluir a entrega até 13/11.",
+      "A Sprint 18 em aberto além do previsto impede o planejamento firme da Sprint 19."
      ]
     }
    }
@@ -188,11 +221,11 @@
    "atencao": [
     {
      "id": "vazao-homologacao-rev",
-     "risco": "Vazão da homologação: 125 US testáveis estão em homologação na UAT ao mesmo tempo, contra 40 já validadas. O ritmo de teste da MV é o que determina o fechamento da frente."
+     "risco": "Vazão da homologação: 146 US estão em homologação na UAT ao mesmo tempo, contra 66 já validadas. O ritmo de teste da MV é o que determina o fechamento da frente."
     },
     {
      "id": "banner",
-     "risco": "O material do banner foi recebido pela Sottelli neste mês. O desenvolvimento ainda não começou: a capacidade do time, que está reduzido, está alocada em ajustes, correção de bugs e nas agendas de homologação. O prazo entre a solicitação e o recebimento do material consumiu a janela que havia para esse desenvolvimento."
+     "risco": "O material do banner foi recebido pela Sottelli. O desenvolvimento ainda não começou: a capacidade do time, que está reduzido, está alocada em ajustes, correção de bugs e nas agendas de homologação."
     },
     {
      "id": "permissionamento-apps",
@@ -267,7 +300,7 @@
       "Documento de cutover (Plano de Virada) com entrega prevista"
      ],
      "incluir": [
-      "Material do banner recebido neste mês; o desenvolvimento ainda não começou, porque a capacidade do time está em ajustes, bugs e agendas de homologação."
+      "Material do banner recebido; o desenvolvimento ainda não começou, porque a capacidade do time está em ajustes, bugs e agendas de homologação."
      ]
     },
     "PENDÊNCIAS": {
@@ -285,7 +318,7 @@
      ],
      "incluir": [
       "Integração com a Benner ainda em aberto — bloqueia parte do desenvolvimento.",
-      "125 US testáveis aguardando homologação na UAT. Todas precisam ser testadas e aprovadas para a frente fechar."
+      "146 US aguardando homologação na UAT. Todas precisam ser testadas e aprovadas para a frente fechar."
      ]
     }
    }

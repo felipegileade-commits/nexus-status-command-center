@@ -910,13 +910,30 @@
       .then(r=>r.ok?r.json():null).then(j=>(cfgPainel=j)).catch(()=>null);
     return carregandoP;
   }
+  // Semana ISO: a semana 1 e a que contem a primeira quinta-feira do ano.
+  function semanaISO(dt){
+    const t=new Date(Date.UTC(dt.getFullYear(),dt.getMonth(),dt.getDate()));
+    t.setUTCDate(t.getUTCDate()+4-(t.getUTCDay()||7));          // anda ate a quinta da semana
+    const jan1=new Date(Date.UTC(t.getUTCFullYear(),0,1));
+    return Math.ceil(((t-jan1)/86400000+1)/7);
+  }
+
   function cabecalhoData(w){
     if(!cfgPainel)return;const d=w.document;
     const metas=d.querySelectorAll('.topbar .meta');
-    if(metas[0]&&cfgPainel.atualizadoEm){const s=metas[0].querySelector('small');
-      if(s&&s.textContent!==cfgPainel.atualizadoEm)s.textContent=cfgPainel.atualizadoEm}
-    if(metas[1]&&cfgPainel.semana!==undefined){const s=metas[1].querySelector('small');
-      if(s&&s.textContent!==String(cfgPainel.semana))s.textContent=String(cfgPainel.semana)}
+    // "auto" carimba o dia de hoje. Com data escrita a mao, ela congelava no dia da
+    // edicao e o painel abria dizendo 17/10 em pleno dia 26.
+    const hoje=new Date();
+    const auto=String(cfgPainel.atualizadoEm||'').toLowerCase()==='auto';
+    const dataTxt=auto
+      ? String(hoje.getDate()).padStart(2,'0')+'/'+String(hoje.getMonth()+1).padStart(2,'0')+'/'+hoje.getFullYear()
+      : cfgPainel.atualizadoEm;
+    const semanaTxt=auto?String(semanaISO(hoje))
+      :(cfgPainel.semana!==undefined?String(cfgPainel.semana):null);
+    if(metas[0]&&dataTxt){const s=metas[0].querySelector('small');
+      if(s&&s.textContent!==dataTxt)s.textContent=dataTxt}
+    if(metas[1]&&semanaTxt){const s=metas[1].querySelector('small');
+      if(s&&s.textContent!==semanaTxt)s.textContent=semanaTxt}
     // Sprint do rodape de cada frente. Vinha do conteudo editavel e envelhecia sozinha:
     // o painel dizia "Sprint 15/20" com o Jira ja na 18. Agora sai daqui, junto da data.
     const sp=cfgPainel.sprint||{};
