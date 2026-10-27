@@ -7,7 +7,7 @@
  "fonteDosNumeros": "arquivos publicados no commit db4c7ed",
  "avisos": [
   "Numeros do quadro reconstruidos dos arquivos; o /api/jira nao tem leitura retroativa, entao o que a tela mostrava naquele dia pode ter diferido em alguns cards.",
-  "O <main> editavel desta data nao e recuperavel: o Supabase guarda uma linha so, sem versao."
+  "O texto editavel desta data foi recuperado: a linha do Supabase ainda estava em 16/10/2026 20:55 (ninguem salvou o painel entre 17/10 e 26/10), ou seja, e o mesmo texto que estava na tela no dia 17."
  ],
  "cabecalho": {
   "atualizadoEm": "17/10/2026",

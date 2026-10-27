@@ -1,0 +1,184 @@
+{
+ "_leiame": "Mapa de procedencia dos numeros do painel. Cada indicador diz de onde vem: jira (JQL conferivel), derivado (conta sobre outros) ou externo (planilha, cronograma, julgamento gerencial). Lido por metodologia.js, que monta a aba so no editor. Para editar, mexa neste arquivo. ATENCAO: os textos aparecem na tela e vao acentuados; so este comentario fica sem acento.",
+ "atualizadoEm": "16/10/2026",
+ "instancia": "https://sottelli.atlassian.net",
+ "prefixo": {
+  "central": "project = MVPMO AND issuetype in (10001,10005,10212)",
+  "revenue": "project = MVREV AND issuetype in (10001,10005,10212)"
+ },
+ "origens": {
+  "jira": { "rotulo": "Jira", "desc": "Lido do Jira quando a página abre. Conferível por JQL." },
+  "derivado": { "rotulo": "Derivado", "desc": "Conta feita sobre as linhas do quadro." },
+  "externo": { "rotulo": "Fonte externa", "desc": "Não sai do Jira: planilha, cronograma ou julgamento gerencial." }
+ },
+ "secoes": [
+  {
+   "id": "esteiras",
+   "nome": "Onde o trabalho está · esteiras",
+   "arquivo": "/api/jira · leitura automática do Jira ao abrir a página",
+   "atualizacao": "Automático — relido a cada carga; o botão “Atualizar do Jira” relê na hora",
+   "indicadores": [
+    {
+     "nome": "Refinamento · UpStream",
+     "origem": "jira",
+     "desc": "US ainda sendo entendidas ou escritas. Não dá para desenvolver nada daqui.",
+     "formula": "coluna em refino + coluna backlog técnico",
+     "jql": "status in (\"Em refinamento\", \"EM REFINAMENTO | ESCRITA DE US\", \"EM ANÁLISE TÉCNICA\", \"Em prototipagem\")",
+     "campos": "status, issuetype",
+     "obs": "O detalhe da linha abre as duas colunas separadas."
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "origem": "jira",
+     "desc": "US escritas esperando o aceite do cliente para entrar na sprint.",
+     "formula": "coluna aguardando aprovação do cliente",
+     "jql": "status = \"EM APROVAÇÃO DO CLIENTE\"",
+     "campos": "status, issuetype"
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "origem": "jira",
+     "desc": "O que o time está construindo.",
+     "formula": "a esteira de DownStream inteira",
+     "jql": "status in (\"Pronto para DEV\", \"EM DESENVOLVIMENTO\", \"PRONTO PARA DEPLOY EM QA\", \"Realizando Deploy em QA\")",
+     "campos": "status, issuetype",
+     "obs": "Sem filtro de sprint: uma US em status de desenvolvimento sem sprint atribuída some do board, mas continua sendo trabalho em aberto e entra aqui."
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "origem": "jira",
+     "desc": "Já está na UAT e ainda não tem aceite. Pós Review é para onde o deploy levou as US — elas estão na UAT, a MV é que ainda não começou a testar.",
+     "formula": "liberado + iniciado + bug/ajuste + reteste",
+     "jql": "status in (\"Pós Review\", \"EM HOMOLOGAÇÃO\", \"BUG\", \"BUG EM CORREÇÃO\", \"BUG EM TESTES\")",
+     "campos": "status, issuetype",
+     "obs": "O detalhe da linha abre as quatro colunas, para o número cheio não esconder quanto está reprovado ou em reteste."
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "origem": "jira",
+     "desc": "US com aceite do cliente. É o número que vai para a apresentação.",
+     "formula": "coluna aprovado em UAT + coluna validado",
+     "jql": "status in (\"Liberado para deploy\", \"PRONTO PARA DEPLOY EM PROD\", \"Deploy em Prod. realizado\", \"CONCLUÍDO\")",
+     "campos": "status, issuetype",
+     "obs": "“Pronto para deploy em prod” quer dizer pronta para subir, não que subiu: nenhuma US da Central foi para produção até hoje."
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "origem": "jira",
+     "desc": "Melhorias e ajustes que não serão entregues até 13 de novembro.",
+     "formula": "coluna backlog de melhorias",
+     "jql": "status = \"BACKLOG\"",
+     "campos": "status, issuetype",
+     "obs": "FICA FORA DA BASE DO PERCENTUAL: não é escopo a entregar, então diluir as outras linhas com ele seria errado. Entra só no Total geral."
+    },
+    {
+     "nome": "Total do escopo ativo e Total geral",
+     "origem": "derivado",
+     "desc": "O escopo a entregar e o universo completo da frente.",
+     "formula": "Escopo = as 5 linhas acima, sem o backlog · Geral = escopo + backlog",
+     "obs": "O que sobra para o total cru do projeto está em espera, bloqueado ou cancelado, e não aparece no quadro."
+    }
+   ]
+  },
+  {
+   "id": "topo",
+   "nome": "Topo da frente · barras de percentual",
+   "arquivo": "calculado sobre as linhas da esteira",
+   "atualizacao": "Automático — recalculado junto com o quadro",
+   "indicadores": [
+    {
+     "nome": "% desenvolvido",
+     "origem": "derivado",
+     "desc": "Quanto do escopo já chegou na UAT. É a leitura que o cliente olha primeiro.",
+     "formula": "(Em homologação na UAT + Aprovado em UAT) ÷ Escopo ativo × 100",
+     "obs": "Desenvolvido quer dizer “está na UAT”, não “o dev terminou”. Card que o dev terminou mas não subiu continua contado em desenvolvimento."
+    },
+    {
+     "nome": "% em desenvolvimento",
+     "origem": "derivado",
+     "formula": "Desenvolvimento ÷ Escopo ativo × 100",
+     "desc": "O que está na mão do time Sottelli agora."
+    },
+    {
+     "nome": "% bloqueado",
+     "origem": "derivado",
+     "formula": "(Refinamento + Aprovação de US) ÷ Escopo ativo × 100",
+     "desc": "O que não anda sem a MV: refino e aceite de US.",
+     "obs": "As três primeiras barras somam 100% pelo método do maior resto, para não dar 99% nem 101%."
+    },
+    {
+     "nome": "% homologado geral",
+     "origem": "derivado",
+     "formula": "Aprovado em UAT ÷ Escopo ativo × 100",
+     "desc": "Quanto do escopo já tem aceite do cliente."
+    },
+    {
+     "nome": "% homologado desenvolvido",
+     "origem": "derivado",
+     "formula": "Aprovado em UAT ÷ Desenvolvido × 100",
+     "desc": "Do que já está na UAT, quanto a MV já aprovou. Mede o ritmo da homologação, não o do desenvolvimento."
+    }
+   ]
+  },
+  {
+   "id": "regua",
+   "nome": "A régua, em uma linha",
+   "arquivo": "api/jira.js",
+   "atualizacao": "Fechado com o Felipe e o Gabriel em 16/10/2026",
+   "indicadores": [
+    {
+     "nome": "Quais tipos de card entram",
+     "origem": "jira",
+     "desc": "História, Habilitador e Melhoria.",
+     "jql": "issuetype in (10001,10005,10212)",
+     "campos": "issuetype",
+     "obs": "Bug e Tarefa ficam de fora de todas as linhas: são a mesma entrega voltando, não escopo a mais. Melhoria entra porque é escopo novo — e no backlog ela é a maior parte dos cards."
+    },
+    {
+     "nome": "Por que o board pode mostrar outro número",
+     "origem": "derivado",
+     "desc": "O board filtra pela sprint aberta e conta todo tipo de card; o painel conta a coluna inteira e só os três tipos acima.",
+     "obs": "É a causa de toda divergência já vista entre a tela do Jira e o painel. Quando os dois discordam, comece por aqui."
+    }
+   ]
+  },
+  {
+   "id": "externos",
+   "nome": "Fora do Jira",
+   "arquivo": "vários arquivos",
+   "atualizacao": "Manual",
+   "indicadores": [
+    {
+     "nome": "Riscos e próximos passos",
+     "origem": "externo",
+     "desc": "Julgamento gerencial do Scrum Master sobre o que pode comprometer a entrega.",
+     "obs": "data/riscos.json. Não há fonte automatizável: é análise, não contagem."
+    },
+    {
+     "nome": "Cronograma executivo",
+     "origem": "externo",
+     "desc": "Marcos e janelas de trabalho de setembro a novembro.",
+     "obs": "Marcos guardados no conteúdo editável, vindos da planilha de cronograma da Sottelli."
+    },
+    {
+     "nome": "US Aprovadas (aba própria)",
+     "origem": "externo",
+     "desc": "Lista nominal das US com aceite, por frente e sprint.",
+     "obs": "data/us-aprovadas.json, alimentado pela planilha de homologação da MV."
+    },
+    {
+     "nome": "Desvio de cronograma",
+     "origem": "externo",
+     "desc": "Quanto o projeto está adiantado ou atrasado em relação ao previsto.",
+     "obs": "data/desvio.json, calculado à mão a partir da planilha de sprints."
+    },
+    {
+     "nome": "Visão Geral · onde estão as entregas",
+     "origem": "externo",
+     "desc": "Retrato por etapa e quadros de épico.",
+     "obs": "data/jira.json, do workflow sync-jira.yml — que nunca rodou, por falta dos secrets no GitHub. Os dados estão parados na Sprint 16 (28/09) e a aba está oculta do cliente. Usa régua diferente desta: antes de reativar, alinhar."
+    }
+   ]
+  }
+ ]
+}

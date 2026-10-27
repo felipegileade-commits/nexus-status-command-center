@@ -22,7 +22,14 @@ import { execSync } from 'node:child_process';
 
 const BASE = 'https://nexus-status-command-center.vercel.app';
 const DIR = 'historico';
-const DADOS = ['painel.json', 'esteiras.json', 'riscos.json', 'us-aprovadas.json'];
+// Todo /data/*.json que os scripts do painel buscam em tempo de execucao. A lista
+// veio de: grep -ohE "data/[a-z0-9-]+.json" *.js. Faltar um aqui nao da erro na
+// tela congelada: o script simplesmente desiste em silencio. Foi o que aconteceu
+// com jira.json ate 27/10 — sem ele, painel() retorna antes de injetar o <style>
+// do bloco, e o quadro "Onde o trabalho esta" sai como lista, sem a grade.
+const DADOS = ['painel.json', 'esteiras.json', 'riscos.json', 'us-aprovadas.json',
+                'jira.json', 'homologacao.json', 'medidas.json', 'metodologia.json',
+                'p-9c4e1b7a3f.json'];
 
 // A URL e a chave publishable do Supabase saem do proprio shell.js em vez de
 // serem repetidas aqui: chave duplicada e chave que um dia divergi.

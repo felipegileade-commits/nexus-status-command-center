@@ -1,0 +1,110 @@
+{
+ "_leiame": "Percentuais do topo de cada frente, por contagem de US no Jira. \"segmentos\" abre o que falta ao lado do desenvolvido (em desenvolvimento, bloqueado) e os tres somam 100. \"hom\" e o homologado geral e \"homDev\" e o homologado sobre o que ja foi desenvolvido — os dois descem para barras proprias, porque sao PARTE do desenvolvido e nao caberiam na mesma barra sem mentir. \"semHab\" e a mesma conta so com US testavel, e e o que o botao \"Ocultar habilitadores\" mostra. Mantenha \"base\" verdadeiro: e o texto da caixa de dica e e o que permite conferir.",
+ "atualizadoEm": "2026-10-16",
+ "frentes": {
+  "central": {
+   "peso": {
+    "dev": 85,
+    "hom": 31,
+    "base": "Contagem de US no Jira MVPMO em 16/10. Base: as 184 US do escopo ativo, sem os 90 do backlog de melhorias. Desenvolvido é o que já está na UAT: as 100 em homologação mais as 57 aprovadas — 157 de 184, 85%. Fora dos 85%: 7% em desenvolvimento (12 US, das quais 9 estão na Sprint 17 e 3 seguem sem sprint atribuída) e 8% bloqueado (11 no refinamento e 4 na aprovação de US). Homologado geral: as 57 aprovadas sobre as 184 — 31%. Homologado desenvolvido: as 57 aprovadas sobre o que já foi desenvolvido, 57 de 157 — 36%.",
+    "uat": 85,
+    "semHab": {
+     "dev": 91,
+     "uat": 91,
+     "hom": 30,
+     "homDev": 33,
+     "segmentos": [
+      {
+       "rotulo": "em desenvolvimento",
+       "pct": 4,
+       "cor": "emdev"
+      },
+      {
+       "rotulo": "bloqueado",
+       "pct": 5,
+       "cor": "bloq"
+      }
+     ],
+     "base": "Mesma régua, só US testável: base de 129. Desenvolvido 117 (78 em homologação e 39 aprovadas), 91%. Em desenvolvimento 5 (4%) e bloqueado 7 (5%). Homologado geral 39 de 129, 30%. Homologado desenvolvido 39 de 117, 33%."
+    },
+    "homDev": 36,
+    "segmentos": [
+     {
+      "rotulo": "em desenvolvimento",
+      "pct": 7,
+      "cor": "emdev"
+     },
+     {
+      "rotulo": "bloqueado",
+      "pct": 8,
+      "cor": "bloq"
+     }
+    ]
+   },
+   "_unidadeRetirada": {
+    "dev": 69,
+    "hom": 25,
+    "base": "Por contagem de US no Jira MVPMO, base de 227 US ativas (História e Habilitador, sem BACKLOG, bloqueadas e canceladas), lida em 07/10/2026. Desenvolvido: 156 US já saíram do desenvolvimento. Disponível em UAT: 96 — as que entraram no board de Homologação. Homologado: 57 aprovadas — 40 na coluna Validado e 17 em Aprovado em UAT.",
+    "uat": 42,
+    "semHab": {
+     "dev": 65,
+     "hom": 22,
+     "uat": 44,
+     "base": "Por contagem de US no Jira MVPMO, só US testável: base de 178 (227 ativas menos 49 habilitadores). Desenvolvidas 116, disponíveis em UAT 78, aprovadas 39."
+    }
+   }
+  },
+  "revenue": {
+   "peso": {
+    "dev": 92,
+    "hom": 26,
+    "base": "Contagem de US no Jira MVREV, posição de 13/10. Base: as 214 US do quadro. Desenvolvido é o que está em UAT: as 142 em homologação mais as 56 já aprovadas — 198 de 214, 92%. Fora dos 92%: 4% em desenvolvimento (8 US) e 4% bloqueado (8 no refinamento). Homologado geral: as 56 aprovadas sobre as 214 — 26%. Homologado desenvolvido: 56 de 198 — 28%. A régua antiga, por esforço do cronograma, dava 92,37% de desenvolvido até a Sprint 15; a leitura por US chega ao mesmo lugar por outro caminho.",
+    "uat": 66,
+    "semHab": {
+     "dev": 91,
+     "uat": 73,
+     "hom": 18,
+     "homDev": 20,
+     "segmentos": [
+      {
+       "rotulo": "em desenvolvimento",
+       "pct": 4,
+       "cor": "emdev"
+      },
+      {
+       "rotulo": "bloqueado",
+       "pct": 5,
+       "cor": "bloq"
+      }
+     ],
+     "base": "Mesma régua, só US testável: base de 166. Desenvolvido 151 (121 em homologação e 30 aprovadas), 91%. Em desenvolvimento 7 (4%) e bloqueado 8 (5%). Homologado geral 30 de 166, 18%. Homologado desenvolvido 30 de 151, 20%."
+    },
+    "homDev": 28,
+    "segmentos": [
+     {
+      "rotulo": "em desenvolvimento",
+      "pct": 4,
+      "cor": "emdev"
+     },
+     {
+      "rotulo": "bloqueado",
+      "pct": 4,
+      "cor": "bloq"
+     }
+    ]
+   },
+   "_unidadeRetirada": {
+    "dev": 93,
+    "hom": 26,
+    "base": "Por contagem de US no Jira MVREV, base de 214 US ativas (História e Habilitador, sem bloqueadas e canceladas), lida em 07/10/2026 — igual à leitura anterior. Desenvolvido: 198 US já saíram do desenvolvimento. Homologado: 56 aprovadas na coluna Validado. Disponível em UAT: 88 de 214.",
+    "uat": 41,
+    "semHab": {
+     "dev": 91,
+     "hom": 18,
+     "uat": 37,
+     "base": "Por contagem de US no Jira MVREV, só US testável: base de 166 (214 ativas menos 48 habilitadores). Desenvolvido 151, disponível em UAT 62, aprovadas 30."
+    }
+   }
+  }
+ }
+}
