@@ -7,33 +7,22 @@
    "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas US que determina se a entrega fecha em 13/11.",
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [],
-   "extras": [
-    {
-     "id": "tema-do-refino",
-     "risco": "Priorização do refinamento: com a janela reduzida e a Sprint 18 prorrogada, o tema dos próximos refinos pode não ser o que o projeto precisa refinar agora.",
-     "acao": "Rever em conjunto com a MV a pauta dos próximos refinos, priorizando o que ainda cabe até 13/11."
-    }
-   ],
+   "extras": [],
    "passos": [
     {
-     "id": "vazao-homologacao",
+     "id": "agenda-refino-12-11",
      "status": "Previsto",
-     "texto": "Dar vazão à homologação: a MV iniciar os testes das 89 US e concluir os 13 retestes."
+     "texto": "Agenda de refino na quinta-feira, 12/11, das 14h às 15h30. A agenda já foi enviada; a MV precisa convidar as pessoas responsáveis e confirmar quem participa."
     },
     {
-     "id": "ajustes-bugs",
+     "id": "continuidade-desenvolvimento",
      "status": "Previsto",
-     "texto": "Tratar os 7 ajustes de bugs, que começam agora na Sprint 20."
+     "texto": "Continuidade do desenvolvimento: Sprint 20, com a entrega final em 19/11."
     },
     {
-     "id": "aprovar-2-us",
+     "id": "continuidade-bugs",
      "status": "Previsto",
-     "texto": "Aprovar as 2 US que aguardam aceite do cliente, por e-mail se necessário."
-    },
-    {
-     "id": "refino-quinta",
-     "status": "Previsto",
-     "texto": "Agenda de refino na quinta-feira, 12/11, das 14h às 15h30."
+     "texto": "Continuidade dos ajustes de bugs e correções na Sprint 20."
     },
     {
      "id": "continuidade-fora",
@@ -51,11 +40,6 @@
      "id": "capacidade-19-11",
      "titulo": "Capacidade do time até 19/11",
      "texto": "O time técnico da Central apresentou esta semana, em reunião com a gerência de projetos da MV, o levantamento das US que cabem na capacidade de atuação do time até 19 de novembro. É esse levantamento que define o conjunto de requisitos que a Central vai entregar — parte do que foi previsto ao longo do projeto não cabe nessa janela."
-    },
-    {
-     "id": "escopo-realocado",
-     "titulo": "Realocação de esforço entre épicos",
-     "texto": "Depois desse levantamento, foi apurado o que ficou fora do escopo e o que foi entregue além do previsto. O caso mais relevante são os três portais: no cronograma original o esforço previsto correspondia a portais de escopo básico, e o que foi construído tem porte bem maior. Esse esforço adicional saiu de outros épicos — por isso parte das US foi para o backlog de melhorias."
     }
    ],
    "passosOcultar": [
@@ -113,11 +97,15 @@
    ],
    "resumo": {
     "ATIVIDADES EXECUTADAS": {
-     "remover": [],
+     "remover": [
+      "Revisão da Sprint 14 e planejamento da Sprint 15.",
+      "2ª etapa da Homologação Guiada.",
+      "Apoio aos testes da homologação.",
+      "Aprovação de US’s (26/08)."
+     ],
      "incluir": [
       "Sprint 19 entregue: o desenvolvimento da sprint foi concluído com o time. Hoje há review e apresentação para a MV.",
-      "Todas as US em desenvolvimento estão em code review, e uma está pronta para teste. Nenhuma US em QA.",
-      "Início da Sprint 20, com os ajustes de bugs.",
+      "Todas as US em desenvolvimento estão em code review, e uma está pronta para teste.",
       "Criação da branch para subida.",
       "Backlog de melhorias: de 95 para 86. Foram 9 US desenvolvidas que saíram da coluna."
      ]
@@ -125,14 +113,14 @@
     "IMPEDIMENTOS": {
      "remover": [],
      "incluir": [
-      "Homologação: 89 US aguardando a MV iniciar, 7 em ajuste de bugs, 13 em reteste, 24 aprovadas em UAT e 40 validadas."
+      "Existem US aguardando homologação na esteira de homologação. Isso é cuidado do cliente."
      ]
     },
     "PENDÊNCIAS": {
      "remover": [],
      "incluir": [
+      "Agenda de refino na quinta-feira, 12/11, das 14h às 15h30: já enviada. A MV precisa convidar as pessoas responsáveis.",
       "Aprovação de 2 US normais pelo cliente (pode ser por e-mail).",
-      "Agenda de refino na quinta-feira, 12/11, das 14h às 15h30.",
       "Continuidade do projeto será tratada após o dia 19, em agenda própria, fora deste status."
      ]
     }
