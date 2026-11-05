@@ -12,11 +12,6 @@
      "id": "testes-qa",
      "risco": "Os testes da Central estão na Sprint 14. Como temos apenas um QA, o ritmo de teste anda mais devagar.",
      "acao": "Apenas para sinalizar."
-    },
-    {
-     "id": "homologacoes-paradas",
-     "risco": "As homologações foram paradas.",
-     "acao": "—"
     }
    ],
    "passos": [
@@ -139,6 +134,12 @@
       "Agenda de refino na quinta-feira, 12/11, das 14h às 15h30: já enviada. A MV precisa convidar as pessoas responsáveis.",
       "Aprovação de 2 US normais pelo cliente (pode ser por e-mail).",
       "Continuidade do projeto será tratada após o dia 19, em agenda própria, fora deste status."
+     ]
+    },
+    "PONTOS DE ATENÇÃO": {
+     "remover": [],
+     "incluir": [
+      "As homologações foram paradas."
      ]
     }
    }
