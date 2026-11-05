@@ -7,8 +7,24 @@
    "acao": "Em andamento. As gerências de PMO e Transformação Digital se alinham semanalmente para ajustar as dinâmicas e a condução. É a vazão dessas US que determina se a entrega fecha em 13/11.",
    "origem": "Pedido da Andressa (MV) em 28/09/2026, com concordância do Felipe.",
    "substitui": [],
-   "extras": [],
+   "extras": [
+    {
+     "id": "testes-qa",
+     "risco": "Os testes da Central estão na Sprint 14. Como temos apenas um QA, o ritmo de teste anda mais devagar.",
+     "acao": "Apenas para sinalizar."
+    },
+    {
+     "id": "homologacoes-paradas",
+     "risco": "As homologações foram paradas.",
+     "acao": "—"
+    }
+   ],
    "passos": [
+    {
+     "id": "ajustes-a-partir-de-06-11",
+     "status": "Previsto",
+     "texto": "A partir de sexta-feira, 06/11, o time trabalha em ajustes, bugs e correções."
+    },
     {
      "id": "agenda-refino-12-11",
      "status": "Previsto",
@@ -119,6 +135,7 @@
     "PENDÊNCIAS": {
      "remover": [],
      "incluir": [
+      "Conferir a revisão das US de melhorias — MV (Eduardo/Andressa).",
       "Agenda de refino na quinta-feira, 12/11, das 14h às 15h30: já enviada. A MV precisa convidar as pessoas responsáveis.",
       "Aprovação de 2 US normais pelo cliente (pode ser por e-mail).",
       "Continuidade do projeto será tratada após o dia 19, em agenda própria, fora deste status."
