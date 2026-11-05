@@ -1,0 +1,107 @@
+{
+ "_leiame": "Bloco \"Homologação em números\" RETIRADO do painel a pedido do Felipe em 07/10/2026. Os dados seguem em \"_frentesRetiradas\" como histórico e nada no painel os lê. Para trazer de volta, mova \"_frentesRetiradas\" de volta para \"frentes\".",
+ "frentes": {},
+ "_frentesRetiradas": {
+  "central": {
+   "fonte": "Planilhas de homologação da MV (1ª e 2ª rodadas) + coluna Validado do board de Homologação (Jira MVPMO)",
+   "lidoEm": "2026-10-07",
+   "grupos": [
+    {
+     "destaque": true,
+     "quadros": [
+      {
+       "n": 87,
+       "rotulo": "US no escopo",
+       "nSem": 69
+      },
+      {
+       "n": 69,
+       "rotulo": "US testáveis"
+      },
+      {
+       "n": 18,
+       "rotulo": "habilitadoras",
+       "nSem": 0
+      },
+      {
+       "sep": true
+      },
+      {
+       "n": 57,
+       "rotulo": "aprovadas",
+       "nSem": 39,
+       "cor": "ok"
+      },
+      {
+       "n": 24,
+       "rotulo": "reprovadas",
+       "cor": "warn"
+      },
+      {
+       "n": 3,
+       "rotulo": "não iniciadas"
+      },
+      {
+       "n": 2,
+       "rotulo": "em andamento"
+      },
+      {
+       "n": 1,
+       "rotulo": "pendente de correção"
+      }
+     ]
+    }
+   ],
+   "nota": "A linha fecha nos dois sentidos: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. Atenção à leitura: os 18 habilitadores nunca foram homologados pelo cliente — foram aprovados tecnicamente e estão no Jira em Validado. É para isso o botão: com eles fora, a conta vira a de homologação pura — 69 US testáveis entraram nas duas rodadas e 39 estão aprovadas. Com eles dentro, bate com as 57 do Jira (40 em Validado e 17 em Aprovado em UAT). Abertura por rodada: a 1ª trouxe 22 testáveis e 18 habilitadoras, todas aprovadas, com 127 apontamentos e 13 bugs (das 22, 15 tiveram cenário de teste executado); a 2ª trouxe 47 testáveis, das quais 17 aprovadas, 24 reprovadas, 3 não iniciadas, 2 em andamento e 1 pendente de correção, com 153 apontamentos, 34 bugs (22%) e 119 melhorias e ajustes (78%) — a planilha calcula 36% de sucesso. As 30 ainda não aprovadas estão no Jira em BUG (13), BUG EM TESTES (10), Pós Review (3), EM HOMOLOGAÇÃO (2) e Aguardando Review (2). As duas rodadas não repetem nenhuma US: conferido chave a chave em 06/10."
+  },
+  "revenue": {
+   "fonte": "Planilhas de homologação de Revenue da MV (1ª e 2ª ondas) + coluna Validado do Jira MVREV",
+   "lidoEm": "2026-10-07",
+   "grupos": [
+    {
+     "destaque": true,
+     "quadros": [
+      {
+       "n": 164,
+       "rotulo": "US no escopo",
+       "nSem": 138
+      },
+      {
+       "n": 138,
+       "rotulo": "US testáveis"
+      },
+      {
+       "n": 26,
+       "rotulo": "habilitadoras",
+       "nSem": 0
+      },
+      {
+       "n": 41,
+       "rotulo": "aprovadas",
+       "nSem": 15,
+       "cor": "ok"
+      },
+      {
+       "n": 15,
+       "rotulo": "reprovadas",
+       "cor": "warn"
+      },
+      {
+       "n": 101,
+       "rotulo": "não iniciadas"
+      },
+      {
+       "n": 7,
+       "rotulo": "em andamento"
+      },
+      {
+       "n": 0,
+       "rotulo": "pendente de correção"
+      }
+     ]
+    }
+   ],
+   "nota": "A linha fecha nos dois sentidos: aprovadas + reprovadas + não iniciadas + em andamento + pendente de correção = US no escopo, e US testáveis + habilitadoras = US no escopo. As 138 testáveis vêm das planilhas da MV e as 26 habilitadoras vêm do Jira (MVREV, coluna Validado) — mesma construção da Central, e é o que o botão de habilitadores tira da conta: sem elas o escopo cai para 138 e as aprovadas para 15. 1ª onda, Sprints 2 a 9, 37 US (planilha lida em 06/10): 15 aprovadas, 15 reprovadas e 7 em andamento — 50% de aprovação entre as que tiveram resultado; 144 apontamentos, 11 bugs, 37 melhorias e 95 ajustes, com 1 sem classificação. 2ª onda, Sprints 10 a 16, 101 US em Sala A (38) e Sala B (63), lida em 30/09: ainda não começou, as 101 seguem como Não Iniciado, embora já existam 71 apontamentos, 8 bugs e 57 ajustes, com 6 sem classificação. Somando as ondas: 215 apontamentos e 19 bugs (9%). Habilitador não entra em onda de homologação em Revenue: as 26 são aprovação técnica, igual às 18 da Central."
+  }
+ }
+}

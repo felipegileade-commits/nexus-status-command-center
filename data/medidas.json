@@ -1,13 +1,13 @@
 {
  "_leiame": "Percentuais do topo de cada frente, por contagem de US no Jira. \"segmentos\" abre o que falta ao lado do desenvolvido (em desenvolvimento, bloqueado) e os tres somam 100. \"hom\" e o homologado geral e \"homDev\" e o homologado sobre o que ja foi desenvolvido — os dois descem para barras proprias, porque sao PARTE do desenvolvido e nao caberiam na mesma barra sem mentir. \"semHab\" e a mesma conta so com US testavel, e e o que o botao \"Ocultar habilitadores\" mostra. Mantenha \"base\" verdadeiro: e o texto da caixa de dica e e o que permite conferir.",
- "atualizadoEm": "2026-10-16",
+ "atualizadoEm": "2026-11-05",
  "frentes": {
   "central": {
    "peso": {
-    "dev": 85,
+    "dev": 88,
     "hom": 31,
-    "base": "Contagem de US no Jira MVPMO em 16/10. Base: as 184 US do escopo ativo, sem os 90 do backlog de melhorias. Desenvolvido é o que já está na UAT: as 100 em homologação mais as 57 aprovadas — 157 de 184, 85%. Fora dos 85%: 7% em desenvolvimento (12 US, das quais 9 estão na Sprint 17 e 3 seguem sem sprint atribuída) e 8% bloqueado (11 no refinamento e 4 na aprovação de US). Homologado geral: as 57 aprovadas sobre as 184 — 31%. Homologado desenvolvido: as 57 aprovadas sobre o que já foi desenvolvido, 57 de 157 — 36%.",
-    "uat": 85,
+    "base": "Contagem de US no Jira MVPMO em 05/11/2026, na régua do painel. Desenvolvido 88%, em desenvolvimento 9%, bloqueado 3%. Homologado geral e homologado desenvolvido mantidos como na versão anterior.",
+    "uat": 88,
     "semHab": {
      "dev": 91,
      "uat": 91,
@@ -31,12 +31,12 @@
     "segmentos": [
      {
       "rotulo": "em desenvolvimento",
-      "pct": 7,
+      "pct": 9,
       "cor": "emdev"
      },
      {
       "rotulo": "bloqueado",
-      "pct": 8,
+      "pct": 3,
       "cor": "bloq"
      }
     ]

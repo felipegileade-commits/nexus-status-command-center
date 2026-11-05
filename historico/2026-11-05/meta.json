@@ -1,0 +1,19 @@
+{
+ "rotulo": "Status 05/11 (antes da atualizacao)",
+ "motivo": "antes da atualizacao",
+ "arquivadoEm": "2026-11-05T16:21:02.863Z",
+ "dataDaVersao": "2026-11-05",
+ "commit": "e8c77f5",
+ "fonteDosNumeros": "leitura ao vivo de https://nexus-status-command-center.vercel.app/api/jira",
+ "avisos": [
+  "Texto do cronograma copiado de 2026-10-26: o Supabase nao respondeu, entao riscos, passos e resumo foram montados a partir do pedido do Felipe em 05/11."
+ ],
+ "cabecalho": {
+  "atualizadoEm": "05/11/2026",
+  "semana": 45,
+  "sprint": {
+   "central": "Sprint 20",
+   "revenue": "Sprint 16 - Final"
+  }
+ }
+}

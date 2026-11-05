@@ -1,0 +1,233 @@
+{
+ "capturadoEm": "2026-11-05T16:21:02.863Z",
+ "aoVivo": {
+  "central": {
+   "frente": "central",
+   "projeto": "MVPMO",
+   "lidoEm": "2026-11-05T16:21:00.153Z",
+   "colunas": {
+    "refino": 0,
+    "backlogTecnico": 4,
+    "aprovacaoUS": 2,
+    "desenvolvimento": 18,
+    "liberado": 86,
+    "iniciado": 0,
+    "bugAjuste": 7,
+    "reteste": 11,
+    "aprovadoUat": 24,
+    "validado": 40,
+    "backlog": 86,
+    "total": 280
+   },
+   "colunasHab": {
+    "refino": 0,
+    "backlogTecnico": 4,
+    "aprovacaoUS": 0,
+    "desenvolvimento": 12,
+    "liberado": 21,
+    "iniciado": 0,
+    "bugAjuste": 0,
+    "reteste": 0,
+    "aprovadoUat": 0,
+    "validado": 18,
+    "backlog": 6,
+    "total": 61
+   },
+   "jql": {
+    "refino": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status in (\"Em refinamento\",\"EM REFINAMENTO | ESCRITA DE US\"))",
+    "backlogTecnico": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status in (\"EM ANÁLISE TÉCNICA\",\"Em prototipagem\"))",
+    "aprovacaoUS": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status = \"EM APROVAÇÃO DO CLIENTE\")",
+    "desenvolvimento": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status in (\"Pronto para DEV\",\"EM DESENVOLVIMENTO\",\"PRONTO PARA DEPLOY EM QA\",\"Realizando Deploy em QA\"))",
+    "liberado": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status = \"Pós Review\")",
+    "iniciado": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status = \"EM HOMOLOGAÇÃO\")",
+    "bugAjuste": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status in (\"BUG\",\"BUG EM CORREÇÃO\"))",
+    "reteste": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status = \"BUG EM TESTES\")",
+    "aprovadoUat": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status = \"Liberado para deploy\")",
+    "validado": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status in (\"PRONTO PARA DEPLOY EM PROD\",\"Deploy em Prod. realizado\"))",
+    "backlog": "project = MVPMO AND issuetype in (10001,10005,10212) AND (status = \"BACKLOG\")",
+    "total": "project = MVPMO AND issuetype in (10001,10005,10212)"
+   },
+   "linhas": {
+    "refinamento": 4,
+    "aprovacaoUS": 2,
+    "desenvolvimento": 18,
+    "homologacao": 104,
+    "aprovado": 64,
+    "backlog": 86
+   },
+   "linhasHab": {
+    "refinamento": 4,
+    "aprovacaoUS": 0,
+    "desenvolvimento": 12,
+    "homologacao": 21,
+    "aprovado": 18,
+    "backlog": 6
+   },
+   "escopoAtivo": 192,
+   "totalGeral": 278,
+   "foraDoQuadro": 2
+  },
+  "revenue": {
+   "frente": "revenue",
+   "projeto": "MVREV",
+   "lidoEm": "2026-11-05T16:21:00.664Z",
+   "colunas": {
+    "refino": 0,
+    "backlogTecnico": 0,
+    "aprovacaoUS": 0,
+    "desenvolvimento": 13,
+    "liberado": 148,
+    "iniciado": 0,
+    "bugAjuste": 0,
+    "reteste": 0,
+    "aprovadoUat": 0,
+    "validado": 65,
+    "backlog": 63,
+    "total": 308
+   },
+   "colunasHab": {
+    "refino": 0,
+    "backlogTecnico": 0,
+    "aprovacaoUS": 0,
+    "desenvolvimento": 4,
+    "liberado": 21,
+    "iniciado": 0,
+    "bugAjuste": 0,
+    "reteste": 0,
+    "aprovadoUat": 0,
+    "validado": 26,
+    "backlog": 7,
+    "total": 61
+   },
+   "jql": {
+    "refino": "project = MVREV AND issuetype in (10001,10005,10212) AND (status in (\"Em refinamento\",\"EM REFINAMENTO | ESCRITA DE US\"))",
+    "backlogTecnico": "project = MVREV AND issuetype in (10001,10005,10212) AND (status in (\"EM ANÁLISE TÉCNICA\",\"Em prototipagem\"))",
+    "aprovacaoUS": "project = MVREV AND issuetype in (10001,10005,10212) AND (status = \"EM APROVAÇÃO DO CLIENTE\")",
+    "desenvolvimento": "project = MVREV AND issuetype in (10001,10005,10212) AND (status in (\"Pronto para DEV\",\"EM DESENVOLVIMENTO\",\"PRONTO PARA DEPLOY EM QA\",\"Realizando Deploy em QA\"))",
+    "liberado": "project = MVREV AND issuetype in (10001,10005,10212) AND (status = \"Pós Review\")",
+    "iniciado": "project = MVREV AND issuetype in (10001,10005,10212) AND (status = \"EM HOMOLOGAÇÃO\")",
+    "bugAjuste": "project = MVREV AND issuetype in (10001,10005,10212) AND (status in (\"BUG\",\"BUG EM CORREÇÃO\"))",
+    "reteste": "project = MVREV AND issuetype in (10001,10005,10212) AND (status = \"BUG EM TESTES\")",
+    "aprovadoUat": "project = MVREV AND issuetype in (10001,10005,10212) AND (status = \"Liberado para deploy\")",
+    "validado": "project = MVREV AND issuetype in (10001,10005,10212) AND (status in (\"PRONTO PARA DEPLOY EM PROD\",\"Deploy em Prod. realizado\"))",
+    "backlog": "project = MVREV AND issuetype in (10001,10005,10212) AND (status = \"BACKLOG\")",
+    "total": "project = MVREV AND issuetype in (10001,10005,10212)"
+   },
+   "linhas": {
+    "refinamento": 0,
+    "aprovacaoUS": 0,
+    "desenvolvimento": 13,
+    "homologacao": 148,
+    "aprovado": 65,
+    "backlog": 63
+   },
+   "linhasHab": {
+    "refinamento": 0,
+    "aprovacaoUS": 0,
+    "desenvolvimento": 4,
+    "homologacao": 21,
+    "aprovado": 26,
+    "backlog": 7
+   },
+   "escopoAtivo": 226,
+   "totalGeral": 289,
+   "foraDoQuadro": 19
+  }
+ },
+ "publicado": {
+  "central": {
+   "lidoEm": "2026-11-05",
+   "linhas": [
+    {
+     "nome": "Refinamento · UpStream",
+     "n": 4,
+     "hab": 4,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 2,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "n": 18,
+     "hab": 12,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "n": 104,
+     "hab": 21,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "n": 64,
+     "hab": 18,
+     "concluido": true,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 86,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": true
+    }
+   ]
+  },
+  "revenue": {
+   "lidoEm": "2026-10-16",
+   "linhas": [
+    {
+     "nome": "Refinamento · UpStream",
+     "n": 0,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovação de US · UpStream",
+     "n": 0,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Desenvolvimento · DownStream",
+     "n": 8,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Em homologação na UAT",
+     "n": 142,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Aprovado em UAT",
+     "n": 56,
+     "hab": 0,
+     "concluido": true,
+     "foraEscopo": false
+    },
+    {
+     "nome": "Backlog de melhorias · à planejar",
+     "n": 73,
+     "hab": 0,
+     "concluido": false,
+     "foraEscopo": true
+    }
+   ]
+  }
+ }
+}
